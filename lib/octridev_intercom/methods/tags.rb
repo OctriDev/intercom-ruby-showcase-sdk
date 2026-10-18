@@ -12,13 +12,12 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalAttachTagToContactMetadata
         FIELDS = {
-          id: "id",
+          id: 'id'
         }.freeze
         REQUIRED_FIELDS = %i[
           id
         ].freeze
-        DECODERS = {
-        }.freeze
+        DECODERS = {}.freeze
       end
 
       # API model for AttachTagToContact.
@@ -48,15 +47,14 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalAttachTagToConversationMetadata
         FIELDS = {
-          id: "id",
-          admin_id: "admin_id",
+          id: 'id',
+          admin_id: 'admin_id'
         }.freeze
         REQUIRED_FIELDS = %i[
           id
           admin_id
         ].freeze
-        DECODERS = {
-        }.freeze
+        DECODERS = {}.freeze
       end
 
       # API model for AttachTagToConversation.
@@ -88,13 +86,12 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalDetachTagFromConversationMetadata
         FIELDS = {
-          admin_id: "admin_id",
+          admin_id: 'admin_id'
         }.freeze
         REQUIRED_FIELDS = %i[
           admin_id
         ].freeze
-        DECODERS = {
-        }.freeze
+        DECODERS = {}.freeze
       end
 
       # API model for DetachTagFromConversation.
@@ -124,15 +121,14 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalAttachTagToTicketMetadata
         FIELDS = {
-          id: "id",
-          admin_id: "admin_id",
+          id: 'id',
+          admin_id: 'admin_id'
         }.freeze
         REQUIRED_FIELDS = %i[
           id
           admin_id
         ].freeze
-        DECODERS = {
-        }.freeze
+        DECODERS = {}.freeze
       end
 
       # API model for AttachTagToTicket.
@@ -164,13 +160,12 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalDetachTagFromTicketMetadata
         FIELDS = {
-          admin_id: "admin_id",
+          admin_id: 'admin_id'
         }.freeze
         REQUIRED_FIELDS = %i[
           admin_id
         ].freeze
-        DECODERS = {
-        }.freeze
+        DECODERS = {}.freeze
       end
 
       # API model for DetachTagFromTicket.
@@ -212,26 +207,25 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/contacts/",
+            '/contacts/',
             SdkClient.encode_path_segment(contact_id),
-            "/tags"
+            '/tags'
           ].join,
           config: config,
           body: {
-            'id' => id,
+            'id' => id
           },
           return_type: ::OctridevIntercom::Tag,
           decoder: :json,
           operation_id: 'attach_tag_to_contact',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -250,13 +244,12 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/contacts/",
+            '/contacts/',
             SdkClient.encode_path_segment(contact_id),
-            "/tags/",
+            '/tags/',
             SdkClient.encode_path_segment(tag_id)
           ].join,
           config: config,
@@ -264,10 +257,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'detach_tag_from_contact',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -288,27 +281,26 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/conversations/",
+            '/conversations/',
             SdkClient.encode_path_segment(conversation_id),
-            "/tags"
+            '/tags'
           ].join,
           config: config,
           body: {
             'id' => id,
-            'admin_id' => admin_id,
+            'admin_id' => admin_id
           },
           return_type: ::OctridevIntercom::Tag,
           decoder: :json,
           operation_id: 'attach_tag_to_conversation',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -328,27 +320,26 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/conversations/",
+            '/conversations/',
             SdkClient.encode_path_segment(conversation_id),
-            "/tags/",
+            '/tags/',
             SdkClient.encode_path_segment(tag_id)
           ].join,
           config: config,
           body: {
-            'admin_id' => admin_id,
+            'admin_id' => admin_id
           },
           return_type: ::OctridevIntercom::Tag,
           decoder: :json,
           operation_id: 'detach_tag_from_conversation',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -360,19 +351,18 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/tags",
+          '/tags',
           config: config,
           return_type: ::OctridevIntercom::TagList,
           decoder: :json,
           operation_id: 'list_tags',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -385,20 +375,19 @@ module OctridevIntercom
         body: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/tags",
+          '/tags',
           config: config,
           body: body,
           return_type: ::OctridevIntercom::TagCreateResponse,
           decoder: :json,
           operation_id: 'create_tag',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 },
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -413,11 +402,10 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/tags/",
+            '/tags/',
             SdkClient.encode_path_segment(tag_id)
           ].join,
           config: config,
@@ -425,10 +413,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'find_tag',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -443,21 +431,20 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/tags/",
+            '/tags/',
             SdkClient.encode_path_segment(tag_id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'delete_tag',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -478,27 +465,26 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/tickets/",
+            '/tickets/',
             SdkClient.encode_path_segment(ticket_id),
-            "/tags"
+            '/tags'
           ].join,
           config: config,
           body: {
             'id' => id,
-            'admin_id' => admin_id,
+            'admin_id' => admin_id
           },
           return_type: ::OctridevIntercom::Tag,
           decoder: :json,
           operation_id: 'attach_tag_to_ticket',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -519,27 +505,26 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/tickets/",
+            '/tickets/',
             SdkClient.encode_path_segment(ticket_id),
-            "/tags/",
+            '/tags/',
             SdkClient.encode_path_segment(tag_id)
           ].join,
           config: config,
           body: {
-            'admin_id' => admin_id,
+            'admin_id' => admin_id
           },
           return_type: ::OctridevIntercom::Tag,
           decoder: :json,
           operation_id: 'detach_tag_from_ticket',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
     end

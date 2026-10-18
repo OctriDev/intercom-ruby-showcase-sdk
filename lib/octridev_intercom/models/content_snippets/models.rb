@@ -5,78 +5,76 @@
 
 # tagged_models_content_snippets domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalContentSnippetMetadata
-  FIELDS = {
-    type: "type",
-    id: "id",
-    title: "title",
-    locale: "locale",
-    json_blocks: "json_blocks",
-    body_markdown: "body_markdown",
-    chatbot_availability: "chatbot_availability",
-    copilot_availability: "copilot_availability",
-    ai_chatbot_availability: "ai_chatbot_availability",
-    ai_copilot_availability: "ai_copilot_availability",
-    ai_sales_agent_availability: "ai_sales_agent_availability",
-    created_at: "created_at",
-    updated_at: "updated_at",
-    audience_ids: "audience_ids",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ContentSnippet.
-# A content snippet is a reusable piece of content for your AI agent and Copilot.
-class ContentSnippet
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalContentSnippetMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalContentSnippetMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalContentSnippetMetadata::DECODERS
-
-  # @return [String] String representing the object's type. Always has the value `content_snippet`.
-  attr_reader :type
-  # @return [String] The unique identifier for the content snippet.
-  attr_reader :id
-  # @return [String] The title of the content snippet.
-  attr_reader :title
-  # @return [String] The locale of the content snippet.
-  attr_reader :locale
-  # @return [Array_of_Hash] The content blocks that make up the body of the snippet.
-  attr_reader :json_blocks
-  # @return [String] The body of the content snippet in markdown.
-  attr_reader :body_markdown
-  # @return [Integer] Deprecated. Use ai_chatbot_availability instead. Whether this snippet is available for Fin (1 = on, 0 = off).
-  attr_reader :chatbot_availability
-  # @return [Integer] Deprecated. Use ai_copilot_availability instead. Whether this snippet is available for Copilot (1 = on, 0 = off).
-  attr_reader :copilot_availability
-  # @return [Boolean] Whether the content snippet is available for AI Chatbot (Fin).
-  attr_reader :ai_chatbot_availability
-  # @return [Boolean] Whether the content snippet is available for AI Copilot.
-  attr_reader :ai_copilot_availability
-  # @return [Boolean] Whether the content snippet is available for AI Sales Agent.
-  attr_reader :ai_sales_agent_availability
-  # @return [Integer] The time the snippet was created as a UNIX timestamp.
-  attr_reader :created_at
-  # @return [Integer] The time the snippet was last updated as a UNIX timestamp.
-  attr_reader :updated_at
-  # @return [Array_of_Integer] The list of audience IDs this content snippet is targeted to for Fin AI Agent. Empty array means no audience targeting is set.
-  attr_reader :audience_ids
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalContentSnippetMetadata
+    FIELDS = {
+      type: 'type',
+      id: 'id',
+      title: 'title',
+      locale: 'locale',
+      json_blocks: 'json_blocks',
+      body_markdown: 'body_markdown',
+      chatbot_availability: 'chatbot_availability',
+      copilot_availability: 'copilot_availability',
+      ai_chatbot_availability: 'ai_chatbot_availability',
+      ai_copilot_availability: 'ai_copilot_availability',
+      ai_sales_agent_availability: 'ai_sales_agent_availability',
+      created_at: 'created_at',
+      updated_at: 'updated_at',
+      audience_ids: 'audience_ids'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for ContentSnippet.
+  # A content snippet is a reusable piece of content for your AI agent and Copilot.
+  class ContentSnippet
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalContentSnippetMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalContentSnippetMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalContentSnippetMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [String] String representing the object's type. Always has the value `content_snippet`.
+    attr_reader :type
+    # @return [String] The unique identifier for the content snippet.
+    attr_reader :id
+    # @return [String] The title of the content snippet.
+    attr_reader :title
+    # @return [String] The locale of the content snippet.
+    attr_reader :locale
+    # @return [Array_of_Hash] The content blocks that make up the body of the snippet.
+    attr_reader :json_blocks
+    # @return [String] The body of the content snippet in markdown.
+    attr_reader :body_markdown
+    # @return [Integer] Deprecated. Use ai_chatbot_availability instead. Whether this snippet is available for Fin (1 = on, 0 = off).
+    attr_reader :chatbot_availability
+    # @return [Integer] Deprecated. Use ai_copilot_availability instead. Whether this snippet is available for Copilot (1 = on, 0 = off).
+    attr_reader :copilot_availability
+    # @return [Boolean] Whether the content snippet is available for AI Chatbot (Fin).
+    attr_reader :ai_chatbot_availability
+    # @return [Boolean] Whether the content snippet is available for AI Copilot.
+    attr_reader :ai_copilot_availability
+    # @return [Boolean] Whether the content snippet is available for AI Sales Agent.
+    attr_reader :ai_sales_agent_availability
+    # @return [Integer] The time the snippet was created as a UNIX timestamp.
+    attr_reader :created_at
+    # @return [Integer] The time the snippet was last updated as a UNIX timestamp.
+    attr_reader :updated_at
+    # @return [Array_of_Integer] The list of audience IDs this content snippet is targeted to for Fin AI Agent. Empty array means no audience targeting is set.
+    attr_reader :audience_ids
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

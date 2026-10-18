@@ -13,7 +13,7 @@ module OctridevIntercom
       module ListDataAttributesParameter
         CONTACT = 'contact'
         COMPANY = 'company'
-        VALUES = ['contact', 'company'].freeze
+        VALUES = %w[contact company].freeze
         def self.from_value(value)
           value
         end
@@ -35,23 +35,22 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/data_attributes",
+          '/data_attributes',
           config: config,
           query: {
             'model' => QueryValue.new(model, style: 'form', explode: true),
-            'include_archived' => QueryValue.new(include_archived, style: 'form', explode: true),
+            'include_archived' => QueryValue.new(include_archived, style: 'form', explode: true)
           },
           return_type: ::OctridevIntercom::DataAttributeList,
           decoder: :json,
           operation_id: 'list_data_attributes',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -75,25 +74,24 @@ module OctridevIntercom
         messenger_writable: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/data_attributes",
+          '/data_attributes',
           config: config,
           body: {
             'name' => name,
             'model' => model,
             'description' => description,
-            'messenger_writable' => messenger_writable,
+            'messenger_writable' => messenger_writable
           },
           return_type: ::OctridevIntercom::DataAttribute,
           decoder: :json,
           operation_id: 'create_data_attribute',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 },
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -116,27 +114,26 @@ module OctridevIntercom
         messenger_writable: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PUT',
           [
-            "/data_attributes/",
+            '/data_attributes/',
             SdkClient.encode_path_segment(data_attribute_id)
           ].join,
           config: config,
           body: {
             'archived' => archived,
             'description' => description,
-            'messenger_writable' => messenger_writable,
+            'messenger_writable' => messenger_writable
           },
           return_type: ::OctridevIntercom::DataAttribute,
           decoder: :json,
           operation_id: 'update_data_attribute',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
         ).data
       end
     end

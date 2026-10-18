@@ -17,19 +17,18 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/teams",
+          '/teams',
           config: config,
           return_type: ::OctridevIntercom::TeamList,
           decoder: :json,
           operation_id: 'list_teams',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -44,11 +43,10 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/teams/",
+            '/teams/',
             SdkClient.encode_path_segment(team_id)
           ].join,
           config: config,
@@ -56,10 +54,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'retrieve_team',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -72,33 +70,26 @@ module OctridevIntercom
       # @param idle_threshold [Integer] The number of seconds after which an open
       #   conversation is considered idle. Clamped to the range 1–86400. Defaults to
       #   1800 (30 minutes).
-      singleton_class.define_method(:get_team_metrics) do |
-        config:,
-        team_id:,
-        idle_threshold: NOT_GIVEN,
-        intercom_version: NOT_GIVEN,
-        request_options: nil
-      |
-
+      singleton_class.define_method(:get_team_metrics) do |config:, team_id:, idle_threshold: NOT_GIVEN, intercom_version: NOT_GIVEN, request_options: nil|
         SdkClient.request(
           'GET',
           [
-            "/teams/",
+            '/teams/',
             SdkClient.encode_path_segment(team_id),
-            "/metrics"
+            '/metrics'
           ].join,
           config: config,
           query: {
-            'idle_threshold' => QueryValue.new(idle_threshold, style: 'form', explode: true),
+            'idle_threshold' => QueryValue.new(idle_threshold, style: 'form', explode: true)
           },
           return_type: ::OctridevIntercom::TeamMetricList,
           decoder: :json,
           operation_id: 'get_team_metrics',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
     end

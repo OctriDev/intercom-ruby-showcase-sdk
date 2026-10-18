@@ -5,212 +5,207 @@
 
 # shared_ai domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalAiAgentEventOtpEmailVerificationFailedEventDataOtpEmailVerifiX59f0b7402bMetadata
-  FIELDS = {
-    reason: "reason",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for AiAgentEventOtpEmailVerificationFailedEventDataOtpEmailVerifiX59f0b7402b.
-# Details of the failed verification
-class AiAgentEventOtpEmailVerificationFailedEventDataOtpEmailVerifiX59f0b7402b
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAiAgentEventOtpEmailVerificationFailedEventDataOtpEmailVerifiX59f0b7402bMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAiAgentEventOtpEmailVerificationFailedEventDataOtpEmailVerifiX59f0b7402bMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAiAgentEventOtpEmailVerificationFailedEventDataOtpEmailVerifiX59f0b7402bMetadata::DECODERS
-
-  # @return [String] Why the one-time passcode email could not verify the contact. Treat this as a free-form string and fall back to value for a reason you do not recognise. no_email means the contact has no email address on record.
-  attr_reader :reason
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAiAgentEventOtpEmailVerificationFailedEventDataOtpEmailVerifiX59f0b7402bMetadata
+    FIELDS = {
+      reason: 'reason'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AiAgentEventOtpEmailVerificationFailedEventDataOtpEmailVerifiX59f0b7402b.
+  # Details of the failed verification
+  class AiAgentEventOtpEmailVerificationFailedEventDataOtpEmailVerifiX59f0b7402b
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAiAgentEventOtpEmailVerificationFailedEventDataOtpEmailVerifiX59f0b7402bMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAiAgentEventOtpEmailVerificationFailedEventDataOtpEmailVerifiX59f0b7402bMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAiAgentEventOtpEmailVerificationFailedEventDataOtpEmailVerifiX59f0b7402bMetadata::DECODERS
+
+    # @return [String] Why the one-time passcode email could not verify the contact. Treat this as a free-form string and fall back to value for a reason you do not recognise. no_email means the contact has no email address on record.
+    attr_reader :reason
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAiAgentEventOtpEmailVerificationFailedEventDataMetadata
-  FIELDS = {
-    otp_email_verification_failed: "otp_email_verification_failed",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    otp_email_verification_failed: lambda do |value|
-      ::OctridevIntercom::AiAgentEventOtpEmailVerificationFailedEventDataOtpEmailVerifiX59f0b7402b.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for AiAgentEventOtpEmailVerificationFailedEventData.
-# Data recorded with the event. Empty when the failure was recorded without a reason.
-class AiAgentEventOtpEmailVerificationFailedEventData
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAiAgentEventOtpEmailVerificationFailedEventDataMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAiAgentEventOtpEmailVerificationFailedEventDataMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAiAgentEventOtpEmailVerificationFailedEventDataMetadata::DECODERS
-
-  # @return [AiAgentEventOtpEmailVerificationFailedEventDataOtpEmailVerifiX59f0b7402b] Details of the failed verification
-  attr_reader :otp_email_verification_failed
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAiAgentEventOtpEmailVerificationFailedEventDataMetadata
+    FIELDS = {
+      otp_email_verification_failed: 'otp_email_verification_failed'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      otp_email_verification_failed: lambda do |value|
+        ::OctridevIntercom::AiAgentEventOtpEmailVerificationFailedEventDataOtpEmailVerifiX59f0b7402b.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AiAgentEventOtpEmailVerificationFailedEventData.
+  # Data recorded with the event. Empty when the failure was recorded without a reason.
+  class AiAgentEventOtpEmailVerificationFailedEventData
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAiAgentEventOtpEmailVerificationFailedEventDataMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAiAgentEventOtpEmailVerificationFailedEventDataMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAiAgentEventOtpEmailVerificationFailedEventDataMetadata::DECODERS
+
+    # @return [AiAgentEventOtpEmailVerificationFailedEventDataOtpEmailVerifiX59f0b7402b] Details of the failed verification
+    attr_reader :otp_email_verification_failed
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAiAgentEventOtpEmailVerificationFailedEventMetadata
-  FIELDS = {
-    type: "type",
-    value: "value",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    data: lambda do |value|
-      ::OctridevIntercom::AiAgentEventOtpEmailVerificationFailedEventData.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for AiAgentEventOtpEmailVerificationFailedEvent.
-# The event the part records
-class AiAgentEventOtpEmailVerificationFailedEvent
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAiAgentEventOtpEmailVerificationFailedEventMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAiAgentEventOtpEmailVerificationFailedEventMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAiAgentEventOtpEmailVerificationFailedEventMetadata::DECODERS
-
-  # @return [String] The event type
-  attr_reader :type
-  # @return [String] A readable label for the event
-  attr_reader :value
-  # @return [AiAgentEventOtpEmailVerificationFailedEventData] Data recorded with the event. Empty when the failure was recorded without a reason.
-  attr_reader :data
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAiAgentEventOtpEmailVerificationFailedEventMetadata
+    FIELDS = {
+      type: 'type',
+      value: 'value',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      data: lambda do |value|
+        ::OctridevIntercom::AiAgentEventOtpEmailVerificationFailedEventData.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AiAgentEventOtpEmailVerificationFailedEvent.
+  # The event the part records
+  class AiAgentEventOtpEmailVerificationFailedEvent
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAiAgentEventOtpEmailVerificationFailedEventMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAiAgentEventOtpEmailVerificationFailedEventMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAiAgentEventOtpEmailVerificationFailedEventMetadata::DECODERS
+
+    # @return [String] The event type
+    attr_reader :type
+    # @return [String] A readable label for the event
+    attr_reader :value
+    # @return [AiAgentEventOtpEmailVerificationFailedEventData] Data recorded with the event. Empty when the failure was recorded without a reason.
+    attr_reader :data
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAiAgentEventOtpEmailVerificationFailedMetadata
-  FIELDS = {
-    event: "event",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    event: lambda do |value|
-      ::OctridevIntercom::AiAgentEventOtpEmailVerificationFailedEvent.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for AiAgentEventOtpEmailVerificationFailed.
-# Contains the reason Fin could not verify a contact by one-time passcode email, for conversation part type ai_agent_event when the event type is otp_email_verification_failed . Other ai_agent_event event types are not described here.
-class AiAgentEventOtpEmailVerificationFailed
-  include EventDetails
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAiAgentEventOtpEmailVerificationFailedMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAiAgentEventOtpEmailVerificationFailedMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAiAgentEventOtpEmailVerificationFailedMetadata::DECODERS
-
-  # @return [AiAgentEventOtpEmailVerificationFailedEvent] The event the part records
-  attr_reader :event
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAiAgentEventOtpEmailVerificationFailedMetadata
+    FIELDS = {
+      event: 'event'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      event: lambda do |value|
+        ::OctridevIntercom::AiAgentEventOtpEmailVerificationFailedEvent.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AiAgentEventOtpEmailVerificationFailed.
+  # Contains the reason Fin could not verify a contact by one-time passcode email, for conversation part type ai_agent_event when the event type is otp_email_verification_failed . Other ai_agent_event event types are not described here.
+  class AiAgentEventOtpEmailVerificationFailed
+    include EventDetails
+
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAiAgentEventOtpEmailVerificationFailedMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAiAgentEventOtpEmailVerificationFailedMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAiAgentEventOtpEmailVerificationFailedMetadata::DECODERS
+
+    # @return [AiAgentEventOtpEmailVerificationFailedEvent] The event the part records
+    attr_reader :event
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAiTopicSubtopicListItemMetadata
-  FIELDS = {
-    topic_name: "topic_name",
-    subtopic_name: "subtopic_name",
-    id: "id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for AiTopicSubtopicListItem.
-class AiTopicSubtopicListItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAiTopicSubtopicListItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAiTopicSubtopicListItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAiTopicSubtopicListItemMetadata::DECODERS
-
-  # @return [String] The name of the topic.
-  attr_reader :topic_name
-  # @return [String] The name of the subtopic, where the topic has one.
-  attr_reader :subtopic_name
-  # @return [Integer] The unique identifier for the subtopic.
-  attr_reader :id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAiTopicSubtopicListItemMetadata
+    FIELDS = {
+      topic_name: 'topic_name',
+      subtopic_name: 'subtopic_name',
+      id: 'id'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AiTopicSubtopicListItem.
+  class AiTopicSubtopicListItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAiTopicSubtopicListItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAiTopicSubtopicListItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAiTopicSubtopicListItemMetadata::DECODERS
+
+    # @return [String] The name of the topic.
+    attr_reader :topic_name
+    # @return [String] The name of the subtopic, where the topic has one.
+    attr_reader :subtopic_name
+    # @return [Integer] The unique identifier for the subtopic.
+    attr_reader :id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # Defines the AiTopicSubtopicList SDK value decoder.
+  module AiTopicSubtopicList
+    def self.from_hash(value)
+      return nil if value.nil?
 
-# Defines the AiTopicSubtopicList SDK value decoder.
-module AiTopicSubtopicList
-  def self.from_hash(value)
-    return nil if value.nil?
-    value&.map { |item| ::OctridevIntercom::AiTopicSubtopicListItem.from_hash(item) }
+      value&.map { |item| ::OctridevIntercom::AiTopicSubtopicListItem.from_hash(item) }
+    end
   end
-end
 end

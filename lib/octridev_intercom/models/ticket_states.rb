@@ -5,45 +5,44 @@
 
 # ticket_states domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalTicketStateListMetadata
-  FIELDS = {
-    type: "type",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    data: lambda do |value|
-      value&.map { |item| item.nil? ? nil : ::OctridevIntercom::TicketStateDetailed.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for TicketStateList.
-# A list of ticket states associated with a given ticket type.
-class TicketStateList
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTicketStateListMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTicketStateListMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTicketStateListMetadata::DECODERS
-
-  # @return [String] String representing the object's type. Always has the value `list`.
-  attr_reader :type
-  # @return [Array_of_TicketStateDetailed] A list of ticket states associated with a given ticket type.
-  attr_reader :data
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalTicketStateListMetadata
+    FIELDS = {
+      type: 'type',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      data: lambda do |value|
+        value&.map { |item| item.nil? ? nil : ::OctridevIntercom::TicketStateDetailed.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for TicketStateList.
+  # A list of ticket states associated with a given ticket type.
+  class TicketStateList
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTicketStateListMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTicketStateListMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTicketStateListMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [String] String representing the object's type. Always has the value `list`.
+    attr_reader :type
+    # @return [Array_of_TicketStateDetailed] A list of ticket states associated with a given ticket type.
+    attr_reader :data
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

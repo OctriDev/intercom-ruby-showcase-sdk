@@ -5,65 +5,64 @@
 
 # tagged_models_data_export domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalDataExportMetadata
-  FIELDS = {
-    job_identifier: "job_identifier",
-    status: "status",
-    download_expires_at: "download_expires_at",
-    download_url: "download_url",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevIntercom::DataExportStatus.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for DataExport.
-# The data export API is used to export message delivery and engagement statistics for outbound content (Emails, Posts, Custom Bots, Surveys, Tours, Series, and more) sent in a given timeframe. The exported data includes who received each message, when they received it, and how they engaged with it (opens, clicks, replies, completions, dismissals, unsubscribes, and bounces).
-class DataExport
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDataExportMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDataExportMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDataExportMetadata::DECODERS
-
-  # @return [String] The identifier for your job.
-  attr_reader :job_identifier
-  # @return [DataExportStatus] The current state of your job.
-  attr_reader :status
-  # @return [String] The time after which you will not be able to access the data.
-  attr_reader :download_expires_at
-  # @return [String] The location where you can download your data.
-  attr_reader :download_url
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalDataExportMetadata
+    FIELDS = {
+      job_identifier: 'job_identifier',
+      status: 'status',
+      download_expires_at: 'download_expires_at',
+      download_url: 'download_url'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevIntercom::DataExportStatus.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for DataExport.
+  # The data export API is used to export message delivery and engagement statistics for outbound content (Emails, Posts, Custom Bots, Surveys, Tours, Series, and more) sent in a given timeframe. The exported data includes who received each message, when they received it, and how they engaged with it (opens, clicks, replies, completions, dismissals, unsubscribes, and bounces).
+  class DataExport
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDataExportMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDataExportMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDataExportMetadata::DECODERS
+
+    # @return [String] The identifier for your job.
+    attr_reader :job_identifier
+    # @return [DataExportStatus] The current state of your job.
+    attr_reader :status
+    # @return [String] The time after which you will not be able to access the data.
+    attr_reader :download_expires_at
+    # @return [String] The location where you can download your data.
+    attr_reader :download_url
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Defines the DataExportStatus SDK namespace.
+  module DataExportStatus
+    PENDING = 'pending'
+    IN_PROGRESS = 'in_progress'
+    FAILED = 'failed'
+    COMPLETED = 'completed'
+    NO_DATA = 'no_data'
+    CANCELED = 'canceled'
+    VALUES = %w[pending in_progress failed completed no_data canceled].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
-
-# Defines the DataExportStatus SDK namespace.
-module DataExportStatus
-  PENDING = 'pending'
-  IN_PROGRESS = 'in_progress'
-  FAILED = 'failed'
-  COMPLETED = 'completed'
-  NO_DATA = 'no_data'
-  CANCELED = 'canceled'
-  VALUES = ['pending', 'in_progress', 'failed', 'completed', 'no_data', 'canceled'].freeze
-  def self.from_value(value)
-    value
-  end
-end
 end

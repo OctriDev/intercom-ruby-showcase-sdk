@@ -5,390 +5,385 @@
 
 # tagged_models_contacts domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalContactAvatarMetadata
-  FIELDS = {
-    type: "type",
-    image_url: "image_url",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ContactAvatar.
-# Optional object value serialized in the `avatar` wire field.
-class ContactAvatar
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalContactAvatarMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalContactAvatarMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalContactAvatarMetadata::DECODERS
-
-  # @return [String] The type of object
-  attr_reader :type
-  # @return [String] An image URL containing the avatar of a contact.
-  attr_reader :image_url
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalContactAvatarMetadata
+    FIELDS = {
+      type: 'type',
+      image_url: 'image_url'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ContactAvatar.
+  # Optional object value serialized in the `avatar` wire field.
+  class ContactAvatar
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalContactAvatarMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalContactAvatarMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalContactAvatarMetadata::DECODERS
+
+    # @return [String] The type of object
+    attr_reader :type
+    # @return [String] An image URL containing the avatar of a contact.
+    attr_reader :image_url
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalContactMetadata
-  FIELDS = {
-    type: "type",
-    id: "id",
-    external_id: "external_id",
-    workspace_id: "workspace_id",
-    role: "role",
-    email: "email",
-    email_domain: "email_domain",
-    email_verified: "email_verified",
-    phone: "phone",
-    name: "name",
-    owner_id: "owner_id",
-    has_hard_bounced: "has_hard_bounced",
-    marked_email_as_spam: "marked_email_as_spam",
-    unsubscribed_from_emails: "unsubscribed_from_emails",
-    created_at: "created_at",
-    updated_at: "updated_at",
-    signed_up_at: "signed_up_at",
-    last_seen_at: "last_seen_at",
-    last_replied_at: "last_replied_at",
-    last_contacted_at: "last_contacted_at",
-    last_email_opened_at: "last_email_opened_at",
-    last_email_clicked_at: "last_email_clicked_at",
-    language_override: "language_override",
-    browser: "browser",
-    browser_version: "browser_version",
-    browser_language: "browser_language",
-    os: "os",
-    android_app_name: "android_app_name",
-    android_app_version: "android_app_version",
-    android_device: "android_device",
-    android_os_version: "android_os_version",
-    android_sdk_version: "android_sdk_version",
-    android_last_seen_at: "android_last_seen_at",
-    ios_app_name: "ios_app_name",
-    ios_app_version: "ios_app_version",
-    ios_device: "ios_device",
-    ios_os_version: "ios_os_version",
-    ios_sdk_version: "ios_sdk_version",
-    ios_last_seen_at: "ios_last_seen_at",
-    custom_attributes: "custom_attributes",
-    avatar: "avatar",
-    tags: "tags",
-    notes: "notes",
-    companies: "companies",
-    location: "location",
-    social_profiles: "social_profiles",
-    merge_history: "merge_history",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    avatar: lambda do |value|
-      ::OctridevIntercom::ContactAvatar.from_hash(value)
-    end,
-    tags: lambda do |value|
-      ::OctridevIntercom::ContactTags.from_hash(value)
-    end,
-    notes: lambda do |value|
-      ::OctridevIntercom::ContactNotes.from_hash(value)
-    end,
-    companies: lambda do |value|
-      ::OctridevIntercom::ContactCompanies.from_hash(value)
-    end,
-    location: lambda do |value|
-      ::OctridevIntercom::ContactLocation.from_hash(value)
-    end,
-    social_profiles: lambda do |value|
-      ::OctridevIntercom::ContactSocialProfiles.from_hash(value)
-    end,
-    merge_history: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::MergeHistoryItem.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for Contact.
-# Contacts represent your leads and users in Intercom.
-class Contact
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalContactMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalContactMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalContactMetadata::DECODERS
-
-  # @return [String] The type of object.
-  attr_reader :type
-  # @return [String] The unique identifier for the contact which is given by Intercom.
-  attr_reader :id
-  # @return [String] The unique identifier for the contact which is provided by the Client.
-  attr_reader :external_id
-  # @return [String] The id of the workspace which the contact belongs to.
-  attr_reader :workspace_id
-  # @return [String] The role of the contact.
-  attr_reader :role
-  # @return [String] The contact's email.
-  attr_reader :email
-  # @return [String] The contact's email domain.
-  attr_reader :email_domain
-  # @return [Boolean] Whether the contact has proved they own their current email address. `true` only when this address was marked verified through the Contacts API (`email_verified: true` on create or update) and has not changed since; it becomes `false` again if the contact's email changes, until the new address is verified. Intercom reuses a lead with a verified email when it later matches an inbound email, or an outbound conversation or ticket, to that address, instead of creating a new lead.
-  attr_reader :email_verified
-  # @return [String] The contacts phone.
-  attr_reader :phone
-  # @return [String] The contacts name.
-  attr_reader :name
-  # @return [String] The id of an admin that has been assigned account ownership of the contact.
-  attr_reader :owner_id
-  # @return [Boolean] Whether the contact has had an email sent to them hard bounce.
-  attr_reader :has_hard_bounced
-  # @return [Boolean] Whether the contact has marked an email sent to them as spam.
-  attr_reader :marked_email_as_spam
-  # @return [Boolean] Whether the contact is unsubscribed from emails.
-  attr_reader :unsubscribed_from_emails
-  # @return [Integer] (Unix timestamp in seconds) The time when the contact was created.
-  attr_reader :created_at
-  # @return [Integer] (Unix timestamp in seconds) The time when the contact was last updated.
-  attr_reader :updated_at
-  # @return [Integer] (Unix timestamp in seconds) The time specified for when a contact signed up.
-  attr_reader :signed_up_at
-  # @return [Integer] (Unix timestamp in seconds) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).
-  attr_reader :last_seen_at
-  # @return [Integer] (Unix timestamp in seconds) The time when the contact last messaged in.
-  attr_reader :last_replied_at
-  # @return [Integer] (Unix timestamp in seconds) The time when the contact was last messaged.
-  attr_reader :last_contacted_at
-  # @return [Integer] (Unix timestamp in seconds) The time when the contact last opened an email.
-  attr_reader :last_email_opened_at
-  # @return [Integer] (Unix timestamp in seconds) The time when the contact last clicked a link in an email.
-  attr_reader :last_email_clicked_at
-  # @return [String] A preferred language setting for the contact, used by the Intercom Messenger even if their browser settings change.
-  attr_reader :language_override
-  # @return [String] The name of the browser which the contact is using.
-  attr_reader :browser
-  # @return [String] The version of the browser which the contact is using.
-  attr_reader :browser_version
-  # @return [String] The language set by the browser which the contact is using.
-  attr_reader :browser_language
-  # @return [String] The operating system which the contact is using.
-  attr_reader :os
-  # @return [String] The name of the Android app which the contact is using.
-  attr_reader :android_app_name
-  # @return [String] The version of the Android app which the contact is using.
-  attr_reader :android_app_version
-  # @return [String] The Android device which the contact is using.
-  attr_reader :android_device
-  # @return [String] The version of the Android OS which the contact is using.
-  attr_reader :android_os_version
-  # @return [String] The version of the Android SDK which the contact is using.
-  attr_reader :android_sdk_version
-  # @return [Integer] (Unix timestamp in seconds) The time when the contact was last seen on an Android device.
-  attr_reader :android_last_seen_at
-  # @return [String] The name of the iOS app which the contact is using.
-  attr_reader :ios_app_name
-  # @return [String] The version of the iOS app which the contact is using.
-  attr_reader :ios_app_version
-  # @return [String] The iOS device which the contact is using.
-  attr_reader :ios_device
-  # @return [String] The version of iOS which the contact is using.
-  attr_reader :ios_os_version
-  # @return [String] The version of the iOS SDK which the contact is using.
-  attr_reader :ios_sdk_version
-  # @return [Integer] (Unix timestamp in seconds) The last time the contact used the iOS app.
-  attr_reader :ios_last_seen_at
-  # @return [Hash] The custom attributes which are set for the contact.
-  attr_reader :custom_attributes
-  # @return [ContactAvatar] Optional object value serialized in the `avatar` wire field.
-  attr_reader :avatar
-  # @return [ContactTags] An object containing tags meta data about the tags that a contact has. Up to 10 will be displayed here. Use the url to get more.
-  attr_reader :tags
-  # @return [ContactNotes] An object containing notes meta data about the notes that a contact has. Up to 10 will be displayed here. Use the url to get more.
-  attr_reader :notes
-  # @return [ContactCompanies] An object with metadata about companies attached to a contact . Up to 10 will be displayed here. Use the url to get more.
-  attr_reader :companies
-  # @return [ContactLocation] An object containing location meta data about a Intercom contact.
-  attr_reader :location
-  # @return [ContactSocialProfiles] An object containing social profiles that a contact has.
-  attr_reader :social_profiles
-  # @return [Array_of_MergeHistoryItem] A list of contacts that were merged into this contact. Only included in the response when `include_merge_history=true` is passed as a query parameter. Only available for contacts with a `user` role.
-  attr_reader :merge_history
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalContactMetadata
+    FIELDS = {
+      type: 'type',
+      id: 'id',
+      external_id: 'external_id',
+      workspace_id: 'workspace_id',
+      role: 'role',
+      email: 'email',
+      email_domain: 'email_domain',
+      email_verified: 'email_verified',
+      phone: 'phone',
+      name: 'name',
+      owner_id: 'owner_id',
+      has_hard_bounced: 'has_hard_bounced',
+      marked_email_as_spam: 'marked_email_as_spam',
+      unsubscribed_from_emails: 'unsubscribed_from_emails',
+      created_at: 'created_at',
+      updated_at: 'updated_at',
+      signed_up_at: 'signed_up_at',
+      last_seen_at: 'last_seen_at',
+      last_replied_at: 'last_replied_at',
+      last_contacted_at: 'last_contacted_at',
+      last_email_opened_at: 'last_email_opened_at',
+      last_email_clicked_at: 'last_email_clicked_at',
+      language_override: 'language_override',
+      browser: 'browser',
+      browser_version: 'browser_version',
+      browser_language: 'browser_language',
+      os: 'os',
+      android_app_name: 'android_app_name',
+      android_app_version: 'android_app_version',
+      android_device: 'android_device',
+      android_os_version: 'android_os_version',
+      android_sdk_version: 'android_sdk_version',
+      android_last_seen_at: 'android_last_seen_at',
+      ios_app_name: 'ios_app_name',
+      ios_app_version: 'ios_app_version',
+      ios_device: 'ios_device',
+      ios_os_version: 'ios_os_version',
+      ios_sdk_version: 'ios_sdk_version',
+      ios_last_seen_at: 'ios_last_seen_at',
+      custom_attributes: 'custom_attributes',
+      avatar: 'avatar',
+      tags: 'tags',
+      notes: 'notes',
+      companies: 'companies',
+      location: 'location',
+      social_profiles: 'social_profiles',
+      merge_history: 'merge_history'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      avatar: lambda do |value|
+        ::OctridevIntercom::ContactAvatar.from_hash(value)
+      end,
+      tags: lambda do |value|
+        ::OctridevIntercom::ContactTags.from_hash(value)
+      end,
+      notes: lambda do |value|
+        ::OctridevIntercom::ContactNotes.from_hash(value)
+      end,
+      companies: lambda do |value|
+        ::OctridevIntercom::ContactCompanies.from_hash(value)
+      end,
+      location: lambda do |value|
+        ::OctridevIntercom::ContactLocation.from_hash(value)
+      end,
+      social_profiles: lambda do |value|
+        ::OctridevIntercom::ContactSocialProfiles.from_hash(value)
+      end,
+      merge_history: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::MergeHistoryItem.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for Contact.
+  # Contacts represent your leads and users in Intercom.
+  class Contact
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalContactMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalContactMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalContactMetadata::DECODERS
+
+    # @return [String] The type of object.
+    attr_reader :type
+    # @return [String] The unique identifier for the contact which is given by Intercom.
+    attr_reader :id
+    # @return [String] The unique identifier for the contact which is provided by the Client.
+    attr_reader :external_id
+    # @return [String] The id of the workspace which the contact belongs to.
+    attr_reader :workspace_id
+    # @return [String] The role of the contact.
+    attr_reader :role
+    # @return [String] The contact's email.
+    attr_reader :email
+    # @return [String] The contact's email domain.
+    attr_reader :email_domain
+    # @return [Boolean] Whether the contact has proved they own their current email address. `true` only when this address was marked verified through the Contacts API (`email_verified: true` on create or update) and has not changed since; it becomes `false` again if the contact's email changes, until the new address is verified. Intercom reuses a lead with a verified email when it later matches an inbound email, or an outbound conversation or ticket, to that address, instead of creating a new lead.
+    attr_reader :email_verified
+    # @return [String] The contacts phone.
+    attr_reader :phone
+    # @return [String] The contacts name.
+    attr_reader :name
+    # @return [String] The id of an admin that has been assigned account ownership of the contact.
+    attr_reader :owner_id
+    # @return [Boolean] Whether the contact has had an email sent to them hard bounce.
+    attr_reader :has_hard_bounced
+    # @return [Boolean] Whether the contact has marked an email sent to them as spam.
+    attr_reader :marked_email_as_spam
+    # @return [Boolean] Whether the contact is unsubscribed from emails.
+    attr_reader :unsubscribed_from_emails
+    # @return [Integer] (Unix timestamp in seconds) The time when the contact was created.
+    attr_reader :created_at
+    # @return [Integer] (Unix timestamp in seconds) The time when the contact was last updated.
+    attr_reader :updated_at
+    # @return [Integer] (Unix timestamp in seconds) The time specified for when a contact signed up.
+    attr_reader :signed_up_at
+    # @return [Integer] (Unix timestamp in seconds) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).
+    attr_reader :last_seen_at
+    # @return [Integer] (Unix timestamp in seconds) The time when the contact last messaged in.
+    attr_reader :last_replied_at
+    # @return [Integer] (Unix timestamp in seconds) The time when the contact was last messaged.
+    attr_reader :last_contacted_at
+    # @return [Integer] (Unix timestamp in seconds) The time when the contact last opened an email.
+    attr_reader :last_email_opened_at
+    # @return [Integer] (Unix timestamp in seconds) The time when the contact last clicked a link in an email.
+    attr_reader :last_email_clicked_at
+    # @return [String] A preferred language setting for the contact, used by the Intercom Messenger even if their browser settings change.
+    attr_reader :language_override
+    # @return [String] The name of the browser which the contact is using.
+    attr_reader :browser
+    # @return [String] The version of the browser which the contact is using.
+    attr_reader :browser_version
+    # @return [String] The language set by the browser which the contact is using.
+    attr_reader :browser_language
+    # @return [String] The operating system which the contact is using.
+    attr_reader :os
+    # @return [String] The name of the Android app which the contact is using.
+    attr_reader :android_app_name
+    # @return [String] The version of the Android app which the contact is using.
+    attr_reader :android_app_version
+    # @return [String] The Android device which the contact is using.
+    attr_reader :android_device
+    # @return [String] The version of the Android OS which the contact is using.
+    attr_reader :android_os_version
+    # @return [String] The version of the Android SDK which the contact is using.
+    attr_reader :android_sdk_version
+    # @return [Integer] (Unix timestamp in seconds) The time when the contact was last seen on an Android device.
+    attr_reader :android_last_seen_at
+    # @return [String] The name of the iOS app which the contact is using.
+    attr_reader :ios_app_name
+    # @return [String] The version of the iOS app which the contact is using.
+    attr_reader :ios_app_version
+    # @return [String] The iOS device which the contact is using.
+    attr_reader :ios_device
+    # @return [String] The version of iOS which the contact is using.
+    attr_reader :ios_os_version
+    # @return [String] The version of the iOS SDK which the contact is using.
+    attr_reader :ios_sdk_version
+    # @return [Integer] (Unix timestamp in seconds) The last time the contact used the iOS app.
+    attr_reader :ios_last_seen_at
+    # @return [Hash] The custom attributes which are set for the contact.
+    attr_reader :custom_attributes
+    # @return [ContactAvatar] Optional object value serialized in the `avatar` wire field.
+    attr_reader :avatar
+    # @return [ContactTags] An object containing tags meta data about the tags that a contact has. Up to 10 will be displayed here. Use the url to get more.
+    attr_reader :tags
+    # @return [ContactNotes] An object containing notes meta data about the notes that a contact has. Up to 10 will be displayed here. Use the url to get more.
+    attr_reader :notes
+    # @return [ContactCompanies] An object with metadata about companies attached to a contact . Up to 10 will be displayed here. Use the url to get more.
+    attr_reader :companies
+    # @return [ContactLocation] An object containing location meta data about a Intercom contact.
+    attr_reader :location
+    # @return [ContactSocialProfiles] An object containing social profiles that a contact has.
+    attr_reader :social_profiles
+    # @return [Array_of_MergeHistoryItem] A list of contacts that were merged into this contact. Only included in the response when `include_merge_history=true` is passed as a query parameter. Only available for contacts with a `user` role.
+    attr_reader :merge_history
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalContactsBulkJobTasksItemMetadata
-  FIELDS = {
-    id: "id",
-    item_count: "item_count",
-    state: "state",
-    created_at: "created_at",
-    started_at: "started_at",
-    completed_at: "completed_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    state: lambda do |value|
-      ::OctridevIntercom::ContactsBulkJobTasksItemState.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for ContactsBulkJobTasksItem.
-# Required object value serialized in the `tasks[]` wire field.
-class ContactsBulkJobTasksItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalContactsBulkJobTasksItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalContactsBulkJobTasksItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalContactsBulkJobTasksItemMetadata::DECODERS
-
-  # @return [String] The unique identifier for the task.
-  attr_reader :id
-  # @return [Integer] The number of items in this task.
-  attr_reader :item_count
-  # @return [ContactsBulkJobTasksItemState] The current state of the task.
-  attr_reader :state
-  # @return [Integer] The time the task was created as a Unix timestamp.
-  attr_reader :created_at
-  # @return [Integer] The time the task started as a Unix timestamp. Null if not yet started.
-  attr_reader :started_at
-  # @return [Integer] The time the task completed as a Unix timestamp. Null if not yet completed.
-  attr_reader :completed_at
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalContactsBulkJobTasksItemMetadata
+    FIELDS = {
+      id: 'id',
+      item_count: 'item_count',
+      state: 'state',
+      created_at: 'created_at',
+      started_at: 'started_at',
+      completed_at: 'completed_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      state: lambda do |value|
+        ::OctridevIntercom::ContactsBulkJobTasksItemState.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ContactsBulkJobTasksItem.
+  # Required object value serialized in the `tasks[]` wire field.
+  class ContactsBulkJobTasksItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalContactsBulkJobTasksItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalContactsBulkJobTasksItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalContactsBulkJobTasksItemMetadata::DECODERS
+
+    # @return [String] The unique identifier for the task.
+    attr_reader :id
+    # @return [Integer] The number of items in this task.
+    attr_reader :item_count
+    # @return [ContactsBulkJobTasksItemState] The current state of the task.
+    attr_reader :state
+    # @return [Integer] The time the task was created as a Unix timestamp.
+    attr_reader :created_at
+    # @return [Integer] The time the task started as a Unix timestamp. Null if not yet started.
+    attr_reader :started_at
+    # @return [Integer] The time the task completed as a Unix timestamp. Null if not yet completed.
+    attr_reader :completed_at
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalContactsBulkJobMetadata
-  FIELDS = {
-    id: "id",
-    type: "type",
-    state: "state",
-    created_at: "created_at",
-    updated_at: "updated_at",
-    completed_at: "completed_at",
-    tasks: "tasks",
-    url: "url",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::ContactsBulkJobType.from_value(value)
-    end,
-    state: lambda do |value|
-      ::OctridevIntercom::ContactsBulkJobState.from_value(value)
-    end,
-    tasks: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::ContactsBulkJobTasksItem.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for ContactsBulkJob.
-# A bulk job for updating contacts asynchronously. Track the job status using the `state` field.
-class ContactsBulkJob
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalContactsBulkJobMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalContactsBulkJobMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalContactsBulkJobMetadata::DECODERS
-
-  # @return [String] The unique identifier for the bulk job.
-  attr_reader :id
-  # @return [ContactsBulkJobType] The type of the object.
-  attr_reader :type
-  # @return [ContactsBulkJobState] The current state of the job.
-  attr_reader :state
-  # @return [Integer] The time the job was created as a Unix timestamp.
-  attr_reader :created_at
-  # @return [Integer] The time the job was last updated as a Unix timestamp.
-  attr_reader :updated_at
-  # @return [Integer] The time the job completed as a Unix timestamp. Null if not yet completed.
-  attr_reader :completed_at
-  # @return [Array_of_ContactsBulkJobTasksItem] The tasks that make up this bulk job.
-  attr_reader :tasks
-  # @return [String] The URL to check the job status.
-  attr_reader :url
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalContactsBulkJobMetadata
+    FIELDS = {
+      id: 'id',
+      type: 'type',
+      state: 'state',
+      created_at: 'created_at',
+      updated_at: 'updated_at',
+      completed_at: 'completed_at',
+      tasks: 'tasks',
+      url: 'url'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::ContactsBulkJobType.from_value(value)
+      end,
+      state: lambda do |value|
+        ::OctridevIntercom::ContactsBulkJobState.from_value(value)
+      end,
+      tasks: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::ContactsBulkJobTasksItem.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ContactsBulkJob.
+  # A bulk job for updating contacts asynchronously. Track the job status using the `state` field.
+  class ContactsBulkJob
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalContactsBulkJobMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalContactsBulkJobMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalContactsBulkJobMetadata::DECODERS
+
+    # @return [String] The unique identifier for the bulk job.
+    attr_reader :id
+    # @return [ContactsBulkJobType] The type of the object.
+    attr_reader :type
+    # @return [ContactsBulkJobState] The current state of the job.
+    attr_reader :state
+    # @return [Integer] The time the job was created as a Unix timestamp.
+    attr_reader :created_at
+    # @return [Integer] The time the job was last updated as a Unix timestamp.
+    attr_reader :updated_at
+    # @return [Integer] The time the job completed as a Unix timestamp. Null if not yet completed.
+    attr_reader :completed_at
+    # @return [Array_of_ContactsBulkJobTasksItem] The tasks that make up this bulk job.
+    attr_reader :tasks
+    # @return [String] The URL to check the job status.
+    attr_reader :url
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Defines the ContactsBulkJobState SDK namespace.
+  module ContactsBulkJobState
+    PENDING = 'pending'
+    RUNNING = 'running'
+    COMPLETED = 'completed'
+    COMPLETED_WITH_ERRORS = 'completed_with_errors'
+    VALUES = %w[pending running completed completed_with_errors].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
 
-# Defines the ContactsBulkJobState SDK namespace.
-module ContactsBulkJobState
-  PENDING = 'pending'
-  RUNNING = 'running'
-  COMPLETED = 'completed'
-  COMPLETED_WITH_ERRORS = 'completed_with_errors'
-  VALUES = ['pending', 'running', 'completed', 'completed_with_errors'].freeze
-  def self.from_value(value)
-    value
+  # Defines the ContactsBulkJobTasksItemState SDK namespace.
+  module ContactsBulkJobTasksItemState
+    PENDING = 'pending'
+    RUNNING = 'running'
+    COMPLETED = 'completed'
+    COMPLETED_WITH_ERRORS = 'completed_with_errors'
+    VALUES = %w[pending running completed completed_with_errors].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
 
-# Defines the ContactsBulkJobTasksItemState SDK namespace.
-module ContactsBulkJobTasksItemState
-  PENDING = 'pending'
-  RUNNING = 'running'
-  COMPLETED = 'completed'
-  COMPLETED_WITH_ERRORS = 'completed_with_errors'
-  VALUES = ['pending', 'running', 'completed', 'completed_with_errors'].freeze
-  def self.from_value(value)
-    value
+  # Defines the ContactsBulkJobType SDK namespace.
+  module ContactsBulkJobType
+    CONTACTS_BULK_JOB = 'contacts.bulk.job'
+    VALUES = ['contacts.bulk.job'].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
-
-# Defines the ContactsBulkJobType SDK namespace.
-module ContactsBulkJobType
-  CONTACTS_BULK_JOB = 'contacts.bulk.job'
-  VALUES = ['contacts.bulk.job'].freeze
-  def self.from_value(value)
-    value
-  end
-end
 end

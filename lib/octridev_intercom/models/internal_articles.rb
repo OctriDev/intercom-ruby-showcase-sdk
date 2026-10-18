@@ -5,249 +5,244 @@
 
 # internal_articles domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalCreateInternalArticleRequestMetadata
-  FIELDS = {
-    title: "title",
-    body: "body",
-    body_markdown: "body_markdown",
-    author_id: "author_id",
-    owner_id: "owner_id",
-    folder_id: "folder_id",
-    audience_ids: "audience_ids",
-    ai_chatbot_availability: "ai_chatbot_availability",
-    ai_copilot_availability: "ai_copilot_availability",
-    ai_sales_agent_availability: "ai_sales_agent_availability",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    title
-    author_id
-    owner_id
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for CreateInternalArticleRequest.
-# You can create an Internal Article
-class CreateInternalArticleRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateInternalArticleRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateInternalArticleRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateInternalArticleRequestMetadata::DECODERS
-
-  # @return [String] The title of the article.
-  attr_reader :title
-  # @return [String] The content of the article in HTML. Mutually exclusive with `body_markdown`.
-  attr_reader :body
-  # @return [String] The content of the article in markdown. An alternative to `body` — you can provide content as markdown instead of HTML. Mutually exclusive with `body`.
-  attr_reader :body_markdown
-  # @return [Integer] The id of the author of the article.
-  attr_reader :author_id
-  # @return [Integer] The id of the owner of the article.
-  attr_reader :owner_id
-  # @return [Integer] The ID of the folder to place this article in, or null to leave it without a folder.
-  attr_reader :folder_id
-  # @return [Array_of_Integer] The list of audience IDs to target this internal article to for Fin AI Agent. Pass an empty array or omit the field for no audience targeting. Unknown audience IDs return a `404` error with no partial commit.
-  attr_reader :audience_ids
-  # @return [Boolean] Whether the internal article should be available for AI Chatbot (Fin). Defaults to false.
-  attr_reader :ai_chatbot_availability
-  # @return [Boolean] Whether the internal article should be available for AI Copilot. Defaults to false.
-  attr_reader :ai_copilot_availability
-  # @return [Boolean] Whether the internal article should be available for AI Sales Agent. Defaults to false.
-  attr_reader :ai_sales_agent_availability
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCreateInternalArticleRequestMetadata
+    FIELDS = {
+      title: 'title',
+      body: 'body',
+      body_markdown: 'body_markdown',
+      author_id: 'author_id',
+      owner_id: 'owner_id',
+      folder_id: 'folder_id',
+      audience_ids: 'audience_ids',
+      ai_chatbot_availability: 'ai_chatbot_availability',
+      ai_copilot_availability: 'ai_copilot_availability',
+      ai_sales_agent_availability: 'ai_sales_agent_availability'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      title
+      author_id
+      owner_id
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for CreateInternalArticleRequest.
+  # You can create an Internal Article
+  class CreateInternalArticleRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateInternalArticleRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateInternalArticleRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateInternalArticleRequestMetadata::DECODERS
+
+    # @return [String] The title of the article.
+    attr_reader :title
+    # @return [String] The content of the article in HTML. Mutually exclusive with `body_markdown`.
+    attr_reader :body
+    # @return [String] The content of the article in markdown. An alternative to `body` — you can provide content as markdown instead of HTML. Mutually exclusive with `body`.
+    attr_reader :body_markdown
+    # @return [Integer] The id of the author of the article.
+    attr_reader :author_id
+    # @return [Integer] The id of the owner of the article.
+    attr_reader :owner_id
+    # @return [Integer] The ID of the folder to place this article in, or null to leave it without a folder.
+    attr_reader :folder_id
+    # @return [Array_of_Integer] The list of audience IDs to target this internal article to for Fin AI Agent. Pass an empty array or omit the field for no audience targeting. Unknown audience IDs return a `404` error with no partial commit.
+    attr_reader :audience_ids
+    # @return [Boolean] Whether the internal article should be available for AI Chatbot (Fin). Defaults to false.
+    attr_reader :ai_chatbot_availability
+    # @return [Boolean] Whether the internal article should be available for AI Copilot. Defaults to false.
+    attr_reader :ai_copilot_availability
+    # @return [Boolean] Whether the internal article should be available for AI Sales Agent. Defaults to false.
+    attr_reader :ai_sales_agent_availability
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDeletedInternalArticleObjectMetadata
-  FIELDS = {
-    id: "id",
-    object: "object",
-    deleted: "deleted",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    object: lambda do |value|
-      ::OctridevIntercom::DeletedInternalArticleObjectObject.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for DeletedInternalArticleObject.
-# Response returned when an object is deleted
-class DeletedInternalArticleObject
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDeletedInternalArticleObjectMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDeletedInternalArticleObjectMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDeletedInternalArticleObjectMetadata::DECODERS
-
-  # @return [String] The unique identifier for the internal article which you provided in the URL.
-  attr_reader :id
-  # @return [DeletedInternalArticleObjectObject] The type of object which was deleted. - internal_article
-  attr_reader :object
-  # @return [Boolean] Whether the internal article was deleted successfully or not.
-  attr_reader :deleted
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalDeletedInternalArticleObjectMetadata
+    FIELDS = {
+      id: 'id',
+      object: 'object',
+      deleted: 'deleted'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      object: lambda do |value|
+        ::OctridevIntercom::DeletedInternalArticleObjectObject.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for DeletedInternalArticleObject.
+  # Response returned when an object is deleted
+  class DeletedInternalArticleObject
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDeletedInternalArticleObjectMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDeletedInternalArticleObjectMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDeletedInternalArticleObjectMetadata::DECODERS
+
+    # @return [String] The unique identifier for the internal article which you provided in the URL.
+    attr_reader :id
+    # @return [DeletedInternalArticleObjectObject] The type of object which was deleted. - internal_article
+    attr_reader :object
+    # @return [Boolean] Whether the internal article was deleted successfully or not.
+    attr_reader :deleted
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the DeletedInternalArticleObjectObject SDK namespace.
-module DeletedInternalArticleObjectObject
-  INTERNAL_ARTICLE = 'internal_article'
-  VALUES = ['internal_article'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalInternalArticleListMetadata
-  FIELDS = {
-    type: "type",
-    pages: "pages",
-    total_count: "total_count",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::InternalArticleListType.from_value(value)
-    end,
-    pages: lambda do |value|
-      ::OctridevIntercom::CursorPages.from_hash(value)
-    end,
-    data: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::InternalArticleListItem.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for InternalArticleList.
-# This will return a list of internal articles for the App.
-class InternalArticleList
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalInternalArticleListMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalInternalArticleListMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalInternalArticleListMetadata::DECODERS
-
-  # @return [InternalArticleListType] The type of the object - `list`.
-  attr_reader :type
-  # @return [CursorPages] Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
-  attr_reader :pages
-  # @return [Integer] A count of the total number of internal articles.
-  attr_reader :total_count
-  # @return [Array_of_InternalArticleListItem] An array of Internal Article objects
-  attr_reader :data
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the DeletedInternalArticleObjectObject SDK namespace.
+  module DeletedInternalArticleObjectObject
+    INTERNAL_ARTICLE = 'internal_article'
+    VALUES = ['internal_article'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalInternalArticleListMetadata
+    FIELDS = {
+      type: 'type',
+      pages: 'pages',
+      total_count: 'total_count',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::InternalArticleListType.from_value(value)
+      end,
+      pages: lambda do |value|
+        ::OctridevIntercom::CursorPages.from_hash(value)
+      end,
+      data: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::InternalArticleListItem.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for InternalArticleList.
+  # This will return a list of internal articles for the App.
+  class InternalArticleList
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalInternalArticleListMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalInternalArticleListMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalInternalArticleListMetadata::DECODERS
 
-# Defines the InternalArticleListType SDK namespace.
-module InternalArticleListType
-  LIST = 'list'
-  VALUES = ['list'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [InternalArticleListType] The type of the object - `list`.
+    attr_reader :type
+    # @return [CursorPages] Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
+    attr_reader :pages
+    # @return [Integer] A count of the total number of internal articles.
+    attr_reader :total_count
+    # @return [Array_of_InternalArticleListItem] An array of Internal Article objects
+    attr_reader :data
 
-# Internal model hydration metadata.
-class SdkInternalUpdateInternalArticleRequestMetadata
-  FIELDS = {
-    title: "title",
-    body: "body",
-    body_markdown: "body_markdown",
-    author_id: "author_id",
-    owner_id: "owner_id",
-    folder_id: "folder_id",
-    audience_ids: "audience_ids",
-    ai_chatbot_availability: "ai_chatbot_availability",
-    ai_copilot_availability: "ai_copilot_availability",
-    ai_sales_agent_availability: "ai_sales_agent_availability",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# API model for UpdateInternalArticleRequest.
-# You can Update an Internal Article
-class UpdateInternalArticleRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalUpdateInternalArticleRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalUpdateInternalArticleRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalUpdateInternalArticleRequestMetadata::DECODERS
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  # @return [String] The title of the article.
-  attr_reader :title
-  # @return [String] The content of the article in HTML. Mutually exclusive with `body_markdown`.
-  attr_reader :body
-  # @return [String] The content of the article in markdown. An alternative to `body` — you can provide content as markdown instead of HTML. Mutually exclusive with `body`.
-  attr_reader :body_markdown
-  # @return [Integer] The id of the author of the article.
-  attr_reader :author_id
-  # @return [Integer] The id of the author of the article.
-  attr_reader :owner_id
-  # @return [Integer] The ID of the folder to place this article in, or null to remove it from its folder.
-  attr_reader :folder_id
-  # @return [Array_of_Integer] The list of audience IDs to target this internal article to for Fin AI Agent. Omitting the field leaves existing audience memberships unchanged (PATCH semantics). Pass `[]` to clear all audience memberships. Unknown audience IDs return a `404` error with no partial commit.
-  attr_reader :audience_ids
-  # @return [Boolean] Whether the internal article should be available for AI Chatbot (Fin).
-  attr_reader :ai_chatbot_availability
-  # @return [Boolean] Whether the internal article should be available for AI Copilot.
-  attr_reader :ai_copilot_availability
-  # @return [Boolean] Whether the internal article should be available for AI Sales Agent.
-  attr_reader :ai_sales_agent_availability
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the InternalArticleListType SDK namespace.
+  module InternalArticleListType
+    LIST = 'list'
+    VALUES = ['list'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalUpdateInternalArticleRequestMetadata
+    FIELDS = {
+      title: 'title',
+      body: 'body',
+      body_markdown: 'body_markdown',
+      author_id: 'author_id',
+      owner_id: 'owner_id',
+      folder_id: 'folder_id',
+      audience_ids: 'audience_ids',
+      ai_chatbot_availability: 'ai_chatbot_availability',
+      ai_copilot_availability: 'ai_copilot_availability',
+      ai_sales_agent_availability: 'ai_sales_agent_availability'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
-end
+
+  # API model for UpdateInternalArticleRequest.
+  # You can Update an Internal Article
+  class UpdateInternalArticleRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalUpdateInternalArticleRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalUpdateInternalArticleRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalUpdateInternalArticleRequestMetadata::DECODERS
+
+    # @return [String] The title of the article.
+    attr_reader :title
+    # @return [String] The content of the article in HTML. Mutually exclusive with `body_markdown`.
+    attr_reader :body
+    # @return [String] The content of the article in markdown. An alternative to `body` — you can provide content as markdown instead of HTML. Mutually exclusive with `body`.
+    attr_reader :body_markdown
+    # @return [Integer] The id of the author of the article.
+    attr_reader :author_id
+    # @return [Integer] The id of the author of the article.
+    attr_reader :owner_id
+    # @return [Integer] The ID of the folder to place this article in, or null to remove it from its folder.
+    attr_reader :folder_id
+    # @return [Array_of_Integer] The list of audience IDs to target this internal article to for Fin AI Agent. Omitting the field leaves existing audience memberships unchanged (PATCH semantics). Pass `[]` to clear all audience memberships. Unknown audience IDs return a `404` error with no partial commit.
+    attr_reader :audience_ids
+    # @return [Boolean] Whether the internal article should be available for AI Chatbot (Fin).
+    attr_reader :ai_chatbot_availability
+    # @return [Boolean] Whether the internal article should be available for AI Copilot.
+    attr_reader :ai_copilot_availability
+    # @return [Boolean] Whether the internal article should be available for AI Sales Agent.
+    attr_reader :ai_sales_agent_availability
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
 end

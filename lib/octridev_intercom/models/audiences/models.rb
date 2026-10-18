@@ -5,75 +5,74 @@
 
 # tagged_models_audiences domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalAudienceMetadata
-  FIELDS = {
-    type: "type",
-    id: "id",
-    name: "name",
-    predicates: "predicates",
-    role_predicates: "role_predicates",
-    created_at: "created_at",
-    updated_at: "updated_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::AudienceType.from_value(value)
-    end,
-    predicates: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::Predicate.from_hash(item) }
-    end,
-    role_predicates: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::Predicate.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for Audience.
-# An audience represents a group of contacts that can be targeted by Fin.
-class Audience
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAudienceMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAudienceMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAudienceMetadata::DECODERS
-
-  # @return [AudienceType] The type of object.
-  attr_reader :type
-  # @return [String] The unique identifier representing the audience.
-  attr_reader :id
-  # @return [String] The name of the audience.
-  attr_reader :name
-  # @return [Array_of_Predicate] The predicates that define which contacts belong to the audience.
-  attr_reader :predicates
-  # @return [Array_of_Predicate] Role-based predicates that further filter audience membership by contact role.
-  attr_reader :role_predicates
-  # @return [Integer] The time the audience was created as a Unix timestamp.
-  attr_reader :created_at
-  # @return [Integer] The time the audience was last updated as a Unix timestamp.
-  attr_reader :updated_at
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAudienceMetadata
+    FIELDS = {
+      type: 'type',
+      id: 'id',
+      name: 'name',
+      predicates: 'predicates',
+      role_predicates: 'role_predicates',
+      created_at: 'created_at',
+      updated_at: 'updated_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::AudienceType.from_value(value)
+      end,
+      predicates: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::Predicate.from_hash(item) }
+      end,
+      role_predicates: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::Predicate.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for Audience.
+  # An audience represents a group of contacts that can be targeted by Fin.
+  class Audience
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAudienceMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAudienceMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAudienceMetadata::DECODERS
+
+    # @return [AudienceType] The type of object.
+    attr_reader :type
+    # @return [String] The unique identifier representing the audience.
+    attr_reader :id
+    # @return [String] The name of the audience.
+    attr_reader :name
+    # @return [Array_of_Predicate] The predicates that define which contacts belong to the audience.
+    attr_reader :predicates
+    # @return [Array_of_Predicate] Role-based predicates that further filter audience membership by contact role.
+    attr_reader :role_predicates
+    # @return [Integer] The time the audience was created as a Unix timestamp.
+    attr_reader :created_at
+    # @return [Integer] The time the audience was last updated as a Unix timestamp.
+    attr_reader :updated_at
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Defines the AudienceType SDK namespace.
+  module AudienceType
+    AUDIENCE = 'audience'
+    VALUES = ['audience'].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
-
-# Defines the AudienceType SDK namespace.
-module AudienceType
-  AUDIENCE = 'audience'
-  VALUES = ['audience'].freeze
-  def self.from_value(value)
-    value
-  end
-end
 end

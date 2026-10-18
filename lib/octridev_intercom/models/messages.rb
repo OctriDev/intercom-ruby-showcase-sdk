@@ -5,574 +5,568 @@
 
 # messages domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalCreateMessageRequestFromMetadata
-  FIELDS = {
-    type: "type",
-    id: "id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    id
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::CreateMessageRequestFromType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for CreateMessageRequestFrom.
-# The sender of the message. If not provided, the default sender will be used.
-class CreateMessageRequestFrom
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateMessageRequestFromMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateMessageRequestFromMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateMessageRequestFromMetadata::DECODERS
-
-  # @return [CreateMessageRequestFromType] Always `admin`.
-  attr_reader :type
-  # @return [Integer] The identifier for the admin which is given by Intercom.
-  attr_reader :id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCreateMessageRequestFromMetadata
+    FIELDS = {
+      type: 'type',
+      id: 'id'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      id
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::CreateMessageRequestFromType.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for CreateMessageRequestFrom.
+  # The sender of the message. If not provided, the default sender will be used.
+  class CreateMessageRequestFrom
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateMessageRequestFromMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateMessageRequestFromMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateMessageRequestFromMetadata::DECODERS
+
+    # @return [CreateMessageRequestFromType] Always `admin`.
+    attr_reader :type
+    # @return [Integer] The identifier for the admin which is given by Intercom.
+    attr_reader :id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalCreateMessageRequestMetadata
-  FIELDS = {
-    message_type: "message_type",
-    subject: "subject",
-    body: "body",
-    template: "template",
-    from: "from",
-    to: "to",
-    cc: "cc",
-    bcc: "bcc",
-    created_at: "created_at",
-    create_conversation_without_contact_reply: "create_conversation_without_contact_reply",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    message_type: lambda do |value|
-      ::OctridevIntercom::CreateMessageRequestMessageType.from_value(value)
-    end,
-    from: lambda do |value|
-      ::OctridevIntercom::CreateMessageRequestFrom.from_hash(value)
-    end,
-    to: lambda do |value|
-      SdkModel.union_branch(value, [::OctridevIntercom::Recipient])
-    end,
-    cc: lambda do |value|
-      SdkModel.union_branch(value, [::OctridevIntercom::Recipient])
-    end,
-    bcc: lambda do |value|
-      SdkModel.union_branch(value, [::OctridevIntercom::Recipient])
-    end,
-  }.freeze
-end
-
-# API model for CreateMessageRequest.
-# You can create a message
-class CreateMessageRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateMessageRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateMessageRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateMessageRequestMetadata::DECODERS
-
-  # @return [CreateMessageRequestMessageType] The kind of message being created. Values: `in_app`, `email` or `whatsapp`.
-  attr_reader :message_type
-  # @return [String] The title of the email.
-  attr_reader :subject
-  # @return [String] The content of the message. HTML and plaintext are supported.
-  attr_reader :body
-  # @return [String] The style of the outgoing message. Possible values `plain` or `personal`.
-  attr_reader :template
-  # @return [CreateMessageRequestFrom] The sender of the message. If not provided, the default sender will be used.
-  attr_reader :from
-  # @return [Object] Optional API value serialized in the `to` wire field.
-  attr_reader :to
-  # @return [Object] Optional API value serialized in the `cc` wire field.
-  attr_reader :cc
-  # @return [Object] Optional API value serialized in the `bcc` wire field.
-  attr_reader :bcc
-  # @return [Integer] The time the message was created. If not provided, the current time will be used.
-  attr_reader :created_at
-  # @return [Boolean] Whether a conversation should be opened in the inbox for the message without the contact replying. Defaults to false if not provided.
-  attr_reader :create_conversation_without_contact_reply
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCreateMessageRequestMetadata
+    FIELDS = {
+      message_type: 'message_type',
+      subject: 'subject',
+      body: 'body',
+      template: 'template',
+      from: 'from',
+      to: 'to',
+      cc: 'cc',
+      bcc: 'bcc',
+      created_at: 'created_at',
+      create_conversation_without_contact_reply: 'create_conversation_without_contact_reply'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      message_type: lambda do |value|
+        ::OctridevIntercom::CreateMessageRequestMessageType.from_value(value)
+      end,
+      from: lambda do |value|
+        ::OctridevIntercom::CreateMessageRequestFrom.from_hash(value)
+      end,
+      to: lambda do |value|
+        SdkModel.union_branch(value, [::OctridevIntercom::Recipient])
+      end,
+      cc: lambda do |value|
+        SdkModel.union_branch(value, [::OctridevIntercom::Recipient])
+      end,
+      bcc: lambda do |value|
+        SdkModel.union_branch(value, [::OctridevIntercom::Recipient])
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for CreateMessageRequest.
+  # You can create a message
+  class CreateMessageRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateMessageRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateMessageRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateMessageRequestMetadata::DECODERS
+
+    # @return [CreateMessageRequestMessageType] The kind of message being created. Values: `in_app`, `email` or `whatsapp`.
+    attr_reader :message_type
+    # @return [String] The title of the email.
+    attr_reader :subject
+    # @return [String] The content of the message. HTML and plaintext are supported.
+    attr_reader :body
+    # @return [String] The style of the outgoing message. Possible values `plain` or `personal`.
+    attr_reader :template
+    # @return [CreateMessageRequestFrom] The sender of the message. If not provided, the default sender will be used.
+    attr_reader :from
+    # @return [Object] Optional API value serialized in the `to` wire field.
+    attr_reader :to
+    # @return [Object] Optional API value serialized in the `cc` wire field.
+    attr_reader :cc
+    # @return [Object] Optional API value serialized in the `bcc` wire field.
+    attr_reader :bcc
+    # @return [Integer] The time the message was created. If not provided, the current time will be used.
+    attr_reader :created_at
+    # @return [Boolean] Whether a conversation should be opened in the inbox for the message without the contact replying. Defaults to false if not provided.
+    attr_reader :create_conversation_without_contact_reply
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the CreateMessageRequestFromType SDK namespace.
-module CreateMessageRequestFromType
-  ADMIN = 'admin'
-  VALUES = ['admin'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the CreateMessageRequestMessageType SDK namespace.
-module CreateMessageRequestMessageType
-  IN_APP = 'in_app'
-  EMAIL = 'email'
-  WHATSAPP = 'whatsapp'
-  VALUES = ['in_app', 'email', 'whatsapp'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalRecipientMetadata
-  FIELDS = {
-    type: "type",
-    id: "id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    id
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::RecipientType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for Recipient.
-# A recipient of a message
-class Recipient
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalRecipientMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalRecipientMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalRecipientMetadata::DECODERS
-
-  # @return [RecipientType] The role associated to the contact - `user` or `lead`.
-  attr_reader :type
-  # @return [String] The identifier for the contact which is given by Intercom.
-  attr_reader :id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the CreateMessageRequestFromType SDK namespace.
+  module CreateMessageRequestFromType
+    ADMIN = 'admin'
+    VALUES = ['admin'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the CreateMessageRequestMessageType SDK namespace.
+  module CreateMessageRequestMessageType
+    IN_APP = 'in_app'
+    EMAIL = 'email'
+    WHATSAPP = 'whatsapp'
+    VALUES = %w[in_app email whatsapp].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the RecipientType SDK namespace.
-module RecipientType
-  USER = 'user'
-  LEAD = 'lead'
-  VALUES = ['user', 'lead'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalWhatsappMessageStatusErrorMetadata
-  FIELDS = {
-    message: "message",
-    details: "details",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for WhatsappMessageStatusError.
-# Error details, present only when status is "failed"
-class WhatsappMessageStatusError
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalWhatsappMessageStatusErrorMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalWhatsappMessageStatusErrorMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalWhatsappMessageStatusErrorMetadata::DECODERS
-
-  # @return [String] Error message
-  attr_reader :message
-  # @return [String] Detailed error information
-  attr_reader :details
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalRecipientMetadata
+    FIELDS = {
+      type: 'type',
+      id: 'id'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      id
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::RecipientType.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for Recipient.
+  # A recipient of a message
+  class Recipient
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalRecipientMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalRecipientMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalRecipientMetadata::DECODERS
+
+    # @return [RecipientType] The role associated to the contact - `user` or `lead`.
+    attr_reader :type
+    # @return [String] The identifier for the contact which is given by Intercom.
+    attr_reader :id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalWhatsappMessageStatusMetadata
-  FIELDS = {
-    conversation_id: "conversation_id",
-    status: "status",
-    type: "type",
-    created_at: "created_at",
-    updated_at: "updated_at",
-    template_name: "template_name",
-    message_id: "message_id",
-    error: "error",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevIntercom::WhatsappMessageStatusStatus.from_value(value)
-    end,
-    error: lambda do |value|
-      ::OctridevIntercom::WhatsappMessageStatusError.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for WhatsappMessageStatus.
-# The delivery status of a specific WhatsApp message.
-class WhatsappMessageStatus
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalWhatsappMessageStatusMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalWhatsappMessageStatusMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalWhatsappMessageStatusMetadata::DECODERS
-
-  # @return [String] ID of the conversation
-  attr_reader :conversation_id
-  # @return [WhatsappMessageStatusStatus] Current delivery status of the message
-  attr_reader :status
-  # @return [String] Event type
-  attr_reader :type
-  # @return [Integer] Creation timestamp
-  attr_reader :created_at
-  # @return [Integer] Last update timestamp
-  attr_reader :updated_at
-  # @return [String] Name of the WhatsApp template used
-  attr_reader :template_name
-  # @return [String] The WhatsApp message ID
-  attr_reader :message_id
-  # @return [WhatsappMessageStatusError] Error details, present only when status is "failed"
-  attr_reader :error
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the RecipientType SDK namespace.
+  module RecipientType
+    USER = 'user'
+    LEAD = 'lead'
+    VALUES = %w[user lead].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalWhatsappMessageStatusErrorMetadata
+    FIELDS = {
+      message: 'message',
+      details: 'details'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for WhatsappMessageStatusError.
+  # Error details, present only when status is "failed"
+  class WhatsappMessageStatusError
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalWhatsappMessageStatusErrorMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalWhatsappMessageStatusErrorMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalWhatsappMessageStatusErrorMetadata::DECODERS
 
-# Defines the WhatsappMessageStatusStatus SDK namespace.
-module WhatsappMessageStatusStatus
-  SENT = 'sent'
-  DELIVERED = 'delivered'
-  READ = 'read'
-  FAILED = 'failed'
-  VALUES = ['sent', 'delivered', 'read', 'failed'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [String] Error message
+    attr_reader :message
+    # @return [String] Detailed error information
+    attr_reader :details
 
-# Internal model hydration metadata.
-class SdkInternalWhatsappMessageStatusListPagesNextMetadata
-  FIELDS = {
-    starting_after: "starting_after",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# API model for WhatsappMessageStatusListPagesNext.
-# Information for fetching next page (null if no more pages)
-class WhatsappMessageStatusListPagesNext
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalWhatsappMessageStatusListPagesNextMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalWhatsappMessageStatusListPagesNextMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalWhatsappMessageStatusListPagesNextMetadata::DECODERS
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  # @return [String] Cursor for the next page
-  attr_reader :starting_after
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalWhatsappMessageStatusMetadata
+    FIELDS = {
+      conversation_id: 'conversation_id',
+      status: 'status',
+      type: 'type',
+      created_at: 'created_at',
+      updated_at: 'updated_at',
+      template_name: 'template_name',
+      message_id: 'message_id',
+      error: 'error'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevIntercom::WhatsappMessageStatusStatus.from_value(value)
+      end,
+      error: lambda do |value|
+        ::OctridevIntercom::WhatsappMessageStatusError.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for WhatsappMessageStatus.
+  # The delivery status of a specific WhatsApp message.
+  class WhatsappMessageStatus
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalWhatsappMessageStatusMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalWhatsappMessageStatusMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalWhatsappMessageStatusMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalWhatsappMessageStatusListPagesMetadata
-  FIELDS = {
-    type: "type",
-    per_page: "per_page",
-    total_pages: "total_pages",
-    next_: "next",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    per_page
-    total_pages
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::WhatsappMessageStatusListPagesType.from_value(value)
-    end,
-    next_: lambda do |value|
-      ::OctridevIntercom::WhatsappMessageStatusListPagesNext.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [String] ID of the conversation
+    attr_reader :conversation_id
+    # @return [WhatsappMessageStatusStatus] Current delivery status of the message
+    attr_reader :status
+    # @return [String] Event type
+    attr_reader :type
+    # @return [Integer] Creation timestamp
+    attr_reader :created_at
+    # @return [Integer] Last update timestamp
+    attr_reader :updated_at
+    # @return [String] Name of the WhatsApp template used
+    attr_reader :template_name
+    # @return [String] The WhatsApp message ID
+    attr_reader :message_id
+    # @return [WhatsappMessageStatusError] Error details, present only when status is "failed"
+    attr_reader :error
 
-# API model for WhatsappMessageStatusListPages.
-# Required object value serialized in the `pages` wire field.
-class WhatsappMessageStatusListPages
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalWhatsappMessageStatusListPagesMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalWhatsappMessageStatusListPagesMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalWhatsappMessageStatusListPagesMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [WhatsappMessageStatusListPagesType] Required enumerated value serialized in the `type` wire field.
-  attr_reader :type
-  # @return [Integer] Number of results per page
-  attr_reader :per_page
-  # @return [Integer] Total number of pages
-  attr_reader :total_pages
-  # @return [WhatsappMessageStatusListPagesNext] Information for fetching next page (null if no more pages)
-  attr_reader :next_
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the WhatsappMessageStatusStatus SDK namespace.
+  module WhatsappMessageStatusStatus
+    SENT = 'sent'
+    DELIVERED = 'delivered'
+    READ = 'read'
+    FAILED = 'failed'
+    VALUES = %w[sent delivered read failed].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalWhatsappMessageStatusListEventsItemMetadata
-  FIELDS = {
-    id: "id",
-    conversation_id: "conversation_id",
-    status: "status",
-    type: "type",
-    created_at: "created_at",
-    updated_at: "updated_at",
-    whatsapp_message_id: "whatsapp_message_id",
-    template_name: "template_name",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    id
-    conversation_id
-    status
-    type
-    created_at
-    updated_at
-    whatsapp_message_id
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevIntercom::WhatsappMessageStatusListEventsItemStatus.from_value(value)
-    end,
-    type: lambda do |value|
-      ::OctridevIntercom::WhatsappMessageStatusListEventsItemType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for WhatsappMessageStatusListEventsItem.
-# Required object value serialized in the `events[]` wire field.
-class WhatsappMessageStatusListEventsItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalWhatsappMessageStatusListEventsItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalWhatsappMessageStatusListEventsItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalWhatsappMessageStatusListEventsItemMetadata::DECODERS
-
-  # @return [String] Event ID
-  attr_reader :id
-  # @return [String] ID of the conversation
-  attr_reader :conversation_id
-  # @return [WhatsappMessageStatusListEventsItemStatus] Current status of the message
-  attr_reader :status
-  # @return [WhatsappMessageStatusListEventsItemType] Event type
-  attr_reader :type
-  # @return [Integer] Creation timestamp
-  attr_reader :created_at
-  # @return [Integer] Last update timestamp
-  attr_reader :updated_at
-  # @return [String] WhatsApp's message identifier
-  attr_reader :whatsapp_message_id
-  # @return [String] Name of the WhatsApp template used
-  attr_reader :template_name
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalWhatsappMessageStatusListPagesNextMetadata
+    FIELDS = {
+      starting_after: 'starting_after'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for WhatsappMessageStatusListPagesNext.
+  # Information for fetching next page (null if no more pages)
+  class WhatsappMessageStatusListPagesNext
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalWhatsappMessageStatusListPagesNextMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalWhatsappMessageStatusListPagesNextMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalWhatsappMessageStatusListPagesNextMetadata::DECODERS
+
+    # @return [String] Cursor for the next page
+    attr_reader :starting_after
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalWhatsappMessageStatusListMetadata
-  FIELDS = {
-    type: "type",
-    ruleset_id: "ruleset_id",
-    pages: "pages",
-    total_count: "total_count",
-    events: "events",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    ruleset_id
-    pages
-    total_count
-    events
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::WhatsappMessageStatusListType.from_value(value)
-    end,
-    pages: lambda do |value|
-      ::OctridevIntercom::WhatsappMessageStatusListPages.from_hash(value)
-    end,
-    events: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::WhatsappMessageStatusListEventsItem.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for WhatsappMessageStatusList.
-# Typed representation of the `WhatsappMessageStatusList` API schema.
-class WhatsappMessageStatusList
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalWhatsappMessageStatusListMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalWhatsappMessageStatusListMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalWhatsappMessageStatusListMetadata::DECODERS
-
-  # @return [WhatsappMessageStatusListType] Required enumerated value serialized in the `type` wire field.
-  attr_reader :type
-  # @return [String] The provided ruleset ID
-  attr_reader :ruleset_id
-  # @return [WhatsappMessageStatusListPages] Required object value serialized in the `pages` wire field.
-  attr_reader :pages
-  # @return [Integer] Total number of events
-  attr_reader :total_count
-  # @return [Array_of_WhatsappMessageStatusListEventsItem] Required array value serialized in the `events` wire field.
-  attr_reader :events
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalWhatsappMessageStatusListPagesMetadata
+    FIELDS = {
+      type: 'type',
+      per_page: 'per_page',
+      total_pages: 'total_pages',
+      next_: 'next'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      per_page
+      total_pages
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::WhatsappMessageStatusListPagesType.from_value(value)
+      end,
+      next_: lambda do |value|
+        ::OctridevIntercom::WhatsappMessageStatusListPagesNext.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for WhatsappMessageStatusListPages.
+  # Required object value serialized in the `pages` wire field.
+  class WhatsappMessageStatusListPages
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalWhatsappMessageStatusListPagesMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalWhatsappMessageStatusListPagesMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalWhatsappMessageStatusListPagesMetadata::DECODERS
+
+    # @return [WhatsappMessageStatusListPagesType] Required enumerated value serialized in the `type` wire field.
+    attr_reader :type
+    # @return [Integer] Number of results per page
+    attr_reader :per_page
+    # @return [Integer] Total number of pages
+    attr_reader :total_pages
+    # @return [WhatsappMessageStatusListPagesNext] Information for fetching next page (null if no more pages)
+    attr_reader :next_
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalWhatsappMessageStatusListEventsItemMetadata
+    FIELDS = {
+      id: 'id',
+      conversation_id: 'conversation_id',
+      status: 'status',
+      type: 'type',
+      created_at: 'created_at',
+      updated_at: 'updated_at',
+      whatsapp_message_id: 'whatsapp_message_id',
+      template_name: 'template_name'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      id
+      conversation_id
+      status
+      type
+      created_at
+      updated_at
+      whatsapp_message_id
+    ].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevIntercom::WhatsappMessageStatusListEventsItemStatus.from_value(value)
+      end,
+      type: lambda do |value|
+        ::OctridevIntercom::WhatsappMessageStatusListEventsItemType.from_value(value)
+      end
+    }.freeze
   end
-end
 
-# Defines the WhatsappMessageStatusListEventsItemStatus SDK namespace.
-module WhatsappMessageStatusListEventsItemStatus
-  SENT = 'sent'
-  DELIVERED = 'delivered'
-  READ = 'read'
-  FAILED = 'failed'
-  VALUES = ['sent', 'delivered', 'read', 'failed'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+  # API model for WhatsappMessageStatusListEventsItem.
+  # Required object value serialized in the `events[]` wire field.
+  class WhatsappMessageStatusListEventsItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalWhatsappMessageStatusListEventsItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalWhatsappMessageStatusListEventsItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalWhatsappMessageStatusListEventsItemMetadata::DECODERS
 
-# Defines the WhatsappMessageStatusListEventsItemType SDK namespace.
-module WhatsappMessageStatusListEventsItemType
-  BROADCAST_OUTBOUND = 'broadcast_outbound'
-  VALUES = ['broadcast_outbound'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [String] Event ID
+    attr_reader :id
+    # @return [String] ID of the conversation
+    attr_reader :conversation_id
+    # @return [WhatsappMessageStatusListEventsItemStatus] Current status of the message
+    attr_reader :status
+    # @return [WhatsappMessageStatusListEventsItemType] Event type
+    attr_reader :type
+    # @return [Integer] Creation timestamp
+    attr_reader :created_at
+    # @return [Integer] Last update timestamp
+    attr_reader :updated_at
+    # @return [String] WhatsApp's message identifier
+    attr_reader :whatsapp_message_id
+    # @return [String] Name of the WhatsApp template used
+    attr_reader :template_name
 
-# Defines the WhatsappMessageStatusListPagesType SDK namespace.
-module WhatsappMessageStatusListPagesType
-  PAGES = 'pages'
-  VALUES = ['pages'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# Defines the WhatsappMessageStatusListType SDK namespace.
-module WhatsappMessageStatusListType
-  LIST = 'list'
-  VALUES = ['list'].freeze
-  def self.from_value(value)
-    value
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
+
+  # Internal model hydration metadata.
+  class SdkInternalWhatsappMessageStatusListMetadata
+    FIELDS = {
+      type: 'type',
+      ruleset_id: 'ruleset_id',
+      pages: 'pages',
+      total_count: 'total_count',
+      events: 'events'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      ruleset_id
+      pages
+      total_count
+      events
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::WhatsappMessageStatusListType.from_value(value)
+      end,
+      pages: lambda do |value|
+        ::OctridevIntercom::WhatsappMessageStatusListPages.from_hash(value)
+      end,
+      events: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::WhatsappMessageStatusListEventsItem.from_hash(item) }
+      end
+    }.freeze
+  end
+
+  # API model for WhatsappMessageStatusList.
+  # Typed representation of the `WhatsappMessageStatusList` API schema.
+  class WhatsappMessageStatusList
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalWhatsappMessageStatusListMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalWhatsappMessageStatusListMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalWhatsappMessageStatusListMetadata::DECODERS
+
+    # @return [WhatsappMessageStatusListType] Required enumerated value serialized in the `type` wire field.
+    attr_reader :type
+    # @return [String] The provided ruleset ID
+    attr_reader :ruleset_id
+    # @return [WhatsappMessageStatusListPages] Required object value serialized in the `pages` wire field.
+    attr_reader :pages
+    # @return [Integer] Total number of events
+    attr_reader :total_count
+    # @return [Array_of_WhatsappMessageStatusListEventsItem] Required array value serialized in the `events` wire field.
+    attr_reader :events
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the WhatsappMessageStatusListEventsItemStatus SDK namespace.
+  module WhatsappMessageStatusListEventsItemStatus
+    SENT = 'sent'
+    DELIVERED = 'delivered'
+    READ = 'read'
+    FAILED = 'failed'
+    VALUES = %w[sent delivered read failed].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Defines the WhatsappMessageStatusListEventsItemType SDK namespace.
+  module WhatsappMessageStatusListEventsItemType
+    BROADCAST_OUTBOUND = 'broadcast_outbound'
+    VALUES = ['broadcast_outbound'].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Defines the WhatsappMessageStatusListPagesType SDK namespace.
+  module WhatsappMessageStatusListPagesType
+    PAGES = 'pages'
+    VALUES = ['pages'].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Defines the WhatsappMessageStatusListType SDK namespace.
+  module WhatsappMessageStatusListType
+    LIST = 'list'
+    VALUES = ['list'].freeze
+    def self.from_value(value)
+      value
+    end
+  end
 end
