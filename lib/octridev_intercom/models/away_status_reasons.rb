@@ -5,111 +5,114 @@
 
 # away_status_reasons domain models
 module OctridevIntercom
-  # Internal model hydration metadata.
-  class SdkInternalAwayStatusReasonMetadata
-    FIELDS = {
-      type: 'type',
-      id: 'id',
-      label: 'label',
-      emoji: 'emoji',
-      order: 'order',
-      deleted: 'deleted',
-      created_at: 'created_at',
-      updated_at: 'updated_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalAwayStatusReasonMetadata
+  FIELDS = {
+    type: "type",
+    id: "id",
+    label: "label",
+    emoji: "emoji",
+    order: "order",
+    deleted: "deleted",
+    created_at: "created_at",
+    updated_at: "updated_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for AwayStatusReason.
+# Typed representation of the `AwayStatusReason` API schema.
+class AwayStatusReason
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAwayStatusReasonMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAwayStatusReasonMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAwayStatusReasonMetadata::DECODERS
+
+  # @return [String] Optional `string` value serialized in the `type` wire field.
+  attr_reader :type
+  # @return [String] The unique identifier for the away status reason
+  attr_reader :id
+  # @return [String] The display text for the away status reason
+  attr_reader :label
+  # @return [String] The emoji associated with the status reason
+  attr_reader :emoji
+  # @return [Integer] The display order of the status reason
+  attr_reader :order
+  # @return [Boolean] Whether the status reason has been soft deleted
+  attr_reader :deleted
+  # @return [Integer] The Unix timestamp when the status reason was created
+  attr_reader :created_at
+  # @return [Integer] The Unix timestamp when the status reason was last updated
+  attr_reader :updated_at
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AwayStatusReason.
-  # Typed representation of the `AwayStatusReason` API schema.
-  class AwayStatusReason
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAwayStatusReasonMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAwayStatusReasonMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAwayStatusReasonMetadata::DECODERS
-
-    # @return [String] Optional `string` value serialized in the `type` wire field.
-    attr_reader :type
-    # @return [String] The unique identifier for the away status reason
-    attr_reader :id
-    # @return [String] The display text for the away status reason
-    attr_reader :label
-    # @return [String] The emoji associated with the status reason
-    attr_reader :emoji
-    # @return [Integer] The display order of the status reason
-    attr_reader :order
-    # @return [Boolean] Whether the status reason has been soft deleted
-    attr_reader :deleted
-    # @return [Integer] The Unix timestamp when the status reason was created
-    attr_reader :created_at
-    # @return [Integer] The Unix timestamp when the status reason was last updated
-    attr_reader :updated_at
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAwayStatusReasonListMetadata
-    FIELDS = {
-      type: 'type',
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevIntercom::AwayStatusReasonListType.from_value(value)
-      end,
-      data: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::AwayStatusReason.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAwayStatusReasonListMetadata
+  FIELDS = {
+    type: "type",
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevIntercom::AwayStatusReasonListType.from_value(value)
+    end,
+    data: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::AwayStatusReason.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for AwayStatusReasonList.
+# A list of away status reasons.
+class AwayStatusReasonList
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAwayStatusReasonListMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAwayStatusReasonListMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAwayStatusReasonListMetadata::DECODERS
+
+  # @return [AwayStatusReasonListType] The type of the object
+  attr_reader :type
+  # @return [Array_of_AwayStatusReason] A list of away status reason objects.
+  attr_reader :data
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AwayStatusReasonList.
-  # A list of away status reasons.
-  class AwayStatusReasonList
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAwayStatusReasonListMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAwayStatusReasonListMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAwayStatusReasonListMetadata::DECODERS
-
-    # @return [AwayStatusReasonListType] The type of the object
-    attr_reader :type
-    # @return [Array_of_AwayStatusReason] A list of away status reason objects.
-    attr_reader :data
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the AwayStatusReasonListType SDK namespace.
-  module AwayStatusReasonListType
-    LIST = 'list'
-    VALUES = ['list'].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
+
+# Defines the AwayStatusReasonListType SDK namespace.
+module AwayStatusReasonListType
+  LIST = 'list'
+  VALUES = ['list'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 end

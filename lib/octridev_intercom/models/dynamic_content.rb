@@ -5,225 +5,228 @@
 
 # dynamic_content domain models
 module OctridevIntercom
-  # Internal model hydration metadata.
-  class SdkInternalDynamicContentCreateRequestMetadata
-    FIELDS = {
-      name: 'name',
-      content_type: 'content_type',
-      default_locale: 'default_locale',
-      variations: 'variations'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      name
-      content_type
-      default_locale
-      variations
-    ].freeze
-    DECODERS = {
-      content_type: lambda do |value|
-        ::OctridevIntercom::DynamicContentCreateRequestContentType.from_value(value)
-      end,
-      variations: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::DynamicContentVariationRequest.from_hash(item) }
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalDynamicContentCreateRequestMetadata
+  FIELDS = {
+    name: "name",
+    content_type: "content_type",
+    default_locale: "default_locale",
+    variations: "variations",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    name
+    content_type
+    default_locale
+    variations
+  ].freeze
+  DECODERS = {
+    content_type: lambda do |value|
+      ::OctridevIntercom::DynamicContentCreateRequestContentType.from_value(value)
+    end,
+    variations: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::DynamicContentVariationRequest.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for DynamicContentCreateRequest.
+# The request payload for creating dynamic content.
+class DynamicContentCreateRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDynamicContentCreateRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDynamicContentCreateRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDynamicContentCreateRequestMetadata::DECODERS
+
+  # @return [String] The name of the dynamic content. Must be unique in the workspace.
+  attr_reader :name
+  # @return [DynamicContentCreateRequestContentType] Whether the dynamic content is a short inline value (`inline`) or one or more blocks of content (`block`). Can't be changed later.
+  attr_reader :content_type
+  # @return [String] The locale whose variation is used when there's no variation for the requested locale. `variations` must include a variation for this locale that applies to all brands.
+  attr_reader :default_locale
+  # @return [Array_of_DynamicContentVariationRequest] The variations of the dynamic content, one per locale and optionally per brand. Set `brand_id` on a variation to override the all-brands value for that brand. At least one is required.
+  attr_reader :variations
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DynamicContentCreateRequest.
-  # The request payload for creating dynamic content.
-  class DynamicContentCreateRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDynamicContentCreateRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDynamicContentCreateRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDynamicContentCreateRequestMetadata::DECODERS
-
-    # @return [String] The name of the dynamic content. Must be unique in the workspace.
-    attr_reader :name
-    # @return [DynamicContentCreateRequestContentType] Whether the dynamic content is a short inline value (`inline`) or one or more blocks of content (`block`). Can't be changed later.
-    attr_reader :content_type
-    # @return [String] The locale whose variation is used when there's no variation for the requested locale. `variations` must include a variation for this locale that applies to all brands.
-    attr_reader :default_locale
-    # @return [Array_of_DynamicContentVariationRequest] The variations of the dynamic content, one per locale and optionally per brand. Set `brand_id` on a variation to override the all-brands value for that brand. At least one is required.
-    attr_reader :variations
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the DynamicContentCreateRequestContentType SDK namespace.
-  module DynamicContentCreateRequestContentType
-    INLINE = 'inline'
-    BLOCK = 'block'
-    VALUES = %w[inline block].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the DynamicContentCreateRequestContentType SDK namespace.
+module DynamicContentCreateRequestContentType
+  INLINE = 'inline'
+  BLOCK = 'block'
+  VALUES = ['inline', 'block'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDynamicContentListMetadata
+  FIELDS = {
+    type: "type",
+    data: "data",
+    total_count: "total_count",
+    page: "page",
+    per_page: "per_page",
+    total_pages: "total_pages",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevIntercom::DynamicContentListType.from_value(value)
+    end,
+    data: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::DynamicContent.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for DynamicContentList.
+# A paginated list of dynamic content.
+class DynamicContentList
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDynamicContentListMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDynamicContentListMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDynamicContentListMetadata::DECODERS
+
+  # @return [DynamicContentListType] Optional enumerated value serialized in the `type` wire field.
+  attr_reader :type
+  # @return [Array_of_DynamicContent] An array of dynamic content objects.
+  attr_reader :data
+  # @return [Integer] The total number of dynamic content.
+  attr_reader :total_count
+  # @return [Integer] The current page number.
+  attr_reader :page
+  # @return [Integer] The number of results per page.
+  attr_reader :per_page
+  # @return [Integer] The total number of pages.
+  attr_reader :total_pages
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDynamicContentListMetadata
-    FIELDS = {
-      type: 'type',
-      data: 'data',
-      total_count: 'total_count',
-      page: 'page',
-      per_page: 'per_page',
-      total_pages: 'total_pages'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevIntercom::DynamicContentListType.from_value(value)
-      end,
-      data: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::DynamicContent.from_hash(item) }
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for DynamicContentList.
-  # A paginated list of dynamic content.
-  class DynamicContentList
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDynamicContentListMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDynamicContentListMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDynamicContentListMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [DynamicContentListType] Optional enumerated value serialized in the `type` wire field.
-    attr_reader :type
-    # @return [Array_of_DynamicContent] An array of dynamic content objects.
-    attr_reader :data
-    # @return [Integer] The total number of dynamic content.
-    attr_reader :total_count
-    # @return [Integer] The current page number.
-    attr_reader :page
-    # @return [Integer] The number of results per page.
-    attr_reader :per_page
-    # @return [Integer] The total number of pages.
-    attr_reader :total_pages
+# Defines the DynamicContentListType SDK namespace.
+module DynamicContentListType
+  LIST = 'list'
+  VALUES = ['list'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# Internal model hydration metadata.
+class SdkInternalDynamicContentUpdateRequestMetadata
+  FIELDS = {
+    name: "name",
+    default_locale: "default_locale",
+    variations: "variations",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    variations: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::DynamicContentVariationRequest.from_hash(item) }
+    end,
+  }.freeze
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# API model for DynamicContentUpdateRequest.
+# The request payload for updating dynamic content. All fields are optional — only provided fields are updated.
+class DynamicContentUpdateRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDynamicContentUpdateRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDynamicContentUpdateRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDynamicContentUpdateRequestMetadata::DECODERS
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  # @return [String] The name of the dynamic content. Must be unique in the workspace. Renaming doesn't change the `key`.
+  attr_reader :name
+  # @return [String] The locale whose variation is used when there's no variation for the requested locale. The dynamic content must have a variation for this locale that applies to all brands.
+  attr_reader :default_locale
+  # @return [Array_of_DynamicContentVariationRequest] The full set of variations. Existing variations that aren't included are deleted.
+  attr_reader :variations
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the DynamicContentListType SDK namespace.
-  module DynamicContentListType
-    LIST = 'list'
-    VALUES = ['list'].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDynamicContentUpdateRequestMetadata
-    FIELDS = {
-      name: 'name',
-      default_locale: 'default_locale',
-      variations: 'variations'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      variations: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::DynamicContentVariationRequest.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDynamicContentVariationRequestMetadata
+  FIELDS = {
+    locale: "locale",
+    brand_id: "brand_id",
+    text_content: "text_content",
+    body: "body",
+    intentionally_empty: "intentionally_empty",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    locale
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for DynamicContentVariationRequest.
+# A variation of a dynamic content. Provide `text_content` for inline dynamic content, or `body` for block dynamic content.
+class DynamicContentVariationRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDynamicContentVariationRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDynamicContentVariationRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDynamicContentVariationRequestMetadata::DECODERS
+
+  # @return [String] The locale of the variation. Each locale can appear once per brand.
+  attr_reader :locale
+  # @return [String] The unique identifier for the brand the variation applies to. Omit for a variation that applies to all brands.
+  attr_reader :brand_id
+  # @return [String] The value of an inline variation.
+  attr_reader :text_content
+  # @return [String] The content of a block variation in HTML.
+  attr_reader :body
+  # @return [Boolean] Set to `true` to make the variation show nothing instead of falling back to the default content. Any `text_content` or `body` sent with it is ignored.
+  attr_reader :intentionally_empty
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DynamicContentUpdateRequest.
-  # The request payload for updating dynamic content. All fields are optional — only provided fields are updated.
-  class DynamicContentUpdateRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDynamicContentUpdateRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDynamicContentUpdateRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDynamicContentUpdateRequestMetadata::DECODERS
-
-    # @return [String] The name of the dynamic content. Must be unique in the workspace. Renaming doesn't change the `key`.
-    attr_reader :name
-    # @return [String] The locale whose variation is used when there's no variation for the requested locale. The dynamic content must have a variation for this locale that applies to all brands.
-    attr_reader :default_locale
-    # @return [Array_of_DynamicContentVariationRequest] The full set of variations. Existing variations that aren't included are deleted.
-    attr_reader :variations
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDynamicContentVariationRequestMetadata
-    FIELDS = {
-      locale: 'locale',
-      brand_id: 'brand_id',
-      text_content: 'text_content',
-      body: 'body',
-      intentionally_empty: 'intentionally_empty'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      locale
-    ].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
-
-  # API model for DynamicContentVariationRequest.
-  # A variation of a dynamic content. Provide `text_content` for inline dynamic content, or `body` for block dynamic content.
-  class DynamicContentVariationRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDynamicContentVariationRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDynamicContentVariationRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDynamicContentVariationRequestMetadata::DECODERS
-
-    # @return [String] The locale of the variation. Each locale can appear once per brand.
-    attr_reader :locale
-    # @return [String] The unique identifier for the brand the variation applies to. Omit for a variation that applies to all brands.
-    attr_reader :brand_id
-    # @return [String] The value of an inline variation.
-    attr_reader :text_content
-    # @return [String] The content of a block variation in HTML.
-    attr_reader :body
-    # @return [Boolean] Set to `true` to make the variation show nothing instead of falling back to the default content. Any `text_content` or `body` sent with it is ignored.
-    attr_reader :intentionally_empty
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
+end
 end

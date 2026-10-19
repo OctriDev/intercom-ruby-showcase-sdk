@@ -5,303 +5,303 @@
 
 # ai_content domain models
 module OctridevIntercom
-  # Internal model hydration metadata.
-  class SdkInternalCreateContentImportSourceRequestMetadata
-    FIELDS = {
-      sync_behavior: 'sync_behavior',
-      status: 'status',
-      url: 'url',
-      audience_ids: 'audience_ids'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      sync_behavior
-      url
-    ].freeze
-    DECODERS = {
-      sync_behavior: lambda do |value|
-        ::OctridevIntercom::CreateContentImportSourceRequestSyncBehavior.from_value(value)
-      end,
-      status: lambda do |value|
-        ::OctridevIntercom::CreateContentImportSourceRequestStatus.from_value(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalCreateContentImportSourceRequestMetadata
+  FIELDS = {
+    sync_behavior: "sync_behavior",
+    status: "status",
+    url: "url",
+    audience_ids: "audience_ids",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    sync_behavior
+    url
+  ].freeze
+  DECODERS = {
+    sync_behavior: lambda do |value|
+      ::OctridevIntercom::CreateContentImportSourceRequestSyncBehavior.from_value(value)
+    end,
+    status: lambda do |value|
+      ::OctridevIntercom::CreateContentImportSourceRequestStatus.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for CreateContentImportSourceRequest.
+# You can add an Content Import Source to your Fin Content Library.
+class CreateContentImportSourceRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCreateContentImportSourceRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCreateContentImportSourceRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCreateContentImportSourceRequestMetadata::DECODERS
+
+  # @return [CreateContentImportSourceRequestSyncBehavior] If you intend to create or update External Pages via the API, this should be set to `api`.
+  attr_reader :sync_behavior
+  # @return [CreateContentImportSourceRequestStatus] The status of the content import source.
+  attr_reader :status
+  # @return [String] The URL of the content import source.
+  attr_reader :url
+  # @return [Object] The unique identifiers for the audiences to associate with this content import source. Can be a single integer or an array of integers.
+  attr_reader :audience_ids
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CreateContentImportSourceRequest.
-  # You can add an Content Import Source to your Fin Content Library.
-  class CreateContentImportSourceRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCreateContentImportSourceRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCreateContentImportSourceRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCreateContentImportSourceRequestMetadata::DECODERS
-
-    # @return [CreateContentImportSourceRequestSyncBehavior] If you intend to create or update External Pages via the API, this should be set to `api`.
-    attr_reader :sync_behavior
-    # @return [CreateContentImportSourceRequestStatus] The status of the content import source.
-    attr_reader :status
-    # @return [String] The URL of the content import source.
-    attr_reader :url
-    # @return [Object] The unique identifiers for the audiences to associate with this content import source. Can be a single integer or an array of integers.
-    attr_reader :audience_ids
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the CreateContentImportSourceRequestStatus SDK namespace.
-  module CreateContentImportSourceRequestStatus
-    ACTIVE = 'active'
-    DEACTIVATED = 'deactivated'
-    VALUES = %w[active deactivated].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the CreateContentImportSourceRequestStatus SDK namespace.
+module CreateContentImportSourceRequestStatus
+  ACTIVE = 'active'
+  DEACTIVATED = 'deactivated'
+  VALUES = ['active', 'deactivated'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Defines the CreateContentImportSourceRequestSyncBehavior SDK namespace.
+module CreateContentImportSourceRequestSyncBehavior
+  API = 'api'
+  VALUES = ['api'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalCreateExternalPageRequestMetadata
+  FIELDS = {
+    title: "title",
+    html: "html",
+    url: "url",
+    ai_agent_availability: "ai_agent_availability",
+    ai_copilot_availability: "ai_copilot_availability",
+    locale: "locale",
+    source_id: "source_id",
+    external_id: "external_id",
+    audience_ids: "audience_ids",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    title
+    html
+    locale
+    source_id
+    external_id
+  ].freeze
+  DECODERS = {
+    locale: lambda do |value|
+      ::OctridevIntercom::CreateExternalPageRequestLocale.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for CreateExternalPageRequest.
+# You can add an External Page to your Fin Content Library.
+class CreateExternalPageRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCreateExternalPageRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCreateExternalPageRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCreateExternalPageRequestMetadata::DECODERS
+
+  # @return [String] The title of the external page.
+  attr_reader :title
+  # @return [String] The body of the external page in HTML.
+  attr_reader :html
+  # @return [String] The URL of the external page. This will be used by Fin to link end users to the page it based its answer on. When a URL is not present, Fin will not reference the source.
+  attr_reader :url
+  # @return [Boolean] Whether the external page should be used to answer questions by AI Agent. Will not default when updating an existing external page.
+  attr_reader :ai_agent_availability
+  # @return [Boolean] Whether the external page should be used to answer questions by AI Copilot. Will not default when updating an existing external page.
+  attr_reader :ai_copilot_availability
+  # @return [CreateExternalPageRequestLocale] Always en
+  attr_reader :locale
+  # @return [Integer] The unique identifier for the source of the external page which was given by Intercom. Every external page must be associated with a Content Import Source which represents the place it comes from and from which it inherits a default audience (configured in the UI). For a new source, make a POST request to the Content Import Source endpoint and an ID for the source will be returned in the response.
+  attr_reader :source_id
+  # @return [String] The identifier for the external page which was given by the source. Must be unique for the source.
+  attr_reader :external_id
+  # @return [Array_of_Integer] The list of audience IDs to target this external page to for Fin AI Agent. Omitting the field keeps the default audience inherited from the source. Pass `[]` to clear all audience memberships, including the inherited ones. If an external page already exists with the specified source_id and external_id, omitting the field leaves its audience memberships unchanged. Unknown audience IDs return a `404` error.
+  attr_reader :audience_ids
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the CreateContentImportSourceRequestSyncBehavior SDK namespace.
-  module CreateContentImportSourceRequestSyncBehavior
-    API = 'api'
-    VALUES = ['api'].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalCreateExternalPageRequestMetadata
-    FIELDS = {
-      title: 'title',
-      html: 'html',
-      url: 'url',
-      ai_agent_availability: 'ai_agent_availability',
-      ai_copilot_availability: 'ai_copilot_availability',
-      locale: 'locale',
-      source_id: 'source_id',
-      external_id: 'external_id',
-      audience_ids: 'audience_ids'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      title
-      html
-      locale
-      source_id
-      external_id
-    ].freeze
-    DECODERS = {
-      locale: lambda do |value|
-        ::OctridevIntercom::CreateExternalPageRequestLocale.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the CreateExternalPageRequestLocale SDK namespace.
+module CreateExternalPageRequestLocale
+  EN = 'en'
+  VALUES = ['en'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalUpdateContentImportSourceRequestMetadata
+  FIELDS = {
+    sync_behavior: "sync_behavior",
+    status: "status",
+    url: "url",
+    audience_ids: "audience_ids",
+    apply_audience_to_existing_content: "apply_audience_to_existing_content",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    sync_behavior
+    url
+  ].freeze
+  DECODERS = {
+    sync_behavior: lambda do |value|
+      ::OctridevIntercom::UpdateContentImportSourceRequestSyncBehavior.from_value(value)
+    end,
+    status: lambda do |value|
+      ::OctridevIntercom::UpdateContentImportSourceRequestStatus.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for UpdateContentImportSourceRequest.
+# You can modify a Content Import Source of your Fin Content Library.
+class UpdateContentImportSourceRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalUpdateContentImportSourceRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalUpdateContentImportSourceRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalUpdateContentImportSourceRequestMetadata::DECODERS
+
+  # @return [UpdateContentImportSourceRequestSyncBehavior] If you intend to create or update External Pages via the API, this should be set to `api`. You can not change the value to or from api.
+  attr_reader :sync_behavior
+  # @return [UpdateContentImportSourceRequestStatus] The status of the content import source.
+  attr_reader :status
+  # @return [String] The URL of the content import source. This may only be different from the existing value if the sync behavior is API.
+  attr_reader :url
+  # @return [Object] The unique identifiers for the audiences to associate with this content import source. Can be a single integer or an array of integers. Set to null or an empty array to remove all audiences.
+  attr_reader :audience_ids
+  # @return [Boolean] When true, the audience will be applied to all existing external pages belonging to this content import source.
+  attr_reader :apply_audience_to_existing_content
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CreateExternalPageRequest.
-  # You can add an External Page to your Fin Content Library.
-  class CreateExternalPageRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCreateExternalPageRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCreateExternalPageRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCreateExternalPageRequestMetadata::DECODERS
-
-    # @return [String] The title of the external page.
-    attr_reader :title
-    # @return [String] The body of the external page in HTML.
-    attr_reader :html
-    # @return [String] The URL of the external page. This will be used by Fin to link end users to the page it based its answer on. When a URL is not present, Fin will not reference the source.
-    attr_reader :url
-    # @return [Boolean] Whether the external page should be used to answer questions by AI Agent. Will not default when updating an existing external page.
-    attr_reader :ai_agent_availability
-    # @return [Boolean] Whether the external page should be used to answer questions by AI Copilot. Will not default when updating an existing external page.
-    attr_reader :ai_copilot_availability
-    # @return [CreateExternalPageRequestLocale] Always en
-    attr_reader :locale
-    # @return [Integer] The unique identifier for the source of the external page which was given by Intercom. Every external page must be associated with a Content Import Source which represents the place it comes from and from which it inherits a default audience (configured in the UI). For a new source, make a POST request to the Content Import Source endpoint and an ID for the source will be returned in the response.
-    attr_reader :source_id
-    # @return [String] The identifier for the external page which was given by the source. Must be unique for the source.
-    attr_reader :external_id
-    # @return [Array_of_Integer] The list of audience IDs to target this external page to for Fin AI Agent. Omitting the field keeps the default audience inherited from the source. Pass `[]` to clear all audience memberships, including the inherited ones. If an external page already exists with the specified source_id and external_id, omitting the field leaves its audience memberships unchanged. Unknown audience IDs return a `404` error.
-    attr_reader :audience_ids
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the CreateExternalPageRequestLocale SDK namespace.
-  module CreateExternalPageRequestLocale
-    EN = 'en'
-    VALUES = ['en'].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the UpdateContentImportSourceRequestStatus SDK namespace.
+module UpdateContentImportSourceRequestStatus
+  ACTIVE = 'active'
+  DEACTIVATED = 'deactivated'
+  VALUES = ['active', 'deactivated'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Defines the UpdateContentImportSourceRequestSyncBehavior SDK namespace.
+module UpdateContentImportSourceRequestSyncBehavior
+  API = 'api'
+  AUTOMATED = 'automated'
+  MANUAL = 'manual'
+  VALUES = ['api', 'automated', 'manual'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalUpdateExternalPageRequestMetadata
+  FIELDS = {
+    title: "title",
+    html: "html",
+    url: "url",
+    fin_availability: "fin_availability",
+    locale: "locale",
+    source_id: "source_id",
+    external_id: "external_id",
+    audience_ids: "audience_ids",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    title
+    html
+    url
+    locale
+    source_id
+  ].freeze
+  DECODERS = {
+    locale: lambda do |value|
+      ::OctridevIntercom::UpdateExternalPageRequestLocale.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for UpdateExternalPageRequest.
+# You can update an External Page in your Fin Content Library.
+class UpdateExternalPageRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalUpdateExternalPageRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalUpdateExternalPageRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalUpdateExternalPageRequestMetadata::DECODERS
+
+  # @return [String] The title of the external page.
+  attr_reader :title
+  # @return [String] The body of the external page in HTML.
+  attr_reader :html
+  # @return [String] The URL of the external page. This will be used by Fin to link end users to the page it based its answer on.
+  attr_reader :url
+  # @return [Boolean] Whether the external page should be used to answer questions by Fin.
+  attr_reader :fin_availability
+  # @return [UpdateExternalPageRequestLocale] Always en
+  attr_reader :locale
+  # @return [Integer] The unique identifier for the source of the external page which was given by Intercom. Every external page must be associated with a Content Import Source which represents the place it comes from and from which it inherits a default audience (configured in the UI). For a new source, make a POST request to the Content Import Source endpoint and an ID for the source will be returned in the response.
+  attr_reader :source_id
+  # @return [String] The identifier for the external page which was given by the source. Must be unique for the source.
+  attr_reader :external_id
+  # @return [Array_of_Integer] The list of audience IDs to target this external page to for Fin AI Agent. Replaces all existing audience memberships. Omitting the field leaves existing audience memberships unchanged. Pass `[]` to clear all audience memberships. Unknown audience IDs return a `404` error.
+  attr_reader :audience_ids
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalUpdateContentImportSourceRequestMetadata
-    FIELDS = {
-      sync_behavior: 'sync_behavior',
-      status: 'status',
-      url: 'url',
-      audience_ids: 'audience_ids',
-      apply_audience_to_existing_content: 'apply_audience_to_existing_content'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      sync_behavior
-      url
-    ].freeze
-    DECODERS = {
-      sync_behavior: lambda do |value|
-        ::OctridevIntercom::UpdateContentImportSourceRequestSyncBehavior.from_value(value)
-      end,
-      status: lambda do |value|
-        ::OctridevIntercom::UpdateContentImportSourceRequestStatus.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for UpdateContentImportSourceRequest.
-  # You can modify a Content Import Source of your Fin Content Library.
-  class UpdateContentImportSourceRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalUpdateContentImportSourceRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalUpdateContentImportSourceRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalUpdateContentImportSourceRequestMetadata::DECODERS
-
-    # @return [UpdateContentImportSourceRequestSyncBehavior] If you intend to create or update External Pages via the API, this should be set to `api`. You can not change the value to or from api.
-    attr_reader :sync_behavior
-    # @return [UpdateContentImportSourceRequestStatus] The status of the content import source.
-    attr_reader :status
-    # @return [String] The URL of the content import source. This may only be different from the existing value if the sync behavior is API.
-    attr_reader :url
-    # @return [Object] The unique identifiers for the audiences to associate with this content import source. Can be a single integer or an array of integers. Set to null or an empty array to remove all audiences.
-    attr_reader :audience_ids
-    # @return [Boolean] When true, the audience will be applied to all existing external pages belonging to this content import source.
-    attr_reader :apply_audience_to_existing_content
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 
-  # Defines the UpdateContentImportSourceRequestStatus SDK namespace.
-  module UpdateContentImportSourceRequestStatus
-    ACTIVE = 'active'
-    DEACTIVATED = 'deactivated'
-    VALUES = %w[active deactivated].freeze
-    def self.from_value(value)
-      value
-    end
+# Defines the UpdateExternalPageRequestLocale SDK namespace.
+module UpdateExternalPageRequestLocale
+  EN = 'en'
+  VALUES = ['en'].freeze
+  def self.from_value(value)
+    value
   end
-
-  # Defines the UpdateContentImportSourceRequestSyncBehavior SDK namespace.
-  module UpdateContentImportSourceRequestSyncBehavior
-    API = 'api'
-    AUTOMATED = 'automated'
-    MANUAL = 'manual'
-    VALUES = %w[api automated manual].freeze
-    def self.from_value(value)
-      value
-    end
-  end
-
-  # Internal model hydration metadata.
-  class SdkInternalUpdateExternalPageRequestMetadata
-    FIELDS = {
-      title: 'title',
-      html: 'html',
-      url: 'url',
-      fin_availability: 'fin_availability',
-      locale: 'locale',
-      source_id: 'source_id',
-      external_id: 'external_id',
-      audience_ids: 'audience_ids'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      title
-      html
-      url
-      locale
-      source_id
-    ].freeze
-    DECODERS = {
-      locale: lambda do |value|
-        ::OctridevIntercom::UpdateExternalPageRequestLocale.from_value(value)
-      end
-    }.freeze
-  end
-
-  # API model for UpdateExternalPageRequest.
-  # You can update an External Page in your Fin Content Library.
-  class UpdateExternalPageRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalUpdateExternalPageRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalUpdateExternalPageRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalUpdateExternalPageRequestMetadata::DECODERS
-
-    # @return [String] The title of the external page.
-    attr_reader :title
-    # @return [String] The body of the external page in HTML.
-    attr_reader :html
-    # @return [String] The URL of the external page. This will be used by Fin to link end users to the page it based its answer on.
-    attr_reader :url
-    # @return [Boolean] Whether the external page should be used to answer questions by Fin.
-    attr_reader :fin_availability
-    # @return [UpdateExternalPageRequestLocale] Always en
-    attr_reader :locale
-    # @return [Integer] The unique identifier for the source of the external page which was given by Intercom. Every external page must be associated with a Content Import Source which represents the place it comes from and from which it inherits a default audience (configured in the UI). For a new source, make a POST request to the Content Import Source endpoint and an ID for the source will be returned in the response.
-    attr_reader :source_id
-    # @return [String] The identifier for the external page which was given by the source. Must be unique for the source.
-    attr_reader :external_id
-    # @return [Array_of_Integer] The list of audience IDs to target this external page to for Fin AI Agent. Replaces all existing audience memberships. Omitting the field leaves existing audience memberships unchanged. Pass `[]` to clear all audience memberships. Unknown audience IDs return a `404` error.
-    attr_reader :audience_ids
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Defines the UpdateExternalPageRequestLocale SDK namespace.
-  module UpdateExternalPageRequestLocale
-    EN = 'en'
-    VALUES = ['en'].freeze
-    def self.from_value(value)
-      value
-    end
-  end
+end
 end

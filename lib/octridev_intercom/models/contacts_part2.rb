@@ -5,649 +5,660 @@
 
 # contacts domain models (part 2)
 module OctridevIntercom
-  # API model for BulkUpdateContactsRequestJob.
-  # Optional. Include to append tasks to an existing job.
-  class BulkUpdateContactsRequestJob
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBulkUpdateContactsRequestJobMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBulkUpdateContactsRequestJobMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBulkUpdateContactsRequestJobMetadata::DECODERS
+# API model for BulkUpdateContactsRequestJob.
+# Optional. Include to append tasks to an existing job.
+class BulkUpdateContactsRequestJob
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBulkUpdateContactsRequestJobMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBulkUpdateContactsRequestJobMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBulkUpdateContactsRequestJobMetadata::DECODERS
 
-    # @return [String] The ID of an existing bulk job to append to.
-    attr_reader :id
+  # @return [String] The ID of an existing bulk job to append to.
+  attr_reader :id
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBulkUpdateContactsRequestMetadata
-    FIELDS = {
-      contacts: 'contacts',
-      job: 'job'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      contacts
-    ].freeze
-    DECODERS = {
-      contacts: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::BulkUpdateContactsRequestContactsItem.from_hash(item) }
-      end,
-      job: lambda do |value|
-        ::OctridevIntercom::BulkUpdateContactsRequestJob.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for BulkUpdateContactsRequest.
-  # Request body for bulk updating contacts.
-  class BulkUpdateContactsRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBulkUpdateContactsRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBulkUpdateContactsRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBulkUpdateContactsRequestMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Array_of_BulkUpdateContactsRequestContactsItem] An array of contact objects to update. Each must include an `id` and the fields to update. Maximum 100 contacts per request.
-    attr_reader :contacts
-    # @return [BulkUpdateContactsRequestJob] Optional. Include to append tasks to an existing job.
-    attr_reader :job
+# Internal model hydration metadata.
+class SdkInternalBulkUpdateContactsRequestMetadata
+  FIELDS = {
+    contacts: "contacts",
+    job: "job",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    contacts
+  ].freeze
+  DECODERS = {
+    contacts: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::BulkUpdateContactsRequestContactsItem.from_hash(item) }
+    end,
+    job: lambda do |value|
+      ::OctridevIntercom::BulkUpdateContactsRequestJob.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for BulkUpdateContactsRequest.
+# Request body for bulk updating contacts.
+class BulkUpdateContactsRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBulkUpdateContactsRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBulkUpdateContactsRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBulkUpdateContactsRequestMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [Array_of_BulkUpdateContactsRequestContactsItem] An array of contact objects to update. Each must include an `id` and the fields to update. Maximum 100 contacts per request.
+  attr_reader :contacts
+  # @return [BulkUpdateContactsRequestJob] Optional. Include to append tasks to an existing job.
+  attr_reader :job
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalContactActivityMetadata
-    FIELDS = {
-      type: 'type',
-      id: 'id',
-      event_type: 'event_type',
-      contact_id: 'contact_id',
-      external_id: 'external_id',
-      role: 'role',
-      merge_source_id: 'merge_source_id',
-      merge_target_id: 'merge_target_id',
-      failure_reason: 'failure_reason',
-      created_at: 'created_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevIntercom::ContactActivityType.from_value(value)
-      end,
-      event_type: lambda do |value|
-        ::OctridevIntercom::ContactActivityEventType.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ContactActivity.
-  # An activity event that occurred for a contact, such as creation, merge, or deletion.
-  class ContactActivity
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalContactActivityMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalContactActivityMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalContactActivityMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [ContactActivityType] Always contact_activity
-    attr_reader :type
-    # @return [String] The unique identifier for the activity event.
-    attr_reader :id
-    # @return [ContactActivityEventType] The type of activity event.
-    attr_reader :event_type
-    # @return [String] The unique identifier for the contact the event relates to.
-    attr_reader :contact_id
-    # @return [String] The external identifier of the contact, if one is set.
-    attr_reader :external_id
-    # @return [String] The role of the contact at the time of the event, either user, lead, or visitor.
-    attr_reader :role
-    # @return [String] For merge events, the identifier of the contact that was merged away.
-    attr_reader :merge_source_id
-    # @return [String] For merge events, the identifier of the contact that was merged into.
-    attr_reader :merge_target_id
-    # @return [String] For failed events, the reason the activity did not succeed.
-    attr_reader :failure_reason
-    # @return [Integer] The time the activity event occurred, as a Unix timestamp in seconds.
-    attr_reader :created_at
+# Internal model hydration metadata.
+class SdkInternalContactActivityMetadata
+  FIELDS = {
+    type: "type",
+    id: "id",
+    event_type: "event_type",
+    contact_id: "contact_id",
+    external_id: "external_id",
+    role: "role",
+    merge_source_id: "merge_source_id",
+    merge_target_id: "merge_target_id",
+    failure_reason: "failure_reason",
+    created_at: "created_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevIntercom::ContactActivityType.from_value(value)
+    end,
+    event_type: lambda do |value|
+      ::OctridevIntercom::ContactActivityEventType.from_value(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ContactActivity.
+# An activity event that occurred for a contact, such as creation, merge, or deletion.
+class ContactActivity
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalContactActivityMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalContactActivityMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalContactActivityMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [ContactActivityType] Always contact_activity
+  attr_reader :type
+  # @return [String] The unique identifier for the activity event.
+  attr_reader :id
+  # @return [ContactActivityEventType] The type of activity event.
+  attr_reader :event_type
+  # @return [String] The unique identifier for the contact the event relates to.
+  attr_reader :contact_id
+  # @return [String] The external identifier of the contact, if one is set.
+  attr_reader :external_id
+  # @return [String] The role of the contact at the time of the event, either user, lead, or visitor.
+  attr_reader :role
+  # @return [String] For merge events, the identifier of the contact that was merged away.
+  attr_reader :merge_source_id
+  # @return [String] For merge events, the identifier of the contact that was merged into.
+  attr_reader :merge_target_id
+  # @return [String] For failed events, the reason the activity did not succeed.
+  attr_reader :failure_reason
+  # @return [Integer] The time the activity event occurred, as a Unix timestamp in seconds.
+  attr_reader :created_at
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the ContactActivityEventType SDK namespace.
-  module ContactActivityEventType
-    CONTACT_CREATED = 'contact.created'
-    CONTACT_ROLE_UPDATED = 'contact.role_updated'
-    CONTACT_DELETED = 'contact.deleted'
-    CONTACT_MERGED = 'contact.merged'
-    CONTACT_MERGE_FAILED = 'contact.merge_failed'
-    VALUES = [
-      'contact.created', 'contact.role_updated', 'contact.deleted', 'contact.merged',
-      'contact.merge_failed'
-    ].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the ContactActivityType SDK namespace.
-  module ContactActivityType
-    CONTACT_ACTIVITY = 'contact_activity'
-    VALUES = ['contact_activity'].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the ContactActivityEventType SDK namespace.
+module ContactActivityEventType
+  CONTACT_CREATED = 'contact.created'
+  CONTACT_ROLE_UPDATED = 'contact.role_updated'
+  CONTACT_DELETED = 'contact.deleted'
+  CONTACT_MERGED = 'contact.merged'
+  CONTACT_MERGE_FAILED = 'contact.merge_failed'
+  VALUES = [
+    'contact.created', 'contact.role_updated', 'contact.deleted', 'contact.merged',
+    'contact.merge_failed'
+  ].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Defines the ContactActivityType SDK namespace.
+module ContactActivityType
+  CONTACT_ACTIVITY = 'contact_activity'
+  VALUES = ['contact_activity'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalContactActivityListPagesNextMetadata
+  FIELDS = {
+    starting_after: "starting_after",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ContactActivityListPagesNext.
+# Cursor for the next page of results.
+class ContactActivityListPagesNext
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalContactActivityListPagesNextMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalContactActivityListPagesNextMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalContactActivityListPagesNextMetadata::DECODERS
+
+  # @return [String] The cursor value to use for the next page.
+  attr_reader :starting_after
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalContactActivityListPagesNextMetadata
-    FIELDS = {
-      starting_after: 'starting_after'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ContactActivityListPagesNext.
-  # Cursor for the next page of results.
-  class ContactActivityListPagesNext
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalContactActivityListPagesNextMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalContactActivityListPagesNextMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalContactActivityListPagesNextMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] The cursor value to use for the next page.
-    attr_reader :starting_after
+# Internal model hydration metadata.
+class SdkInternalContactActivityListPagesMetadata
+  FIELDS = {
+    type: "type",
+    per_page: "per_page",
+    next_: "next",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevIntercom::ContactActivityListPagesType.from_value(value)
+    end,
+    next_: lambda do |value|
+      ::OctridevIntercom::ContactActivityListPagesNext.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ContactActivityListPages.
+# Pagination information.
+class ContactActivityListPages
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalContactActivityListPagesMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalContactActivityListPagesMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalContactActivityListPagesMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [ContactActivityListPagesType] Optional enumerated value serialized in the `type` wire field.
+  attr_reader :type
+  # @return [Integer] The number of results per page.
+  attr_reader :per_page
+  # @return [ContactActivityListPagesNext] Cursor for the next page of results.
+  attr_reader :next_
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalContactActivityListPagesMetadata
-    FIELDS = {
-      type: 'type',
-      per_page: 'per_page',
-      next_: 'next'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevIntercom::ContactActivityListPagesType.from_value(value)
-      end,
-      next_: lambda do |value|
-        ::OctridevIntercom::ContactActivityListPagesNext.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ContactActivityListPages.
-  # Pagination information.
-  class ContactActivityListPages
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalContactActivityListPagesMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalContactActivityListPagesMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalContactActivityListPagesMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [ContactActivityListPagesType] Optional enumerated value serialized in the `type` wire field.
-    attr_reader :type
-    # @return [Integer] The number of results per page.
-    attr_reader :per_page
-    # @return [ContactActivityListPagesNext] Cursor for the next page of results.
-    attr_reader :next_
+# Internal model hydration metadata.
+class SdkInternalContactActivityListMetadata
+  FIELDS = {
+    type: "type",
+    data: "data",
+    pages: "pages",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevIntercom::ContactActivityListType.from_value(value)
+    end,
+    data: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::ContactActivity.from_hash(item) }
+    end,
+    pages: lambda do |value|
+      ::OctridevIntercom::ContactActivityListPages.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ContactActivityList.
+# A paginated list of contact activity events.
+class ContactActivityList
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalContactActivityListMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalContactActivityListMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalContactActivityListMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [ContactActivityListType] Always list
+  attr_reader :type
+  # @return [Array_of_ContactActivity] The list of contact activity objects.
+  attr_reader :data
+  # @return [ContactActivityListPages] Pagination information.
+  attr_reader :pages
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalContactActivityListMetadata
-    FIELDS = {
-      type: 'type',
-      data: 'data',
-      pages: 'pages'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevIntercom::ContactActivityListType.from_value(value)
-      end,
-      data: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::ContactActivity.from_hash(item) }
-      end,
-      pages: lambda do |value|
-        ::OctridevIntercom::ContactActivityListPages.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ContactActivityList.
-  # A paginated list of contact activity events.
-  class ContactActivityList
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalContactActivityListMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalContactActivityListMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalContactActivityListMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [ContactActivityListType] Always list
-    attr_reader :type
-    # @return [Array_of_ContactActivity] The list of contact activity objects.
-    attr_reader :data
-    # @return [ContactActivityListPages] Pagination information.
-    attr_reader :pages
+# Defines the ContactActivityListPagesType SDK namespace.
+module ContactActivityListPagesType
+  PAGES = 'pages'
+  VALUES = ['pages'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# Defines the ContactActivityListType SDK namespace.
+module ContactActivityListType
+  LIST = 'list'
+  VALUES = ['list'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# Internal model hydration metadata.
+class SdkInternalContactArchivedMetadata
+  FIELDS = {
+    type: "type",
+    id: "id",
+    external_id: "external_id",
+    archived: "archived",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevIntercom::ContactArchivedType.from_value(value)
+    end,
+  }.freeze
+end
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+# API model for ContactArchived.
+# archived contact object
+class ContactArchived
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalContactArchivedMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalContactArchivedMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalContactArchivedMetadata::DECODERS
+
+  # @return [ContactArchivedType] always contact
+  attr_reader :type
+  # @return [String] The unique identifier for the contact which is given by Intercom.
+  attr_reader :id
+  # @return [String] The unique identifier for the contact which is provided by the Client.
+  attr_reader :external_id
+  # @return [Boolean] Whether the contact is archived or not.
+  attr_reader :archived
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the ContactActivityListPagesType SDK namespace.
-  module ContactActivityListPagesType
-    PAGES = 'pages'
-    VALUES = ['pages'].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the ContactActivityListType SDK namespace.
-  module ContactActivityListType
-    LIST = 'list'
-    VALUES = ['list'].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the ContactArchivedType SDK namespace.
+module ContactArchivedType
+  CONTACT = 'contact'
+  VALUES = ['contact'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalContactAttachedCompaniesMetadata
+  FIELDS = {
+    type: "type",
+    companies: "companies",
+    total_count: "total_count",
+    pages: "pages",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevIntercom::ContactAttachedCompaniesType.from_value(value)
+    end,
+    companies: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::Company.from_hash(item) }
+    end,
+    pages: lambda do |value|
+      ::OctridevIntercom::PagesLink.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ContactAttachedCompanies.
+# A list of Company Objects
+class ContactAttachedCompanies
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalContactAttachedCompaniesMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalContactAttachedCompaniesMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalContactAttachedCompaniesMetadata::DECODERS
+
+  # @return [ContactAttachedCompaniesType] The type of object
+  attr_reader :type
+  # @return [Array_of_Company] An array containing Company Objects
+  attr_reader :companies
+  # @return [Integer] The total number of companies associated to this contact
+  attr_reader :total_count
+  # @return [PagesLink] The majority of list resources in the API are paginated to allow clients to traverse data over multiple requests. Their responses are likely to contain a pages object that hosts pagination links which a client can use to paginate through the data without having to construct a query. The link relations for the pages field are as follows.
+  attr_reader :pages
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalContactArchivedMetadata
-    FIELDS = {
-      type: 'type',
-      id: 'id',
-      external_id: 'external_id',
-      archived: 'archived'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevIntercom::ContactArchivedType.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ContactArchived.
-  # archived contact object
-  class ContactArchived
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalContactArchivedMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalContactArchivedMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalContactArchivedMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [ContactArchivedType] always contact
-    attr_reader :type
-    # @return [String] The unique identifier for the contact which is given by Intercom.
-    attr_reader :id
-    # @return [String] The unique identifier for the contact which is provided by the Client.
-    attr_reader :external_id
-    # @return [Boolean] Whether the contact is archived or not.
-    attr_reader :archived
+# Defines the ContactAttachedCompaniesType SDK namespace.
+module ContactAttachedCompaniesType
+  LIST = 'list'
+  VALUES = ['list'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# Internal model hydration metadata.
+class SdkInternalContactBlockedMetadata
+  FIELDS = {
+    type: "type",
+    id: "id",
+    external_id: "external_id",
+    blocked: "blocked",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevIntercom::ContactBlockedType.from_value(value)
+    end,
+  }.freeze
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# API model for ContactBlocked.
+# blocked contact object
+class ContactBlocked
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalContactBlockedMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalContactBlockedMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalContactBlockedMetadata::DECODERS
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  # @return [ContactBlockedType] always contact
+  attr_reader :type
+  # @return [String] The unique identifier for the contact which is given by Intercom.
+  attr_reader :id
+  # @return [String] The unique identifier for the contact which is provided by the Client.
+  attr_reader :external_id
+  # @return [Boolean] Always true.
+  attr_reader :blocked
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the ContactArchivedType SDK namespace.
-  module ContactArchivedType
-    CONTACT = 'contact'
-    VALUES = ['contact'].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalContactAttachedCompaniesMetadata
-    FIELDS = {
-      type: 'type',
-      companies: 'companies',
-      total_count: 'total_count',
-      pages: 'pages'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevIntercom::ContactAttachedCompaniesType.from_value(value)
-      end,
-      companies: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::Company.from_hash(item) }
-      end,
-      pages: lambda do |value|
-        ::OctridevIntercom::PagesLink.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the ContactBlockedType SDK namespace.
+module ContactBlockedType
+  CONTACT = 'contact'
+  VALUES = ['contact'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalContactDeletedMetadata
+  FIELDS = {
+    type: "type",
+    id: "id",
+    external_id: "external_id",
+    deleted: "deleted",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevIntercom::ContactDeletedType.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for ContactDeleted.
+# deleted contact object
+class ContactDeleted
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalContactDeletedMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalContactDeletedMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalContactDeletedMetadata::DECODERS
+
+  # @return [ContactDeletedType] always contact
+  attr_reader :type
+  # @return [String] The unique identifier for the contact which is given by Intercom.
+  attr_reader :id
+  # @return [String] The unique identifier for the contact which is provided by the Client.
+  attr_reader :external_id
+  # @return [Boolean] Whether the contact is deleted or not.
+  attr_reader :deleted
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ContactAttachedCompanies.
-  # A list of Company Objects
-  class ContactAttachedCompanies
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalContactAttachedCompaniesMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalContactAttachedCompaniesMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalContactAttachedCompaniesMetadata::DECODERS
-
-    # @return [ContactAttachedCompaniesType] The type of object
-    attr_reader :type
-    # @return [Array_of_Company] An array containing Company Objects
-    attr_reader :companies
-    # @return [Integer] The total number of companies associated to this contact
-    attr_reader :total_count
-    # @return [PagesLink] The majority of list resources in the API are paginated to allow clients to traverse data over multiple requests. Their responses are likely to contain a pages object that hosts pagination links which a client can use to paginate through the data without having to construct a query. The link relations for the pages field are as follows.
-    attr_reader :pages
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the ContactAttachedCompaniesType SDK namespace.
-  module ContactAttachedCompaniesType
-    LIST = 'list'
-    VALUES = ['list'].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the ContactDeletedType SDK namespace.
+module ContactDeletedType
+  CONTACT = 'contact'
+  VALUES = ['contact'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalContactListMetadata
+  FIELDS = {
+    type: "type",
+    data: "data",
+    total_count: "total_count",
+    pages: "pages",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevIntercom::ContactListType.from_value(value)
+    end,
+    data: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::Contact.from_hash(item) }
+    end,
+    pages: lambda do |value|
+      ::OctridevIntercom::CursorPages.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ContactList.
+# Contacts are your users in Intercom.
+class ContactList
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalContactListMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalContactListMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalContactListMetadata::DECODERS
+
+  # @return [ContactListType] Always list
+  attr_reader :type
+  # @return [Array_of_Contact] The list of contact objects
+  attr_reader :data
+  # @return [Integer] A count of the total number of objects.
+  attr_reader :total_count
+  # @return [CursorPages] Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
+  attr_reader :pages
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalContactBlockedMetadata
-    FIELDS = {
-      type: 'type',
-      id: 'id',
-      external_id: 'external_id',
-      blocked: 'blocked'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevIntercom::ContactBlockedType.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ContactBlocked.
-  # blocked contact object
-  class ContactBlocked
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalContactBlockedMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalContactBlockedMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalContactBlockedMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [ContactBlockedType] always contact
-    attr_reader :type
-    # @return [String] The unique identifier for the contact which is given by Intercom.
-    attr_reader :id
-    # @return [String] The unique identifier for the contact which is provided by the Client.
-    attr_reader :external_id
-    # @return [Boolean] Always true.
-    attr_reader :blocked
+# Defines the ContactListType SDK namespace.
+module ContactListType
+  LIST = 'list'
+  VALUES = ['list'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# Internal model hydration metadata.
+class SdkInternalContactSearchRequestSortMetadata
+  FIELDS = {
+    field: "field",
+    order: "order",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    order: lambda do |value|
+      ::OctridevIntercom::ContactSearchRequestSortOrder.from_value(value)
+    end,
+  }.freeze
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# API model for ContactSearchRequestSort.
+# An optional object to sort the results by.
+class ContactSearchRequestSort
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalContactSearchRequestSortMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalContactSearchRequestSortMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalContactSearchRequestSortMetadata::DECODERS
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  # @return [String] The field to sort the results on.
+  attr_reader :field
+  # @return [ContactSearchRequestSortOrder] The order to sort the results in. Defaults to `descending` when omitted. Values other than `ascending` or `descending` return a `400` error with code `invalid_sort_order`.
+  attr_reader :order
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the ContactBlockedType SDK namespace.
-  module ContactBlockedType
-    CONTACT = 'contact'
-    VALUES = ['contact'].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalContactDeletedMetadata
-    FIELDS = {
-      type: 'type',
-      id: 'id',
-      external_id: 'external_id',
-      deleted: 'deleted'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevIntercom::ContactDeletedType.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
-
-  # API model for ContactDeleted.
-  # deleted contact object
-  class ContactDeleted
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalContactDeletedMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalContactDeletedMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalContactDeletedMetadata::DECODERS
-
-    # @return [ContactDeletedType] always contact
-    attr_reader :type
-    # @return [String] The unique identifier for the contact which is given by Intercom.
-    attr_reader :id
-    # @return [String] The unique identifier for the contact which is provided by the Client.
-    attr_reader :external_id
-    # @return [Boolean] Whether the contact is deleted or not.
-    attr_reader :deleted
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Defines the ContactDeletedType SDK namespace.
-  module ContactDeletedType
-    CONTACT = 'contact'
-    VALUES = ['contact'].freeze
-    def self.from_value(value)
-      value
-    end
-  end
-
-  # Internal model hydration metadata.
-  class SdkInternalContactListMetadata
-    FIELDS = {
-      type: 'type',
-      data: 'data',
-      total_count: 'total_count',
-      pages: 'pages'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevIntercom::ContactListType.from_value(value)
-      end,
-      data: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::Contact.from_hash(item) }
-      end,
-      pages: lambda do |value|
-        ::OctridevIntercom::CursorPages.from_hash(value)
-      end
-    }.freeze
-  end
-
-  # API model for ContactList.
-  # Contacts are your users in Intercom.
-  class ContactList
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalContactListMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalContactListMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalContactListMetadata::DECODERS
-
-    # @return [ContactListType] Always list
-    attr_reader :type
-    # @return [Array_of_Contact] The list of contact objects
-    attr_reader :data
-    # @return [Integer] A count of the total number of objects.
-    attr_reader :total_count
-    # @return [CursorPages] Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
-    attr_reader :pages
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Defines the ContactListType SDK namespace.
-  module ContactListType
-    LIST = 'list'
-    VALUES = ['list'].freeze
-    def self.from_value(value)
-      value
-    end
-  end
-
-  # Internal model hydration metadata.
-  class SdkInternalContactSearchRequestSortMetadata
-    FIELDS = {
-      field: 'field',
-      order: 'order'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      order: lambda do |value|
-        ::OctridevIntercom::ContactSearchRequestSortOrder.from_value(value)
-      end
-    }.freeze
-  end
-
-  # API model for ContactSearchRequestSort.
-  # An optional object to sort the results by.
-  class ContactSearchRequestSort
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalContactSearchRequestSortMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalContactSearchRequestSortMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalContactSearchRequestSortMetadata::DECODERS
-
-    # @return [String] The field to sort the results on.
-    attr_reader :field
-    # @return [ContactSearchRequestSortOrder] The order to sort the results in. Defaults to `descending` when omitted. Values other than `ascending` or `descending` return a `400` error with code `invalid_sort_order`.
-    attr_reader :order
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
+end
 end

@@ -48,10 +48,12 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalRunFinProcedureConversationMetadataMetadata
         FIELDS = {
-          attributes: 'attributes'
+          attributes: "attributes",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
-        DECODERS = {}.freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
+        DECODERS = {
+        }.freeze
       end
 
       # API model for RunFinProcedureConversationMetadata.
@@ -82,11 +84,11 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalRunFinProcedureMetadata
         FIELDS = {
-          conversation_id: 'conversation_id',
-          user: 'user',
-          message: 'message',
-          conversation_metadata: 'conversation_metadata',
-          environment: 'environment'
+          conversation_id: "conversation_id",
+          user: "user",
+          message: "message",
+          conversation_metadata: "conversation_metadata",
+          environment: "environment",
         }.freeze
         REQUIRED_FIELDS = %i[
           conversation_id
@@ -101,7 +103,7 @@ module OctridevIntercom
           end,
           conversation_metadata: lambda do |value|
             ::OctridevIntercom::Methods::FinAgent::RunFinProcedureConversationMetadata.from_hash(value)
-          end
+          end,
         }.freeze
       end
 
@@ -140,23 +142,24 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalRunFinProcedureResponseMetadata
         FIELDS = {
-          conversation_id: 'conversation_id',
-          intercom_conversation_id: 'intercom_conversation_id',
-          user_id: 'user_id',
-          procedure_id: 'procedure_id',
-          status: 'status',
-          created_at_ms: 'created_at_ms',
-          errors: 'errors',
-          sse_subscription_url: 'sse_subscription_url'
+          conversation_id: "conversation_id",
+          intercom_conversation_id: "intercom_conversation_id",
+          user_id: "user_id",
+          procedure_id: "procedure_id",
+          status: "status",
+          created_at_ms: "created_at_ms",
+          errors: "errors",
+          sse_subscription_url: "sse_subscription_url",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
         DECODERS = {
           status: lambda do |value|
             ::OctridevIntercom::Methods::FinAgent::RunFinProcedureResponseStatus.from_value(value)
           end,
           errors: lambda do |value|
             ::OctridevIntercom::FinAgentAttributeErrors.from_hash(value)
-          end
+          end,
         }.freeze
       end
 
@@ -201,15 +204,16 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalEscalateFinConversationMetadata
         FIELDS = {
-          conversation_id: 'conversation_id',
-          user: 'user',
-          context: 'context'
+          conversation_id: "conversation_id",
+          user: "user",
+          context: "context",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
         DECODERS = {
           user: lambda do |value|
             ::OctridevIntercom::FinAgentUser.from_hash(value)
-          end
+          end,
         }.freeze
       end
 
@@ -244,16 +248,17 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalEscalateFinConversationResponseMetadata
         FIELDS = {
-          conversation_id: 'conversation_id',
-          intercom_conversation_id: 'intercom_conversation_id',
-          sse_subscription_url: 'sse_subscription_url',
-          status: 'status'
+          conversation_id: "conversation_id",
+          intercom_conversation_id: "intercom_conversation_id",
+          sse_subscription_url: "sse_subscription_url",
+          status: "status",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
         DECODERS = {
           status: lambda do |value|
             ::OctridevIntercom::Methods::FinAgent::EscalateFinConversationResponseStatus.from_value(value)
-          end
+          end,
         }.freeze
       end
 
@@ -295,8 +300,8 @@ module OctridevIntercom
         ESCALATED = 'escalated'
         RESOLVED = 'resolved'
         COMPLETE = 'complete'
-        VALUES = %w[
-          thinking replying awaiting_user_reply escalated resolved complete
+        VALUES = [
+          'thinking', 'replying', 'awaiting_user_reply', 'escalated', 'resolved', 'complete'
         ].freeze
         def self.from_value(value)
           value
@@ -320,8 +325,8 @@ module OctridevIntercom
         ESCALATED = 'escalated'
         RESOLVED = 'resolved'
         COMPLETE = 'complete'
-        VALUES = %w[
-          thinking replying awaiting_user_reply escalated resolved complete
+        VALUES = [
+          'thinking', 'replying', 'awaiting_user_reply', 'escalated', 'resolved', 'complete'
         ].freeze
         def self.from_value(value)
           value
@@ -335,7 +340,7 @@ module OctridevIntercom
         OK = 'ok'
         GOOD = 'good'
         AMAZING = 'amazing'
-        VALUES = %w[terrible bad ok good amazing].freeze
+        VALUES = ['terrible', 'bad', 'ok', 'good', 'amazing'].freeze
         def self.from_value(value)
           value
         end
@@ -348,7 +353,7 @@ module OctridevIntercom
         OK = 'ok'
         GOOD = 'good'
         AMAZING = 'amazing'
-        VALUES = %w[terrible bad ok good amazing].freeze
+        VALUES = ['terrible', 'bad', 'ok', 'good', 'amazing'].freeze
         def self.from_value(value)
           value
         end
@@ -362,8 +367,8 @@ module OctridevIntercom
         ESCALATED = 'escalated'
         RESOLVED = 'resolved'
         COMPLETE = 'complete'
-        VALUES = %w[
-          thinking replying awaiting_user_reply escalated resolved complete
+        VALUES = [
+          'thinking', 'replying', 'awaiting_user_reply', 'escalated', 'resolved', 'complete'
         ].freeze
         def self.from_value(value)
           value
@@ -385,7 +390,7 @@ module OctridevIntercom
         REPLYING = 'replying'
         RESOLVED = 'resolved'
         COMPLETE = 'complete'
-        VALUES = %w[thinking replying resolved complete].freeze
+        VALUES = ['thinking', 'replying', 'resolved', 'complete'].freeze
         def self.from_value(value)
           value
         end
@@ -421,11 +426,12 @@ module OctridevIntercom
         environment: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(attachments) { Validation.validate_items('attachments', attachments, max: 10) }
 
         SdkClient.request(
           'POST',
-          '/fin/start',
+          "/fin/start",
           config: config,
           body: {
             'conversation_id' => conversation_id,
@@ -433,16 +439,16 @@ module OctridevIntercom
             'user' => user,
             'attachments' => attachments,
             'conversation_metadata' => conversation_metadata,
-            'environment' => environment
+            'environment' => environment,
           },
           return_type: ::OctridevIntercom::Methods::FinAgent::StartFinConversationResponse,
           decoder: :json,
           operation_id: 'start_fin_conversation',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -466,26 +472,27 @@ module OctridevIntercom
         attachments: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(attachments) { Validation.validate_items('attachments', attachments, max: 10) }
 
         SdkClient.request(
           'POST',
-          '/fin/reply',
+          "/fin/reply",
           config: config,
           body: {
             'conversation_id' => conversation_id,
             'message' => message,
             'user' => user,
-            'attachments' => attachments
+            'attachments' => attachments,
           },
           return_type: ::OctridevIntercom::Methods::FinAgent::ReplyToFinResponse,
           decoder: :json,
           operation_id: 'reply_to_fin',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -509,23 +516,24 @@ module OctridevIntercom
         remark: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/fin/csat',
+          "/fin/csat",
           config: config,
           body: {
             'conversation_id' => conversation_id,
             'rating' => rating,
-            'remark' => remark
+            'remark' => remark,
           },
           return_type: ::OctridevIntercom::Methods::FinAgent::SubmitFinCsatResponse,
           decoder: :json,
           operation_id: 'submit_fin_csat',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -542,21 +550,22 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/fin/capabilities',
+          "/fin/capabilities",
           config: config,
           body: {
-            'user' => user
+            'user' => user,
           },
           return_type: ::OctridevIntercom::Methods::FinAgent::ListFinCapabilitiesResponse,
           decoder: :json,
           operation_id: 'list_fin_capabilities',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

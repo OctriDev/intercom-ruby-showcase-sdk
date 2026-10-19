@@ -40,11 +40,12 @@ module OctridevIntercom
         environment: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(attachments) { Validation.validate_items('attachments', attachments, max: 10) }
 
         SdkClient.request(
           'POST',
-          '/fin/ask',
+          "/fin/ask",
           config: config,
           body: {
             'conversation_id' => conversation_id,
@@ -52,16 +53,16 @@ module OctridevIntercom
             'user' => user,
             'conversation_metadata' => conversation_metadata,
             'attachments' => attachments,
-            'environment' => environment
+            'environment' => environment,
           },
           return_type: ::OctridevIntercom::Methods::FinAgent::AskFinResponse,
           decoder: :json,
           operation_id: 'ask_fin',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -95,12 +96,13 @@ module OctridevIntercom
         environment: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/fin/procedures/',
+            "/fin/procedures/",
             SdkClient.encode_path_segment(procedure_id),
-            '/run'
+            "/run"
           ].join,
           config: config,
           body: {
@@ -108,16 +110,16 @@ module OctridevIntercom
             'user' => user,
             'message' => message,
             'conversation_metadata' => conversation_metadata,
-            'environment' => environment
+            'environment' => environment,
           },
           return_type: ::OctridevIntercom::Methods::FinAgent::RunFinProcedureResponse,
           decoder: :json,
           operation_id: 'run_fin_procedure',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -145,25 +147,26 @@ module OctridevIntercom
         context: NOT_GIVEN,
         request_options: nil
       )
-        Validation.if_given(context) { Validation.validate_length('context', context, max: 10_000) }
+
+        Validation.if_given(context) { Validation.validate_length('context', context, max: 10000) }
 
         SdkClient.request(
           'POST',
-          '/fin/escalate',
+          "/fin/escalate",
           config: config,
           body: {
             'conversation_id' => conversation_id,
             'user' => user,
-            'context' => context
+            'context' => context,
           },
           return_type: ::OctridevIntercom::Methods::FinAgent::EscalateFinConversationResponse,
           decoder: :json,
           operation_id: 'escalate_fin_conversation',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

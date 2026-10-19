@@ -5,56 +5,57 @@
 
 # misc domain models
 module OctridevIntercom
-  # Internal model hydration metadata.
-  class SdkInternalVisitorDeletedObjectMetadata
-    FIELDS = {
-      id: 'id',
-      type: 'type',
-      user_id: 'user_id'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevIntercom::VisitorDeletedObjectType.from_value(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalVisitorDeletedObjectMetadata
+  FIELDS = {
+    id: "id",
+    type: "type",
+    user_id: "user_id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevIntercom::VisitorDeletedObjectType.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for VisitorDeletedObject.
+# Response returned when an object is deleted
+class VisitorDeletedObject
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalVisitorDeletedObjectMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalVisitorDeletedObjectMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalVisitorDeletedObjectMetadata::DECODERS
+
+  # @return [String] The unique identifier for the visitor which is given by Intercom.
+  attr_reader :id
+  # @return [VisitorDeletedObjectType] The type of object which was deleted
+  attr_reader :type
+  # @return [String] Automatically generated identifier for the Visitor.
+  attr_reader :user_id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for VisitorDeletedObject.
-  # Response returned when an object is deleted
-  class VisitorDeletedObject
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalVisitorDeletedObjectMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalVisitorDeletedObjectMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalVisitorDeletedObjectMetadata::DECODERS
-
-    # @return [String] The unique identifier for the visitor which is given by Intercom.
-    attr_reader :id
-    # @return [VisitorDeletedObjectType] The type of object which was deleted
-    attr_reader :type
-    # @return [String] Automatically generated identifier for the Visitor.
-    attr_reader :user_id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the VisitorDeletedObjectType SDK namespace.
-  module VisitorDeletedObjectType
-    VISITOR = 'visitor'
-    VALUES = ['visitor'].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
+
+# Defines the VisitorDeletedObjectType SDK namespace.
+module VisitorDeletedObjectType
+  VISITOR = 'visitor'
+  VALUES = ['visitor'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 end

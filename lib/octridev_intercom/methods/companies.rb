@@ -12,12 +12,13 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalAttachCompaniesContactMetadata
         FIELDS = {
-          id: 'id'
+          id: "id",
         }.freeze
         REQUIRED_FIELDS = %i[
           id
         ].freeze
-        DECODERS = {}.freeze
+        DECODERS = {
+        }.freeze
       end
 
       # API model for AttachCompaniesContact.
@@ -82,9 +83,10 @@ module OctridevIntercom
         monthly_spend: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/companies',
+          "/companies",
           config: config,
           body: {
             'name' => name,
@@ -96,16 +98,16 @@ module OctridevIntercom
             'custom_attributes' => custom_attributes,
             'remote_created_at' => remote_created_at,
             'update_last_request_at' => update_last_request_at,
-            'monthly_spend' => monthly_spend
+            'monthly_spend' => monthly_spend,
           },
           return_type: ::OctridevIntercom::Company,
           decoder: :json,
           operation_id: 'create_or_update_company',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -131,9 +133,10 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/companies',
+          "/companies",
           config: config,
           query: {
             'name' => QueryValue.new(name, style: 'form', explode: true),
@@ -141,16 +144,16 @@ module OctridevIntercom
             'tag_id' => QueryValue.new(tag_id, style: 'form', explode: true),
             'segment_id' => QueryValue.new(segment_id, style: 'form', explode: true),
             'page' => QueryValue.new(page, style: 'form', explode: true),
-            'per_page' => QueryValue.new(per_page, style: 'form', explode: true)
+            'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
           },
           return_type: ::OctridevIntercom::CompanyList,
           decoder: :json,
           operation_id: 'retrieve_company',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -166,10 +169,11 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/companies/',
+            "/companies/",
             SdkClient.encode_path_segment(company_id)
           ].join,
           config: config,
@@ -177,10 +181,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'retrieve_companies_by_id',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -217,10 +221,11 @@ module OctridevIntercom
         monthly_spend: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PUT',
           [
-            '/companies/',
+            "/companies/",
             SdkClient.encode_path_segment(company_id)
           ].join,
           config: config,
@@ -231,16 +236,16 @@ module OctridevIntercom
             'website' => website,
             'industry' => industry,
             'custom_attributes' => custom_attributes,
-            'monthly_spend' => monthly_spend
+            'monthly_spend' => monthly_spend,
           },
           return_type: ::OctridevIntercom::Company,
           decoder: :json,
           operation_id: 'update_company',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -256,10 +261,11 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/companies/',
+            "/companies/",
             SdkClient.encode_path_segment(company_id)
           ].join,
           config: config,
@@ -267,10 +273,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'delete_company',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -286,22 +292,23 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/companies/',
+            "/companies/",
             SdkClient.encode_path_segment(company_id),
-            '/contacts'
+            "/contacts"
           ].join,
           config: config,
           return_type: ::OctridevIntercom::CompanyAttachedContacts,
           decoder: :json,
           operation_id: 'list_attached_contacts',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -317,22 +324,23 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/companies/',
+            "/companies/",
             SdkClient.encode_path_segment(company_id),
-            '/segments'
+            "/segments"
           ].join,
           config: config,
           return_type: ::OctridevIntercom::CompanyAttachedSegments,
           decoder: :json,
           operation_id: 'list_companies_attached_segments',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -354,23 +362,24 @@ module OctridevIntercom
         sort: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/companies/search',
+          "/companies/search",
           config: config,
           body: {
             'query' => query,
             'pagination' => pagination,
-            'sort' => sort
+            'sort' => sort,
           },
           return_type: ::OctridevIntercom::CompanyList,
           decoder: :json,
           operation_id: 'search_companies',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -391,23 +400,24 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/companies/list',
+          "/companies/list",
           config: config,
           query: {
             'page' => QueryValue.new(page, style: 'form', explode: true),
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'order' => QueryValue.new(order, style: 'form', explode: true)
+            'order' => QueryValue.new(order, style: 'form', explode: true),
           },
           return_type: ::OctridevIntercom::CompanyList,
           decoder: :json,
           operation_id: 'list_all_companies',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -420,21 +430,22 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/companies/scroll',
+          "/companies/scroll",
           config: config,
           query: {
-            'scroll_param' => QueryValue.new(scroll_param, style: 'form', explode: true)
+            'scroll_param' => QueryValue.new(scroll_param, style: 'form', explode: true),
           },
           return_type: ::OctridevIntercom::CompanyScroll,
           decoder: :json,
           operation_id: 'scroll_over_all_companies',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -453,25 +464,26 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/contacts/',
+            "/contacts/",
             SdkClient.encode_path_segment(contact_id),
-            '/companies'
+            "/companies"
           ].join,
           config: config,
           body: {
-            'id' => id
+            'id' => id,
           },
           return_type: ::OctridevIntercom::Company,
           decoder: :json,
           operation_id: 'attach_companies_contact',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -490,12 +502,13 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/contacts/',
+            "/contacts/",
             SdkClient.encode_path_segment(contact_id),
-            '/companies/',
+            "/companies/",
             SdkClient.encode_path_segment(company_id)
           ].join,
           config: config,
@@ -503,10 +516,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'detach_companies_contact',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

@@ -12,10 +12,10 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalCreateEnqueueMetadata
         FIELDS = {
-          dataset_id: 'dataset_id',
-          attribute_ids: 'attribute_ids',
-          start_time: 'start_time',
-          end_time: 'end_time'
+          dataset_id: "dataset_id",
+          attribute_ids: "attribute_ids",
+          start_time: "start_time",
+          end_time: "end_time",
         }.freeze
         REQUIRED_FIELDS = %i[
           dataset_id
@@ -23,7 +23,8 @@ module OctridevIntercom
           start_time
           end_time
         ].freeze
-        DECODERS = {}.freeze
+        DECODERS = {
+        }.freeze
       end
 
       # API model for CreateEnqueue.
@@ -52,13 +53,15 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalCreateEnqueueResponseMetadata
         FIELDS = {
-          job_identifier: 'job_identifier',
-          status: 'status',
-          download_url: 'download_url',
-          download_expires_at: 'download_expires_at'
+          job_identifier: "job_identifier",
+          status: "status",
+          download_url: "download_url",
+          download_expires_at: "download_expires_at",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
-        DECODERS = {}.freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
+        DECODERS = {
+        }.freeze
       end
 
       # API model for CreateEnqueueResponse.
@@ -87,13 +90,15 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalGetReportingDataResponseMetadata
         FIELDS = {
-          job_identifier: 'job_identifier',
-          status: 'status',
-          download_url: 'download_url',
-          download_expires_at: 'download_expires_at'
+          job_identifier: "job_identifier",
+          status: "status",
+          download_url: "download_url",
+          download_expires_at: "download_expires_at",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
-        DECODERS = {}.freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
+        DECODERS = {
+        }.freeze
       end
 
       # API model for GetReportingDataResponse.
@@ -122,12 +127,14 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalListGetDatasetsResponseDataItemAttributesItemMetadata
         FIELDS = {
-          id: 'id',
-          qualified_id: 'qualified_id',
-          name: 'name'
+          id: "id",
+          qualified_id: "qualified_id",
+          name: "name",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
-        DECODERS = {}.freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
+        DECODERS = {
+        }.freeze
       end
 
       # API model for ListGetDatasetsResponseDataItemAttributesItem.
@@ -160,17 +167,18 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalListGetDatasetsResponseDataItemMetadata
         FIELDS = {
-          id: 'id',
-          name: 'name',
-          description: 'description',
-          default_time_attribute_id: 'default_time_attribute_id',
-          attributes: 'attributes'
+          id: "id",
+          name: "name",
+          description: "description",
+          default_time_attribute_id: "default_time_attribute_id",
+          attributes: "attributes",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
         DECODERS = {
           attributes: lambda do |value|
             value&.map { |item| ::OctridevIntercom::Methods::ReportingDataExport::ListGetDatasetsResponseDataItemAttributesItem.from_hash(item) }
-          end
+          end,
         }.freeze
       end
 
@@ -200,14 +208,15 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalListGetDatasetsResponseMetadata
         FIELDS = {
-          type: 'type',
-          data: 'data'
+          type: "type",
+          data: "data",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
         DECODERS = {
           data: lambda do |value|
             value&.map { |item| ::OctridevIntercom::Methods::ReportingDataExport::ListGetDatasetsResponseDataItem.from_hash(item) }
-          end
+          end,
         }.freeze
       end
 
@@ -255,24 +264,25 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/export/reporting_data/enqueue',
+          "/export/reporting_data/enqueue",
           config: config,
           body: {
             'dataset_id' => dataset_id,
             'attribute_ids' => attribute_ids,
             'start_time' => start_time,
-            'end_time' => end_time
+            'end_time' => end_time,
           },
           return_type: ::OctridevIntercom::Methods::ReportingDataExport::CreateEnqueueResponse,
           decoder: :json,
           operation_id: 'create_enqueue',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '429' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '429' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -283,27 +293,36 @@ module OctridevIntercom
       # @param app_id [String] The Intercom defined code of the workspace the
       #   company is associated to.
       # @param job_identifier2 [String] Unique identifier of the job.
-      singleton_class.define_method(:get_reporting_data) do |config:, job_identifier:, app_id:, client_id:, job_identifier2:, intercom_version: NOT_GIVEN, request_options: nil|
+      singleton_class.define_method(:get_reporting_data) do |
+        config:,
+        job_identifier:,
+        app_id:,
+        client_id:,
+        job_identifier2:,
+        intercom_version: NOT_GIVEN,
+        request_options: nil
+      |
+
         SdkClient.request(
           'GET',
           [
-            '/export/reporting_data/',
+            "/export/reporting_data/",
             SdkClient.encode_path_segment(job_identifier)
           ].join,
           config: config,
           query: {
             'app_id' => QueryValue.new(app_id, style: 'form', explode: true),
             'client_id' => QueryValue.new(client_id, style: 'form', explode: true),
-            'job_identifier' => QueryValue.new(job_identifier2, style: 'form', explode: true)
+            'job_identifier' => QueryValue.new(job_identifier2, style: 'form', explode: true),
           },
           return_type: ::OctridevIntercom::Methods::ReportingDataExport::GetReportingDataResponse,
           decoder: :json,
           operation_id: 'get_reporting_data',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '404' => ::OctridevIntercom::Error2 }
+          errors: { '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -313,17 +332,18 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/export/reporting_data/get_datasets',
+          "/export/reporting_data/get_datasets",
           config: config,
           return_type: ::OctridevIntercom::Methods::ReportingDataExport::ListGetDatasetsResponse,
           decoder: :json,
           operation_id: 'list_get_datasets',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
-          request_options: request_options
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
+          request_options: request_options,
         ).data
       end
 
@@ -335,26 +355,35 @@ module OctridevIntercom
       #   `/download/reporting_data/{job_identifier}`.
       # @param accept [GetReportingData2Parameter] Required header for downloading
       #   the export file
-      singleton_class.define_method(:get_reporting_data2) do |config:, job_identifier:, app_id:, job_identifier2:, accept:, intercom_version: NOT_GIVEN, request_options: nil|
+      singleton_class.define_method(:get_reporting_data2) do |
+        config:,
+        job_identifier:,
+        app_id:,
+        job_identifier2:,
+        accept:,
+        intercom_version: NOT_GIVEN,
+        request_options: nil
+      |
+
         SdkClient.request(
           'GET',
           [
-            '/download/reporting_data/',
+            "/download/reporting_data/",
             SdkClient.encode_path_segment(job_identifier)
           ].join,
           config: config,
           query: {
             'app_id' => QueryValue.new(app_id, style: 'form', explode: true),
-            'job_identifier' => QueryValue.new(job_identifier2, style: 'form', explode: true)
+            'job_identifier' => QueryValue.new(job_identifier2, style: 'form', explode: true),
           },
           decoder: :empty,
           operation_id: 'get_reporting_data2',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Accept' => SdkClient.header_value(accept),
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Accept' => SdkClient.header_value(accept),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '404' => ::OctridevIntercom::Error2 }
+          errors: { '404' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

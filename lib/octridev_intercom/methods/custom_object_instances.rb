@@ -34,10 +34,11 @@ module OctridevIntercom
         custom_attributes: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/custom_object_instances/',
+            "/custom_object_instances/",
             SdkClient.encode_path_segment(custom_object_type_identifier)
           ].join,
           config: config,
@@ -45,16 +46,16 @@ module OctridevIntercom
             'external_id' => external_id,
             'external_created_at' => external_created_at,
             'external_updated_at' => external_updated_at,
-            'custom_attributes' => custom_attributes
+            'custom_attributes' => custom_attributes,
           },
           return_type: ::OctridevIntercom::CustomObjectInstance,
           decoder: :json,
           operation_id: 'create_custom_object_instances',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -83,12 +84,13 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, max: 150) }
 
         SdkClient.request(
           'GET',
           [
-            '/custom_object_instances/',
+            "/custom_object_instances/",
             SdkClient.encode_path_segment(custom_object_type_identifier)
           ].join,
           config: config,
@@ -97,16 +99,16 @@ module OctridevIntercom
             'references_conversation_id' => QueryValue.new(references_conversation_id, style: 'form', explode: true),
             'external_id' => QueryValue.new(external_id, style: 'form', explode: true),
             'page' => QueryValue.new(page, style: 'form', explode: true),
-            'per_page' => QueryValue.new(per_page, style: 'form', explode: true)
+            'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
           },
           return_type: ::OctridevIntercom::CustomObjectInstancesPaginatedList,
           decoder: :json,
           operation_id: 'list_custom_object_instances',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -123,24 +125,25 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/custom_object_instances/',
+            "/custom_object_instances/",
             SdkClient.encode_path_segment(custom_object_type_identifier)
           ].join,
           config: config,
           query: {
-            'external_id' => QueryValue.new(external_id, style: 'form', explode: true)
+            'external_id' => QueryValue.new(external_id, style: 'form', explode: true),
           },
           return_type: ::OctridevIntercom::CustomObjectInstanceDeleted,
           decoder: :json,
           operation_id: 'delete_custom_object_instances_by_id',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -152,13 +155,20 @@ module OctridevIntercom
       #   custom object type that defines the structure of the custom object instance.
       # @param custom_object_instance_id [String] The id or external_id of the
       #   custom object instance
-      singleton_class.define_method(:get_custom_object_instances_by_id) do |config:, custom_object_type_identifier:, custom_object_instance_id:, intercom_version: NOT_GIVEN, request_options: nil|
+      singleton_class.define_method(:get_custom_object_instances_by_id) do |
+        config:,
+        custom_object_type_identifier:,
+        custom_object_instance_id:,
+        intercom_version: NOT_GIVEN,
+        request_options: nil
+      |
+
         SdkClient.request(
           'GET',
           [
-            '/custom_object_instances/',
+            "/custom_object_instances/",
             SdkClient.encode_path_segment(custom_object_type_identifier),
-            '/',
+            "/",
             SdkClient.encode_path_segment(custom_object_instance_id)
           ].join,
           config: config,
@@ -166,10 +176,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'get_custom_object_instances_by_id',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -188,12 +198,13 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/custom_object_instances/',
+            "/custom_object_instances/",
             SdkClient.encode_path_segment(custom_object_type_identifier),
-            '/',
+            "/",
             SdkClient.encode_path_segment(custom_object_instance_id)
           ].join,
           config: config,
@@ -201,10 +212,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'delete_custom_object_instances_by_external_id',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

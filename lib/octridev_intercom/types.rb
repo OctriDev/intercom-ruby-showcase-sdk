@@ -8,79 +8,60 @@ module OctridevIntercom
   # Defines the AttachContactToConversationRequestCustomer SDK namespace.
   module AttachContactToConversationRequestCustomer
   end
-
   # Defines the CompanySearchRequestQuery SDK namespace.
   module CompanySearchRequestQuery
   end
-
   # Defines the ContactReplyConversationRequest SDK namespace.
   module ContactReplyConversationRequest
   end
-
   # Defines the ContactReplyTicketRequest SDK namespace.
   module ContactReplyTicketRequest
   end
-
   # Defines the ContactSearchRequestQuery SDK namespace.
   module ContactSearchRequestQuery
   end
-
   # Defines the ContentSearchResult SDK namespace.
   module ContentSearchResult
   end
-
   # Defines the ConversationAttribute SDK namespace.
   module ConversationAttribute
   end
-
   # Defines the CreateConversationAttributeRequest SDK namespace.
   module CreateConversationAttributeRequest
   end
-
   # Defines the CreateDataAttributeRequest SDK namespace.
   module CreateDataAttributeRequest
   end
-
   # Defines the CreateTicketReplyWithCommentRequest SDK namespace.
   module CreateTicketReplyWithCommentRequest
   end
-
   # Defines the CreateTicketRequestContactsItem SDK namespace.
   module CreateTicketRequestContactsItem
   end
-
   # Defines the CustomerRequest SDK namespace.
   module CustomerRequest
   end
-
   # Defines the Datetime SDK namespace.
   module Datetime
   end
-
   # Defines the EventDetails SDK namespace.
   module EventDetails
   end
-
   # Defines the MergePreviewResponse SDK namespace.
   module MergePreviewResponse
   end
-
   # Defines the PaginatedResponseDataItem SDK namespace.
   module PaginatedResponseDataItem
   end
-
   # Defines the RedactConversationRequest SDK namespace.
   module RedactConversationRequest
   end
-
   # Defines the ReplyConversationRequest SDK namespace.
   module ReplyConversationRequest
   end
-
   # Defines the SearchRequestQuery SDK namespace.
   module SearchRequestQuery
   end
-
   # Defines the UpdateDataAttributeRequest SDK namespace.
   module UpdateDataAttributeRequest
   end

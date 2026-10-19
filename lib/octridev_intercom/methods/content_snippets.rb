@@ -12,13 +12,14 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalAttachContentSnippetsTagMetadata
         FIELDS = {
-          id: 'id',
-          admin_id: 'admin_id'
+          id: "id",
+          admin_id: "admin_id",
         }.freeze
         REQUIRED_FIELDS = %i[
           id
         ].freeze
-        DECODERS = {}.freeze
+        DECODERS = {
+        }.freeze
       end
 
       # API model for AttachContentSnippetsTag.
@@ -61,25 +62,26 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/content_snippets',
+          "/content_snippets",
           config: config,
           query: {
             'page' => QueryValue.new(page, style: 'form', explode: true),
-            'per_page' => QueryValue.new(per_page, style: 'form', explode: true)
+            'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
           },
           return_type: ::OctridevIntercom::ContentSnippetList,
           decoder: :json,
           operation_id: 'list_content_snippets',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
-          request_options: request_options
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
+          request_options: request_options,
         ).data
       end
 
-      ListContentSnippetsPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
+    ListContentSnippetsPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
 
       # Lists content snippets in a workspace. Use `page` and `per_page` to paginate the results; each page includes snippet objects and pagination metadata.
       #
@@ -107,10 +109,8 @@ module OctridevIntercom
             )
             items = page.data || []
             break if items.empty?
-
             items.each { |item| y << item }
             break if page_number >= page.total_pages
-
             page_number += 1
           end
         end
@@ -135,12 +135,10 @@ module OctridevIntercom
             )
             items = page.data || []
             break if items.empty?
-
             next_page_number = page_number + 1
             has_more = !next_page_number.nil? && next_page_number != page_number && next_page_number <= page.total_pages
             y << ListContentSnippetsPage.new(data: page, items: items, has_more: has_more)
             break unless has_more
-
             page_number = next_page_number
           end
         end
@@ -180,11 +178,12 @@ module OctridevIntercom
         ai_sales_agent_availability: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_length('title', title, max: 255)
 
         SdkClient.request(
           'POST',
-          '/content_snippets',
+          "/content_snippets",
           config: config,
           body: {
             'title' => title,
@@ -194,16 +193,16 @@ module OctridevIntercom
             'audience_ids' => audience_ids,
             'ai_chatbot_availability' => ai_chatbot_availability,
             'ai_copilot_availability' => ai_copilot_availability,
-            'ai_sales_agent_availability' => ai_sales_agent_availability
+            'ai_sales_agent_availability' => ai_sales_agent_availability,
           },
           return_type: ::OctridevIntercom::ContentSnippet,
           decoder: :json,
           operation_id: 'create_content_snippet',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
+          errors: { '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -212,11 +211,17 @@ module OctridevIntercom
       # You can fetch a single content snippet by its id.
       #
       # @param id [String] The unique identifier for the content snippet.
-      singleton_class.define_method(:get_content_snippet) do |config:, id:, intercom_version: NOT_GIVEN, request_options: nil|
+      singleton_class.define_method(:get_content_snippet) do |
+        config:,
+        id:,
+        intercom_version: NOT_GIVEN,
+        request_options: nil
+      |
+
         SdkClient.request(
           'GET',
           [
-            '/content_snippets/',
+            "/content_snippets/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -224,10 +229,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'get_content_snippet',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '404' => ::OctridevIntercom::Error2 }
+          errors: { '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -268,12 +273,13 @@ module OctridevIntercom
         ai_sales_agent_availability: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(title) { Validation.validate_length('title', title, max: 255) }
 
         SdkClient.request(
           'PUT',
           [
-            '/content_snippets/',
+            "/content_snippets/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -285,16 +291,16 @@ module OctridevIntercom
             'audience_ids' => audience_ids,
             'ai_chatbot_availability' => ai_chatbot_availability,
             'ai_copilot_availability' => ai_copilot_availability,
-            'ai_sales_agent_availability' => ai_sales_agent_availability
+            'ai_sales_agent_availability' => ai_sales_agent_availability,
           },
           return_type: ::OctridevIntercom::ContentSnippet,
           decoder: :json,
           operation_id: 'update_content_snippet',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
+          errors: { '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -309,20 +315,21 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/content_snippets/',
+            "/content_snippets/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'delete_content_snippet',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
+          errors: { '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -345,26 +352,27 @@ module OctridevIntercom
         admin_id: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/content_snippets/',
+            "/content_snippets/",
             SdkClient.encode_path_segment(content_snippet_id),
-            '/tags'
+            "/tags"
           ].join,
           config: config,
           body: {
             'id' => id,
-            'admin_id' => admin_id
+            'admin_id' => admin_id,
           },
           return_type: ::OctridevIntercom::Tag,
           decoder: :json,
           operation_id: 'attach_content_snippets_tag',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -383,12 +391,13 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/content_snippets/',
+            "/content_snippets/",
             SdkClient.encode_path_segment(content_snippet_id),
-            '/tags/',
+            "/tags/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -396,10 +405,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'detach_content_snippets_tag',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

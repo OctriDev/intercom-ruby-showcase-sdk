@@ -12,12 +12,13 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalListFoldersResponseMetadata
         FIELDS = {
-          type: 'type',
-          data: 'data',
-          total_count: 'total_count',
-          pages: 'pages'
+          type: "type",
+          data: "data",
+          total_count: "total_count",
+          pages: "pages",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
         DECODERS = {
           type: lambda do |value|
             ::OctridevIntercom::Methods::Folders::ListFoldersResponseType.from_value(value)
@@ -27,7 +28,7 @@ module OctridevIntercom
           end,
           pages: lambda do |value|
             ::OctridevIntercom::PagesLink.from_hash(value)
-          end
+          end,
         }.freeze
       end
 
@@ -61,15 +62,16 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalCreateFolderFolderMetadata
         FIELDS = {
-          name: 'name',
-          description: 'description',
-          emoji: 'emoji',
-          parent_folder_id: 'parent_folder_id'
+          name: "name",
+          description: "description",
+          emoji: "emoji",
+          parent_folder_id: "parent_folder_id",
         }.freeze
         REQUIRED_FIELDS = %i[
           name
         ].freeze
-        DECODERS = {}.freeze
+        DECODERS = {
+        }.freeze
       end
 
       # API model for CreateFolderFolder.
@@ -105,7 +107,7 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalCreateFolderMetadata
         FIELDS = {
-          folder: 'folder'
+          folder: "folder",
         }.freeze
         REQUIRED_FIELDS = %i[
           folder
@@ -113,7 +115,7 @@ module OctridevIntercom
         DECODERS = {
           folder: lambda do |value|
             ::OctridevIntercom::Methods::Folders::CreateFolderFolder.from_hash(value)
-          end
+          end,
         }.freeze
       end
 
@@ -143,13 +145,15 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalUpdateFolderFolderMetadata
         FIELDS = {
-          name: 'name',
-          description: 'description',
-          emoji: 'emoji',
-          parent_folder_id: 'parent_folder_id'
+          name: "name",
+          description: "description",
+          emoji: "emoji",
+          parent_folder_id: "parent_folder_id",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
-        DECODERS = {}.freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
+        DECODERS = {
+        }.freeze
       end
 
       # API model for UpdateFolderFolder.
@@ -185,7 +189,7 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalUpdateFolderMetadata
         FIELDS = {
-          folder: 'folder'
+          folder: "folder",
         }.freeze
         REQUIRED_FIELDS = %i[
           folder
@@ -193,7 +197,7 @@ module OctridevIntercom
         DECODERS = {
           folder: lambda do |value|
             ::OctridevIntercom::Methods::Folders::UpdateFolderFolder.from_hash(value)
-          end
+          end,
         }.freeze
       end
 
@@ -245,23 +249,24 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/folders',
+          "/folders",
           config: config,
           query: {
             'page' => QueryValue.new(page, style: 'form', explode: true),
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'parent_folder_id' => QueryValue.new(parent_folder_id, style: 'form', explode: true)
+            'parent_folder_id' => QueryValue.new(parent_folder_id, style: 'form', explode: true),
           },
           return_type: ::OctridevIntercom::Methods::Folders::ListFoldersResponse,
           decoder: :json,
           operation_id: 'list_folders',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -274,21 +279,22 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/folders',
+          "/folders",
           config: config,
           body: {
-            'folder' => folder
+            'folder' => folder,
           },
           return_type: ::OctridevIntercom::Folder,
           decoder: :json,
           operation_id: 'create_folder',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -303,10 +309,11 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/folders/',
+            "/folders/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -314,10 +321,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'retrieve_folder',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -333,24 +340,25 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PUT',
           [
-            '/folders/',
+            "/folders/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           body: {
-            'folder' => folder
+            'folder' => folder,
           },
           return_type: ::OctridevIntercom::Folder,
           decoder: :json,
           operation_id: 'update_folder',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -365,10 +373,11 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/folders/',
+            "/folders/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -376,10 +385,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'delete_folder',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

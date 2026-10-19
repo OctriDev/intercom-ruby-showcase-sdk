@@ -14,11 +14,17 @@ module OctridevIntercom
       # You can fetch a single macro (saved reply) by its ID. The macro will only be returned if it is visible to the authenticated user based on its visibility settings. **Visibility Rules** A macro is returned based on its `visible_to` setting: - `everyone`: Always visible to all team members - `specific_teams`: Only visible if the authenticated user belongs to one of the teams specified in `visible_to_team_ids` If a macro exists but is not visible to the authenticated user, a 404…
       #
       # @param id [String] The unique identifier of the macro
-      singleton_class.define_method(:get_macro) do |config:, id:, intercom_version: NOT_GIVEN, request_options: nil|
+      singleton_class.define_method(:get_macro) do |
+        config:,
+        id:,
+        intercom_version: NOT_GIVEN,
+        request_options: nil
+      |
+
         SdkClient.request(
           'GET',
           [
-            '/macros/',
+            "/macros/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -26,10 +32,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'get_macro',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -50,25 +56,26 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 150) }
 
         SdkClient.request(
           'GET',
-          '/macros',
+          "/macros",
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
             'starting_after' => QueryValue.new(starting_after, style: 'form', explode: true),
-            'updated_since' => QueryValue.new(updated_since, style: 'form', explode: true)
+            'updated_since' => QueryValue.new(updated_since, style: 'form', explode: true),
           },
           return_type: ::OctridevIntercom::MacroList,
           decoder: :json,
           operation_id: 'list_macros',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

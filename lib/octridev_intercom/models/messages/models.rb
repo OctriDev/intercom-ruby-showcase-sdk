@@ -5,77 +5,77 @@
 
 # tagged_models_messages domain models
 module OctridevIntercom
-  # Internal model hydration metadata.
-  class SdkInternalMessageMetadata
-    FIELDS = {
-      type: 'type',
-      id: 'id',
-      created_at: 'created_at',
-      subject: 'subject',
-      body: 'body',
-      message_type: 'message_type',
-      conversation_id: 'conversation_id'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      type
-      id
-      created_at
-      body
-      message_type
-    ].freeze
-    DECODERS = {
-      message_type: lambda do |value|
-        ::OctridevIntercom::MessageMessageType.from_value(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalMessageMetadata
+  FIELDS = {
+    type: "type",
+    id: "id",
+    created_at: "created_at",
+    subject: "subject",
+    body: "body",
+    message_type: "message_type",
+    conversation_id: "conversation_id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    type
+    id
+    created_at
+    body
+    message_type
+  ].freeze
+  DECODERS = {
+    message_type: lambda do |value|
+      ::OctridevIntercom::MessageMessageType.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for Message.
+# Message are how you reach out to contacts in Intercom. They are created when an admin sends an outbound message to a contact.
+class Message
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalMessageMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalMessageMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalMessageMetadata::DECODERS
+
+  # @return [String] The type of the message
+  attr_reader :type
+  # @return [String] The id representing the message.
+  attr_reader :id
+  # @return [Integer] The time the conversation was created.
+  attr_reader :created_at
+  # @return [String] The subject of the message. Only present if message_type: email.
+  attr_reader :subject
+  # @return [String] The message body, which may contain HTML.
+  attr_reader :body
+  # @return [MessageMessageType] The type of message that was sent. Can be email, inapp, facebook or twitter.
+  attr_reader :message_type
+  # @return [String] The associated conversation_id
+  attr_reader :conversation_id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for Message.
-  # Message are how you reach out to contacts in Intercom. They are created when an admin sends an outbound message to a contact.
-  class Message
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalMessageMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalMessageMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalMessageMetadata::DECODERS
-
-    # @return [String] The type of the message
-    attr_reader :type
-    # @return [String] The id representing the message.
-    attr_reader :id
-    # @return [Integer] The time the conversation was created.
-    attr_reader :created_at
-    # @return [String] The subject of the message. Only present if message_type: email.
-    attr_reader :subject
-    # @return [String] The message body, which may contain HTML.
-    attr_reader :body
-    # @return [MessageMessageType] The type of message that was sent. Can be email, inapp, facebook or twitter.
-    attr_reader :message_type
-    # @return [String] The associated conversation_id
-    attr_reader :conversation_id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the MessageMessageType SDK namespace.
-  module MessageMessageType
-    EMAIL = 'email'
-    INAPP = 'inapp'
-    FACEBOOK = 'facebook'
-    TWITTER = 'twitter'
-    VALUES = %w[email inapp facebook twitter].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
+
+# Defines the MessageMessageType SDK namespace.
+module MessageMessageType
+  EMAIL = 'email'
+  INAPP = 'inapp'
+  FACEBOOK = 'facebook'
+  TWITTER = 'twitter'
+  VALUES = ['email', 'inapp', 'facebook', 'twitter'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 end

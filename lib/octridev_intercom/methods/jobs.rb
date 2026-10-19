@@ -21,10 +21,11 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/jobs/status/',
+            "/jobs/status/",
             SdkClient.encode_path_segment(job_id)
           ].join,
           config: config,
@@ -32,10 +33,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'jobs_status',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

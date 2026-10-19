@@ -56,9 +56,10 @@ module OctridevIntercom
         skip_notifications: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/tickets/enqueue',
+          "/tickets/enqueue",
           config: config,
           body: {
             'ticket_type_id' => ticket_type_id,
@@ -69,16 +70,16 @@ module OctridevIntercom
             'ticket_attributes' => ticket_attributes,
             'assignment' => assignment,
             'channel' => channel,
-            'skip_notifications' => skip_notifications
+            'skip_notifications' => skip_notifications,
           },
           return_type: ::OctridevIntercom::Jobs,
           decoder: :json,
           operation_id: 'enqueue_create_ticket',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -122,10 +123,11 @@ module OctridevIntercom
         skip_notifications: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PUT',
           [
-            '/tickets/',
+            "/tickets/",
             SdkClient.encode_path_segment(ticket_id)
           ].join,
           config: config,
@@ -138,16 +140,16 @@ module OctridevIntercom
             'snoozed_until' => snoozed_until,
             'admin_id' => admin_id,
             'assignee_id' => assignee_id,
-            'skip_notifications' => skip_notifications
+            'skip_notifications' => skip_notifications,
           },
           return_type: ::OctridevIntercom::Ticket,
           decoder: :json,
           operation_id: 'update_ticket',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -160,11 +162,17 @@ module OctridevIntercom
       #   %} This is the internal `id` field from the API response, not the
       #   `ticket_id` displayed in the Intercom Inbox (e.g., #12345). Use the `id`
       #   value from the ticket object returned by the API. {% /admonition %}
-      singleton_class.define_method(:get_ticket) do |config:, ticket_id:, intercom_version: NOT_GIVEN, request_options: nil|
+      singleton_class.define_method(:get_ticket) do |
+        config:,
+        ticket_id:,
+        intercom_version: NOT_GIVEN,
+        request_options: nil
+      |
+
         SdkClient.request(
           'GET',
           [
-            '/tickets/',
+            "/tickets/",
             SdkClient.encode_path_segment(ticket_id)
           ].join,
           config: config,
@@ -172,10 +180,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'get_ticket',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -194,10 +202,11 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/tickets/',
+            "/tickets/",
             SdkClient.encode_path_segment(ticket_id)
           ].join,
           config: config,
@@ -205,10 +214,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'delete_ticket',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -235,27 +244,28 @@ module OctridevIntercom
         ticket_attributes: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/tickets/',
+            "/tickets/",
             SdkClient.encode_path_segment(ticket_id),
-            '/change_type'
+            "/change_type"
           ].join,
           config: config,
           body: {
             'ticket_type_id' => ticket_type_id,
             'ticket_state_id' => ticket_state_id,
-            'ticket_attributes' => ticket_attributes
+            'ticket_attributes' => ticket_attributes,
           },
           return_type: ::OctridevIntercom::Ticket,
           decoder: :json,
           operation_id: 'change_ticket_type',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -274,21 +284,22 @@ module OctridevIntercom
         pagination: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/tickets/search',
+          "/tickets/search",
           config: config,
           body: {
             'query' => query,
-            'pagination' => pagination
+            'pagination' => pagination,
           },
           return_type: ::OctridevIntercom::TicketList,
           decoder: :json,
           operation_id: 'search_tickets',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
-          request_options: request_options
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
+          request_options: request_options,
         ).data
       end
     end

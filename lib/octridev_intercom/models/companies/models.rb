@@ -5,318 +5,324 @@
 
 # tagged_models_companies domain models
 module OctridevIntercom
-  # Internal model hydration metadata.
-  class SdkInternalCompanyPlanMetadata
-    FIELDS = {
-      type: 'type',
-      id: 'id',
-      name: 'name'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalCompanyPlanMetadata
+  FIELDS = {
+    type: "type",
+    id: "id",
+    name: "name",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for CompanyPlan.
+# Optional object value serialized in the `plan` wire field.
+class CompanyPlan
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCompanyPlanMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCompanyPlanMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCompanyPlanMetadata::DECODERS
+
+  # @return [String] Value is always "plan"
+  attr_reader :type
+  # @return [String] The id of the plan
+  attr_reader :id
+  # @return [String] The name of the plan
+  attr_reader :name
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CompanyPlan.
-  # Optional object value serialized in the `plan` wire field.
-  class CompanyPlan
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCompanyPlanMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCompanyPlanMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCompanyPlanMetadata::DECODERS
-
-    # @return [String] Value is always "plan"
-    attr_reader :type
-    # @return [String] The id of the plan
-    attr_reader :id
-    # @return [String] The name of the plan
-    attr_reader :name
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalCompanyTagsMetadata
-    FIELDS = {
-      type: 'type',
-      tags: 'tags'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevIntercom::CompanyTagsType.from_value(value)
-      end,
-      tags: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::TagBasic.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalCompanyTagsMetadata
+  FIELDS = {
+    type: "type",
+    tags: "tags",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevIntercom::CompanyTagsType.from_value(value)
+    end,
+    tags: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::TagBasic.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for CompanyTags.
+# The list of tags associated with the company
+class CompanyTags
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCompanyTagsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCompanyTagsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCompanyTagsMetadata::DECODERS
+
+  # @return [CompanyTagsType] The type of the object
+  attr_reader :type
+  # @return [Array_of_TagBasic] Optional array value serialized in the `tags` wire field.
+  attr_reader :tags
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CompanyTags.
-  # The list of tags associated with the company
-  class CompanyTags
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCompanyTagsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCompanyTagsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCompanyTagsMetadata::DECODERS
-
-    # @return [CompanyTagsType] The type of the object
-    attr_reader :type
-    # @return [Array_of_TagBasic] Optional array value serialized in the `tags` wire field.
-    attr_reader :tags
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalCompanySegmentsMetadata
-    FIELDS = {
-      type: 'type',
-      segments: 'segments'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevIntercom::CompanySegmentsType.from_value(value)
-      end,
-      segments: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::Segment.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalCompanySegmentsMetadata
+  FIELDS = {
+    type: "type",
+    segments: "segments",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevIntercom::CompanySegmentsType.from_value(value)
+    end,
+    segments: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::Segment.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for CompanySegments.
+# The list of segments associated with the company
+class CompanySegments
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCompanySegmentsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCompanySegmentsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCompanySegmentsMetadata::DECODERS
+
+  # @return [CompanySegmentsType] The type of the object
+  attr_reader :type
+  # @return [Array_of_Segment] Optional array value serialized in the `segments` wire field.
+  attr_reader :segments
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CompanySegments.
-  # The list of segments associated with the company
-  class CompanySegments
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCompanySegmentsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCompanySegmentsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCompanySegmentsMetadata::DECODERS
-
-    # @return [CompanySegmentsType] The type of the object
-    attr_reader :type
-    # @return [Array_of_Segment] Optional array value serialized in the `segments` wire field.
-    attr_reader :segments
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalCompanyNotesMetadata
-    FIELDS = {
-      type: 'type',
-      notes: 'notes'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevIntercom::CompanyNotesType.from_value(value)
-      end,
-      notes: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::CompanyNote.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalCompanyNotesMetadata
+  FIELDS = {
+    type: "type",
+    notes: "notes",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevIntercom::CompanyNotesType.from_value(value)
+    end,
+    notes: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::CompanyNote.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for CompanyNotes.
+# The list of notes associated with the company
+class CompanyNotes
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCompanyNotesMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCompanyNotesMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCompanyNotesMetadata::DECODERS
+
+  # @return [CompanyNotesType] The type of the object
+  attr_reader :type
+  # @return [Array_of_CompanyNote] Optional array value serialized in the `notes` wire field.
+  attr_reader :notes
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CompanyNotes.
-  # The list of notes associated with the company
-  class CompanyNotes
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCompanyNotesMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCompanyNotesMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCompanyNotesMetadata::DECODERS
-
-    # @return [CompanyNotesType] The type of the object
-    attr_reader :type
-    # @return [Array_of_CompanyNote] Optional array value serialized in the `notes` wire field.
-    attr_reader :notes
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalCompanyMetadata
-    FIELDS = {
-      type: 'type',
-      id: 'id',
-      name: 'name',
-      app_id: 'app_id',
-      plan: 'plan',
-      company_id: 'company_id',
-      remote_created_at: 'remote_created_at',
-      created_at: 'created_at',
-      updated_at: 'updated_at',
-      last_request_at: 'last_request_at',
-      size: 'size',
-      website: 'website',
-      industry: 'industry',
-      monthly_spend: 'monthly_spend',
-      session_count: 'session_count',
-      user_count: 'user_count',
-      custom_attributes: 'custom_attributes',
-      tags: 'tags',
-      segments: 'segments',
-      notes: 'notes'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevIntercom::CompanyType.from_value(value)
-      end,
-      plan: lambda do |value|
-        ::OctridevIntercom::CompanyPlan.from_hash(value)
-      end,
-      tags: lambda do |value|
-        ::OctridevIntercom::CompanyTags.from_hash(value)
-      end,
-      segments: lambda do |value|
-        ::OctridevIntercom::CompanySegments.from_hash(value)
-      end,
-      notes: lambda do |value|
-        ::OctridevIntercom::CompanyNotes.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalCompanyMetadata
+  FIELDS = {
+    type: "type",
+    id: "id",
+    name: "name",
+    app_id: "app_id",
+    plan: "plan",
+    company_id: "company_id",
+    remote_created_at: "remote_created_at",
+    created_at: "created_at",
+    updated_at: "updated_at",
+    last_request_at: "last_request_at",
+    size: "size",
+    website: "website",
+    industry: "industry",
+    monthly_spend: "monthly_spend",
+    session_count: "session_count",
+    user_count: "user_count",
+    custom_attributes: "custom_attributes",
+    tags: "tags",
+    segments: "segments",
+    notes: "notes",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevIntercom::CompanyType.from_value(value)
+    end,
+    plan: lambda do |value|
+      ::OctridevIntercom::CompanyPlan.from_hash(value)
+    end,
+    tags: lambda do |value|
+      ::OctridevIntercom::CompanyTags.from_hash(value)
+    end,
+    segments: lambda do |value|
+      ::OctridevIntercom::CompanySegments.from_hash(value)
+    end,
+    notes: lambda do |value|
+      ::OctridevIntercom::CompanyNotes.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for Company.
+# Companies allow you to represent organizations using your product. Each company will have its own description and be associated with contacts. You can fetch, create, update and list companies.
+class Company
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCompanyMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCompanyMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCompanyMetadata::DECODERS
+
+  # @return [CompanyType] Value is `company`
+  attr_reader :type
+  # @return [String] The Intercom defined id representing the company.
+  attr_reader :id
+  # @return [String] The name of the company.
+  attr_reader :name
+  # @return [String] The Intercom defined code of the workspace the company is associated to.
+  attr_reader :app_id
+  # @return [CompanyPlan] Optional object value serialized in the `plan` wire field.
+  attr_reader :plan
+  # @return [String] The company id you have defined for the company.
+  attr_reader :company_id
+  # @return [Integer] The time the company was created by you.
+  attr_reader :remote_created_at
+  # @return [Integer] The time the company was added in Intercom.
+  attr_reader :created_at
+  # @return [Integer] The last time the company was updated.
+  attr_reader :updated_at
+  # @return [Integer] The time the company last recorded making a request.
+  attr_reader :last_request_at
+  # @return [Integer] The number of employees in the company.
+  attr_reader :size
+  # @return [String] The URL for the company website.
+  attr_reader :website
+  # @return [String] The industry that the company operates in.
+  attr_reader :industry
+  # @return [Integer] How much revenue the company generates for your business.
+  attr_reader :monthly_spend
+  # @return [Integer] How many sessions the company has recorded.
+  attr_reader :session_count
+  # @return [Integer] The number of users in the company.
+  attr_reader :user_count
+  # @return [Hash] The custom attributes you have set on the company.
+  attr_reader :custom_attributes
+  # @return [CompanyTags] The list of tags associated with the company
+  attr_reader :tags
+  # @return [CompanySegments] The list of segments associated with the company
+  attr_reader :segments
+  # @return [CompanyNotes] The list of notes associated with the company
+  attr_reader :notes
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for Company.
-  # Companies allow you to represent organizations using your product. Each company will have its own description and be associated with contacts. You can fetch, create, update and list companies.
-  class Company
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCompanyMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCompanyMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCompanyMetadata::DECODERS
-
-    # @return [CompanyType] Value is `company`
-    attr_reader :type
-    # @return [String] The Intercom defined id representing the company.
-    attr_reader :id
-    # @return [String] The name of the company.
-    attr_reader :name
-    # @return [String] The Intercom defined code of the workspace the company is associated to.
-    attr_reader :app_id
-    # @return [CompanyPlan] Optional object value serialized in the `plan` wire field.
-    attr_reader :plan
-    # @return [String] The company id you have defined for the company.
-    attr_reader :company_id
-    # @return [Integer] The time the company was created by you.
-    attr_reader :remote_created_at
-    # @return [Integer] The time the company was added in Intercom.
-    attr_reader :created_at
-    # @return [Integer] The last time the company was updated.
-    attr_reader :updated_at
-    # @return [Integer] The time the company last recorded making a request.
-    attr_reader :last_request_at
-    # @return [Integer] The number of employees in the company.
-    attr_reader :size
-    # @return [String] The URL for the company website.
-    attr_reader :website
-    # @return [String] The industry that the company operates in.
-    attr_reader :industry
-    # @return [Integer] How much revenue the company generates for your business.
-    attr_reader :monthly_spend
-    # @return [Integer] How many sessions the company has recorded.
-    attr_reader :session_count
-    # @return [Integer] The number of users in the company.
-    attr_reader :user_count
-    # @return [Hash] The custom attributes you have set on the company.
-    attr_reader :custom_attributes
-    # @return [CompanyTags] The list of tags associated with the company
-    attr_reader :tags
-    # @return [CompanySegments] The list of segments associated with the company
-    attr_reader :segments
-    # @return [CompanyNotes] The list of notes associated with the company
-    attr_reader :notes
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the CompanyNotesType SDK namespace.
-  module CompanyNotesType
-    NOTE_LIST = 'note.list'
-    VALUES = ['note.list'].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 
-  # Defines the CompanySegmentsType SDK namespace.
-  module CompanySegmentsType
-    SEGMENT_LIST = 'segment.list'
-    VALUES = ['segment.list'].freeze
-    def self.from_value(value)
-      value
-    end
+# Defines the CompanyNotesType SDK namespace.
+module CompanyNotesType
+  NOTE_LIST = 'note.list'
+  VALUES = ['note.list'].freeze
+  def self.from_value(value)
+    value
   end
+end
 
-  # Defines the CompanyTagsType SDK namespace.
-  module CompanyTagsType
-    TAG_LIST = 'tag.list'
-    VALUES = ['tag.list'].freeze
-    def self.from_value(value)
-      value
-    end
+# Defines the CompanySegmentsType SDK namespace.
+module CompanySegmentsType
+  SEGMENT_LIST = 'segment.list'
+  VALUES = ['segment.list'].freeze
+  def self.from_value(value)
+    value
   end
+end
 
-  # Defines the CompanyType SDK namespace.
-  module CompanyType
-    COMPANY = 'company'
-    VALUES = ['company'].freeze
-    def self.from_value(value)
-      value
-    end
+# Defines the CompanyTagsType SDK namespace.
+module CompanyTagsType
+  TAG_LIST = 'tag.list'
+  VALUES = ['tag.list'].freeze
+  def self.from_value(value)
+    value
   end
+end
+
+# Defines the CompanyType SDK namespace.
+module CompanyType
+  COMPANY = 'company'
+  VALUES = ['company'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 end

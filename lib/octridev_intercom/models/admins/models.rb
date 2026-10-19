@@ -5,157 +5,162 @@
 
 # tagged_models_admins domain models
 module OctridevIntercom
-  # Internal model hydration metadata.
-  class SdkInternalActivityLogEventTypeListMetadata
-    FIELDS = {
-      type: 'type',
-      event_types: 'event_types'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalActivityLogEventTypeListMetadata
+  FIELDS = {
+    type: "type",
+    event_types: "event_types",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ActivityLogEventTypeList.
+# A list of all activity log event types.
+class ActivityLogEventTypeList
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalActivityLogEventTypeListMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalActivityLogEventTypeListMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalActivityLogEventTypeListMetadata::DECODERS
+
+  # @return [String] String representing the object's type. Always has the value `activity_log_event_type.list`.
+  attr_reader :type
+  # @return [Array_of_String] An array of activity log event type strings.
+  attr_reader :event_types
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ActivityLogEventTypeList.
-  # A list of all activity log event types.
-  class ActivityLogEventTypeList
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalActivityLogEventTypeListMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalActivityLogEventTypeListMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalActivityLogEventTypeListMetadata::DECODERS
-
-    # @return [String] String representing the object's type. Always has the value `activity_log_event_type.list`.
-    attr_reader :type
-    # @return [Array_of_String] An array of activity log event type strings.
-    attr_reader :event_types
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAdminRoleMetadata
-    FIELDS = {
-      type: 'type',
-      id: 'id',
-      name: 'name'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAdminRoleMetadata
+  FIELDS = {
+    type: "type",
+    id: "id",
+    name: "name",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for AdminRole.
+# The role assigned to this admin. Only present if the admin has a role assigned.
+class AdminRole
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAdminRoleMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAdminRoleMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAdminRoleMetadata::DECODERS
+
+  # @return [String] String representing the object's type. Always has the value `role`.
+  attr_reader :type
+  # @return [String] The id of the role.
+  attr_reader :id
+  # @return [String] The name of the role.
+  attr_reader :name
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AdminRole.
-  # The role assigned to this admin. Only present if the admin has a role assigned.
-  class AdminRole
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAdminRoleMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAdminRoleMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAdminRoleMetadata::DECODERS
-
-    # @return [String] String representing the object's type. Always has the value `role`.
-    attr_reader :type
-    # @return [String] The id of the role.
-    attr_reader :id
-    # @return [String] The name of the role.
-    attr_reader :name
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAdminMetadata
-    FIELDS = {
-      type: 'type',
-      id: 'id',
-      name: 'name',
-      email: 'email',
-      job_title: 'job_title',
-      away_mode_enabled: 'away_mode_enabled',
-      away_mode_reassign: 'away_mode_reassign',
-      away_status_reason_id: 'away_status_reason_id',
-      has_inbox_seat: 'has_inbox_seat',
-      team_ids: 'team_ids',
-      avatar: 'avatar',
-      team_priority_level: 'team_priority_level',
-      role: 'role'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      team_priority_level: lambda do |value|
-        ::OctridevIntercom::TeamPriorityLevel.from_hash(value)
-      end,
-      role: lambda do |value|
-        ::OctridevIntercom::AdminRole.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAdminMetadata
+  FIELDS = {
+    type: "type",
+    id: "id",
+    name: "name",
+    email: "email",
+    job_title: "job_title",
+    away_mode_enabled: "away_mode_enabled",
+    away_mode_reassign: "away_mode_reassign",
+    away_status_reason_id: "away_status_reason_id",
+    has_inbox_seat: "has_inbox_seat",
+    team_ids: "team_ids",
+    avatar: "avatar",
+    team_priority_level: "team_priority_level",
+    role: "role",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    team_priority_level: lambda do |value|
+      ::OctridevIntercom::TeamPriorityLevel.from_hash(value)
+    end,
+    role: lambda do |value|
+      ::OctridevIntercom::AdminRole.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for Admin.
+# Admins are teammate accounts that have access to a workspace.
+class Admin
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAdminMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAdminMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAdminMetadata::DECODERS
+
+  # @return [String] String representing the object's type. Always has the value `admin`.
+  attr_reader :type
+  # @return [String] The id representing the admin.
+  attr_reader :id
+  # @return [String] The name of the admin.
+  attr_reader :name
+  # @return [String] The email of the admin.
+  attr_reader :email
+  # @return [String] The job title of the admin.
+  attr_reader :job_title
+  # @return [Boolean] Identifies if this admin is currently set in away mode.
+  attr_reader :away_mode_enabled
+  # @return [Boolean] Identifies if this admin is set to automatically reassign new conversations to the apps default inbox.
+  attr_reader :away_mode_reassign
+  # @return [Integer] The unique identifier of the away status reason
+  attr_reader :away_status_reason_id
+  # @return [Boolean] Identifies if this admin has a paid inbox seat to restrict/allow features that require them.
+  attr_reader :has_inbox_seat
+  # @return [Array_of_Integer] This object represents the avatar associated with the admin.
+  attr_reader :team_ids
+  # @return [String] Image for the associated team or teammate
+  attr_reader :avatar
+  # @return [TeamPriorityLevel] Admin priority levels for teams
+  attr_reader :team_priority_level
+  # @return [AdminRole] The role assigned to this admin. Only present if the admin has a role assigned.
+  attr_reader :role
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for Admin.
-  # Admins are teammate accounts that have access to a workspace.
-  class Admin
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAdminMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAdminMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAdminMetadata::DECODERS
-
-    # @return [String] String representing the object's type. Always has the value `admin`.
-    attr_reader :type
-    # @return [String] The id representing the admin.
-    attr_reader :id
-    # @return [String] The name of the admin.
-    attr_reader :name
-    # @return [String] The email of the admin.
-    attr_reader :email
-    # @return [String] The job title of the admin.
-    attr_reader :job_title
-    # @return [Boolean] Identifies if this admin is currently set in away mode.
-    attr_reader :away_mode_enabled
-    # @return [Boolean] Identifies if this admin is set to automatically reassign new conversations to the apps default inbox.
-    attr_reader :away_mode_reassign
-    # @return [Integer] The unique identifier of the away status reason
-    attr_reader :away_status_reason_id
-    # @return [Boolean] Identifies if this admin has a paid inbox seat to restrict/allow features that require them.
-    attr_reader :has_inbox_seat
-    # @return [Array_of_Integer] This object represents the avatar associated with the admin.
-    attr_reader :team_ids
-    # @return [String] Image for the associated team or teammate
-    attr_reader :avatar
-    # @return [TeamPriorityLevel] Admin priority levels for teams
-    attr_reader :team_priority_level
-    # @return [AdminRole] The role assigned to this admin. Only present if the admin has a role assigned.
-    attr_reader :role
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

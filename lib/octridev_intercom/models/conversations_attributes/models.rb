@@ -5,28 +5,27 @@
 
 # tagged_models_conversations_attributes domain models
 module OctridevIntercom
-  # Defines the ConversationAttribute SDK namespace.
-  module ConversationAttribute
-    DISCRIMINATOR_MAPPING = {
-      'string' => -> { ConversationAttributeStringType },
-      'integer' => -> { ConversationAttributeIntegerType },
-      'list' => -> { ConversationAttributeListType },
-      'decimal' => -> { ConversationAttributeDecimalType },
-      'boolean' => -> { ConversationAttributeBooleanType },
-      'datetime' => -> { ConversationAttributeDatetimeType },
-      'relationship' => -> { ConversationAttributeRelationshipType },
-      'files' => -> { ConversationAttributeFilesType }
-    }.freeze
+# Defines the ConversationAttribute SDK namespace.
+module ConversationAttribute
+  DISCRIMINATOR_MAPPING = {
+    "string" => -> { ConversationAttributeStringType },
+    "integer" => -> { ConversationAttributeIntegerType },
+    "list" => -> { ConversationAttributeListType },
+    "decimal" => -> { ConversationAttributeDecimalType },
+    "boolean" => -> { ConversationAttributeBooleanType },
+    "datetime" => -> { ConversationAttributeDatetimeType },
+    "relationship" => -> { ConversationAttributeRelationshipType },
+    "files" => -> { ConversationAttributeFilesType },
+  }.freeze
 
-    def self.from_hash(hash)
-      return hash unless hash.is_a?(::Hash)
+  def self.from_hash(hash)
+    return hash unless hash.is_a?(::Hash)
+    type = DISCRIMINATOR_MAPPING[hash["data_type"]]&.call
+    return type.from_hash(hash) if type
 
-      type = DISCRIMINATOR_MAPPING[hash['data_type']]&.call
-      return type.from_hash(hash) if type
+    return SdkUnknownMember.new(hash) if hash["data_type"].is_a?(::String)
 
-      return SdkUnknownMember.new(hash) if hash['data_type'].is_a?(::String)
-
-      raise SdkValidationError.new('ConversationAttribute', 'variant', "Unknown ConversationAttribute discriminator: #{hash['data_type'].inspect}")
-    end
+    raise SdkValidationError.new('ConversationAttribute', 'variant', "Unknown ConversationAttribute discriminator: #{hash["data_type"].inspect}")
   end
+end
 end

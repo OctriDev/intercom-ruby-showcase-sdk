@@ -12,12 +12,12 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalStartFinConversationMetadata
         FIELDS = {
-          conversation_id: 'conversation_id',
-          message: 'message',
-          user: 'user',
-          attachments: 'attachments',
-          conversation_metadata: 'conversation_metadata',
-          environment: 'environment'
+          conversation_id: "conversation_id",
+          message: "message",
+          user: "user",
+          attachments: "attachments",
+          conversation_metadata: "conversation_metadata",
+          environment: "environment",
         }.freeze
         REQUIRED_FIELDS = %i[
           conversation_id
@@ -36,7 +36,7 @@ module OctridevIntercom
           end,
           conversation_metadata: lambda do |value|
             ::OctridevIntercom::FinAgentConversationMetadata.from_hash(value)
-          end
+          end,
         }.freeze
       end
 
@@ -77,22 +77,23 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalStartFinConversationResponseMetadata
         FIELDS = {
-          conversation_id: 'conversation_id',
-          intercom_conversation_id: 'intercom_conversation_id',
-          user_id: 'user_id',
-          status: 'status',
-          created_at_ms: 'created_at_ms',
-          errors: 'errors',
-          sse_subscription_url: 'sse_subscription_url'
+          conversation_id: "conversation_id",
+          intercom_conversation_id: "intercom_conversation_id",
+          user_id: "user_id",
+          status: "status",
+          created_at_ms: "created_at_ms",
+          errors: "errors",
+          sse_subscription_url: "sse_subscription_url",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
         DECODERS = {
           status: lambda do |value|
             ::OctridevIntercom::Methods::FinAgent::StartFinConversationResponseStatus.from_value(value)
           end,
           errors: lambda do |value|
             ::OctridevIntercom::FinAgentAttributeErrors.from_hash(value)
-          end
+          end,
         }.freeze
       end
 
@@ -135,10 +136,10 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalReplyToFinMetadata
         FIELDS = {
-          conversation_id: 'conversation_id',
-          message: 'message',
-          user: 'user',
-          attachments: 'attachments'
+          conversation_id: "conversation_id",
+          message: "message",
+          user: "user",
+          attachments: "attachments",
         }.freeze
         REQUIRED_FIELDS = %i[
           conversation_id
@@ -154,7 +155,7 @@ module OctridevIntercom
           end,
           attachments: lambda do |value|
             value&.map { |item| ::OctridevIntercom::FinAgentAttachment.from_hash(item) }
-          end
+          end,
         }.freeze
       end
 
@@ -191,22 +192,23 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalReplyToFinResponseMetadata
         FIELDS = {
-          conversation_id: 'conversation_id',
-          intercom_conversation_id: 'intercom_conversation_id',
-          user_id: 'user_id',
-          status: 'status',
-          created_at_ms: 'created_at_ms',
-          errors: 'errors',
-          sse_subscription_url: 'sse_subscription_url'
+          conversation_id: "conversation_id",
+          intercom_conversation_id: "intercom_conversation_id",
+          user_id: "user_id",
+          status: "status",
+          created_at_ms: "created_at_ms",
+          errors: "errors",
+          sse_subscription_url: "sse_subscription_url",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
         DECODERS = {
           status: lambda do |value|
             ::OctridevIntercom::Methods::FinAgent::ReplyToFinResponseStatus.from_value(value)
           end,
           errors: lambda do |value|
             ::OctridevIntercom::FinAgentAttributeErrors.from_hash(value)
-          end
+          end,
         }.freeze
       end
 
@@ -249,9 +251,9 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalSubmitFinCsatMetadata
         FIELDS = {
-          conversation_id: 'conversation_id',
-          rating: 'rating',
-          remark: 'remark'
+          conversation_id: "conversation_id",
+          rating: "rating",
+          remark: "remark",
         }.freeze
         REQUIRED_FIELDS = %i[
           conversation_id
@@ -260,7 +262,7 @@ module OctridevIntercom
         DECODERS = {
           rating: lambda do |value|
             ::OctridevIntercom::Methods::FinAgent::SubmitFinCsatRating.from_value(value)
-          end
+          end,
         }.freeze
       end
 
@@ -295,18 +297,19 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalSubmitFinCsatResponseMetadata
         FIELDS = {
-          conversation_id: 'conversation_id',
-          rating: 'rating',
-          status: 'status'
+          conversation_id: "conversation_id",
+          rating: "rating",
+          status: "status",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
         DECODERS = {
           rating: lambda do |value|
             ::OctridevIntercom::Methods::FinAgent::SubmitFinCsatResponseRating.from_value(value)
           end,
           status: lambda do |value|
             ::OctridevIntercom::Methods::FinAgent::SubmitFinCsatResponseStatus.from_value(value)
-          end
+          end,
         }.freeze
       end
 
@@ -341,7 +344,7 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalListFinCapabilitiesMetadata
         FIELDS = {
-          user: 'user'
+          user: "user",
         }.freeze
         REQUIRED_FIELDS = %i[
           user
@@ -349,7 +352,7 @@ module OctridevIntercom
         DECODERS = {
           user: lambda do |value|
             ::OctridevIntercom::FinAgentUser.from_hash(value)
-          end
+          end,
         }.freeze
       end
 
@@ -380,15 +383,17 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalListFinCapabilitiesResponseCapabilitiesItemMetadata
         FIELDS = {
-          type: 'type',
-          id: 'id',
-          name: 'name',
-          description: 'description',
-          endpoint: 'endpoint',
-          method: 'method'
+          type: "type",
+          id: "id",
+          name: "name",
+          description: "description",
+          endpoint: "endpoint",
+          method: "method",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
-        DECODERS = {}.freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
+        DECODERS = {
+        }.freeze
       end
 
       # API model for ListFinCapabilitiesResponseCapabilitiesItem.
@@ -428,14 +433,15 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalListFinCapabilitiesResponseMetadata
         FIELDS = {
-          version: 'version',
-          capabilities: 'capabilities'
+          version: "version",
+          capabilities: "capabilities",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
         DECODERS = {
           capabilities: lambda do |value|
             value&.map { |item| ::OctridevIntercom::Methods::FinAgent::ListFinCapabilitiesResponseCapabilitiesItem.from_hash(item) }
-          end
+          end,
         }.freeze
       end
 
@@ -468,12 +474,12 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalAskFinMetadata
         FIELDS = {
-          conversation_id: 'conversation_id',
-          message: 'message',
-          user: 'user',
-          conversation_metadata: 'conversation_metadata',
-          attachments: 'attachments',
-          environment: 'environment'
+          conversation_id: "conversation_id",
+          message: "message",
+          user: "user",
+          conversation_metadata: "conversation_metadata",
+          attachments: "attachments",
+          environment: "environment",
         }.freeze
         REQUIRED_FIELDS = %i[
           conversation_id
@@ -492,7 +498,7 @@ module OctridevIntercom
           end,
           attachments: lambda do |value|
             value&.map { |item| ::OctridevIntercom::FinAgentAttachment.from_hash(item) }
-          end
+          end,
         }.freeze
       end
 
@@ -533,22 +539,23 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalAskFinResponseMetadata
         FIELDS = {
-          conversation_id: 'conversation_id',
-          intercom_conversation_id: 'intercom_conversation_id',
-          user_id: 'user_id',
-          status: 'status',
-          created_at_ms: 'created_at_ms',
-          errors: 'errors',
-          sse_subscription_url: 'sse_subscription_url'
+          conversation_id: "conversation_id",
+          intercom_conversation_id: "intercom_conversation_id",
+          user_id: "user_id",
+          status: "status",
+          created_at_ms: "created_at_ms",
+          errors: "errors",
+          sse_subscription_url: "sse_subscription_url",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
         DECODERS = {
           status: lambda do |value|
             ::OctridevIntercom::Methods::FinAgent::AskFinResponseStatus.from_value(value)
           end,
           errors: lambda do |value|
             ::OctridevIntercom::FinAgentAttributeErrors.from_hash(value)
-          end
+          end,
         }.freeze
       end
     end

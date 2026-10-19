@@ -5,182 +5,184 @@
 
 # shared_conversation domain models (part 3)
 module OctridevIntercom
-  # API model for ConversationSourceAuthor.
-  # The author who started the conversation. Can be a Contact, Admin, or Bot.
-  class ConversationSourceAuthor
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalConversationSourceAuthorMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalConversationSourceAuthorMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalConversationSourceAuthorMetadata::DECODERS
+# API model for ConversationSourceAuthor.
+# The author who started the conversation. Can be a Contact, Admin, or Bot.
+class ConversationSourceAuthor
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalConversationSourceAuthorMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalConversationSourceAuthorMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalConversationSourceAuthorMetadata::DECODERS
 
-    # @return [String] The type of the author.
-    attr_reader :type
-    # @return [String] The id of the author.
-    attr_reader :id
-    # @return [String] The name of the author.
-    attr_reader :name
-    # @return [String] The email of the author.
-    attr_reader :email
+  # @return [String] The type of the author.
+  attr_reader :type
+  # @return [String] The id of the author.
+  attr_reader :id
+  # @return [String] The name of the author.
+  attr_reader :name
+  # @return [String] The email of the author.
+  attr_reader :email
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalConversationStatisticsMetadata
-    FIELDS = {
-      type: 'type',
-      time_to_assignment: 'time_to_assignment',
-      time_to_admin_reply: 'time_to_admin_reply',
-      time_to_first_close: 'time_to_first_close',
-      time_to_last_close: 'time_to_last_close',
-      median_time_to_reply: 'median_time_to_reply',
-      first_contact_reply_at: 'first_contact_reply_at',
-      first_assignment_at: 'first_assignment_at',
-      first_admin_reply_at: 'first_admin_reply_at',
-      first_close_at: 'first_close_at',
-      last_assignment_at: 'last_assignment_at',
-      last_assignment_admin_reply_at: 'last_assignment_admin_reply_at',
-      last_contact_reply_at: 'last_contact_reply_at',
-      last_admin_reply_at: 'last_admin_reply_at',
-      last_close_at: 'last_close_at',
-      last_closed_by_id: 'last_closed_by_id',
-      count_reopens: 'count_reopens',
-      count_assignments: 'count_assignments',
-      count_conversation_parts: 'count_conversation_parts',
-      assigned_team_first_response_time: 'assigned_team_first_response_time',
-      assigned_team_first_response_time_in_office_hours: 'assigned_team_first_response_time_in_office_hours',
-      handling_time: 'handling_time',
-      adjusted_handling_time: 'adjusted_handling_time'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      assigned_team_first_response_time: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::ConversationResponseTime.from_hash(item) }
-      end,
-      assigned_team_first_response_time_in_office_hours: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::ConversationResponseTime.from_hash(item) }
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ConversationStatistics.
-  # A Statistics object containing all information required for reporting, with timestamps and calculated metrics.
-  class ConversationStatistics
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalConversationStatisticsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalConversationStatisticsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalConversationStatisticsMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] Optional `string` value serialized in the `type` wire field.
-    attr_reader :type
-    # @return [Integer] Duration until last assignment before first admin reply. In seconds.
-    attr_reader :time_to_assignment
-    # @return [Integer] Duration until first admin reply. Subtracts out of business hours. In seconds.
-    attr_reader :time_to_admin_reply
-    # @return [Integer] Duration until conversation was closed first time. Subtracts out of business hours. In seconds.
-    attr_reader :time_to_first_close
-    # @return [Integer] Duration until conversation was closed last time. Subtracts out of business hours. In seconds.
-    attr_reader :time_to_last_close
-    # @return [Integer] Median based on all admin replies after a contact reply. Subtracts out of business hours. In seconds.
-    attr_reader :median_time_to_reply
-    # @return [Integer] Time of first text conversation part from a contact.
-    attr_reader :first_contact_reply_at
-    # @return [Integer] Time of first assignment after first_contact_reply_at.
-    attr_reader :first_assignment_at
-    # @return [Integer] Time of first admin reply after first_contact_reply_at.
-    attr_reader :first_admin_reply_at
-    # @return [Integer] Time of first close after first_contact_reply_at.
-    attr_reader :first_close_at
-    # @return [Integer] Time of last assignment after first_contact_reply_at.
-    attr_reader :last_assignment_at
-    # @return [Integer] Time of first admin reply since most recent assignment.
-    attr_reader :last_assignment_admin_reply_at
-    # @return [Integer] Time of the last conversation part from a contact.
-    attr_reader :last_contact_reply_at
-    # @return [Integer] Time of the last conversation part from an admin.
-    attr_reader :last_admin_reply_at
-    # @return [Integer] Time of the last conversation close.
-    attr_reader :last_close_at
-    # @return [String] The last admin who closed the conversation. Returns a reference to an Admin object.
-    attr_reader :last_closed_by_id
-    # @return [Integer] Number of reopens after first_contact_reply_at.
-    attr_reader :count_reopens
-    # @return [Integer] Number of assignments after first_contact_reply_at.
-    attr_reader :count_assignments
-    # @return [Integer] Total number of conversation parts.
-    attr_reader :count_conversation_parts
-    # @return [Array_of_ConversationResponseTime] An array of conversation response time objects
-    attr_reader :assigned_team_first_response_time
-    # @return [Array_of_ConversationResponseTime] An array of conversation response time objects within office hours
-    attr_reader :assigned_team_first_response_time_in_office_hours
-    # @return [Integer] Time from conversation assignment to conversation close in seconds.
-    attr_reader :handling_time
-    # @return [Integer] Adjusted handling time for conversation in seconds. This is the active handling time excluding idle periods when teammates are not actively working on the conversation.
-    attr_reader :adjusted_handling_time
+# Internal model hydration metadata.
+class SdkInternalConversationStatisticsMetadata
+  FIELDS = {
+    type: "type",
+    time_to_assignment: "time_to_assignment",
+    time_to_admin_reply: "time_to_admin_reply",
+    time_to_first_close: "time_to_first_close",
+    time_to_last_close: "time_to_last_close",
+    median_time_to_reply: "median_time_to_reply",
+    first_contact_reply_at: "first_contact_reply_at",
+    first_assignment_at: "first_assignment_at",
+    first_admin_reply_at: "first_admin_reply_at",
+    first_close_at: "first_close_at",
+    last_assignment_at: "last_assignment_at",
+    last_assignment_admin_reply_at: "last_assignment_admin_reply_at",
+    last_contact_reply_at: "last_contact_reply_at",
+    last_admin_reply_at: "last_admin_reply_at",
+    last_close_at: "last_close_at",
+    last_closed_by_id: "last_closed_by_id",
+    count_reopens: "count_reopens",
+    count_assignments: "count_assignments",
+    count_conversation_parts: "count_conversation_parts",
+    assigned_team_first_response_time: "assigned_team_first_response_time",
+    assigned_team_first_response_time_in_office_hours: "assigned_team_first_response_time_in_office_hours",
+    handling_time: "handling_time",
+    adjusted_handling_time: "adjusted_handling_time",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    assigned_team_first_response_time: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::ConversationResponseTime.from_hash(item) }
+    end,
+    assigned_team_first_response_time_in_office_hours: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::ConversationResponseTime.from_hash(item) }
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ConversationStatistics.
+# A Statistics object containing all information required for reporting, with timestamps and calculated metrics.
+class ConversationStatistics
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalConversationStatisticsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalConversationStatisticsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalConversationStatisticsMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] Optional `string` value serialized in the `type` wire field.
+  attr_reader :type
+  # @return [Integer] Duration until last assignment before first admin reply. In seconds.
+  attr_reader :time_to_assignment
+  # @return [Integer] Duration until first admin reply. Subtracts out of business hours. In seconds.
+  attr_reader :time_to_admin_reply
+  # @return [Integer] Duration until conversation was closed first time. Subtracts out of business hours. In seconds.
+  attr_reader :time_to_first_close
+  # @return [Integer] Duration until conversation was closed last time. Subtracts out of business hours. In seconds.
+  attr_reader :time_to_last_close
+  # @return [Integer] Median based on all admin replies after a contact reply. Subtracts out of business hours. In seconds.
+  attr_reader :median_time_to_reply
+  # @return [Integer] Time of first text conversation part from a contact.
+  attr_reader :first_contact_reply_at
+  # @return [Integer] Time of first assignment after first_contact_reply_at.
+  attr_reader :first_assignment_at
+  # @return [Integer] Time of first admin reply after first_contact_reply_at.
+  attr_reader :first_admin_reply_at
+  # @return [Integer] Time of first close after first_contact_reply_at.
+  attr_reader :first_close_at
+  # @return [Integer] Time of last assignment after first_contact_reply_at.
+  attr_reader :last_assignment_at
+  # @return [Integer] Time of first admin reply since most recent assignment.
+  attr_reader :last_assignment_admin_reply_at
+  # @return [Integer] Time of the last conversation part from a contact.
+  attr_reader :last_contact_reply_at
+  # @return [Integer] Time of the last conversation part from an admin.
+  attr_reader :last_admin_reply_at
+  # @return [Integer] Time of the last conversation close.
+  attr_reader :last_close_at
+  # @return [String] The last admin who closed the conversation. Returns a reference to an Admin object.
+  attr_reader :last_closed_by_id
+  # @return [Integer] Number of reopens after first_contact_reply_at.
+  attr_reader :count_reopens
+  # @return [Integer] Number of assignments after first_contact_reply_at.
+  attr_reader :count_assignments
+  # @return [Integer] Total number of conversation parts.
+  attr_reader :count_conversation_parts
+  # @return [Array_of_ConversationResponseTime] An array of conversation response time objects
+  attr_reader :assigned_team_first_response_time
+  # @return [Array_of_ConversationResponseTime] An array of conversation response time objects within office hours
+  attr_reader :assigned_team_first_response_time_in_office_hours
+  # @return [Integer] Time from conversation assignment to conversation close in seconds.
+  attr_reader :handling_time
+  # @return [Integer] Adjusted handling time for conversation in seconds. This is the active handling time excluding idle periods when teammates are not actively working on the conversation.
+  attr_reader :adjusted_handling_time
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalConversationTeammatesMetadata
-    FIELDS = {
-      type: 'type',
-      teammates: 'teammates'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      teammates: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::Reference.from_hash(item) }
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ConversationTeammates.
-  # The list of teammates who participated in the conversation (wrote at least one conversation part).
-  class ConversationTeammates
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalConversationTeammatesMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalConversationTeammatesMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalConversationTeammatesMetadata::DECODERS
-
-    # @return [String] The type of the object - `admin.list`.
-    attr_reader :type
-    # @return [Array_of_Reference] The list of teammates who participated in the conversation (wrote at least one conversation part).
-    attr_reader :teammates
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
+
+# Internal model hydration metadata.
+class SdkInternalConversationTeammatesMetadata
+  FIELDS = {
+    type: "type",
+    teammates: "teammates",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    teammates: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::Reference.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ConversationTeammates.
+# The list of teammates who participated in the conversation (wrote at least one conversation part).
+class ConversationTeammates
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalConversationTeammatesMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalConversationTeammatesMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalConversationTeammatesMetadata::DECODERS
+
+  # @return [String] The type of the object - `admin.list`.
+  attr_reader :type
+  # @return [Array_of_Reference] The list of teammates who participated in the conversation (wrote at least one conversation part).
+  attr_reader :teammates
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
+  end
+
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

@@ -5,295 +5,302 @@
 
 # data_attributes domain models
 module OctridevIntercom
-  # Internal model hydration metadata.
-  class SdkInternalCreateDataAttributeRequestVariant0OptionsItemMetadata
-    FIELDS = {
-      value: 'value'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalCreateDataAttributeRequestVariant0OptionsItemMetadata
+  FIELDS = {
+    value: "value",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for CreateDataAttributeRequestVariant0OptionsItem.
+class CreateDataAttributeRequestVariant0OptionsItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCreateDataAttributeRequestVariant0OptionsItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCreateDataAttributeRequestVariant0OptionsItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCreateDataAttributeRequestVariant0OptionsItemMetadata::DECODERS
+
+  attr_reader :value
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CreateDataAttributeRequestVariant0OptionsItem.
-  class CreateDataAttributeRequestVariant0OptionsItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCreateDataAttributeRequestVariant0OptionsItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCreateDataAttributeRequestVariant0OptionsItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCreateDataAttributeRequestVariant0OptionsItemMetadata::DECODERS
-
-    attr_reader :value
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalCreateDataAttributeRequestVariant0Metadata
-    FIELDS = {
-      data_type: 'data_type',
-      options: 'options'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      options
-    ].freeze
-    DECODERS = {
-      data_type: lambda do |value|
-        ::OctridevIntercom::CreateDataAttributeRequestVariant0DataType.from_value(value)
-      end,
-      options: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::CreateDataAttributeRequestVariant0OptionsItem.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalCreateDataAttributeRequestVariant0Metadata
+  FIELDS = {
+    data_type: "data_type",
+    options: "options",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    options
+  ].freeze
+  DECODERS = {
+    data_type: lambda do |value|
+      ::OctridevIntercom::CreateDataAttributeRequestVariant0DataType.from_value(value)
+    end,
+    options: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::CreateDataAttributeRequestVariant0OptionsItem.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for CreateDataAttributeRequestVariant0.
+class CreateDataAttributeRequestVariant0
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCreateDataAttributeRequestVariant0Metadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCreateDataAttributeRequestVariant0Metadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCreateDataAttributeRequestVariant0Metadata::DECODERS
+
+  attr_reader :data_type
+  # @return [Array_of_CreateDataAttributeRequestVariant0OptionsItem] Array of objects representing the options of the list, with `value` as the key and the option as the value. At least two options are required.
+  attr_reader :options
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CreateDataAttributeRequestVariant0.
-  class CreateDataAttributeRequestVariant0
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCreateDataAttributeRequestVariant0Metadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCreateDataAttributeRequestVariant0Metadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCreateDataAttributeRequestVariant0Metadata::DECODERS
-
-    attr_reader :data_type
-    # @return [Array_of_CreateDataAttributeRequestVariant0OptionsItem] Array of objects representing the options of the list, with `value` as the key and the option as the value. At least two options are required.
-    attr_reader :options
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalCreateDataAttributeRequestVariant1Metadata
-    FIELDS = {
-      data_type: 'data_type'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      data_type: lambda do |value|
-        ::OctridevIntercom::CreateDataAttributeRequestVariant1DataType.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalCreateDataAttributeRequestVariant1Metadata
+  FIELDS = {
+    data_type: "data_type",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    data_type: lambda do |value|
+      ::OctridevIntercom::CreateDataAttributeRequestVariant1DataType.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for CreateDataAttributeRequestVariant1.
+class CreateDataAttributeRequestVariant1
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCreateDataAttributeRequestVariant1Metadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCreateDataAttributeRequestVariant1Metadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCreateDataAttributeRequestVariant1Metadata::DECODERS
+
+  attr_reader :data_type
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CreateDataAttributeRequestVariant1.
-  class CreateDataAttributeRequestVariant1
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCreateDataAttributeRequestVariant1Metadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCreateDataAttributeRequestVariant1Metadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCreateDataAttributeRequestVariant1Metadata::DECODERS
-
-    attr_reader :data_type
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the CreateDataAttributeRequest SDK namespace.
-  module CreateDataAttributeRequest
-    def self.from_hash(hash)
-      shape_mapping = {
-        'options' => CreateDataAttributeRequestVariant0
-      }
-      type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
-      decoded = type&.from_hash(hash)
-      return decoded unless type.nil?
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-      CreateDataAttributeRequestVariant1.from_hash(hash)
-    end
+# Defines the CreateDataAttributeRequest SDK namespace.
+module CreateDataAttributeRequest
+  def self.from_hash(hash)
+    shape_mapping = {
+      "options" => CreateDataAttributeRequestVariant0,
+    }
+    type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
+    decoded = type&.from_hash(hash)
+    return decoded unless type.nil?
+    return CreateDataAttributeRequestVariant1.from_hash(hash)
+  end
+end
+
+# Defines the CreateDataAttributeRequestVariant0DataType SDK namespace.
+module CreateDataAttributeRequestVariant0DataType
+  OPTIONS = 'options'
+  VALUES = ['options'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Defines the CreateDataAttributeRequestVariant1DataType SDK namespace.
+module CreateDataAttributeRequestVariant1DataType
+  STRING = 'string'
+  INTEGER = 'integer'
+  FLOAT = 'float'
+  BOOLEAN = 'boolean'
+  DATETIME = 'datetime'
+  DATE = 'date'
+  VALUES = ['string', 'integer', 'float', 'boolean', 'datetime', 'date'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Defines the CreateDataAttributeRequestModel SDK namespace.
+module CreateDataAttributeRequestModel
+  CONTACT = 'contact'
+  COMPANY = 'company'
+  VALUES = ['contact', 'company'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDataAttributeListMetadata
+  FIELDS = {
+    type: "type",
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevIntercom::DataAttributeListType.from_value(value)
+    end,
+    data: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::DataAttribute.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for DataAttributeList.
+# A list of all data attributes belonging to a workspace for contacts or companies.
+class DataAttributeList
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDataAttributeListMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDataAttributeListMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDataAttributeListMetadata::DECODERS
+
+  # @return [DataAttributeListType] The type of the object
+  attr_reader :type
+  # @return [Array_of_DataAttribute] A list of data attributes
+  attr_reader :data
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the CreateDataAttributeRequestVariant0DataType SDK namespace.
-  module CreateDataAttributeRequestVariant0DataType
-    OPTIONS = 'options'
-    VALUES = ['options'].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the CreateDataAttributeRequestVariant1DataType SDK namespace.
-  module CreateDataAttributeRequestVariant1DataType
-    STRING = 'string'
-    INTEGER = 'integer'
-    FLOAT = 'float'
-    BOOLEAN = 'boolean'
-    DATETIME = 'datetime'
-    DATE = 'date'
-    VALUES = %w[string integer float boolean datetime date].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the DataAttributeListType SDK namespace.
+module DataAttributeListType
+  LIST = 'list'
+  VALUES = ['list'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalUpdateDataAttributeRequestVariant0OptionsItemMetadata
+  FIELDS = {
+    value: "value",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for UpdateDataAttributeRequestVariant0OptionsItem.
+class UpdateDataAttributeRequestVariant0OptionsItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalUpdateDataAttributeRequestVariant0OptionsItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalUpdateDataAttributeRequestVariant0OptionsItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalUpdateDataAttributeRequestVariant0OptionsItemMetadata::DECODERS
+
+  attr_reader :value
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the CreateDataAttributeRequestModel SDK namespace.
-  module CreateDataAttributeRequestModel
-    CONTACT = 'contact'
-    COMPANY = 'company'
-    VALUES = %w[contact company].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDataAttributeListMetadata
-    FIELDS = {
-      type: 'type',
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevIntercom::DataAttributeListType.from_value(value)
-      end,
-      data: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::DataAttribute.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalUpdateDataAttributeRequestVariant0Metadata
+  FIELDS = {
+    options: "options",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    options
+  ].freeze
+  DECODERS = {
+    options: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::UpdateDataAttributeRequestVariant0OptionsItem.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for UpdateDataAttributeRequestVariant0.
+class UpdateDataAttributeRequestVariant0
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalUpdateDataAttributeRequestVariant0Metadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalUpdateDataAttributeRequestVariant0Metadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalUpdateDataAttributeRequestVariant0Metadata::DECODERS
+
+  # @return [Array_of_UpdateDataAttributeRequestVariant0OptionsItem] Array of objects representing the options of the list, with `value` as the key and the option as the value. At least two options are required.
+  attr_reader :options
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DataAttributeList.
-  # A list of all data attributes belonging to a workspace for contacts or companies.
-  class DataAttributeList
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDataAttributeListMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDataAttributeListMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDataAttributeListMetadata::DECODERS
-
-    # @return [DataAttributeListType] The type of the object
-    attr_reader :type
-    # @return [Array_of_DataAttribute] A list of data attributes
-    attr_reader :data
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the DataAttributeListType SDK namespace.
-  module DataAttributeListType
-    LIST = 'list'
-    VALUES = ['list'].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 
-  # Internal model hydration metadata.
-  class SdkInternalUpdateDataAttributeRequestVariant0OptionsItemMetadata
-    FIELDS = {
-      value: 'value'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
-  end
-
-  # API model for UpdateDataAttributeRequestVariant0OptionsItem.
-  class UpdateDataAttributeRequestVariant0OptionsItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalUpdateDataAttributeRequestVariant0OptionsItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalUpdateDataAttributeRequestVariant0OptionsItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalUpdateDataAttributeRequestVariant0OptionsItemMetadata::DECODERS
-
-    attr_reader :value
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Internal model hydration metadata.
-  class SdkInternalUpdateDataAttributeRequestVariant0Metadata
-    FIELDS = {
-      options: 'options'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      options
-    ].freeze
-    DECODERS = {
-      options: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::UpdateDataAttributeRequestVariant0OptionsItem.from_hash(item) }
-      end
-    }.freeze
-  end
-
-  # API model for UpdateDataAttributeRequestVariant0.
-  class UpdateDataAttributeRequestVariant0
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalUpdateDataAttributeRequestVariant0Metadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalUpdateDataAttributeRequestVariant0Metadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalUpdateDataAttributeRequestVariant0Metadata::DECODERS
-
-    # @return [Array_of_UpdateDataAttributeRequestVariant0OptionsItem] Array of objects representing the options of the list, with `value` as the key and the option as the value. At least two options are required.
-    attr_reader :options
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Defines the UpdateDataAttributeRequest SDK namespace.
-  module UpdateDataAttributeRequest
-    def self.from_hash(hash)
-      UpdateDataAttributeRequestVariant0.from_hash(hash)
+# Defines the UpdateDataAttributeRequest SDK namespace.
+module UpdateDataAttributeRequest
+  def self.from_hash(hash)
+    begin
+      return UpdateDataAttributeRequestVariant0.from_hash(hash)
     rescue ::StandardError
       hash
     end
   end
+end
 end

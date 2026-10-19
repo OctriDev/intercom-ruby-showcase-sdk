@@ -5,400 +5,408 @@
 
 # tagged_models_conversations domain models (part 2)
 module OctridevIntercom
-  # Internal model hydration metadata.
-  class SdkInternalConversationScorecardEvaluatorResultMetadata
-    FIELDS = {
-      value: 'value',
-      value_label: 'value_label',
-      source: 'source',
-      reasoning: 'reasoning',
-      reason_ids: 'reason_ids',
-      reasons: 'reasons',
-      other_text: 'other_text'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      reasons: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::ConversationScorecardEvaluatorReason.from_hash(item) }
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalConversationScorecardEvaluatorResultMetadata
+  FIELDS = {
+    value: "value",
+    value_label: "value_label",
+    source: "source",
+    reasoning: "reasoning",
+    reason_ids: "reason_ids",
+    reasons: "reasons",
+    other_text: "other_text",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    reasons: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::ConversationScorecardEvaluatorReason.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ConversationScorecardEvaluatorResult.
+# The outcome of a single evaluator within a scorecard.
+class ConversationScorecardEvaluatorResult
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalConversationScorecardEvaluatorResultMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalConversationScorecardEvaluatorResultMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalConversationScorecardEvaluatorResultMetadata::DECODERS
+
+  # @return [String] The evaluator's selected value (typically a label such as `pass`, `fail`, or a category identifier).
+  attr_reader :value
+  # @return [String] The label of the rating option matching `value` (for example `Needs improvement`). Omitted when the label could not be resolved.
+  attr_reader :value_label
+  # @return [String] The origin of the result (for example, `ai` or `human`).
+  attr_reader :source
+  # @return [String] A free-text explanation of the result.
+  attr_reader :reasoning
+  # @return [Array_of_String] Identifiers for structured reasons assigned to the result, if any.
+  attr_reader :reason_ids
+  # @return [Array_of_ConversationScorecardEvaluatorReason] The structured reasons chosen for this result. Omitted when none were chosen.
+  attr_reader :reasons
+  # @return [String] Free-text entered by the reviewer to supplement or stand in for the structured `reason_ids` — typically captured when the reviewer selects an "Other" option or adds a custom note. Null when not provided.
+  attr_reader :other_text
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ConversationScorecardEvaluatorResult.
-  # The outcome of a single evaluator within a scorecard.
-  class ConversationScorecardEvaluatorResult
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalConversationScorecardEvaluatorResultMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalConversationScorecardEvaluatorResultMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalConversationScorecardEvaluatorResultMetadata::DECODERS
-
-    # @return [String] The evaluator's selected value (typically a label such as `pass`, `fail`, or a category identifier).
-    attr_reader :value
-    # @return [String] The label of the rating option matching `value` (for example `Needs improvement`). Omitted when the label could not be resolved.
-    attr_reader :value_label
-    # @return [String] The origin of the result (for example, `ai` or `human`).
-    attr_reader :source
-    # @return [String] A free-text explanation of the result.
-    attr_reader :reasoning
-    # @return [Array_of_String] Identifiers for structured reasons assigned to the result, if any.
-    attr_reader :reason_ids
-    # @return [Array_of_ConversationScorecardEvaluatorReason] The structured reasons chosen for this result. Omitted when none were chosen.
-    attr_reader :reasons
-    # @return [String] Free-text entered by the reviewer to supplement or stand in for the structured `reason_ids` — typically captured when the reviewer selects an "Other" option or adds a custom note. Null when not provided.
-    attr_reader :other_text
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalConversationScorecardNoteMetadata
-    FIELDS = {
-      id: 'id',
-      created_at: 'created_at',
-      updated_at: 'updated_at',
-      author: 'author',
-      body: 'body'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      author: lambda do |value|
-        ::OctridevIntercom::ConversationScorecardNoteAuthor.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalConversationScorecardNoteMetadata
+  FIELDS = {
+    id: "id",
+    created_at: "created_at",
+    updated_at: "updated_at",
+    author: "author",
+    body: "body",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    author: lambda do |value|
+      ::OctridevIntercom::ConversationScorecardNoteAuthor.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ConversationScorecardNote.
+# A note a teammate left on the QA review of this scorecard.
+class ConversationScorecardNote
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalConversationScorecardNoteMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalConversationScorecardNoteMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalConversationScorecardNoteMetadata::DECODERS
+
+  # @return [String] The id of the note.
+  attr_reader :id
+  # @return [Integer] The time the note was created.
+  attr_reader :created_at
+  # @return [Integer] The time the note was last edited. Equal to `created_at` when the note has never been edited.
+  attr_reader :updated_at
+  # @return [ConversationScorecardNoteAuthor] Who wrote the note. Null when the teammate who wrote it has since been deleted.
+  attr_reader :author
+  # @return [String] The text of the note exactly as the teammate entered it. Plain text; it is not rendered as HTML.
+  attr_reader :body
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ConversationScorecardNote.
-  # A note a teammate left on the QA review of this scorecard.
-  class ConversationScorecardNote
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalConversationScorecardNoteMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalConversationScorecardNoteMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalConversationScorecardNoteMetadata::DECODERS
-
-    # @return [String] The id of the note.
-    attr_reader :id
-    # @return [Integer] The time the note was created.
-    attr_reader :created_at
-    # @return [Integer] The time the note was last edited. Equal to `created_at` when the note has never been edited.
-    attr_reader :updated_at
-    # @return [ConversationScorecardNoteAuthor] Who wrote the note. Null when the teammate who wrote it has since been deleted.
-    attr_reader :author
-    # @return [String] The text of the note exactly as the teammate entered it. Plain text; it is not rendered as HTML.
-    attr_reader :body
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalConversationScorecardNoteAuthorMetadata
-    FIELDS = {
-      type: 'type',
-      admin_id: 'admin_id'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevIntercom::ConversationScorecardNoteAuthorType.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalConversationScorecardNoteAuthorMetadata
+  FIELDS = {
+    type: "type",
+    admin_id: "admin_id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevIntercom::ConversationScorecardNoteAuthorType.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for ConversationScorecardNoteAuthor.
+# Who wrote the note. Null when the teammate who wrote it has since been deleted.
+class ConversationScorecardNoteAuthor
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalConversationScorecardNoteAuthorMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalConversationScorecardNoteAuthorMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalConversationScorecardNoteAuthorMetadata::DECODERS
+
+  # @return [ConversationScorecardNoteAuthorType] The kind of author. `admin` when a teammate wrote the note; `ai` when Fin did.
+  attr_reader :type
+  # @return [String] The id of the admin who wrote the note. Present only when `type` is `admin`.
+  attr_reader :admin_id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ConversationScorecardNoteAuthor.
-  # Who wrote the note. Null when the teammate who wrote it has since been deleted.
-  class ConversationScorecardNoteAuthor
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalConversationScorecardNoteAuthorMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalConversationScorecardNoteAuthorMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalConversationScorecardNoteAuthorMetadata::DECODERS
-
-    # @return [ConversationScorecardNoteAuthorType] The kind of author. `admin` when a teammate wrote the note; `ai` when Fin did.
-    attr_reader :type
-    # @return [String] The id of the admin who wrote the note. Present only when `type` is `admin`.
-    attr_reader :admin_id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the ConversationScorecardNoteAuthorType SDK namespace.
-  module ConversationScorecardNoteAuthorType
-    AI = 'ai'
-    ADMIN = 'admin'
-    VALUES = %w[ai admin].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the ConversationScorecardNoteAuthorType SDK namespace.
+module ConversationScorecardNoteAuthorType
+  AI = 'ai'
+  ADMIN = 'admin'
+  VALUES = ['ai', 'admin'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalConversationScorecardReviewedTeammateMetadata
+  FIELDS = {
+    type: "type",
+    admin_id: "admin_id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevIntercom::ConversationScorecardReviewedTeammateType.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for ConversationScorecardReviewedTeammate.
+# The teammate (or AI agent) whose handling of the conversation was reviewed by this scorecard.
+class ConversationScorecardReviewedTeammate
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalConversationScorecardReviewedTeammateMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalConversationScorecardReviewedTeammateMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalConversationScorecardReviewedTeammateMetadata::DECODERS
+
+  # @return [ConversationScorecardReviewedTeammateType] The kind of reviewee. `ai` if the conversation was handled by Fin or scored without a specific teammate; `admin` if a specific teammate was reviewed.
+  attr_reader :type
+  # @return [String] The id of the admin who was reviewed. Present only when `type` is `admin`.
+  attr_reader :admin_id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalConversationScorecardReviewedTeammateMetadata
-    FIELDS = {
-      type: 'type',
-      admin_id: 'admin_id'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevIntercom::ConversationScorecardReviewedTeammateType.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ConversationScorecardReviewedTeammate.
-  # The teammate (or AI agent) whose handling of the conversation was reviewed by this scorecard.
-  class ConversationScorecardReviewedTeammate
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalConversationScorecardReviewedTeammateMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalConversationScorecardReviewedTeammateMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalConversationScorecardReviewedTeammateMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [ConversationScorecardReviewedTeammateType] The kind of reviewee. `ai` if the conversation was handled by Fin or scored without a specific teammate; `admin` if a specific teammate was reviewed.
-    attr_reader :type
-    # @return [String] The id of the admin who was reviewed. Present only when `type` is `admin`.
-    attr_reader :admin_id
+# Defines the ConversationScorecardReviewedTeammateType SDK namespace.
+module ConversationScorecardReviewedTeammateType
+  AI = 'ai'
+  ADMIN = 'admin'
+  VALUES = ['ai', 'admin'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# Internal model hydration metadata.
+class SdkInternalConversationScorecardReviewerMetadata
+  FIELDS = {
+    type: "type",
+    admin_id: "admin_id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevIntercom::ConversationScorecardReviewerType.from_value(value)
+    end,
+  }.freeze
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# API model for ConversationScorecardReviewer.
+# Who the review of this scorecard is assigned to. `ai` when it is assigned to Fin; `admin` when it is assigned to a teammate. Null when no review exists for this scorecard or the review is unassigned.
+class ConversationScorecardReviewer
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalConversationScorecardReviewerMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalConversationScorecardReviewerMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalConversationScorecardReviewerMetadata::DECODERS
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  # @return [ConversationScorecardReviewerType] The kind of reviewer. `ai` if the review is assigned to Fin; `admin` if it is assigned to a teammate.
+  attr_reader :type
+  # @return [String] The id of the admin the review is assigned to. Present only when `type` is `admin`.
+  attr_reader :admin_id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the ConversationScorecardReviewedTeammateType SDK namespace.
-  module ConversationScorecardReviewedTeammateType
-    AI = 'ai'
-    ADMIN = 'admin'
-    VALUES = %w[ai admin].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalConversationScorecardReviewerMetadata
-    FIELDS = {
-      type: 'type',
-      admin_id: 'admin_id'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevIntercom::ConversationScorecardReviewerType.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the ConversationScorecardReviewerType SDK namespace.
+module ConversationScorecardReviewerType
+  AI = 'ai'
+  ADMIN = 'admin'
+  VALUES = ['ai', 'admin'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalConversationScorecardRevisedByMetadata
+  FIELDS = {
+    type: "type",
+    admin_id: "admin_id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevIntercom::ConversationScorecardRevisedByType.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for ConversationScorecardRevisedBy.
+# Who last changed the review of this scorecard after it was submitted. `ai` when Fin made the change; `admin` when a teammate did. Null while the review is unreviewed, when it has not been changed since it was submitted, or when no review exists for this scorecard.
+class ConversationScorecardRevisedBy
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalConversationScorecardRevisedByMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalConversationScorecardRevisedByMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalConversationScorecardRevisedByMetadata::DECODERS
+
+  # @return [ConversationScorecardRevisedByType] The kind of reviser. `ai` if Fin changed the review; `admin` if a teammate did.
+  attr_reader :type
+  # @return [String] The id of the admin who last changed the review. Present only when `type` is `admin`.
+  attr_reader :admin_id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ConversationScorecardReviewer.
-  # Who the review of this scorecard is assigned to. `ai` when it is assigned to Fin; `admin` when it is assigned to a teammate. Null when no review exists for this scorecard or the review is unassigned.
-  class ConversationScorecardReviewer
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalConversationScorecardReviewerMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalConversationScorecardReviewerMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalConversationScorecardReviewerMetadata::DECODERS
-
-    # @return [ConversationScorecardReviewerType] The kind of reviewer. `ai` if the review is assigned to Fin; `admin` if it is assigned to a teammate.
-    attr_reader :type
-    # @return [String] The id of the admin the review is assigned to. Present only when `type` is `admin`.
-    attr_reader :admin_id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the ConversationScorecardReviewerType SDK namespace.
-  module ConversationScorecardReviewerType
-    AI = 'ai'
-    ADMIN = 'admin'
-    VALUES = %w[ai admin].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the ConversationScorecardRevisedByType SDK namespace.
+module ConversationScorecardRevisedByType
+  AI = 'ai'
+  ADMIN = 'admin'
+  VALUES = ['ai', 'admin'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalConversationScorecardSubmittedByMetadata
+  FIELDS = {
+    type: "type",
+    admin_id: "admin_id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevIntercom::ConversationScorecardSubmittedByType.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for ConversationScorecardSubmittedBy.
+# Who last submitted the review of this scorecard, which can differ from the `reviewer` it is assigned to. `ai` when Fin submitted it; `admin` when a teammate did. Null while the review is unreviewed or when no review exists for this scorecard.
+class ConversationScorecardSubmittedBy
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalConversationScorecardSubmittedByMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalConversationScorecardSubmittedByMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalConversationScorecardSubmittedByMetadata::DECODERS
+
+  # @return [ConversationScorecardSubmittedByType] The kind of submitter. `ai` if Fin submitted the review; `admin` if a teammate did.
+  attr_reader :type
+  # @return [String] The id of the admin who submitted the review. Present only when `type` is `admin`.
+  attr_reader :admin_id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalConversationScorecardRevisedByMetadata
-    FIELDS = {
-      type: 'type',
-      admin_id: 'admin_id'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevIntercom::ConversationScorecardRevisedByType.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ConversationScorecardRevisedBy.
-  # Who last changed the review of this scorecard after it was submitted. `ai` when Fin made the change; `admin` when a teammate did. Null while the review is unreviewed, when it has not been changed since it was submitted, or when no review exists for this scorecard.
-  class ConversationScorecardRevisedBy
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalConversationScorecardRevisedByMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalConversationScorecardRevisedByMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalConversationScorecardRevisedByMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [ConversationScorecardRevisedByType] The kind of reviser. `ai` if Fin changed the review; `admin` if a teammate did.
-    attr_reader :type
-    # @return [String] The id of the admin who last changed the review. Present only when `type` is `admin`.
-    attr_reader :admin_id
+# Defines the ConversationScorecardSubmittedByType SDK namespace.
+module ConversationScorecardSubmittedByType
+  AI = 'ai'
+  ADMIN = 'admin'
+  VALUES = ['ai', 'admin'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# Internal model hydration metadata.
+class SdkInternalMergeConversationsRequestMetadata
+  FIELDS = {
+    merge_into_conversation_id: "merge_into_conversation_id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    merge_into_conversation_id
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# API model for MergeConversationsRequest.
+# Payload to merge a secondary conversation into a primary conversation.
+class MergeConversationsRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalMergeConversationsRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalMergeConversationsRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalMergeConversationsRequestMetadata::DECODERS
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  # @return [Integer] The ID of the primary (target) conversation to merge into.
+  attr_reader :merge_into_conversation_id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the ConversationScorecardRevisedByType SDK namespace.
-  module ConversationScorecardRevisedByType
-    AI = 'ai'
-    ADMIN = 'admin'
-    VALUES = %w[ai admin].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalConversationScorecardSubmittedByMetadata
-    FIELDS = {
-      type: 'type',
-      admin_id: 'admin_id'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevIntercom::ConversationScorecardSubmittedByType.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
-
-  # API model for ConversationScorecardSubmittedBy.
-  # Who last submitted the review of this scorecard, which can differ from the `reviewer` it is assigned to. `ai` when Fin submitted it; `admin` when a teammate did. Null while the review is unreviewed or when no review exists for this scorecard.
-  class ConversationScorecardSubmittedBy
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalConversationScorecardSubmittedByMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalConversationScorecardSubmittedByMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalConversationScorecardSubmittedByMetadata::DECODERS
-
-    # @return [ConversationScorecardSubmittedByType] The kind of submitter. `ai` if Fin submitted the review; `admin` if a teammate did.
-    attr_reader :type
-    # @return [String] The id of the admin who submitted the review. Present only when `type` is `admin`.
-    attr_reader :admin_id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Defines the ConversationScorecardSubmittedByType SDK namespace.
-  module ConversationScorecardSubmittedByType
-    AI = 'ai'
-    ADMIN = 'admin'
-    VALUES = %w[ai admin].freeze
-    def self.from_value(value)
-      value
-    end
-  end
-
-  # Internal model hydration metadata.
-  class SdkInternalMergeConversationsRequestMetadata
-    FIELDS = {
-      merge_into_conversation_id: 'merge_into_conversation_id'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      merge_into_conversation_id
-    ].freeze
-    DECODERS = {}.freeze
-  end
-
-  # API model for MergeConversationsRequest.
-  # Payload to merge a secondary conversation into a primary conversation.
-  class MergeConversationsRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalMergeConversationsRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalMergeConversationsRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalMergeConversationsRequestMetadata::DECODERS
-
-    # @return [Integer] The ID of the primary (target) conversation to merge into.
-    attr_reader :merge_into_conversation_id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
+end
 end

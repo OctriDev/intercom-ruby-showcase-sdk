@@ -13,7 +13,7 @@ module OctridevIntercom
       module SearchContentParameterC3d616a1
         ON = 'on'
         OFF = 'off'
-        VALUES = %w[on off].freeze
+        VALUES = ['on', 'off'].freeze
         def self.from_value(value)
           value
         end
@@ -23,7 +23,7 @@ module OctridevIntercom
       module SearchContentParameterItem999af085
         PUBLISHED = 'published'
         DRAFT = 'draft'
-        VALUES = %w[published draft].freeze
+        VALUES = ['published', 'draft'].freeze
         def self.from_value(value)
           value
         end
@@ -33,7 +33,7 @@ module OctridevIntercom
       module SearchContentParameter78150152
         IN = 'IN'
         NIN = 'NIN'
-        VALUES = %w[IN NIN].freeze
+        VALUES = ['IN', 'NIN'].freeze
         def self.from_value(value)
           value
         end
@@ -46,8 +46,8 @@ module OctridevIntercom
         FILE_SOURCE_CONTENT = 'file_source_content'
         INTERNAL_ARTICLE = 'internal_article'
         ARTICLE = 'article'
-        VALUES = %w[
-          snippet external_content file_source_content internal_article article
+        VALUES = [
+          'snippet', 'external_content', 'file_source_content', 'internal_article', 'article'
         ].freeze
         def self.from_value(value)
           value
@@ -58,7 +58,7 @@ module OctridevIntercom
       module SearchContentParameterE870c63a
         ON = 'on'
         OFF = 'off'
-        VALUES = %w[on off].freeze
+        VALUES = ['on', 'off'].freeze
         def self.from_value(value)
           value
         end
@@ -68,7 +68,7 @@ module OctridevIntercom
       module SearchContentParameterA0a1ebd4
         ON = 'on'
         OFF = 'off'
-        VALUES = %w[on off].freeze
+        VALUES = ['on', 'off'].freeze
         def self.from_value(value)
           value
         end
@@ -118,27 +118,28 @@ module OctridevIntercom
         tags: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_items('content_ids', content_ids, max: 1000)
 
         SdkClient.request(
           'POST',
-          '/content/bulk_actions',
+          "/content/bulk_actions",
           config: config,
           body: {
             'action' => action,
             'content_ids' => content_ids,
             'availability' => availability,
             'audience' => audience,
-            'tags' => tags
+            'tags' => tags,
           },
           return_type: ::OctridevIntercom::ContentBulkActionResponse,
           decoder: :json,
           operation_id: 'bulk_content_actions',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -219,23 +220,23 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         __sdk_validate_search_content(query: query, page: page, per_page: per_page)
 
         SdkClient.request(
           'GET',
-          '/content/search',
+          "/content/search",
           config: config,
           query: __sdk_query_search_content_part1(query: query, page: page, per_page: per_page, states: states, locales: locales, tag_ids: tag_ids, tag_operator: tag_operator, any_tag_ids: any_tag_ids, folder_ids: folder_ids, folder_entity_type: folder_entity_type, content_types: content_types, copilot_state: copilot_state, fin_service_state: fin_service_state, fin_sales_state: fin_sales_state, created_by_ids: created_by_ids, last_updated_by_ids: last_updated_by_ids, created_at_after: created_at_after, created_at_before: created_at_before).merge(
-            __sdk_query_search_content_part2(updated_at_after: updated_at_after, updated_at_before: updated_at_before)
-          ),
+            __sdk_query_search_content_part2(updated_at_after: updated_at_after, updated_at_before: updated_at_before)),
           return_type: ::OctridevIntercom::ContentSearchResponse,
           decoder: :json,
           operation_id: 'search_content',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -290,7 +291,7 @@ module OctridevIntercom
           'created_by_ids' => QueryValue.new(created_by_ids, style: 'form', explode: false),
           'last_updated_by_ids' => QueryValue.new(last_updated_by_ids, style: 'form', explode: false),
           'created_at_after' => QueryValue.new(created_at_after, style: 'form', explode: true),
-          'created_at_before' => QueryValue.new(created_at_before, style: 'form', explode: true)
+          'created_at_before' => QueryValue.new(created_at_before, style: 'form', explode: true),
         }
       end
       private_class_method :__sdk_query_search_content_part1
@@ -301,7 +302,7 @@ module OctridevIntercom
       )
         {
           'updated_at_after' => QueryValue.new(updated_at_after, style: 'form', explode: true),
-          'updated_at_before' => QueryValue.new(updated_at_before, style: 'form', explode: true)
+          'updated_at_before' => QueryValue.new(updated_at_before, style: 'form', explode: true),
         }
       end
       private_class_method :__sdk_query_search_content_part2

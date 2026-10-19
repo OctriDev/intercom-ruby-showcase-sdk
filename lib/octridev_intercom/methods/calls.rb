@@ -12,12 +12,13 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalListCallsWithTranscriptsMetadata
         FIELDS = {
-          conversation_ids: 'conversation_ids'
+          conversation_ids: "conversation_ids",
         }.freeze
         REQUIRED_FIELDS = %i[
           conversation_ids
         ].freeze
-        DECODERS = {}.freeze
+        DECODERS = {
+        }.freeze
       end
 
       # API model for ListCallsWithTranscripts.
@@ -47,29 +48,30 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalListCallsWithTranscriptsResponseDataItemMetadata
         FIELDS = {
-          type: 'type',
-          id: 'id',
-          conversation_id: 'conversation_id',
-          admin_id: 'admin_id',
-          contact_id: 'contact_id',
-          state: 'state',
-          initiated_at: 'initiated_at',
-          answered_at: 'answered_at',
-          ended_at: 'ended_at',
-          created_at: 'created_at',
-          updated_at: 'updated_at',
-          recording_url: 'recording_url',
-          transcription_url: 'transcription_url',
-          call_type: 'call_type',
-          direction: 'direction',
-          ended_reason: 'ended_reason',
-          phone: 'phone',
-          fin_recording_url: 'fin_recording_url',
-          fin_transcription_url: 'fin_transcription_url',
-          transcript: 'transcript',
-          transcript_status: 'transcript_status'
+          type: "type",
+          id: "id",
+          conversation_id: "conversation_id",
+          admin_id: "admin_id",
+          contact_id: "contact_id",
+          state: "state",
+          initiated_at: "initiated_at",
+          answered_at: "answered_at",
+          ended_at: "ended_at",
+          created_at: "created_at",
+          updated_at: "updated_at",
+          recording_url: "recording_url",
+          transcription_url: "transcription_url",
+          call_type: "call_type",
+          direction: "direction",
+          ended_reason: "ended_reason",
+          phone: "phone",
+          fin_recording_url: "fin_recording_url",
+          fin_transcription_url: "fin_transcription_url",
+          transcript: "transcript",
+          transcript_status: "transcript_status",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
         DECODERS = {
           initiated_at: lambda do |value|
             ::OctridevIntercom::Datetime.from_hash(value)
@@ -85,7 +87,7 @@ module OctridevIntercom
           end,
           updated_at: lambda do |value|
             ::OctridevIntercom::Datetime.from_hash(value)
-          end
+          end,
         }.freeze
       end
 
@@ -156,14 +158,15 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalListCallsWithTranscriptsResponseMetadata
         FIELDS = {
-          type: 'type',
-          data: 'data'
+          type: "type",
+          data: "data",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
         DECODERS = {
           data: lambda do |value|
             value&.map { |item| ::OctridevIntercom::Methods::Calls::ListCallsWithTranscriptsResponseDataItem.from_hash(item) }
-          end
+          end,
         }.freeze
       end
 
@@ -204,22 +207,23 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/calls',
+          "/calls",
           config: config,
           query: {
             'page' => QueryValue.new(page, style: 'form', explode: true),
-            'per_page' => QueryValue.new(per_page, style: 'form', explode: true)
+            'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
           },
           return_type: ::OctridevIntercom::CallList,
           decoder: :json,
           operation_id: 'list_calls',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -234,10 +238,11 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/calls/',
+            "/calls/",
             SdkClient.encode_path_segment(call_id)
           ].join,
           config: config,
@@ -245,10 +250,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'show_call',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -263,21 +268,22 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/calls/',
+            "/calls/",
             SdkClient.encode_path_segment(call_id),
-            '/recording'
+            "/recording"
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'show_call_recording',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -292,21 +298,22 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/calls/',
+            "/calls/",
             SdkClient.encode_path_segment(call_id),
-            '/transcript'
+            "/transcript"
           ].join,
           config: config,
           decoder: :text,
           operation_id: 'show_call_transcript',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '404' => ::OctridevIntercom::Error2 }
+          errors: { '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -322,23 +329,24 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_items('conversation_ids', conversation_ids, min: 1, max: 20)
 
         SdkClient.request(
           'POST',
-          '/calls/search',
+          "/calls/search",
           config: config,
           body: {
-            'conversation_ids' => conversation_ids
+            'conversation_ids' => conversation_ids,
           },
           return_type: ::OctridevIntercom::Methods::Calls::ListCallsWithTranscriptsResponse,
           decoder: :json,
           operation_id: 'list_calls_with_transcripts',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -358,21 +366,22 @@ module OctridevIntercom
         data: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/fin_voice/register',
+          "/fin_voice/register",
           config: config,
           body: {
             'phone_number' => phone_number,
             'call_id' => call_id,
             'source' => source,
-            'data' => data
+            'data' => data,
           },
           return_type: ::OctridevIntercom::AiCallResponse,
           decoder: :json,
           operation_id: 'register_fin_voice_call',
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '409' => ::OctridevIntercom::Error2, 'default' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '409' => ::OctridevIntercom::Error2, 'default' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -384,10 +393,11 @@ module OctridevIntercom
         id:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/fin_voice/collect/',
+            "/fin_voice/collect/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -395,7 +405,7 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'collect_fin_voice_call_by_id',
           request_options: request_options,
-          errors: { '404' => ::OctridevIntercom::Error2, 'default' => ::OctridevIntercom::Error2 }
+          errors: { '404' => ::OctridevIntercom::Error2, 'default' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -408,10 +418,11 @@ module OctridevIntercom
         external_id:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/fin_voice/external_id/',
+            "/fin_voice/external_id/",
             SdkClient.encode_path_segment(external_id)
           ].join,
           config: config,
@@ -419,7 +430,7 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'collect_fin_voice_call_by_external_id',
           request_options: request_options,
-          errors: { '404' => ::OctridevIntercom::Error2, 'default' => ::OctridevIntercom::Error2 }
+          errors: { '404' => ::OctridevIntercom::Error2, 'default' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -431,10 +442,11 @@ module OctridevIntercom
         phone_number:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/fin_voice/phone_number/',
+            "/fin_voice/phone_number/",
             SdkClient.encode_path_segment(phone_number)
           ].join,
           config: config,
@@ -442,7 +454,7 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'collect_fin_voice_call_by_phone_number',
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, 'default' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, 'default' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -454,10 +466,11 @@ module OctridevIntercom
         conversation_id:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/fin_voice/conversation/',
+            "/fin_voice/conversation/",
             SdkClient.encode_path_segment(conversation_id)
           ].join,
           config: config,
@@ -465,7 +478,7 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'collect_fin_voice_calls_by_conversation_id',
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, 'default' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, 'default' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

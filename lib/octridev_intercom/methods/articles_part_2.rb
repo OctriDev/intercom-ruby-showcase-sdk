@@ -25,25 +25,26 @@ module OctridevIntercom
         locales: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/articles/',
+            "/articles/",
             SdkClient.encode_path_segment(id),
-            '/draft/publish'
+            "/draft/publish"
           ].join,
           config: config,
           body: {
-            'locales' => locales
+            'locales' => locales,
           },
           return_type: ::OctridevIntercom::Article,
           decoder: :json,
           operation_id: 'publish_article_draft',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -66,26 +67,27 @@ module OctridevIntercom
         admin_id: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/articles/',
+            "/articles/",
             SdkClient.encode_path_segment(article_id),
-            '/tags'
+            "/tags"
           ].join,
           config: config,
           body: {
             'id' => id,
-            'admin_id' => admin_id
+            'admin_id' => admin_id,
           },
           return_type: ::OctridevIntercom::Tag,
           decoder: :json,
           operation_id: 'attach_articles_tag',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -104,12 +106,13 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/articles/',
+            "/articles/",
             SdkClient.encode_path_segment(article_id),
-            '/tags/',
+            "/tags/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -117,10 +120,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'detach_articles_tag',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -145,27 +148,28 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/articles/',
+            "/articles/",
             SdkClient.encode_path_segment(article_id),
-            '/versions'
+            "/versions"
           ].join,
           config: config,
           query: {
             'page' => QueryValue.new(page, style: 'form', explode: true),
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'locale' => QueryValue.new(locale, style: 'form', explode: true)
+            'locale' => QueryValue.new(locale, style: 'form', explode: true),
           },
           return_type: ::OctridevIntercom::ArticleVersionList,
           decoder: :json,
           operation_id: 'list_article_versions',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -185,26 +189,27 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/articles/',
+            "/articles/",
             SdkClient.encode_path_segment(article_id),
-            '/versions/',
+            "/versions/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           query: {
-            'locale' => QueryValue.new(locale, style: 'form', explode: true)
+            'locale' => QueryValue.new(locale, style: 'form', explode: true),
           },
           return_type: ::OctridevIntercom::ArticleVersion,
           decoder: :json,
           operation_id: 'retrieve_article_version',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -227,24 +232,25 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/articles/search',
+          "/articles/search",
           config: config,
           query: {
             'phrase' => QueryValue.new(phrase, style: 'form', explode: true),
             'state' => QueryValue.new(state, style: 'form', explode: true),
             'help_center_id' => QueryValue.new(help_center_id, style: 'form', explode: true),
-            'highlight' => QueryValue.new(highlight, style: 'form', explode: true)
+            'highlight' => QueryValue.new(highlight, style: 'form', explode: true),
           },
           return_type: ::OctridevIntercom::ArticleSearchResponse,
           decoder: :json,
           operation_id: 'search_articles',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

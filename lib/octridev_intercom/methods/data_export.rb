@@ -24,21 +24,22 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/export/content/data',
+          "/export/content/data",
           config: config,
           body: {
             'created_at_after' => created_at_after,
-            'created_at_before' => created_at_before
+            'created_at_before' => created_at_before,
           },
           return_type: ::OctridevIntercom::DataExport,
           decoder: :json,
           operation_id: 'create_data_export',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
-          request_options: request_options
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
+          request_options: request_options,
         ).data
       end
 
@@ -47,11 +48,17 @@ module OctridevIntercom
       # You can view the status of your job by sending a `GET` request to the URL `api.intercom.io - the `{job_identifier}` is the value returned in the response when you first created the export job. More on it can be seen in the Export Job Model. > 🚧 Jobs expire after two days > All jobs that have completed processing (and are thus available to download from the provided URL) will have an expiry limit of two days from when the export ob completed. After this, the data will no…
       #
       # @param job_identifier [String] job_identifier
-      singleton_class.define_method(:get_data_export) do |config:, job_identifier:, intercom_version: NOT_GIVEN, request_options: nil|
+      singleton_class.define_method(:get_data_export) do |
+        config:,
+        job_identifier:,
+        intercom_version: NOT_GIVEN,
+        request_options: nil
+      |
+
         SdkClient.request(
           'GET',
           [
-            '/export/content/data/',
+            "/export/content/data/",
             SdkClient.encode_path_segment(job_identifier)
           ].join,
           config: config,
@@ -59,9 +66,9 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'get_data_export',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
-          request_options: request_options
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
+          request_options: request_options,
         ).data
       end
 
@@ -76,10 +83,11 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/export/cancel/',
+            "/export/cancel/",
             SdkClient.encode_path_segment(job_identifier)
           ].join,
           config: config,
@@ -87,9 +95,9 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'cancel_data_export',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
-          request_options: request_options
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
+          request_options: request_options,
         ).data
       end
 
@@ -104,19 +112,20 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/download/content/data/',
+            "/download/content/data/",
             SdkClient.encode_path_segment(job_identifier)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'download_data_export',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
-          request_options: request_options
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
+          request_options: request_options,
         ).data
       end
     end

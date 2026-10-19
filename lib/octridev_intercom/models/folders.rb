@@ -5,56 +5,57 @@
 
 # folders domain models
 module OctridevIntercom
-  # Internal model hydration metadata.
-  class SdkInternalDeletedFolderObjectMetadata
-    FIELDS = {
-      id: 'id',
-      object: 'object',
-      deleted: 'deleted'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      object: lambda do |value|
-        ::OctridevIntercom::DeletedFolderObjectObject.from_value(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalDeletedFolderObjectMetadata
+  FIELDS = {
+    id: "id",
+    object: "object",
+    deleted: "deleted",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    object: lambda do |value|
+      ::OctridevIntercom::DeletedFolderObjectObject.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for DeletedFolderObject.
+# Response returned when a folder is deleted
+class DeletedFolderObject
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDeletedFolderObjectMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDeletedFolderObjectMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDeletedFolderObjectMetadata::DECODERS
+
+  # @return [String] The unique identifier for the deleted folder
+  attr_reader :id
+  # @return [DeletedFolderObjectObject] The type of object - `folder`.
+  attr_reader :object
+  # @return [Boolean] Whether the folder was successfully deleted.
+  attr_reader :deleted
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DeletedFolderObject.
-  # Response returned when a folder is deleted
-  class DeletedFolderObject
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDeletedFolderObjectMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDeletedFolderObjectMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDeletedFolderObjectMetadata::DECODERS
-
-    # @return [String] The unique identifier for the deleted folder
-    attr_reader :id
-    # @return [DeletedFolderObjectObject] The type of object - `folder`.
-    attr_reader :object
-    # @return [Boolean] Whether the folder was successfully deleted.
-    attr_reader :deleted
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the DeletedFolderObjectObject SDK namespace.
-  module DeletedFolderObjectObject
-    FOLDER = 'folder'
-    VALUES = ['folder'].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
+
+# Defines the DeletedFolderObjectObject SDK namespace.
+module DeletedFolderObjectObject
+  FOLDER = 'folder'
+  VALUES = ['folder'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 end
