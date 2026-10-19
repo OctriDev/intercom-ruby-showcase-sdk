@@ -23,27 +23,26 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/dynamic_contents",
+          '/dynamic_contents',
           config: config,
           query: {
             'page' => QueryValue.new(page, style: 'form', explode: true),
-            'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
+            'per_page' => QueryValue.new(per_page, style: 'form', explode: true)
           },
           return_type: ::OctridevIntercom::DynamicContentList,
           decoder: :json,
           operation_id: 'list_dynamic_contents',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2 }
         ).data
       end
 
-    ListDynamicContentsPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
+      ListDynamicContentsPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
 
       # Lists dynamic content for a workspace, ordered from most recently updated to least recently updated. Use `page` and `per_page` to paginate the results; access requires the `read_dynamic_content` scope.
       #
@@ -71,8 +70,10 @@ module OctridevIntercom
             )
             items = page.data || []
             break if items.empty?
+
             items.each { |item| y << item }
             break if page_number >= page.total_pages
+
             page_number += 1
           end
         end
@@ -97,10 +98,12 @@ module OctridevIntercom
             )
             items = page.data || []
             break if items.empty?
+
             next_page_number = page_number + 1
             has_more = !next_page_number.nil? && next_page_number != page_number && next_page_number <= page.total_pages
             y << ListDynamicContentsPage.new(data: page, items: items, has_more: has_more)
             break unless has_more
+
             page_number = next_page_number
           end
         end
@@ -131,29 +134,28 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_length('name', name, max: 255)
 
         Validation.validate_items('variations', variations, min: 1)
 
         SdkClient.request(
           'POST',
-          "/dynamic_contents",
+          '/dynamic_contents',
           config: config,
           body: {
             'name' => name,
             'content_type' => content_type,
             'default_locale' => default_locale,
-            'variations' => variations,
+            'variations' => variations
           },
           return_type: ::OctridevIntercom::DynamicContent,
           decoder: :json,
           operation_id: 'create_dynamic_content',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -162,17 +164,11 @@ module OctridevIntercom
       # You can fetch a single dynamic content by its id. Requires the `read_dynamic_content` scope.
       #
       # @param id [String] The unique identifier for the dynamic content.
-      singleton_class.define_method(:get_dynamic_content) do |
-        config:,
-        id:,
-        intercom_version: NOT_GIVEN,
-        request_options: nil
-      |
-
+      singleton_class.define_method(:get_dynamic_content) do |config:, id:, intercom_version: NOT_GIVEN, request_options: nil|
         SdkClient.request(
           'GET',
           [
-            "/dynamic_contents/",
+            '/dynamic_contents/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -180,10 +176,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'get_dynamic_content',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -208,7 +204,6 @@ module OctridevIntercom
         variations: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(name) { Validation.validate_length('name', name, max: 255) }
 
         Validation.if_given(variations) { Validation.validate_items('variations', variations, min: 1) }
@@ -216,23 +211,23 @@ module OctridevIntercom
         SdkClient.request(
           'PUT',
           [
-            "/dynamic_contents/",
+            '/dynamic_contents/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           body: {
             'name' => name,
             'default_locale' => default_locale,
-            'variations' => variations,
+            'variations' => variations
           },
           return_type: ::OctridevIntercom::DynamicContent,
           decoder: :json,
           operation_id: 'update_dynamic_content',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -247,21 +242,20 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/dynamic_contents/",
+            '/dynamic_contents/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'delete_dynamic_content',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
         ).data
       end
     end

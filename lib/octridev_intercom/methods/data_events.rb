@@ -37,10 +37,9 @@ module OctridevIntercom
         metadata: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/events",
+          '/events',
           config: config,
           body: {
             'event_name' => event_name,
@@ -48,15 +47,15 @@ module OctridevIntercom
             'user_id' => user_id,
             'id' => id,
             'email' => email,
-            'metadata' => metadata,
+            'metadata' => metadata
           },
           decoder: :empty,
           operation_id: 'create_data_event',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -74,24 +73,23 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/events",
+          '/events',
           config: config,
           query: {
             'filter' => QueryValue.new(filter, style: 'form', explode: true),
             'type' => QueryValue.new(type, style: 'form', explode: true),
-            'summary' => QueryValue.new(summary, style: 'form', explode: true),
+            'summary' => QueryValue.new(summary, style: 'form', explode: true)
           },
           return_type: ::OctridevIntercom::DataEventSummary,
           decoder: :json,
           operation_id: 'list_data_events',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -112,22 +110,21 @@ module OctridevIntercom
         event_summaries: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/events/summaries",
+          '/events/summaries',
           config: config,
           body: {
             'user_id' => user_id,
-            'event_summaries' => event_summaries,
+            'event_summaries' => event_summaries
           },
           decoder: :empty,
           operation_id: 'data_event_summaries',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2 }
         ).data
       end
     end

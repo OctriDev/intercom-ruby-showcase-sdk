@@ -5,186 +5,180 @@
 
 # teams domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalAdminPriorityLevelMetadata
-  FIELDS = {
-    primary_admin_ids: "primary_admin_ids",
-    secondary_admin_ids: "secondary_admin_ids",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for AdminPriorityLevel.
-# Admin priority levels for the team
-class AdminPriorityLevel
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAdminPriorityLevelMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAdminPriorityLevelMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAdminPriorityLevelMetadata::DECODERS
-
-  # @return [Array_of_Integer] The primary admin ids for the team
-  attr_reader :primary_admin_ids
-  # @return [Array_of_Integer] The secondary admin ids for the team
-  attr_reader :secondary_admin_ids
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAdminPriorityLevelMetadata
+    FIELDS = {
+      primary_admin_ids: 'primary_admin_ids',
+      secondary_admin_ids: 'secondary_admin_ids'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AdminPriorityLevel.
+  # Admin priority levels for the team
+  class AdminPriorityLevel
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAdminPriorityLevelMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAdminPriorityLevelMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAdminPriorityLevelMetadata::DECODERS
+
+    # @return [Array_of_Integer] The primary admin ids for the team
+    attr_reader :primary_admin_ids
+    # @return [Array_of_Integer] The secondary admin ids for the team
+    attr_reader :secondary_admin_ids
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalTeamListMetadata
-  FIELDS = {
-    type: "type",
-    teams: "teams",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::TeamListType.from_value(value)
-    end,
-    teams: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::Team.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for TeamList.
-# This will return a list of team objects for the App.
-class TeamList
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTeamListMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTeamListMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTeamListMetadata::DECODERS
-
-  # @return [TeamListType] The type of the object
-  attr_reader :type
-  # @return [Array_of_Team] A list of team objects
-  attr_reader :teams
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalTeamListMetadata
+    FIELDS = {
+      type: 'type',
+      teams: 'teams'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::TeamListType.from_value(value)
+      end,
+      teams: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::Team.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for TeamList.
+  # This will return a list of team objects for the App.
+  class TeamList
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTeamListMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTeamListMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTeamListMetadata::DECODERS
+
+    # @return [TeamListType] The type of the object
+    attr_reader :type
+    # @return [Array_of_Team] A list of team objects
+    attr_reader :teams
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the TeamListType SDK namespace.
-module TeamListType
-  TEAM_LIST = 'team.list'
-  VALUES = ['team.list'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalTeamMetricMetadata
-  FIELDS = {
-    type: "type",
-    admin_id: "admin_id",
-    open: "open",
-    idle: "idle",
-    snoozed: "snoozed",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for TeamMetric.
-# Per-admin activity metrics within a team.
-class TeamMetric
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTeamMetricMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTeamMetricMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTeamMetricMetadata::DECODERS
-
-  # @return [String] Optional `string` value serialized in the `type` wire field.
-  attr_reader :type
-  # @return [String] The unique identifier for the admin.
-  attr_reader :admin_id
-  # @return [Integer] The number of open conversations assigned to the admin.
-  attr_reader :open
-  # @return [Integer] The number of idle conversations assigned to the admin. A conversation is idle when it has been open and waiting for an admin reply longer than the idle_threshold.
-  attr_reader :idle
-  # @return [Integer] The number of snoozed conversations assigned to the admin.
-  attr_reader :snoozed
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the TeamListType SDK namespace.
+  module TeamListType
+    TEAM_LIST = 'team.list'
+    VALUES = ['team.list'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalTeamMetricMetadata
+    FIELDS = {
+      type: 'type',
+      admin_id: 'admin_id',
+      open: 'open',
+      idle: 'idle',
+      snoozed: 'snoozed'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for TeamMetric.
+  # Per-admin activity metrics within a team.
+  class TeamMetric
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTeamMetricMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTeamMetricMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTeamMetricMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalTeamMetricListMetadata
-  FIELDS = {
-    type: "type",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    data: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::TeamMetric.from_hash(item) }
-    end,
-  }.freeze
-end
+    # @return [String] Optional `string` value serialized in the `type` wire field.
+    attr_reader :type
+    # @return [String] The unique identifier for the admin.
+    attr_reader :admin_id
+    # @return [Integer] The number of open conversations assigned to the admin.
+    attr_reader :open
+    # @return [Integer] The number of idle conversations assigned to the admin. A conversation is idle when it has been open and waiting for an admin reply longer than the idle_threshold.
+    attr_reader :idle
+    # @return [Integer] The number of snoozed conversations assigned to the admin.
+    attr_reader :snoozed
 
-# API model for TeamMetricList.
-# A list of team metrics.
-class TeamMetricList
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTeamMetricListMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTeamMetricListMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTeamMetricListMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] Optional `string` value serialized in the `type` wire field.
-  attr_reader :type
-  # @return [Array_of_TeamMetric] Optional array value serialized in the `data` wire field.
-  attr_reader :data
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalTeamMetricListMetadata
+    FIELDS = {
+      type: 'type',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      data: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::TeamMetric.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for TeamMetricList.
+  # A list of team metrics.
+  class TeamMetricList
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTeamMetricListMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTeamMetricListMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTeamMetricListMetadata::DECODERS
+
+    # @return [String] Optional `string` value serialized in the `type` wire field.
+    attr_reader :type
+    # @return [Array_of_TeamMetric] Optional array value serialized in the `data` wire field.
+    attr_reader :data
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

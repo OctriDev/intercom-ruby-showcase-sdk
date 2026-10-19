@@ -5,422 +5,410 @@
 
 # tags domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalCreateOrUpdateTagRequestMetadata
-  FIELDS = {
-    name: "name",
-    id: "id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for CreateOrUpdateTagRequest.
-# You can create or update an existing tag.
-class CreateOrUpdateTagRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateOrUpdateTagRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateOrUpdateTagRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateOrUpdateTagRequestMetadata::DECODERS
-
-  # @return [String] The name of the tag, which will be created if not found, or the new name for the tag if this is an update request. Names are case insensitive.
-  attr_reader :name
-  # @return [String] The id of tag to updates.
-  attr_reader :id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCreateOrUpdateTagRequestMetadata
+    FIELDS = {
+      name: 'name',
+      id: 'id'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for CreateOrUpdateTagRequest.
+  # You can create or update an existing tag.
+  class CreateOrUpdateTagRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateOrUpdateTagRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateOrUpdateTagRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateOrUpdateTagRequestMetadata::DECODERS
+
+    # @return [String] The name of the tag, which will be created if not found, or the new name for the tag if this is an update request. Names are case insensitive.
+    attr_reader :name
+    # @return [String] The id of tag to updates.
+    attr_reader :id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalTagCompanyRequestCompaniesItemMetadata
-  FIELDS = {
-    id: "id",
-    company_id: "company_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for TagCompanyRequestCompaniesItem.
-# Required object value serialized in the `companies[]` wire field.
-class TagCompanyRequestCompaniesItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTagCompanyRequestCompaniesItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTagCompanyRequestCompaniesItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTagCompanyRequestCompaniesItemMetadata::DECODERS
-
-  # @return [String] The Intercom defined id representing the company.
-  attr_reader :id
-  # @return [String] The company id you have defined for the company.
-  attr_reader :company_id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalTagCompanyRequestCompaniesItemMetadata
+    FIELDS = {
+      id: 'id',
+      company_id: 'company_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for TagCompanyRequestCompaniesItem.
+  # Required object value serialized in the `companies[]` wire field.
+  class TagCompanyRequestCompaniesItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTagCompanyRequestCompaniesItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTagCompanyRequestCompaniesItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTagCompanyRequestCompaniesItemMetadata::DECODERS
+
+    # @return [String] The Intercom defined id representing the company.
+    attr_reader :id
+    # @return [String] The company id you have defined for the company.
+    attr_reader :company_id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalTagCompanyRequestMetadata
-  FIELDS = {
-    name: "name",
-    companies: "companies",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-    companies
-  ].freeze
-  DECODERS = {
-    companies: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::TagCompanyRequestCompaniesItem.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for TagCompanyRequest.
-# You can tag a single company or a list of companies.
-class TagCompanyRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTagCompanyRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTagCompanyRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTagCompanyRequestMetadata::DECODERS
-
-  # @return [String] The name of the tag, which will be created if not found.
-  attr_reader :name
-  # @return [Array_of_TagCompanyRequestCompaniesItem] The id or company_id of the company can be passed as input parameters.
-  attr_reader :companies
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalTagCompanyRequestMetadata
+    FIELDS = {
+      name: 'name',
+      companies: 'companies'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+      companies
+    ].freeze
+    DECODERS = {
+      companies: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::TagCompanyRequestCompaniesItem.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for TagCompanyRequest.
+  # You can tag a single company or a list of companies.
+  class TagCompanyRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTagCompanyRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTagCompanyRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTagCompanyRequestMetadata::DECODERS
+
+    # @return [String] The name of the tag, which will be created if not found.
+    attr_reader :name
+    # @return [Array_of_TagCompanyRequestCompaniesItem] The id or company_id of the company can be passed as input parameters.
+    attr_reader :companies
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalTagCreateResponseVariant1UsersItemMetadata
-  FIELDS = {
-    id: "id",
-    tagged: "tagged",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for TagCreateResponseVariant1UsersItem.
-class TagCreateResponseVariant1UsersItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTagCreateResponseVariant1UsersItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTagCreateResponseVariant1UsersItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTagCreateResponseVariant1UsersItemMetadata::DECODERS
-
-  # @return [String] The Intercom ID of the user.
-  attr_reader :id
-  # @return [Boolean] Whether the user was tagged (true) or untagged (false).
-  attr_reader :tagged
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalTagCreateResponseVariant1UsersItemMetadata
+    FIELDS = {
+      id: 'id',
+      tagged: 'tagged'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for TagCreateResponseVariant1UsersItem.
+  class TagCreateResponseVariant1UsersItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTagCreateResponseVariant1UsersItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTagCreateResponseVariant1UsersItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTagCreateResponseVariant1UsersItemMetadata::DECODERS
+
+    # @return [String] The Intercom ID of the user.
+    attr_reader :id
+    # @return [Boolean] Whether the user was tagged (true) or untagged (false).
+    attr_reader :tagged
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalTagCreateResponseVariant1CompaniesItemMetadata
-  FIELDS = {
-    id: "id",
-    tagged: "tagged",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for TagCreateResponseVariant1CompaniesItem.
-class TagCreateResponseVariant1CompaniesItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTagCreateResponseVariant1CompaniesItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTagCreateResponseVariant1CompaniesItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTagCreateResponseVariant1CompaniesItemMetadata::DECODERS
-
-  # @return [String] The Intercom ID of the company.
-  attr_reader :id
-  # @return [Boolean] Whether the company was tagged (true) or untagged (false).
-  attr_reader :tagged
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalTagCreateResponseVariant1CompaniesItemMetadata
+    FIELDS = {
+      id: 'id',
+      tagged: 'tagged'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for TagCreateResponseVariant1CompaniesItem.
+  class TagCreateResponseVariant1CompaniesItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTagCreateResponseVariant1CompaniesItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTagCreateResponseVariant1CompaniesItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTagCreateResponseVariant1CompaniesItemMetadata::DECODERS
+
+    # @return [String] The Intercom ID of the company.
+    attr_reader :id
+    # @return [Boolean] Whether the company was tagged (true) or untagged (false).
+    attr_reader :tagged
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalTagCreateResponseMetadata
-  FIELDS = {
-    type: "type",
-    id: "id",
-    name: "name",
-    users: "users",
-    companies: "companies",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    users: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::TagCreateResponseVariant1UsersItem.from_hash(item) }
-    end,
-    companies: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::TagCreateResponseVariant1CompaniesItem.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for TagCreateResponse.
-# The response for creating or updating a tag, including the entities that were tagged or untagged.
-class TagCreateResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTagCreateResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTagCreateResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTagCreateResponseMetadata::DECODERS
-
-  # @return [String] value is "tag"
-  attr_reader :type
-  # @return [String] The id of the tag
-  attr_reader :id
-  # @return [String] The name of the tag
-  attr_reader :name
-  # @return [Array_of_TagCreateResponseVariant1UsersItem] The users that were tagged or untagged.
-  attr_reader :users
-  # @return [Array_of_TagCreateResponseVariant1CompaniesItem] The companies that were tagged or untagged.
-  attr_reader :companies
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalTagCreateResponseMetadata
+    FIELDS = {
+      type: 'type',
+      id: 'id',
+      name: 'name',
+      users: 'users',
+      companies: 'companies'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      users: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::TagCreateResponseVariant1UsersItem.from_hash(item) }
+      end,
+      companies: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::TagCreateResponseVariant1CompaniesItem.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for TagCreateResponse.
+  # The response for creating or updating a tag, including the entities that were tagged or untagged.
+  class TagCreateResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTagCreateResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTagCreateResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTagCreateResponseMetadata::DECODERS
+
+    # @return [String] value is "tag"
+    attr_reader :type
+    # @return [String] The id of the tag
+    attr_reader :id
+    # @return [String] The name of the tag
+    attr_reader :name
+    # @return [Array_of_TagCreateResponseVariant1UsersItem] The users that were tagged or untagged.
+    attr_reader :users
+    # @return [Array_of_TagCreateResponseVariant1CompaniesItem] The companies that were tagged or untagged.
+    attr_reader :companies
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalTagMultipleUsersRequestUsersItemMetadata
-  FIELDS = {
-    id: "id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for TagMultipleUsersRequestUsersItem.
-# Required object value serialized in the `users[]` wire field.
-class TagMultipleUsersRequestUsersItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTagMultipleUsersRequestUsersItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTagMultipleUsersRequestUsersItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTagMultipleUsersRequestUsersItemMetadata::DECODERS
-
-  # @return [String] The Intercom defined id representing the user.
-  attr_reader :id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalTagMultipleUsersRequestUsersItemMetadata
+    FIELDS = {
+      id: 'id'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for TagMultipleUsersRequestUsersItem.
+  # Required object value serialized in the `users[]` wire field.
+  class TagMultipleUsersRequestUsersItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTagMultipleUsersRequestUsersItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTagMultipleUsersRequestUsersItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTagMultipleUsersRequestUsersItemMetadata::DECODERS
+
+    # @return [String] The Intercom defined id representing the user.
+    attr_reader :id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalTagMultipleUsersRequestMetadata
-  FIELDS = {
-    name: "name",
-    users: "users",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-    users
-  ].freeze
-  DECODERS = {
-    users: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::TagMultipleUsersRequestUsersItem.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for TagMultipleUsersRequest.
-# You can tag a list of users.
-class TagMultipleUsersRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTagMultipleUsersRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTagMultipleUsersRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTagMultipleUsersRequestMetadata::DECODERS
-
-  # @return [String] The name of the tag, which will be created if not found.
-  attr_reader :name
-  # @return [Array_of_TagMultipleUsersRequestUsersItem] Required array value serialized in the `users` wire field.
-  attr_reader :users
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalTagMultipleUsersRequestMetadata
+    FIELDS = {
+      name: 'name',
+      users: 'users'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+      users
+    ].freeze
+    DECODERS = {
+      users: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::TagMultipleUsersRequestUsersItem.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for TagMultipleUsersRequest.
+  # You can tag a list of users.
+  class TagMultipleUsersRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTagMultipleUsersRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTagMultipleUsersRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTagMultipleUsersRequestMetadata::DECODERS
+
+    # @return [String] The name of the tag, which will be created if not found.
+    attr_reader :name
+    # @return [Array_of_TagMultipleUsersRequestUsersItem] Required array value serialized in the `users` wire field.
+    attr_reader :users
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalUntagCompanyRequestCompaniesItemMetadata
-  FIELDS = {
-    id: "id",
-    company_id: "company_id",
-    untag: "untag",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for UntagCompanyRequestCompaniesItem.
-# Required object value serialized in the `companies[]` wire field.
-class UntagCompanyRequestCompaniesItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalUntagCompanyRequestCompaniesItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalUntagCompanyRequestCompaniesItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalUntagCompanyRequestCompaniesItemMetadata::DECODERS
-
-  # @return [String] The Intercom defined id representing the company.
-  attr_reader :id
-  # @return [String] The company id you have defined for the company.
-  attr_reader :company_id
-  # @return [Boolean] Always set to true
-  attr_reader :untag
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalUntagCompanyRequestCompaniesItemMetadata
+    FIELDS = {
+      id: 'id',
+      company_id: 'company_id',
+      untag: 'untag'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for UntagCompanyRequestCompaniesItem.
+  # Required object value serialized in the `companies[]` wire field.
+  class UntagCompanyRequestCompaniesItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalUntagCompanyRequestCompaniesItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalUntagCompanyRequestCompaniesItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalUntagCompanyRequestCompaniesItemMetadata::DECODERS
+
+    # @return [String] The Intercom defined id representing the company.
+    attr_reader :id
+    # @return [String] The company id you have defined for the company.
+    attr_reader :company_id
+    # @return [Boolean] Always set to true
+    attr_reader :untag
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalUntagCompanyRequestMetadata
-  FIELDS = {
-    name: "name",
-    companies: "companies",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-    companies
-  ].freeze
-  DECODERS = {
-    companies: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::UntagCompanyRequestCompaniesItem.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for UntagCompanyRequest.
-# You can tag a single company or a list of companies.
-class UntagCompanyRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalUntagCompanyRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalUntagCompanyRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalUntagCompanyRequestMetadata::DECODERS
-
-  # @return [String] The name of the tag which will be untagged from the company
-  attr_reader :name
-  # @return [Array_of_UntagCompanyRequestCompaniesItem] The id or company_id of the company can be passed as input parameters.
-  attr_reader :companies
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalUntagCompanyRequestMetadata
+    FIELDS = {
+      name: 'name',
+      companies: 'companies'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+      companies
+    ].freeze
+    DECODERS = {
+      companies: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::UntagCompanyRequestCompaniesItem.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for UntagCompanyRequest.
+  # You can tag a single company or a list of companies.
+  class UntagCompanyRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalUntagCompanyRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalUntagCompanyRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalUntagCompanyRequestMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [String] The name of the tag which will be untagged from the company
+    attr_reader :name
+    # @return [Array_of_UntagCompanyRequestCompaniesItem] The id or company_id of the company can be passed as input parameters.
+    attr_reader :companies
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

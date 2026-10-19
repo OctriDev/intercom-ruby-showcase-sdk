@@ -12,14 +12,12 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalDeleteOfficeHoursExceptionResponseMetadata
         FIELDS = {
-          id: "id",
-          object: "object",
-          deleted: "deleted",
+          id: 'id',
+          object: 'object',
+          deleted: 'deleted'
         }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
+        REQUIRED_FIELDS = %i[].freeze
+        DECODERS = {}.freeze
       end
 
       # API model for DeleteOfficeHoursExceptionResponse.
@@ -48,14 +46,12 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalDeleteOfficeHoursScheduleResponseMetadata
         FIELDS = {
-          id: "id",
-          object: "object",
-          deleted: "deleted",
+          id: 'id',
+          object: 'object',
+          deleted: 'deleted'
         }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
+        REQUIRED_FIELDS = %i[].freeze
+        DECODERS = {}.freeze
       end
 
       # API model for DeleteOfficeHoursScheduleResponse.
@@ -88,20 +84,13 @@ module OctridevIntercom
       # @param office_hours_schedule_id [String] The unique identifier for the
       #   office hours schedule.
       # @param id [String] The unique identifier for the office hours exception.
-      singleton_class.define_method(:get_office_hours_exception) do |
-        config:,
-        office_hours_schedule_id:,
-        id:,
-        intercom_version: NOT_GIVEN,
-        request_options: nil
-      |
-
+      singleton_class.define_method(:get_office_hours_exception) do |config:, office_hours_schedule_id:, id:, intercom_version: NOT_GIVEN, request_options: nil|
         SdkClient.request(
           'GET',
           [
-            "/office_hours_schedules/",
+            '/office_hours_schedules/',
             SdkClient.encode_path_segment(office_hours_schedule_id),
-            "/office_hours_exceptions/",
+            '/office_hours_exceptions/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -109,10 +98,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'get_office_hours_exception',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -146,15 +135,14 @@ module OctridevIntercom
         recurring_annually: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(exception_date) { Validation.validate_date('exception_date', exception_date) }
 
         SdkClient.request(
           'PUT',
           [
-            "/office_hours_schedules/",
+            '/office_hours_schedules/',
             SdkClient.encode_path_segment(office_hours_schedule_id),
-            "/office_hours_exceptions/",
+            '/office_hours_exceptions/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -163,16 +151,16 @@ module OctridevIntercom
             'exception_type' => exception_type,
             'name' => name,
             'time_intervals' => time_intervals,
-            'recurring_annually' => recurring_annually,
+            'recurring_annually' => recurring_annually
           },
           return_type: ::OctridevIntercom::OfficeHoursException,
           decoder: :json,
           operation_id: 'update_office_hours_exception',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -190,13 +178,12 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/office_hours_schedules/",
+            '/office_hours_schedules/',
             SdkClient.encode_path_segment(office_hours_schedule_id),
-            "/office_hours_exceptions/",
+            '/office_hours_exceptions/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -204,10 +191,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'delete_office_hours_exception',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -223,23 +210,22 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/office_hours_schedules/",
+            '/office_hours_schedules/',
             SdkClient.encode_path_segment(office_hours_schedule_id),
-            "/office_hours_exceptions"
+            '/office_hours_exceptions'
           ].join,
           config: config,
           return_type: ::OctridevIntercom::OfficeHoursExceptionList,
           decoder: :json,
           operation_id: 'list_office_hours_exceptions',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -271,15 +257,14 @@ module OctridevIntercom
         recurring_annually: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_date('exception_date', exception_date)
 
         SdkClient.request(
           'POST',
           [
-            "/office_hours_schedules/",
+            '/office_hours_schedules/',
             SdkClient.encode_path_segment(office_hours_schedule_id),
-            "/office_hours_exceptions"
+            '/office_hours_exceptions'
           ].join,
           config: config,
           body: {
@@ -287,16 +272,16 @@ module OctridevIntercom
             'exception_type' => exception_type,
             'name' => name,
             'time_intervals' => time_intervals,
-            'recurring_annually' => recurring_annually,
+            'recurring_annually' => recurring_annually
           },
           return_type: ::OctridevIntercom::OfficeHoursException,
           decoder: :json,
           operation_id: 'create_office_hours_exception',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -305,17 +290,11 @@ module OctridevIntercom
       # You can fetch the details of a single office hours schedule.
       #
       # @param id [String] The unique identifier for the office hours schedule.
-      singleton_class.define_method(:get_office_hours_schedule) do |
-        config:,
-        id:,
-        intercom_version: NOT_GIVEN,
-        request_options: nil
-      |
-
+      singleton_class.define_method(:get_office_hours_schedule) do |config:, id:, intercom_version: NOT_GIVEN, request_options: nil|
         SdkClient.request(
           'GET',
           [
-            "/office_hours_schedules/",
+            '/office_hours_schedules/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -323,10 +302,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'get_office_hours_schedule',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -350,27 +329,26 @@ module OctridevIntercom
         time_intervals: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PUT',
           [
-            "/office_hours_schedules/",
+            '/office_hours_schedules/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           body: {
             'name' => name,
             'time_zone_name' => time_zone_name,
-            'time_intervals' => time_intervals,
+            'time_intervals' => time_intervals
           },
           return_type: ::OctridevIntercom::OfficeHoursSchedule,
           decoder: :json,
           operation_id: 'update_office_hours_schedule',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -385,11 +363,10 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/office_hours_schedules/",
+            '/office_hours_schedules/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -397,10 +374,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'delete_office_hours_schedule',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -412,19 +389,18 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/office_hours_schedules",
+          '/office_hours_schedules',
           config: config,
           return_type: ::OctridevIntercom::OfficeHoursScheduleList,
           decoder: :json,
           operation_id: 'list_office_hours_schedules',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -446,24 +422,23 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/office_hours_schedules",
+          '/office_hours_schedules',
           config: config,
           body: {
             'name' => name,
             'time_zone_name' => time_zone_name,
-            'time_intervals' => time_intervals,
+            'time_intervals' => time_intervals
           },
           return_type: ::OctridevIntercom::OfficeHoursSchedule,
           decoder: :json,
           operation_id: 'create_office_hours_schedule',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
         ).data
       end
     end

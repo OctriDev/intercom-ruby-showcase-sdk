@@ -5,103 +5,102 @@
 
 # tagged_models_subscription_types domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalSubscriptionTypeMetadata
-  FIELDS = {
-    type: "type",
-    id: "id",
-    state: "state",
-    default_translation: "default_translation",
-    translations: "translations",
-    consent_type: "consent_type",
-    content_types: "content_types",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    state: lambda do |value|
-      ::OctridevIntercom::SubscriptionTypeState.from_value(value)
-    end,
-    default_translation: lambda do |value|
-      ::OctridevIntercom::Translation.from_hash(value)
-    end,
-    translations: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::Translation.from_hash(item) }
-    end,
-    consent_type: lambda do |value|
-      ::OctridevIntercom::SubscriptionTypeConsentType.from_value(value)
-    end,
-    content_types: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::SubscriptionTypeContentTypesItem.from_value(item) }
-    end,
-  }.freeze
-end
-
-# API model for SubscriptionType.
-# A subscription type lets customers easily opt out of non-essential communications without missing what's important to them.
-class SubscriptionType
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSubscriptionTypeMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSubscriptionTypeMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSubscriptionTypeMetadata::DECODERS
-
-  # @return [String] The type of the object - subscription
-  attr_reader :type
-  # @return [String] The unique identifier representing the subscription type.
-  attr_reader :id
-  # @return [SubscriptionTypeState] The state of the subscription type.
-  attr_reader :state
-  # @return [Translation] A translation object contains the localised details of a subscription type.
-  attr_reader :default_translation
-  # @return [Array_of_Translation] An array of translations objects with the localised version of the subscription type in each available locale within your translation settings.
-  attr_reader :translations
-  # @return [SubscriptionTypeConsentType] Describes the type of consent.
-  attr_reader :consent_type
-  # @return [Array_of_SubscriptionTypeContentTypesItem] The message types that this subscription supports - can contain `email` or `sms_message`.
-  attr_reader :content_types
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalSubscriptionTypeMetadata
+    FIELDS = {
+      type: 'type',
+      id: 'id',
+      state: 'state',
+      default_translation: 'default_translation',
+      translations: 'translations',
+      consent_type: 'consent_type',
+      content_types: 'content_types'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      state: lambda do |value|
+        ::OctridevIntercom::SubscriptionTypeState.from_value(value)
+      end,
+      default_translation: lambda do |value|
+        ::OctridevIntercom::Translation.from_hash(value)
+      end,
+      translations: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::Translation.from_hash(item) }
+      end,
+      consent_type: lambda do |value|
+        ::OctridevIntercom::SubscriptionTypeConsentType.from_value(value)
+      end,
+      content_types: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::SubscriptionTypeContentTypesItem.from_value(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for SubscriptionType.
+  # A subscription type lets customers easily opt out of non-essential communications without missing what's important to them.
+  class SubscriptionType
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSubscriptionTypeMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSubscriptionTypeMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSubscriptionTypeMetadata::DECODERS
+
+    # @return [String] The type of the object - subscription
+    attr_reader :type
+    # @return [String] The unique identifier representing the subscription type.
+    attr_reader :id
+    # @return [SubscriptionTypeState] The state of the subscription type.
+    attr_reader :state
+    # @return [Translation] A translation object contains the localised details of a subscription type.
+    attr_reader :default_translation
+    # @return [Array_of_Translation] An array of translations objects with the localised version of the subscription type in each available locale within your translation settings.
+    attr_reader :translations
+    # @return [SubscriptionTypeConsentType] Describes the type of consent.
+    attr_reader :consent_type
+    # @return [Array_of_SubscriptionTypeContentTypesItem] The message types that this subscription supports - can contain `email` or `sms_message`.
+    attr_reader :content_types
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Defines the SubscriptionTypeConsentType SDK namespace.
+  module SubscriptionTypeConsentType
+    OPT_OUT = 'opt_out'
+    OPT_IN = 'opt_in'
+    VALUES = %w[opt_out opt_in].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
 
-# Defines the SubscriptionTypeConsentType SDK namespace.
-module SubscriptionTypeConsentType
-  OPT_OUT = 'opt_out'
-  OPT_IN = 'opt_in'
-  VALUES = ['opt_out', 'opt_in'].freeze
-  def self.from_value(value)
-    value
+  # Defines the SubscriptionTypeContentTypesItem SDK namespace.
+  module SubscriptionTypeContentTypesItem
+    EMAIL = 'email'
+    SMS_MESSAGE = 'sms_message'
+    VALUES = %w[email sms_message].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
 
-# Defines the SubscriptionTypeContentTypesItem SDK namespace.
-module SubscriptionTypeContentTypesItem
-  EMAIL = 'email'
-  SMS_MESSAGE = 'sms_message'
-  VALUES = ['email', 'sms_message'].freeze
-  def self.from_value(value)
-    value
+  # Defines the SubscriptionTypeState SDK namespace.
+  module SubscriptionTypeState
+    LIVE = 'live'
+    DRAFT = 'draft'
+    ARCHIVED = 'archived'
+    VALUES = %w[live draft archived].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
-
-# Defines the SubscriptionTypeState SDK namespace.
-module SubscriptionTypeState
-  LIVE = 'live'
-  DRAFT = 'draft'
-  ARCHIVED = 'archived'
-  VALUES = ['live', 'draft', 'archived'].freeze
-  def self.from_value(value)
-    value
-  end
-end
 end

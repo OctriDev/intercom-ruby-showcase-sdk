@@ -20,23 +20,22 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/conversations/",
+            '/conversations/',
             SdkClient.encode_path_segment(id),
-            "/hitl_events"
+            '/hitl_events'
           ].join,
           config: config,
           return_type: ::OctridevIntercom::HitlEventList,
           decoder: :json,
           operation_id: 'list_hitl_events',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -57,29 +56,28 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, max: 50) }
 
         SdkClient.request(
           'GET',
           [
-            "/conversations/",
+            '/conversations/',
             SdkClient.encode_path_segment(id),
-            "/side_conversations"
+            '/side_conversations'
           ].join,
           config: config,
           query: {
             'page' => QueryValue.new(page, style: 'form', explode: true),
-            'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
+            'per_page' => QueryValue.new(per_page, style: 'form', explode: true)
           },
           return_type: ::OctridevIntercom::SideConversationList,
           decoder: :json,
           operation_id: 'list_side_conversations',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -92,20 +90,19 @@ module OctridevIntercom
         body: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/conversations/redact",
+          '/conversations/redact',
           config: config,
           body: body,
           return_type: ::OctridevIntercom::Conversation,
           decoder: :json,
           operation_id: 'redact_conversation',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -124,26 +121,25 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/conversations/",
+            '/conversations/',
             SdkClient.encode_path_segment(id),
-            "/merge"
+            '/merge'
           ].join,
           config: config,
           body: {
-            'merge_into_conversation_id' => merge_into_conversation_id,
+            'merge_into_conversation_id' => merge_into_conversation_id
           },
           return_type: ::OctridevIntercom::Conversation,
           decoder: :json,
           operation_id: 'merge_conversation',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -173,28 +169,27 @@ module OctridevIntercom
         attributes: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/conversations/",
+            '/conversations/',
             SdkClient.encode_path_segment(conversation_id),
-            "/convert"
+            '/convert'
           ].join,
           config: config,
           body: {
             'ticket_type_id' => ticket_type_id,
             'ticket_state_id' => ticket_state_id,
-            'attributes' => attributes,
+            'attributes' => attributes
           },
           return_type: ::OctridevIntercom::Ticket,
           decoder: :json,
           operation_id: 'convert_conversation_to_ticket',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2 },
+          errors: { '400' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -214,26 +209,25 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, max: 60) }
 
         SdkClient.request(
           'GET',
-          "/conversations/deleted",
+          '/conversations/deleted',
           config: config,
           query: {
             'page' => QueryValue.new(page, style: 'form', explode: true),
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'order' => QueryValue.new(order, style: 'form', explode: true),
+            'order' => QueryValue.new(order, style: 'form', explode: true)
           },
           return_type: ::OctridevIntercom::DeletedConversationList,
           decoder: :json,
           operation_id: 'list_deleted_conversation_ids',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 },
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 }
         ).data
       end
     end

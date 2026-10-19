@@ -5,683 +5,670 @@
 
 # admins domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalActivityLogPerformedByMetadata
-  FIELDS = {
-    type: "type",
-    id: "id",
-    email: "email",
-    ip: "ip",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ActivityLogPerformedBy.
-# Details about the Admin involved in the activity.
-class ActivityLogPerformedBy
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalActivityLogPerformedByMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalActivityLogPerformedByMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalActivityLogPerformedByMetadata::DECODERS
-
-  # @return [String] String representing the object's type. Always has the value `admin`.
-  attr_reader :type
-  # @return [String] The id representing the admin.
-  attr_reader :id
-  # @return [String] The email of the admin.
-  attr_reader :email
-  # @return [String] The IP address of the admin.
-  attr_reader :ip
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalActivityLogPerformedByMetadata
+    FIELDS = {
+      type: 'type',
+      id: 'id',
+      email: 'email',
+      ip: 'ip'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ActivityLogPerformedBy.
+  # Details about the Admin involved in the activity.
+  class ActivityLogPerformedBy
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalActivityLogPerformedByMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalActivityLogPerformedByMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalActivityLogPerformedByMetadata::DECODERS
+
+    # @return [String] String representing the object's type. Always has the value `admin`.
+    attr_reader :type
+    # @return [String] The id representing the admin.
+    attr_reader :id
+    # @return [String] The email of the admin.
+    attr_reader :email
+    # @return [String] The IP address of the admin.
+    attr_reader :ip
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalActivityLogMetadata
-  FIELDS = {
-    id: "id",
-    performed_by: "performed_by",
-    metadata: "metadata",
-    created_at: "created_at",
-    activity_type: "activity_type",
-    activity_description: "activity_description",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    performed_by: lambda do |value|
-      ::OctridevIntercom::ActivityLogPerformedBy.from_hash(value)
-    end,
-    metadata: lambda do |value|
-      ::OctridevIntercom::ActivityLogMetadata.from_hash(value)
-    end,
-    activity_type: lambda do |value|
-      ::OctridevIntercom::ActivityLogActivityType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for ActivityLog.
-# Activities performed by Admins.
-class ActivityLog
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalActivityLogMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalActivityLogMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalActivityLogMetadata::DECODERS
-
-  # @return [String] The id representing the activity.
-  attr_reader :id
-  # @return [ActivityLogPerformedBy] Details about the Admin involved in the activity.
-  attr_reader :performed_by
-  # @return [ActivityLogMetadata] Additional data provided about Admin activity.
-  attr_reader :metadata
-  # @return [Integer] The time the activity was created.
-  attr_reader :created_at
-  # @return [ActivityLogActivityType] Optional enumerated value serialized in the `activity_type` wire field.
-  attr_reader :activity_type
-  # @return [String] A sentence or two describing the activity.
-  attr_reader :activity_description
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalActivityLogMetadata
+    FIELDS = {
+      id: 'id',
+      performed_by: 'performed_by',
+      metadata: 'metadata',
+      created_at: 'created_at',
+      activity_type: 'activity_type',
+      activity_description: 'activity_description'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      performed_by: lambda do |value|
+        ::OctridevIntercom::ActivityLogPerformedBy.from_hash(value)
+      end,
+      metadata: lambda do |value|
+        ::OctridevIntercom::ActivityLogMetadata.from_hash(value)
+      end,
+      activity_type: lambda do |value|
+        ::OctridevIntercom::ActivityLogActivityType.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ActivityLog.
+  # Activities performed by Admins.
+  class ActivityLog
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalActivityLogMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalActivityLogMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalActivityLogMetadata::DECODERS
+
+    # @return [String] The id representing the activity.
+    attr_reader :id
+    # @return [ActivityLogPerformedBy] Details about the Admin involved in the activity.
+    attr_reader :performed_by
+    # @return [ActivityLogMetadata] Additional data provided about Admin activity.
+    attr_reader :metadata
+    # @return [Integer] The time the activity was created.
+    attr_reader :created_at
+    # @return [ActivityLogActivityType] Optional enumerated value serialized in the `activity_type` wire field.
+    attr_reader :activity_type
+    # @return [String] A sentence or two describing the activity.
+    attr_reader :activity_description
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the ActivityLogActivityType SDK namespace.
-module ActivityLogActivityType
-  ADMIN_CONVERSATION_ASSIGNMENT_LIMIT_CHANGE = 'admin_conversation_assignment_limit_change'
-  ADMIN_TICKET_ASSIGNMENT_LIMIT_CHANGE = 'admin_ticket_assignment_limit_change'
-  ADMIN_AVATAR_CHANGE = 'admin_avatar_change'
-  ADMIN_AWAY_MODE_CHANGE = 'admin_away_mode_change'
-  ADMIN_DELETION = 'admin_deletion'
-  ADMIN_DEPROVISIONED = 'admin_deprovisioned'
-  ADMIN_IMPERSONATION_END = 'admin_impersonation_end'
-  ADMIN_IMPERSONATION_START = 'admin_impersonation_start'
-  ADMIN_IMPERSONATION_CONSENT_APPROVED = 'admin_impersonation_consent_approved'
-  ADMIN_IMPERSONATION_CONSENT_REVOKED = 'admin_impersonation_consent_revoked'
-  ADMIN_INVITE_CHANGE = 'admin_invite_change'
-  ADMIN_INVITE_CREATION = 'admin_invite_creation'
-  ADMIN_INVITE_DELETION = 'admin_invite_deletion'
-  ADMIN_LOGIN_FAILURE = 'admin_login_failure'
-  ADMIN_LOGIN_SUCCESS = 'admin_login_success'
-  ADMIN_LOGOUT = 'admin_logout'
-  ADMIN_OCCUPANCY_SETTING_CHANGE = 'admin_occupancy_setting_change'
-  ADMIN_OCCUPANCY_STATE_CHANGE = 'admin_occupancy_state_change'
-  ADMIN_PASSWORD_RESET_REQUEST = 'admin_password_reset_request'
-  ADMIN_PASSWORD_RESET_SUCCESS = 'admin_password_reset_success'
-  ADMIN_PERMISSION_CHANGE = 'admin_permission_change'
-  ADMIN_PROVISIONED = 'admin_provisioned'
-  ADMIN_TWO_FACTOR_AUTH_CHANGE = 'admin_two_factor_auth_change'
-  ADMIN_UNAUTHORIZED_SIGN_IN_METHOD = 'admin_unauthorized_sign_in_method'
-  APP_ADMIN_JOIN = 'app_admin_join'
-  APP_AUTHENTICATION_METHOD_CHANGE = 'app_authentication_method_change'
-  APP_DATA_DELETION = 'app_data_deletion'
-  APP_DATA_EXPORT = 'app_data_export'
-  APP_GOOGLE_SSO_DOMAIN_CHANGE = 'app_google_sso_domain_change'
-  APP_IDENTITY_VERIFICATION_CHANGE = 'app_identity_verification_change'
-  APP_NAME_CHANGE = 'app_name_change'
-  APP_OUTBOUND_ADDRESS_CHANGE = 'app_outbound_address_change'
-  APP_PACKAGE_INSTALLATION = 'app_package_installation'
-  APP_PACKAGE_TOKEN_REGENERATION = 'app_package_token_regeneration'
-  APP_PACKAGE_UNINSTALLATION = 'app_package_uninstallation'
-  APP_TEAM_CREATION = 'app_team_creation'
-  APP_TEAM_DELETION = 'app_team_deletion'
-  APP_TEAM_MEMBERSHIP_MODIFICATION = 'app_team_membership_modification'
-  APP_TIMEZONE_CHANGE = 'app_timezone_change'
-  APP_WEBHOOK_CREATION = 'app_webhook_creation'
-  APP_WEBHOOK_DELETION = 'app_webhook_deletion'
-  ARTICLES_IN_MESSENGER_ENABLED_CHANGE = 'articles_in_messenger_enabled_change'
-  AUTOMATIC_AWAY_MODE_SETTING_CHANGE = 'automatic_away_mode_setting_change'
-  BULK_DELETE = 'bulk_delete'
-  BULK_EXPORT = 'bulk_export'
-  CAMPAIGN_DELETION = 'campaign_deletion'
-  CAMPAIGN_STATE_CHANGE = 'campaign_state_change'
-  CONVERSATION_DELETION_SCHEDULE_CREATION = 'conversation_deletion_schedule_creation'
-  CONVERSATION_DELETION_SCHEDULE_DELETION = 'conversation_deletion_schedule_deletion'
-  CONVERSATION_DELETION_SCHEDULE_STATE_CHANGE = 'conversation_deletion_schedule_state_change'
-  CONVERSATION_DELETION_SCHEDULE_UPDATE = 'conversation_deletion_schedule_update'
-  CONVERSATION_PART_DELETION = 'conversation_part_deletion'
-  CONVERSATION_PDF_EXPORT = 'conversation_pdf_export'
-  CONVERSATION_TOPIC_CHANGE = 'conversation_topic_change'
-  CONVERSATION_TOPIC_CREATION = 'conversation_topic_creation'
-  CONVERSATION_TOPIC_DELETION = 'conversation_topic_deletion'
-  CONTENT_REDACTION_RULE_CREATION = 'content_redaction_rule_creation'
-  CONTENT_REDACTION_RULE_DELETION = 'content_redaction_rule_deletion'
-  CONTENT_REDACTION_RULE_UPDATE = 'content_redaction_rule_update'
-  CSV_IMPORT_COMPLETION = 'csv_import_completion'
-  CSV_IMPORT_CREATION = 'csv_import_creation'
-  CUSTOM_AUTHENTICATION_TOKEN_CREATION = 'custom_authentication_token_creation'
-  HELP_CENTER_SETTINGS_CHANGE = 'help_center_settings_change'
-  INBOUND_CONVERSATIONS_CHANGE = 'inbound_conversations_change'
-  INBOX_ACCESS_CHANGE = 'inbox_access_change'
-  INBOX_BULK_ACTION = 'inbox_bulk_action'
-  MACRO_CREATION = 'macro_creation'
-  MACRO_DELETION = 'macro_deletion'
-  MACRO_UPDATE = 'macro_update'
-  MACRO_USAGE_EXPORT = 'macro_usage_export'
-  MALICIOUS_DOMAINS_SETTING_CHANGE = 'malicious_domains_setting_change'
-  MESSAGE_DELETION = 'message_deletion'
-  MESSAGE_STATE_CHANGE = 'message_state_change'
-  MESSENGER_API_SECRET_CREATION = 'messenger_api_secret_creation'
-  MESSENGER_API_SECRET_DELETION = 'messenger_api_secret_deletion'
-  MESSENGER_LOOK_AND_FEEL_CHANGE = 'messenger_look_and_feel_change'
-  MESSENGER_SEARCH_REQUIRED_CHANGE = 'messenger_search_required_change'
-  MESSENGER_SPACES_CHANGE = 'messenger_spaces_change'
-  OAUTH_TOKEN_REVOCATION = 'oauth_token_revocation'
-  OFFICE_HOURS_CHANGE = 'office_hours_change'
-  ROLE_CHANGE = 'role_change'
-  ROLE_CREATION = 'role_creation'
-  ROLE_DELETION = 'role_deletion'
-  RULESET_ACTIVATION_TITLE_PREVIEW = 'ruleset_activation_title_preview'
-  RULESET_CREATION = 'ruleset_creation'
-  RULESET_DELETION = 'ruleset_deletion'
-  SEARCH_BROWSE_ENABLED_CHANGE = 'search_browse_enabled_change'
-  SEARCH_BROWSE_REQUIRED_CHANGE = 'search_browse_required_change'
-  SEAT_CHANGE = 'seat_change'
-  SEAT_REVOKE = 'seat_revoke'
-  SECURITY_SETTINGS_CHANGE = 'security_settings_change'
-  SERIES_CREATION = 'series_creation'
-  SERIES_DELETION = 'series_deletion'
-  SERIES_SETTINGS_UPDATE = 'series_settings_update'
-  SERIES_STATUS_CHANGE = 'series_status_change'
-  SERIES_UPDATE = 'series_update'
-  STRIP_INBOUND_EMAIL_LINKS_CHANGE = 'strip_inbound_email_links_change'
-  TEMPORARY_EXPECTATION_CHANGE = 'temporary_expectation_change'
-  TEAM_ASSIGNMENT_LIMIT_CHANGE = 'team_assignment_limit_change'
-  TRUSTED_DOMAINS_SETTING_CHANGE = 'trusted_domains_setting_change'
-  UNASSIGN_UNSNOOZED_AT_CAPACITY_SETTING_CHANGE = 'unassign_unsnoozed_at_capacity_setting_change'
-  UNASSIGN_UNSNOOZED_WHEN_AWAY_SETTING_CHANGE = 'unassign_unsnoozed_when_away_setting_change'
-  UPFRONT_EMAIL_COLLECTION_CHANGE = 'upfront_email_collection_change'
-  ALLOWED_ATTACHMENT_FILETYPES_SETTING_CHANGE = 'allowed_attachment_filetypes_setting_change'
-  ATTACH_UPLOADS_INLINE_SETTING_CHANGE = 'attach_uploads_inline_setting_change'
-  TEAMMATE_GIFS_SETTING_CHANGE = 'teammate_gifs_setting_change'
-  USER_CAMERA_ATTACHMENTS_SETTING_CHANGE = 'user_camera_attachments_setting_change'
-  USER_CONVERSATION_ATTACHMENTS_SETTING_CHANGE = 'user_conversation_attachments_setting_change'
-  USER_FILE_ATTACHMENTS_SETTING_CHANGE = 'user_file_attachments_setting_change'
-  USER_GIFS_SETTING_CHANGE = 'user_gifs_setting_change'
-  USER_MEDIA_ATTACHMENTS_SETTING_CHANGE = 'user_media_attachments_setting_change'
-  USER_VOICE_NOTES_SETTING_CHANGE = 'user_voice_notes_setting_change'
-  WELCOME_MESSAGE_CHANGE = 'welcome_message_change'
-  WORKSPACE_DELETION_REQUEST = 'workspace_deletion_request'
-  HIDE_CSAT_FROM_AGENTS_SETTING_CHANGE = 'hide_csat_from_agents_setting_change'
-  VALUES = [
-    'admin_conversation_assignment_limit_change', 'admin_ticket_assignment_limit_change',
-    'admin_avatar_change', 'admin_away_mode_change', 'admin_deletion', 'admin_deprovisioned',
-    'admin_impersonation_end', 'admin_impersonation_start', 'admin_impersonation_consent_approved',
-    'admin_impersonation_consent_revoked', 'admin_invite_change', 'admin_invite_creation',
-    'admin_invite_deletion', 'admin_login_failure', 'admin_login_success', 'admin_logout',
-    'admin_occupancy_setting_change', 'admin_occupancy_state_change', 'admin_password_reset_request',
-    'admin_password_reset_success', 'admin_permission_change', 'admin_provisioned',
-    'admin_two_factor_auth_change', 'admin_unauthorized_sign_in_method', 'app_admin_join',
-    'app_authentication_method_change', 'app_data_deletion', 'app_data_export',
-    'app_google_sso_domain_change', 'app_identity_verification_change', 'app_name_change',
-    'app_outbound_address_change', 'app_package_installation', 'app_package_token_regeneration',
-    'app_package_uninstallation', 'app_team_creation', 'app_team_deletion',
-    'app_team_membership_modification', 'app_timezone_change', 'app_webhook_creation',
-    'app_webhook_deletion', 'articles_in_messenger_enabled_change',
-    'automatic_away_mode_setting_change', 'bulk_delete', 'bulk_export', 'campaign_deletion',
-    'campaign_state_change', 'conversation_deletion_schedule_creation',
-    'conversation_deletion_schedule_deletion', 'conversation_deletion_schedule_state_change',
-    'conversation_deletion_schedule_update', 'conversation_part_deletion', 'conversation_pdf_export',
-    'conversation_topic_change', 'conversation_topic_creation', 'conversation_topic_deletion',
-    'content_redaction_rule_creation', 'content_redaction_rule_deletion',
-    'content_redaction_rule_update', 'csv_import_completion', 'csv_import_creation',
-    'custom_authentication_token_creation', 'help_center_settings_change',
-    'inbound_conversations_change', 'inbox_access_change', 'inbox_bulk_action', 'macro_creation',
-    'macro_deletion', 'macro_update', 'macro_usage_export', 'malicious_domains_setting_change',
-    'message_deletion', 'message_state_change', 'messenger_api_secret_creation',
-    'messenger_api_secret_deletion', 'messenger_look_and_feel_change',
-    'messenger_search_required_change', 'messenger_spaces_change', 'oauth_token_revocation',
-    'office_hours_change', 'role_change', 'role_creation', 'role_deletion',
-    'ruleset_activation_title_preview', 'ruleset_creation', 'ruleset_deletion',
-    'search_browse_enabled_change', 'search_browse_required_change', 'seat_change', 'seat_revoke',
-    'security_settings_change', 'series_creation', 'series_deletion', 'series_settings_update',
-    'series_status_change', 'series_update', 'strip_inbound_email_links_change',
-    'temporary_expectation_change', 'team_assignment_limit_change', 'trusted_domains_setting_change',
-    'unassign_unsnoozed_at_capacity_setting_change', 'unassign_unsnoozed_when_away_setting_change',
-    'upfront_email_collection_change', 'allowed_attachment_filetypes_setting_change',
-    'attach_uploads_inline_setting_change', 'teammate_gifs_setting_change',
-    'user_camera_attachments_setting_change', 'user_conversation_attachments_setting_change',
-    'user_file_attachments_setting_change', 'user_gifs_setting_change',
-    'user_media_attachments_setting_change', 'user_voice_notes_setting_change',
-    'welcome_message_change', 'workspace_deletion_request', 'hide_csat_from_agents_setting_change'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalActivityLogListMetadata
-  FIELDS = {
-    type: "type",
-    pages: "pages",
-    activity_logs: "activity_logs",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    pages: lambda do |value|
-      ::OctridevIntercom::CursorPages.from_hash(value)
-    end,
-    activity_logs: lambda do |value|
-      value&.map { |item| item.nil? ? nil : ::OctridevIntercom::ActivityLog.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for ActivityLogList.
-# A paginated list of activity logs.
-class ActivityLogList
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalActivityLogListMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalActivityLogListMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalActivityLogListMetadata::DECODERS
-
-  # @return [String] String representing the object's type. Always has the value `activity_log.list`.
-  attr_reader :type
-  # @return [CursorPages] Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
-  attr_reader :pages
-  # @return [Array_of_ActivityLog] An array of activity logs
-  attr_reader :activity_logs
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ActivityLogActivityType SDK namespace.
+  module ActivityLogActivityType
+    ADMIN_CONVERSATION_ASSIGNMENT_LIMIT_CHANGE = 'admin_conversation_assignment_limit_change'
+    ADMIN_TICKET_ASSIGNMENT_LIMIT_CHANGE = 'admin_ticket_assignment_limit_change'
+    ADMIN_AVATAR_CHANGE = 'admin_avatar_change'
+    ADMIN_AWAY_MODE_CHANGE = 'admin_away_mode_change'
+    ADMIN_DELETION = 'admin_deletion'
+    ADMIN_DEPROVISIONED = 'admin_deprovisioned'
+    ADMIN_IMPERSONATION_END = 'admin_impersonation_end'
+    ADMIN_IMPERSONATION_START = 'admin_impersonation_start'
+    ADMIN_IMPERSONATION_CONSENT_APPROVED = 'admin_impersonation_consent_approved'
+    ADMIN_IMPERSONATION_CONSENT_REVOKED = 'admin_impersonation_consent_revoked'
+    ADMIN_INVITE_CHANGE = 'admin_invite_change'
+    ADMIN_INVITE_CREATION = 'admin_invite_creation'
+    ADMIN_INVITE_DELETION = 'admin_invite_deletion'
+    ADMIN_LOGIN_FAILURE = 'admin_login_failure'
+    ADMIN_LOGIN_SUCCESS = 'admin_login_success'
+    ADMIN_LOGOUT = 'admin_logout'
+    ADMIN_OCCUPANCY_SETTING_CHANGE = 'admin_occupancy_setting_change'
+    ADMIN_OCCUPANCY_STATE_CHANGE = 'admin_occupancy_state_change'
+    ADMIN_PASSWORD_RESET_REQUEST = 'admin_password_reset_request'
+    ADMIN_PASSWORD_RESET_SUCCESS = 'admin_password_reset_success'
+    ADMIN_PERMISSION_CHANGE = 'admin_permission_change'
+    ADMIN_PROVISIONED = 'admin_provisioned'
+    ADMIN_TWO_FACTOR_AUTH_CHANGE = 'admin_two_factor_auth_change'
+    ADMIN_UNAUTHORIZED_SIGN_IN_METHOD = 'admin_unauthorized_sign_in_method'
+    APP_ADMIN_JOIN = 'app_admin_join'
+    APP_AUTHENTICATION_METHOD_CHANGE = 'app_authentication_method_change'
+    APP_DATA_DELETION = 'app_data_deletion'
+    APP_DATA_EXPORT = 'app_data_export'
+    APP_GOOGLE_SSO_DOMAIN_CHANGE = 'app_google_sso_domain_change'
+    APP_IDENTITY_VERIFICATION_CHANGE = 'app_identity_verification_change'
+    APP_NAME_CHANGE = 'app_name_change'
+    APP_OUTBOUND_ADDRESS_CHANGE = 'app_outbound_address_change'
+    APP_PACKAGE_INSTALLATION = 'app_package_installation'
+    APP_PACKAGE_TOKEN_REGENERATION = 'app_package_token_regeneration'
+    APP_PACKAGE_UNINSTALLATION = 'app_package_uninstallation'
+    APP_TEAM_CREATION = 'app_team_creation'
+    APP_TEAM_DELETION = 'app_team_deletion'
+    APP_TEAM_MEMBERSHIP_MODIFICATION = 'app_team_membership_modification'
+    APP_TIMEZONE_CHANGE = 'app_timezone_change'
+    APP_WEBHOOK_CREATION = 'app_webhook_creation'
+    APP_WEBHOOK_DELETION = 'app_webhook_deletion'
+    ARTICLES_IN_MESSENGER_ENABLED_CHANGE = 'articles_in_messenger_enabled_change'
+    AUTOMATIC_AWAY_MODE_SETTING_CHANGE = 'automatic_away_mode_setting_change'
+    BULK_DELETE = 'bulk_delete'
+    BULK_EXPORT = 'bulk_export'
+    CAMPAIGN_DELETION = 'campaign_deletion'
+    CAMPAIGN_STATE_CHANGE = 'campaign_state_change'
+    CONVERSATION_DELETION_SCHEDULE_CREATION = 'conversation_deletion_schedule_creation'
+    CONVERSATION_DELETION_SCHEDULE_DELETION = 'conversation_deletion_schedule_deletion'
+    CONVERSATION_DELETION_SCHEDULE_STATE_CHANGE = 'conversation_deletion_schedule_state_change'
+    CONVERSATION_DELETION_SCHEDULE_UPDATE = 'conversation_deletion_schedule_update'
+    CONVERSATION_PART_DELETION = 'conversation_part_deletion'
+    CONVERSATION_PDF_EXPORT = 'conversation_pdf_export'
+    CONVERSATION_TOPIC_CHANGE = 'conversation_topic_change'
+    CONVERSATION_TOPIC_CREATION = 'conversation_topic_creation'
+    CONVERSATION_TOPIC_DELETION = 'conversation_topic_deletion'
+    CONTENT_REDACTION_RULE_CREATION = 'content_redaction_rule_creation'
+    CONTENT_REDACTION_RULE_DELETION = 'content_redaction_rule_deletion'
+    CONTENT_REDACTION_RULE_UPDATE = 'content_redaction_rule_update'
+    CSV_IMPORT_COMPLETION = 'csv_import_completion'
+    CSV_IMPORT_CREATION = 'csv_import_creation'
+    CUSTOM_AUTHENTICATION_TOKEN_CREATION = 'custom_authentication_token_creation'
+    HELP_CENTER_SETTINGS_CHANGE = 'help_center_settings_change'
+    INBOUND_CONVERSATIONS_CHANGE = 'inbound_conversations_change'
+    INBOX_ACCESS_CHANGE = 'inbox_access_change'
+    INBOX_BULK_ACTION = 'inbox_bulk_action'
+    MACRO_CREATION = 'macro_creation'
+    MACRO_DELETION = 'macro_deletion'
+    MACRO_UPDATE = 'macro_update'
+    MACRO_USAGE_EXPORT = 'macro_usage_export'
+    MALICIOUS_DOMAINS_SETTING_CHANGE = 'malicious_domains_setting_change'
+    MESSAGE_DELETION = 'message_deletion'
+    MESSAGE_STATE_CHANGE = 'message_state_change'
+    MESSENGER_API_SECRET_CREATION = 'messenger_api_secret_creation'
+    MESSENGER_API_SECRET_DELETION = 'messenger_api_secret_deletion'
+    MESSENGER_LOOK_AND_FEEL_CHANGE = 'messenger_look_and_feel_change'
+    MESSENGER_SEARCH_REQUIRED_CHANGE = 'messenger_search_required_change'
+    MESSENGER_SPACES_CHANGE = 'messenger_spaces_change'
+    OAUTH_TOKEN_REVOCATION = 'oauth_token_revocation'
+    OFFICE_HOURS_CHANGE = 'office_hours_change'
+    ROLE_CHANGE = 'role_change'
+    ROLE_CREATION = 'role_creation'
+    ROLE_DELETION = 'role_deletion'
+    RULESET_ACTIVATION_TITLE_PREVIEW = 'ruleset_activation_title_preview'
+    RULESET_CREATION = 'ruleset_creation'
+    RULESET_DELETION = 'ruleset_deletion'
+    SEARCH_BROWSE_ENABLED_CHANGE = 'search_browse_enabled_change'
+    SEARCH_BROWSE_REQUIRED_CHANGE = 'search_browse_required_change'
+    SEAT_CHANGE = 'seat_change'
+    SEAT_REVOKE = 'seat_revoke'
+    SECURITY_SETTINGS_CHANGE = 'security_settings_change'
+    SERIES_CREATION = 'series_creation'
+    SERIES_DELETION = 'series_deletion'
+    SERIES_SETTINGS_UPDATE = 'series_settings_update'
+    SERIES_STATUS_CHANGE = 'series_status_change'
+    SERIES_UPDATE = 'series_update'
+    STRIP_INBOUND_EMAIL_LINKS_CHANGE = 'strip_inbound_email_links_change'
+    TEMPORARY_EXPECTATION_CHANGE = 'temporary_expectation_change'
+    TEAM_ASSIGNMENT_LIMIT_CHANGE = 'team_assignment_limit_change'
+    TRUSTED_DOMAINS_SETTING_CHANGE = 'trusted_domains_setting_change'
+    UNASSIGN_UNSNOOZED_AT_CAPACITY_SETTING_CHANGE = 'unassign_unsnoozed_at_capacity_setting_change'
+    UNASSIGN_UNSNOOZED_WHEN_AWAY_SETTING_CHANGE = 'unassign_unsnoozed_when_away_setting_change'
+    UPFRONT_EMAIL_COLLECTION_CHANGE = 'upfront_email_collection_change'
+    ALLOWED_ATTACHMENT_FILETYPES_SETTING_CHANGE = 'allowed_attachment_filetypes_setting_change'
+    ATTACH_UPLOADS_INLINE_SETTING_CHANGE = 'attach_uploads_inline_setting_change'
+    TEAMMATE_GIFS_SETTING_CHANGE = 'teammate_gifs_setting_change'
+    USER_CAMERA_ATTACHMENTS_SETTING_CHANGE = 'user_camera_attachments_setting_change'
+    USER_CONVERSATION_ATTACHMENTS_SETTING_CHANGE = 'user_conversation_attachments_setting_change'
+    USER_FILE_ATTACHMENTS_SETTING_CHANGE = 'user_file_attachments_setting_change'
+    USER_GIFS_SETTING_CHANGE = 'user_gifs_setting_change'
+    USER_MEDIA_ATTACHMENTS_SETTING_CHANGE = 'user_media_attachments_setting_change'
+    USER_VOICE_NOTES_SETTING_CHANGE = 'user_voice_notes_setting_change'
+    WELCOME_MESSAGE_CHANGE = 'welcome_message_change'
+    WORKSPACE_DELETION_REQUEST = 'workspace_deletion_request'
+    HIDE_CSAT_FROM_AGENTS_SETTING_CHANGE = 'hide_csat_from_agents_setting_change'
+    VALUES = %w[
+      admin_conversation_assignment_limit_change admin_ticket_assignment_limit_change
+      admin_avatar_change admin_away_mode_change admin_deletion admin_deprovisioned
+      admin_impersonation_end admin_impersonation_start admin_impersonation_consent_approved
+      admin_impersonation_consent_revoked admin_invite_change admin_invite_creation
+      admin_invite_deletion admin_login_failure admin_login_success admin_logout
+      admin_occupancy_setting_change admin_occupancy_state_change admin_password_reset_request
+      admin_password_reset_success admin_permission_change admin_provisioned
+      admin_two_factor_auth_change admin_unauthorized_sign_in_method app_admin_join
+      app_authentication_method_change app_data_deletion app_data_export
+      app_google_sso_domain_change app_identity_verification_change app_name_change
+      app_outbound_address_change app_package_installation app_package_token_regeneration
+      app_package_uninstallation app_team_creation app_team_deletion
+      app_team_membership_modification app_timezone_change app_webhook_creation
+      app_webhook_deletion articles_in_messenger_enabled_change
+      automatic_away_mode_setting_change bulk_delete bulk_export campaign_deletion
+      campaign_state_change conversation_deletion_schedule_creation
+      conversation_deletion_schedule_deletion conversation_deletion_schedule_state_change
+      conversation_deletion_schedule_update conversation_part_deletion conversation_pdf_export
+      conversation_topic_change conversation_topic_creation conversation_topic_deletion
+      content_redaction_rule_creation content_redaction_rule_deletion
+      content_redaction_rule_update csv_import_completion csv_import_creation
+      custom_authentication_token_creation help_center_settings_change
+      inbound_conversations_change inbox_access_change inbox_bulk_action macro_creation
+      macro_deletion macro_update macro_usage_export malicious_domains_setting_change
+      message_deletion message_state_change messenger_api_secret_creation
+      messenger_api_secret_deletion messenger_look_and_feel_change
+      messenger_search_required_change messenger_spaces_change oauth_token_revocation
+      office_hours_change role_change role_creation role_deletion
+      ruleset_activation_title_preview ruleset_creation ruleset_deletion
+      search_browse_enabled_change search_browse_required_change seat_change seat_revoke
+      security_settings_change series_creation series_deletion series_settings_update
+      series_status_change series_update strip_inbound_email_links_change
+      temporary_expectation_change team_assignment_limit_change trusted_domains_setting_change
+      unassign_unsnoozed_at_capacity_setting_change unassign_unsnoozed_when_away_setting_change
+      upfront_email_collection_change allowed_attachment_filetypes_setting_change
+      attach_uploads_inline_setting_change teammate_gifs_setting_change
+      user_camera_attachments_setting_change user_conversation_attachments_setting_change
+      user_file_attachments_setting_change user_gifs_setting_change
+      user_media_attachments_setting_change user_voice_notes_setting_change
+      welcome_message_change workspace_deletion_request hide_csat_from_agents_setting_change
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalActivityLogListMetadata
+    FIELDS = {
+      type: 'type',
+      pages: 'pages',
+      activity_logs: 'activity_logs'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      pages: lambda do |value|
+        ::OctridevIntercom::CursorPages.from_hash(value)
+      end,
+      activity_logs: lambda do |value|
+        value&.map { |item| item.nil? ? nil : ::OctridevIntercom::ActivityLog.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ActivityLogList.
+  # A paginated list of activity logs.
+  class ActivityLogList
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalActivityLogListMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalActivityLogListMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalActivityLogListMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalActivityLogMetadataTeamMetadata
-  FIELDS = {
-    id: "id",
-    name: "name",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [String] String representing the object's type. Always has the value `activity_log.list`.
+    attr_reader :type
+    # @return [CursorPages] Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
+    attr_reader :pages
+    # @return [Array_of_ActivityLog] An array of activity logs
+    attr_reader :activity_logs
 
-# API model for ActivityLogMetadataTeam.
-# Details about the team whose assignment limit was changed.
-class ActivityLogMetadataTeam
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalActivityLogMetadataTeamMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalActivityLogMetadataTeamMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalActivityLogMetadataTeamMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Integer] The ID of the team.
-  attr_reader :id
-  # @return [String] The name of the team.
-  attr_reader :name
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalActivityLogMetadataTeamMetadata
+    FIELDS = {
+      id: 'id',
+      name: 'name'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ActivityLogMetadataTeam.
+  # Details about the team whose assignment limit was changed.
+  class ActivityLogMetadataTeam
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalActivityLogMetadataTeamMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalActivityLogMetadataTeamMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalActivityLogMetadataTeamMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalActivityLogMetadataMetadata
-  FIELDS = {
-    sign_in_method: "sign_in_method",
-    external_id: "external_id",
-    away_mode: "away_mode",
-    away_status_reason: "away_status_reason",
-    reassign_conversations: "reassign_conversations",
-    source: "source",
-    auto_changed: "auto_changed",
-    update_by: "update_by",
-    update_by_name: "update_by_name",
-    previous_state: "previous_state",
-    new_state: "new_state",
-    threshold_minutes: "threshold_minutes",
-    last_activity_at: "last_activity_at",
-    auto: "auto",
-    setting_type: "setting_type",
-    changes: "changes",
-    conversation_assignment_limit: "conversation_assignment_limit",
-    ticket_assignment_limit: "ticket_assignment_limit",
-    team: "team",
-    team_assignment_limit: "team_assignment_limit",
-    enabled: "enabled",
-    mode: "mode",
-    consent_id: "consent_id",
-    expired_at: "expired_at",
-    before: "before",
-    after: "after",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    team: lambda do |value|
-      ::OctridevIntercom::ActivityLogMetadataTeam.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [Integer] The ID of the team.
+    attr_reader :id
+    # @return [String] The name of the team.
+    attr_reader :name
 
-# API model for ActivityLogMetadata.
-# Additional data provided about Admin activity.
-class ActivityLogMetadata
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalActivityLogMetadataMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalActivityLogMetadataMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalActivityLogMetadataMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] The way the admin signed in.
-  attr_reader :sign_in_method
-  # @return [String] The unique identifier for the contact which is provided by the Client.
-  attr_reader :external_id
-  # @return [Boolean] The away mode status which is set to true when away and false when returned.
-  attr_reader :away_mode
-  # @return [String] The reason the Admin is away.
-  attr_reader :away_status_reason
-  # @return [Boolean] Indicates if conversations should be reassigned while an Admin is away.
-  attr_reader :reassign_conversations
-  # @return [String] The action that initiated the status change.
-  attr_reader :source
-  # @return [String] Indicates if the status was changed automatically or manually.
-  attr_reader :auto_changed
-  # @return [Integer] The ID of the Admin who initiated the activity.
-  attr_reader :update_by
-  # @return [String] The name of the Admin who initiated the activity.
-  attr_reader :update_by_name
-  # @return [String] The state before the change. `idle` or `occupied` for an occupancy change, and null when the Admin had not been classified yet; `enabled` or `disabled` for an IP allowlist change.
-  attr_reader :previous_state
-  # @return [String] The state after the change. `idle` or `occupied` for an occupancy change; `enabled` or `disabled` for an IP allowlist change.
-  attr_reader :new_state
-  # @return [Integer] The inactivity window, in minutes, used to classify the Admin.
-  attr_reader :threshold_minutes
-  # @return [Integer] The time of the Admin's last recorded activity.
-  attr_reader :last_activity_at
-  # @return [Boolean] Indicates the state was derived automatically rather than set by an Admin.
-  attr_reader :auto
-  # @return [String] The group of workspace settings the change belongs to, for example `teammate_occupancy` or `automatic_away_mode`.
-  attr_reader :setting_type
-  # @return [Hash] The settings altered by the change, keyed by setting name. Only settings whose value actually moved are included, so an unchanged setting is absent rather than present with equal values.
-  attr_reader :changes
-  # @return [Integer] The conversation assignment limit value for an admin.
-  attr_reader :conversation_assignment_limit
-  # @return [Integer] The ticket assignment limit value for an admin.
-  attr_reader :ticket_assignment_limit
-  # @return [ActivityLogMetadataTeam] Details about the team whose assignment limit was changed.
-  attr_reader :team
-  # @return [Integer] The team assignment limit value (null if limit was removed).
-  attr_reader :team_assignment_limit
-  # @return [Boolean] Indicates if the setting is enabled or disabled.
-  attr_reader :enabled
-  # @return [String] The mode of the setting (e.g., when_away_only, when_away_and_reassign).
-  attr_reader :mode
-  # @return [Integer] The ID of the impersonation consent.
-  attr_reader :consent_id
-  # @return [String] The timestamp when the impersonation consent expires.
-  attr_reader :expired_at
-  # @return [Hash] The state of settings or values before the change. Structure varies by activity type.
-  attr_reader :before
-  # @return [Hash] The state of settings or values after the change. Structure varies by activity type.
-  attr_reader :after
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalActivityLogMetadataMetadata
+    FIELDS = {
+      sign_in_method: 'sign_in_method',
+      external_id: 'external_id',
+      away_mode: 'away_mode',
+      away_status_reason: 'away_status_reason',
+      reassign_conversations: 'reassign_conversations',
+      source: 'source',
+      auto_changed: 'auto_changed',
+      update_by: 'update_by',
+      update_by_name: 'update_by_name',
+      previous_state: 'previous_state',
+      new_state: 'new_state',
+      threshold_minutes: 'threshold_minutes',
+      last_activity_at: 'last_activity_at',
+      auto: 'auto',
+      setting_type: 'setting_type',
+      changes: 'changes',
+      conversation_assignment_limit: 'conversation_assignment_limit',
+      ticket_assignment_limit: 'ticket_assignment_limit',
+      team: 'team',
+      team_assignment_limit: 'team_assignment_limit',
+      enabled: 'enabled',
+      mode: 'mode',
+      consent_id: 'consent_id',
+      expired_at: 'expired_at',
+      before: 'before',
+      after: 'after'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      team: lambda do |value|
+        ::OctridevIntercom::ActivityLogMetadataTeam.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ActivityLogMetadata.
+  # Additional data provided about Admin activity.
+  class ActivityLogMetadata
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalActivityLogMetadataMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalActivityLogMetadataMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalActivityLogMetadataMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalAdminListMetadata
-  FIELDS = {
-    type: "type",
-    admins: "admins",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    admins: lambda do |value|
-      value&.map { |item| item.nil? ? nil : ::OctridevIntercom::Admin.from_hash(item) }
-    end,
-  }.freeze
-end
+    # @return [String] The way the admin signed in.
+    attr_reader :sign_in_method
+    # @return [String] The unique identifier for the contact which is provided by the Client.
+    attr_reader :external_id
+    # @return [Boolean] The away mode status which is set to true when away and false when returned.
+    attr_reader :away_mode
+    # @return [String] The reason the Admin is away.
+    attr_reader :away_status_reason
+    # @return [Boolean] Indicates if conversations should be reassigned while an Admin is away.
+    attr_reader :reassign_conversations
+    # @return [String] The action that initiated the status change.
+    attr_reader :source
+    # @return [String] Indicates if the status was changed automatically or manually.
+    attr_reader :auto_changed
+    # @return [Integer] The ID of the Admin who initiated the activity.
+    attr_reader :update_by
+    # @return [String] The name of the Admin who initiated the activity.
+    attr_reader :update_by_name
+    # @return [String] The state before the change. `idle` or `occupied` for an occupancy change, and null when the Admin had not been classified yet; `enabled` or `disabled` for an IP allowlist change.
+    attr_reader :previous_state
+    # @return [String] The state after the change. `idle` or `occupied` for an occupancy change; `enabled` or `disabled` for an IP allowlist change.
+    attr_reader :new_state
+    # @return [Integer] The inactivity window, in minutes, used to classify the Admin.
+    attr_reader :threshold_minutes
+    # @return [Integer] The time of the Admin's last recorded activity.
+    attr_reader :last_activity_at
+    # @return [Boolean] Indicates the state was derived automatically rather than set by an Admin.
+    attr_reader :auto
+    # @return [String] The group of workspace settings the change belongs to, for example `teammate_occupancy` or `automatic_away_mode`.
+    attr_reader :setting_type
+    # @return [Hash] The settings altered by the change, keyed by setting name. Only settings whose value actually moved are included, so an unchanged setting is absent rather than present with equal values.
+    attr_reader :changes
+    # @return [Integer] The conversation assignment limit value for an admin.
+    attr_reader :conversation_assignment_limit
+    # @return [Integer] The ticket assignment limit value for an admin.
+    attr_reader :ticket_assignment_limit
+    # @return [ActivityLogMetadataTeam] Details about the team whose assignment limit was changed.
+    attr_reader :team
+    # @return [Integer] The team assignment limit value (null if limit was removed).
+    attr_reader :team_assignment_limit
+    # @return [Boolean] Indicates if the setting is enabled or disabled.
+    attr_reader :enabled
+    # @return [String] The mode of the setting (e.g., when_away_only, when_away_and_reassign).
+    attr_reader :mode
+    # @return [Integer] The ID of the impersonation consent.
+    attr_reader :consent_id
+    # @return [String] The timestamp when the impersonation consent expires.
+    attr_reader :expired_at
+    # @return [Hash] The state of settings or values before the change. Structure varies by activity type.
+    attr_reader :before
+    # @return [Hash] The state of settings or values after the change. Structure varies by activity type.
+    attr_reader :after
 
-# API model for AdminList.
-# A list of admins associated with a given workspace.
-class AdminList
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAdminListMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAdminListMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAdminListMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] String representing the object's type. Always has the value `admin.list`.
-  attr_reader :type
-  # @return [Array_of_Admin] A list of admins associated with a given workspace.
-  attr_reader :admins
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAdminWithAppAvatarMetadata
-  FIELDS = {
-    type: "type",
-    image_url: "image_url",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for AdminWithAppAvatar.
-# This object represents the avatar associated with the admin.
-class AdminWithAppAvatar
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAdminWithAppAvatarMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAdminWithAppAvatarMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAdminWithAppAvatarMetadata::DECODERS
-
-  # @return [String] This is a string that identifies the type of the object. It will always have the value `avatar`.
-  attr_reader :type
-  # @return [String] This object represents the avatar associated with the admin.
-  attr_reader :image_url
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalAdminListMetadata
+    FIELDS = {
+      type: 'type',
+      admins: 'admins'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      admins: lambda do |value|
+        value&.map { |item| item.nil? ? nil : ::OctridevIntercom::Admin.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for AdminList.
+  # A list of admins associated with a given workspace.
+  class AdminList
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAdminListMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAdminListMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAdminListMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalAdminWithAppMetadata
-  FIELDS = {
-    type: "type",
-    id: "id",
-    name: "name",
-    email: "email",
-    job_title: "job_title",
-    away_mode_enabled: "away_mode_enabled",
-    away_mode_reassign: "away_mode_reassign",
-    has_inbox_seat: "has_inbox_seat",
-    team_ids: "team_ids",
-    avatar: "avatar",
-    email_verified: "email_verified",
-    app: "app",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    avatar: lambda do |value|
-      ::OctridevIntercom::AdminWithAppAvatar.from_hash(value)
-    end,
-    app: lambda do |value|
-      ::OctridevIntercom::App.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [String] String representing the object's type. Always has the value `admin.list`.
+    attr_reader :type
+    # @return [Array_of_Admin] A list of admins associated with a given workspace.
+    attr_reader :admins
 
-# API model for AdminWithApp.
-# Admins are the teammate accounts that have access to a workspace
-class AdminWithApp
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAdminWithAppMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAdminWithAppMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAdminWithAppMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] String representing the object's type. Always has the value `admin`.
-  attr_reader :type
-  # @return [String] The id representing the admin.
-  attr_reader :id
-  # @return [String] The name of the admin.
-  attr_reader :name
-  # @return [String] The email of the admin.
-  attr_reader :email
-  # @return [String] The job title of the admin.
-  attr_reader :job_title
-  # @return [Boolean] Identifies if this admin is currently set in away mode.
-  attr_reader :away_mode_enabled
-  # @return [Boolean] Identifies if this admin is set to automatically reassign new conversations to the apps default inbox.
-  attr_reader :away_mode_reassign
-  # @return [Boolean] Identifies if this admin has a paid inbox seat to restrict/allow features that require them.
-  attr_reader :has_inbox_seat
-  # @return [Array_of_Integer] This is a list of ids of the teams that this admin is part of.
-  attr_reader :team_ids
-  # @return [AdminWithAppAvatar] This object represents the avatar associated with the admin.
-  attr_reader :avatar
-  # @return [Boolean] Identifies if this admin's email is verified.
-  attr_reader :email_verified
-  # @return [App] App that the admin belongs to.
-  attr_reader :app
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalAdminWithAppAvatarMetadata
+    FIELDS = {
+      type: 'type',
+      image_url: 'image_url'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for AdminWithAppAvatar.
+  # This object represents the avatar associated with the admin.
+  class AdminWithAppAvatar
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAdminWithAppAvatarMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAdminWithAppAvatarMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAdminWithAppAvatarMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalAppMetadata
-  FIELDS = {
-    type: "type",
-    id_code: "id_code",
-    name: "name",
-    region: "region",
-    timezone: "timezone",
-    created_at: "created_at",
-    identity_verification: "identity_verification",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [String] This is a string that identifies the type of the object. It will always have the value `avatar`.
+    attr_reader :type
+    # @return [String] This object represents the avatar associated with the admin.
+    attr_reader :image_url
 
-# API model for App.
-# App is a workspace on Intercom
-class App
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] Optional `string` value serialized in the `type` wire field.
-  attr_reader :type
-  # @return [String] The id of the app.
-  attr_reader :id_code
-  # @return [String] The name of the app.
-  attr_reader :name
-  # @return [String] The Intercom region the app is located in.
-  attr_reader :region
-  # @return [String] The timezone of the region where the app is located.
-  attr_reader :timezone
-  # @return [Integer] When the app was created.
-  attr_reader :created_at
-  # @return [Boolean] Whether or not the app uses identity verification.
-  attr_reader :identity_verification
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalAdminWithAppMetadata
+    FIELDS = {
+      type: 'type',
+      id: 'id',
+      name: 'name',
+      email: 'email',
+      job_title: 'job_title',
+      away_mode_enabled: 'away_mode_enabled',
+      away_mode_reassign: 'away_mode_reassign',
+      has_inbox_seat: 'has_inbox_seat',
+      team_ids: 'team_ids',
+      avatar: 'avatar',
+      email_verified: 'email_verified',
+      app: 'app'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      avatar: lambda do |value|
+        ::OctridevIntercom::AdminWithAppAvatar.from_hash(value)
+      end,
+      app: lambda do |value|
+        ::OctridevIntercom::App.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for AdminWithApp.
+  # Admins are the teammate accounts that have access to a workspace
+  class AdminWithApp
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAdminWithAppMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAdminWithAppMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAdminWithAppMetadata::DECODERS
+
+    # @return [String] String representing the object's type. Always has the value `admin`.
+    attr_reader :type
+    # @return [String] The id representing the admin.
+    attr_reader :id
+    # @return [String] The name of the admin.
+    attr_reader :name
+    # @return [String] The email of the admin.
+    attr_reader :email
+    # @return [String] The job title of the admin.
+    attr_reader :job_title
+    # @return [Boolean] Identifies if this admin is currently set in away mode.
+    attr_reader :away_mode_enabled
+    # @return [Boolean] Identifies if this admin is set to automatically reassign new conversations to the apps default inbox.
+    attr_reader :away_mode_reassign
+    # @return [Boolean] Identifies if this admin has a paid inbox seat to restrict/allow features that require them.
+    attr_reader :has_inbox_seat
+    # @return [Array_of_Integer] This is a list of ids of the teams that this admin is part of.
+    attr_reader :team_ids
+    # @return [AdminWithAppAvatar] This object represents the avatar associated with the admin.
+    attr_reader :avatar
+    # @return [Boolean] Identifies if this admin's email is verified.
+    attr_reader :email_verified
+    # @return [App] App that the admin belongs to.
+    attr_reader :app
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
+
+  # Internal model hydration metadata.
+  class SdkInternalAppMetadata
+    FIELDS = {
+      type: 'type',
+      id_code: 'id_code',
+      name: 'name',
+      region: 'region',
+      timezone: 'timezone',
+      created_at: 'created_at',
+      identity_verification: 'identity_verification'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
+  end
+
+  # API model for App.
+  # App is a workspace on Intercom
+  class App
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppMetadata::DECODERS
+
+    # @return [String] Optional `string` value serialized in the `type` wire field.
+    attr_reader :type
+    # @return [String] The id of the app.
+    attr_reader :id_code
+    # @return [String] The name of the app.
+    attr_reader :name
+    # @return [String] The Intercom region the app is located in.
+    attr_reader :region
+    # @return [String] The timezone of the region where the app is located.
+    attr_reader :timezone
+    # @return [Integer] When the app was created.
+    attr_reader :created_at
+    # @return [Boolean] Whether or not the app uses identity verification.
+    attr_reader :identity_verification
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
 end

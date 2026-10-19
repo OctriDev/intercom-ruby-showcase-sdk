@@ -27,23 +27,22 @@ module OctridevIntercom
         custom_attributes: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/phone_call_redirects",
+          '/phone_call_redirects',
           config: config,
           body: {
             'phone' => phone,
-            'custom_attributes' => custom_attributes,
+            'custom_attributes' => custom_attributes
           },
           return_type: ::OctridevIntercom::PhoneSwitch,
           decoder: :json,
           operation_id: 'create_phone_switch',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2 }
         ).data
       end
     end

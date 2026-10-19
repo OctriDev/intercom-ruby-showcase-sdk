@@ -12,15 +12,14 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalAttachSubscriptionTypeToContactMetadata
         FIELDS = {
-          id: "id",
-          consent_type: "consent_type",
+          id: 'id',
+          consent_type: 'consent_type'
         }.freeze
         REQUIRED_FIELDS = %i[
           id
           consent_type
         ].freeze
-        DECODERS = {
-        }.freeze
+        DECODERS = {}.freeze
       end
 
       # API model for AttachSubscriptionTypeToContact.
@@ -67,27 +66,26 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/contacts/",
+            '/contacts/',
             SdkClient.encode_path_segment(contact_id),
-            "/subscriptions"
+            '/subscriptions'
           ].join,
           config: config,
           body: {
             'id' => id,
-            'consent_type' => consent_type,
+            'consent_type' => consent_type
           },
           return_type: ::OctridevIntercom::SubscriptionType,
           decoder: :json,
           operation_id: 'attach_subscription_type_to_contact',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -106,13 +104,12 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/contacts/",
+            '/contacts/',
             SdkClient.encode_path_segment(contact_id),
-            "/subscriptions/",
+            '/subscriptions/',
             SdkClient.encode_path_segment(subscription_id)
           ].join,
           config: config,
@@ -120,10 +117,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'detach_subscription_type_to_contact',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -135,19 +132,18 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/subscription_types",
+          '/subscription_types',
           config: config,
           return_type: ::OctridevIntercom::SubscriptionTypeList,
           decoder: :json,
           operation_id: 'list_subscription_types',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2 }
         ).data
       end
     end
