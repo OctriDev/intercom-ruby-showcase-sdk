@@ -23501,9 +23501,9 @@
       "fileFields": []
     },
     {
-      "id": "unlinkTicketsConversation:unlink_tickets_conversation",
-      "operationId": "unlinkTicketsConversation",
-      "methodName": "unlink_tickets_conversation",
+      "id": "unlinkTicketConversation:unlink_ticket_conversation",
+      "operationId": "unlinkTicketConversation",
+      "methodName": "unlink_ticket_conversation",
       "namespace": [
         "tickets"
       ],
@@ -23570,9 +23570,9 @@
       "fileFields": []
     },
     {
-      "id": "unlinkTicketsConversation:unlink_tickets_conversation:400",
-      "operationId": "unlinkTicketsConversation",
-      "methodName": "unlink_tickets_conversation",
+      "id": "unlinkTicketConversation:unlink_ticket_conversation:400",
+      "operationId": "unlinkTicketConversation",
+      "methodName": "unlink_ticket_conversation",
       "namespace": [
         "tickets"
       ],

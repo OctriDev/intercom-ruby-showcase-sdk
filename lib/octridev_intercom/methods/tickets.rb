@@ -9,443 +9,6 @@ module OctridevIntercom
   module Methods
     # Defines the Tickets SDK namespace.
     module Tickets
-      # Internal model hydration metadata.
-      class SdkInternalLinkTicketsConversationMetadata
-        FIELDS = {
-          conversation_id: 'conversation_id'
-        }.freeze
-        REQUIRED_FIELDS = %i[
-          conversation_id
-        ].freeze
-        DECODERS = {}.freeze
-      end
-
-      # API model for LinkTicketsConversation.
-      class LinkTicketsConversation
-        CONSTRUCTION_SURFACE = :named
-        FIELDS = SdkInternalLinkTicketsConversationMetadata::FIELDS
-        REQUIRED_FIELDS = SdkInternalLinkTicketsConversationMetadata::REQUIRED_FIELDS
-        DECODERS = SdkInternalLinkTicketsConversationMetadata::DECODERS
-
-        # @return [String] The unique identifier (given by Intercom) for the conversation or customer ticket to link to the tracker ticket.
-        attr_reader :conversation_id
-
-        def initialize(**attributes)
-          SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-          freeze
-        end
-
-        def self.from_hash(data)
-          SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-        end
-
-        def to_h
-          SdkModel.to_h(self, FIELDS)
-        end
-      end
-
-      # Internal model hydration metadata.
-      class SdkInternalCreateTicketAssignmentMetadata
-        FIELDS = {
-          admin_assignee_id: 'admin_assignee_id',
-          team_assignee_id: 'team_assignee_id'
-        }.freeze
-        REQUIRED_FIELDS = %i[].freeze
-        DECODERS = {}.freeze
-      end
-
-      # API model for CreateTicketAssignment.
-      # Optional object value serialized in the `assignment` wire field.
-      class CreateTicketAssignment
-        CONSTRUCTION_SURFACE = :named
-        FIELDS = SdkInternalCreateTicketAssignmentMetadata::FIELDS
-        REQUIRED_FIELDS = SdkInternalCreateTicketAssignmentMetadata::REQUIRED_FIELDS
-        DECODERS = SdkInternalCreateTicketAssignmentMetadata::DECODERS
-
-        # @return [String] The ID of the admin to which the ticket is assigned. If not provided, the ticket will be unassigned.
-        attr_reader :admin_assignee_id
-        # @return [String] The ID of the team to which the ticket is assigned. If not provided, the ticket will be unassigned.
-        attr_reader :team_assignee_id
-
-        def initialize(**attributes)
-          SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-          freeze
-        end
-
-        def self.from_hash(data)
-          SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-        end
-
-        def to_h
-          SdkModel.to_h(self, FIELDS)
-        end
-      end
-
-      # Internal model hydration metadata.
-      class SdkInternalCreateTicketMetadata
-        FIELDS = {
-          ticket_type_id: 'ticket_type_id',
-          contacts: 'contacts',
-          conversation_to_link_id: 'conversation_to_link_id',
-          company_id: 'company_id',
-          created_at: 'created_at',
-          ticket_attributes: 'ticket_attributes',
-          assignment: 'assignment',
-          channel: 'channel',
-          skip_notifications: 'skip_notifications'
-        }.freeze
-        REQUIRED_FIELDS = %i[
-          ticket_type_id
-          contacts
-        ].freeze
-        DECODERS = {
-          contacts: lambda do |value|
-            value&.map { |item| ::OctridevIntercom::CreateTicketRequestContactsItem.from_hash(item) }
-          end,
-          ticket_attributes: lambda do |value|
-            ::OctridevIntercom::TicketRequestCustomAttributes.from_hash(value)
-          end,
-          assignment: lambda do |value|
-            ::OctridevIntercom::Methods::Tickets::CreateTicketAssignment.from_hash(value)
-          end,
-          channel: lambda do |value|
-            ::OctridevIntercom::Methods::Tickets::CreateTicketChannel.from_value(value)
-          end
-        }.freeze
-      end
-
-      # API model for CreateTicket.
-      class CreateTicket
-        CONSTRUCTION_SURFACE = :named
-        FIELDS = SdkInternalCreateTicketMetadata::FIELDS
-        REQUIRED_FIELDS = SdkInternalCreateTicketMetadata::REQUIRED_FIELDS
-        DECODERS = SdkInternalCreateTicketMetadata::DECODERS
-
-        # @return [String] The ID of the type of ticket you want to create
-        attr_reader :ticket_type_id
-        # @return [Array_of_CreateTicketRequestContactsItem] The list of contacts (users or leads) affected by this ticket. Currently only one is allowed
-        attr_reader :contacts
-        # @return [String] The ID of the conversation you want to link to the ticket. Here are the valid ways of linking two tickets: - conversation | back-office ticket - customer tickets | non-shared back-office ticket - conversation | tracker ticket - customer ticket | tracker ticket
-        attr_reader :conversation_to_link_id
-        # @return [String] The ID of the company that the ticket is associated with. The unique identifier for the company which is given by Intercom
-        attr_reader :company_id
-        # @return [Integer] The time the ticket was created. If not provided, the current time will be used.
-        attr_reader :created_at
-        # @return [TicketRequestCustomAttributes] The attributes set on the ticket. When setting the default title and description attributes, the attribute keys that should be used are `_default_title_` and `_default_description_`. When setting ticket type attributes of the list attribute type, the key should be the attribute name and the value of the attribute should be the list item id, obtainable by [listing the ticket type](ref:get_ticket-types). For example, if the ticket type has an attribute called `priority` of…
-        attr_reader :ticket_attributes
-        # @return [CreateTicketAssignment] Optional object value serialized in the `assignment` wire field.
-        attr_reader :assignment
-        # @return [CreateTicketChannel] The channel for the ticket. Only supported for customer ticket types. Defaults to messenger if not provided.
-        attr_reader :channel
-        # @return [Boolean] Option to disable notifications when a Ticket is created.
-        attr_reader :skip_notifications
-
-        def initialize(**attributes)
-          SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-          freeze
-        end
-
-        def self.from_hash(data)
-          SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-        end
-
-        def to_h
-          SdkModel.to_h(self, FIELDS)
-        end
-      end
-
-      # Internal model hydration metadata.
-      class SdkInternalEnqueueCreateTicketAssignmentMetadata
-        FIELDS = {
-          admin_assignee_id: 'admin_assignee_id',
-          team_assignee_id: 'team_assignee_id'
-        }.freeze
-        REQUIRED_FIELDS = %i[].freeze
-        DECODERS = {}.freeze
-      end
-
-      # API model for EnqueueCreateTicketAssignment.
-      # Optional object value serialized in the `assignment` wire field.
-      class EnqueueCreateTicketAssignment
-        CONSTRUCTION_SURFACE = :named
-        FIELDS = SdkInternalEnqueueCreateTicketAssignmentMetadata::FIELDS
-        REQUIRED_FIELDS = SdkInternalEnqueueCreateTicketAssignmentMetadata::REQUIRED_FIELDS
-        DECODERS = SdkInternalEnqueueCreateTicketAssignmentMetadata::DECODERS
-
-        # @return [String] The ID of the admin to which the ticket is assigned. If not provided, the ticket will be unassigned.
-        attr_reader :admin_assignee_id
-        # @return [String] The ID of the team to which the ticket is assigned. If not provided, the ticket will be unassigned.
-        attr_reader :team_assignee_id
-
-        def initialize(**attributes)
-          SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-          freeze
-        end
-
-        def self.from_hash(data)
-          SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-        end
-
-        def to_h
-          SdkModel.to_h(self, FIELDS)
-        end
-      end
-
-      # Internal model hydration metadata.
-      class SdkInternalEnqueueCreateTicketMetadata
-        FIELDS = {
-          ticket_type_id: 'ticket_type_id',
-          contacts: 'contacts',
-          conversation_to_link_id: 'conversation_to_link_id',
-          company_id: 'company_id',
-          created_at: 'created_at',
-          ticket_attributes: 'ticket_attributes',
-          assignment: 'assignment',
-          channel: 'channel',
-          skip_notifications: 'skip_notifications'
-        }.freeze
-        REQUIRED_FIELDS = %i[
-          ticket_type_id
-          contacts
-        ].freeze
-        DECODERS = {
-          contacts: lambda do |value|
-            value&.map { |item| ::OctridevIntercom::CreateTicketRequestContactsItem.from_hash(item) }
-          end,
-          ticket_attributes: lambda do |value|
-            ::OctridevIntercom::TicketRequestCustomAttributes.from_hash(value)
-          end,
-          assignment: lambda do |value|
-            ::OctridevIntercom::Methods::Tickets::EnqueueCreateTicketAssignment.from_hash(value)
-          end,
-          channel: lambda do |value|
-            ::OctridevIntercom::Methods::Tickets::EnqueueCreateTicketChannel.from_value(value)
-          end
-        }.freeze
-      end
-
-      # API model for EnqueueCreateTicket.
-      class EnqueueCreateTicket
-        CONSTRUCTION_SURFACE = :named
-        FIELDS = SdkInternalEnqueueCreateTicketMetadata::FIELDS
-        REQUIRED_FIELDS = SdkInternalEnqueueCreateTicketMetadata::REQUIRED_FIELDS
-        DECODERS = SdkInternalEnqueueCreateTicketMetadata::DECODERS
-
-        # @return [String] The ID of the type of ticket you want to create
-        attr_reader :ticket_type_id
-        # @return [Array_of_CreateTicketRequestContactsItem] The list of contacts (users or leads) affected by this ticket. Currently only one is allowed
-        attr_reader :contacts
-        # @return [String] The ID of the conversation you want to link to the ticket. Here are the valid ways of linking two tickets: - conversation | back-office ticket - customer tickets | non-shared back-office ticket - conversation | tracker ticket - customer ticket | tracker ticket
-        attr_reader :conversation_to_link_id
-        # @return [String] The ID of the company that the ticket is associated with. The unique identifier for the company which is given by Intercom
-        attr_reader :company_id
-        # @return [Integer] The time the ticket was created. If not provided, the current time will be used.
-        attr_reader :created_at
-        # @return [TicketRequestCustomAttributes] The attributes set on the ticket. When setting the default title and description attributes, the attribute keys that should be used are `_default_title_` and `_default_description_`. When setting ticket type attributes of the list attribute type, the key should be the attribute name and the value of the attribute should be the list item id, obtainable by [listing the ticket type](ref:get_ticket-types). For example, if the ticket type has an attribute called `priority` of…
-        attr_reader :ticket_attributes
-        # @return [EnqueueCreateTicketAssignment] Optional object value serialized in the `assignment` wire field.
-        attr_reader :assignment
-        # @return [EnqueueCreateTicketChannel] The channel for the ticket. Only supported for customer ticket types. Defaults to messenger if not provided.
-        attr_reader :channel
-        # @return [Boolean] Option to disable notifications when a Ticket is created.
-        attr_reader :skip_notifications
-
-        def initialize(**attributes)
-          SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-          freeze
-        end
-
-        def self.from_hash(data)
-          SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-        end
-
-        def to_h
-          SdkModel.to_h(self, FIELDS)
-        end
-      end
-
-      # Internal model hydration metadata.
-      class SdkInternalUpdateTicketMetadata
-        FIELDS = {
-          ticket_attributes: 'ticket_attributes',
-          ticket_state_id: 'ticket_state_id',
-          company_id: 'company_id',
-          open: 'open',
-          is_shared: 'is_shared',
-          snoozed_until: 'snoozed_until',
-          admin_id: 'admin_id',
-          assignee_id: 'assignee_id',
-          skip_notifications: 'skip_notifications'
-        }.freeze
-        REQUIRED_FIELDS = %i[].freeze
-        DECODERS = {}.freeze
-      end
-
-      # API model for UpdateTicket.
-      class UpdateTicket
-        CONSTRUCTION_SURFACE = :named
-        FIELDS = SdkInternalUpdateTicketMetadata::FIELDS
-        REQUIRED_FIELDS = SdkInternalUpdateTicketMetadata::REQUIRED_FIELDS
-        DECODERS = SdkInternalUpdateTicketMetadata::DECODERS
-
-        # @return [Hash] The attributes set on the ticket.
-        attr_reader :ticket_attributes
-        # @return [String] The ID of the ticket state associated with the ticket type.
-        attr_reader :ticket_state_id
-        # @return [String] The ID of the company that the ticket is associated with. The unique identifier for the company which is given by Intercom. Set to nil to remove company.
-        attr_reader :company_id
-        # @return [Boolean] Specify if a ticket is open. Set to false to close a ticket. Closing a ticket will also unsnooze it.
-        attr_reader :open
-        # @return [Boolean] Specify whether the ticket is visible to users.
-        attr_reader :is_shared
-        # @return [Integer] The time you want the ticket to reopen.
-        attr_reader :snoozed_until
-        # @return [Integer] The ID of the admin performing ticket update. Needed for workflows execution and attributing actions to specific admins.
-        attr_reader :admin_id
-        # @return [String] The ID of the admin or team to which the ticket is assigned. Set this 0 to unassign it.
-        attr_reader :assignee_id
-        # @return [Boolean] Option to disable notifications when a Ticket is updated.
-        attr_reader :skip_notifications
-
-        def initialize(**attributes)
-          SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-          freeze
-        end
-
-        def self.from_hash(data)
-          SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-        end
-
-        def to_h
-          SdkModel.to_h(self, FIELDS)
-        end
-      end
-
-      # Defines the CreateTicketChannel SDK namespace.
-      module CreateTicketChannel
-        EMAIL = 'email'
-        VALUES = ['email'].freeze
-        def self.from_value(value)
-          value
-        end
-      end
-
-      # Defines the EnqueueCreateTicketChannel SDK namespace.
-      module EnqueueCreateTicketChannel
-        EMAIL = 'email'
-        VALUES = ['email'].freeze
-        def self.from_value(value)
-          value
-        end
-      end
-
-      # Submits a reply or note on a ticket, either on behalf of an admin or a contact. For an admin reply, set `message_type` and provide the fields required for that reply type; for a contact reply, identify the contact using one of the supported identifiers. Use the ticket object's internal `id`, not the ticket number shown in the Inbox.
-      #
-      # You can reply to a ticket with a message from an admin or on behalf of a contact, or with a note for admins.
-      #
-      # @param skip_notifications [Boolean] Option to disable notifications when
-      #   replying to a Ticket.
-      def self.reply_ticket(
-        config:,
-        ticket_id:,
-        intercom_version: NOT_GIVEN,
-        skip_notifications: NOT_GIVEN,
-        request_options: nil
-      )
-        SdkClient.request(
-          'POST',
-          [
-            '/tickets/',
-            SdkClient.encode_path_segment(ticket_id),
-            '/reply'
-          ].join,
-          config: config,
-          body: {
-            'skip_notifications' => skip_notifications
-          },
-          return_type: ::OctridevIntercom::TicketReply,
-          decoder: :json,
-          operation_id: 'reply_ticket',
-          extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
-          request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
-        ).data
-      end
-
-      # Links a conversation or customer ticket to an existing tracker ticket. Supply the tracker's `ticket_id` and the `conversation_id` to link; the tracker ticket can have up to 2,500 linked conversations. This operation requires the `write_tickets` OAuth scope.
-      #
-      # Link a conversation to an existing tracker ticket. The conversation can be a regular conversation or one that has been converted into a customer ticket. Use this when related conversations surface after a tracker ticket has already been created. The ticket in the path must be a tracker ticket, and `conversation_id` in the body is the conversation (or customer ticket) to link to it. This returns the linked conversation. A tracker ticket can have up to 2,500 linked…
-      #
-      # @param ticket_id [String] The unique identifier for the tracker ticket which
-      #   is given by Intercom.
-      # @param conversation_id [String] The unique identifier (given by Intercom)
-      #   for the conversation or customer ticket to link to the tracker ticket.
-      def self.link_tickets_conversation(
-        config:,
-        ticket_id:,
-        conversation_id:,
-        intercom_version: NOT_GIVEN,
-        request_options: nil
-      )
-        SdkClient.request(
-          'POST',
-          [
-            '/tickets/',
-            SdkClient.encode_path_segment(ticket_id),
-            '/linked_conversations'
-          ].join,
-          config: config,
-          body: {
-            'conversation_id' => conversation_id
-          },
-          return_type: ::OctridevIntercom::Conversation,
-          decoder: :json,
-          operation_id: 'link_tickets_conversation',
-          extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
-          request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
-        ).data
-      end
-
-      # Unlinks a conversation or converted customer ticket from the tracker ticket it is linked to. Supply the tracker ticket identifier and the identifier of the linked conversation or customer ticket. This operation requires the `write_tickets` OAuth scope.
-      #
-      # Unlink a conversation (or converted customer ticket) from a tracker ticket it is currently linked to. The ticket in the path must be a tracker ticket. This returns the conversation that was unlinked. Requires the `write_tickets` OAuth scope.
-      #
-      # @param ticket_id [String] The unique identifier for the tracker ticket which
-      #   is given by Intercom.
-      # @param id [String] The unique identifier (given by Intercom) for the linked
-      #   conversation or customer ticket to unlink.
-      def self.unlink_tickets_conversation(
-        config:,
-        ticket_id:,
-        id:,
-        intercom_version: NOT_GIVEN,
-        request_options: nil
-      )
-        SdkClient.request(
-          'DELETE',
-          [
-            '/tickets/',
-            SdkClient.encode_path_segment(ticket_id),
-            '/linked_conversations/',
-            SdkClient.encode_path_segment(id)
-          ].join,
-          config: config,
-          return_type: ::OctridevIntercom::Conversation,
-          decoder: :json,
-          operation_id: 'unlink_tickets_conversation',
-          extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
-          request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
-        ).data
-      end
-
       # Creates a ticket using a ticket type and one or more affected contacts. Supply `ticket_type_id` and `contacts`; you can also provide ticket attributes, assignment details, or a conversation to link. A 200 response returns the created ticket and its current state.
       #
       # You can create a new ticket.
@@ -518,8 +81,143 @@ module OctridevIntercom
           errors: { '401' => ::OctridevIntercom::Error2 }
         ).data
       end
+
+      # Updates an existing ticket's attributes, state, company, visibility, assignment, or open and snoozed status. Supply only the ticket properties you want to change, and use `skip_notifications` to control update notifications. A successful response returns the updated ticket.
+      #
+      # You can update a ticket.
+      #
+      # @param ticket_id [String] The unique identifier for the ticket which is
+      #   given by Intercom. {% admonition type="info" name="Not the Inbox ticket ID"
+      #   %} This is the internal `id` field from the API response, not the
+      #   `ticket_id` displayed in the Intercom Inbox (e.g., #12345). Use the `id`
+      #   value from the ticket object returned by the API. {% /admonition %}
+      # @param ticket_attributes [Hash] The attributes set on the ticket.
+      # @param ticket_state_id [String] The ID of the ticket state associated with
+      #   the ticket type.
+      # @param company_id [String] The ID of the company that the ticket is
+      #   associated with. The unique identifier for the company which is given by
+      #   Intercom. Set to nil to remove company.
+      # @param open [Boolean] Specify if a ticket is open. Set to false to close a
+      #   ticket. Closing a ticket will also unsnooze it.
+      # @param is_shared [Boolean] Specify whether the ticket is visible to users.
+      # @param snoozed_until [Integer] The time you want the ticket to reopen.
+      # @param admin_id [Integer] The ID of the admin performing ticket update.
+      #   Needed for workflows execution and attributing actions to specific admins.
+      # @param assignee_id [String] The ID of the admin or team to which the ticket
+      #   is assigned. Set this 0 to unassign it.
+      # @param skip_notifications [Boolean] Option to disable notifications when a
+      #   Ticket is updated.
+      def self.update_ticket(
+        config:,
+        ticket_id:,
+        intercom_version: NOT_GIVEN,
+        ticket_attributes: NOT_GIVEN,
+        ticket_state_id: NOT_GIVEN,
+        company_id: NOT_GIVEN,
+        open: NOT_GIVEN,
+        is_shared: NOT_GIVEN,
+        snoozed_until: NOT_GIVEN,
+        admin_id: NOT_GIVEN,
+        assignee_id: NOT_GIVEN,
+        skip_notifications: NOT_GIVEN,
+        request_options: nil
+      )
+        SdkClient.request(
+          'PUT',
+          [
+            '/tickets/',
+            SdkClient.encode_path_segment(ticket_id)
+          ].join,
+          config: config,
+          body: {
+            'ticket_attributes' => ticket_attributes,
+            'ticket_state_id' => ticket_state_id,
+            'company_id' => company_id,
+            'open' => open,
+            'is_shared' => is_shared,
+            'snoozed_until' => snoozed_until,
+            'admin_id' => admin_id,
+            'assignee_id' => assignee_id,
+            'skip_notifications' => skip_notifications
+          },
+          return_type: ::OctridevIntercom::Ticket,
+          decoder: :json,
+          operation_id: 'update_ticket',
+          extra_headers: SdkClient.serialize_headers({
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
+          request_options: request_options,
+          errors: { '401' => ::OctridevIntercom::Error2 }
+        ).data
+      end
+
+      # Retrieves a ticket using its unique API identifier. Use the ticket object's `id` value, not the `ticket_id` displayed in the Inbox. The response includes ticket details such as its attributes, state, type, and assignment.
+      #
+      # You can fetch the details of a single ticket.
+      #
+      # @param ticket_id [String] The unique identifier for the ticket which is
+      #   given by Intercom. {% admonition type="info" name="Not the Inbox ticket ID"
+      #   %} This is the internal `id` field from the API response, not the
+      #   `ticket_id` displayed in the Intercom Inbox (e.g., #12345). Use the `id`
+      #   value from the ticket object returned by the API. {% /admonition %}
+      singleton_class.define_method(:get_ticket) do |config:, ticket_id:, intercom_version: NOT_GIVEN, request_options: nil|
+        SdkClient.request(
+          'GET',
+          [
+            '/tickets/',
+            SdkClient.encode_path_segment(ticket_id)
+          ].join,
+          config: config,
+          return_type: ::OctridevIntercom::Ticket,
+          decoder: :json,
+          operation_id: 'get_ticket',
+          extra_headers: SdkClient.serialize_headers({
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
+          request_options: request_options,
+          errors: { '401' => ::OctridevIntercom::Error2 }
+        ).data
+      end
+
+      # Deletes a ticket permanently from the inbox, including its replies, attributes, uploads, and related content. <Callout type="warning">Deleting a ticket is permanent and cannot be reversed.</Callout> The ticket remains in reporting, although some reporting data may be incomplete.
+      #
+      # {% admonition type="warning" name="Irreversible operation" %} Deleting a ticket is permanent and cannot be reversed. {% /admonition %} Deleting a ticket permanently removes it from the inbox. All sensitive data is deleted, including admin and user replies, ticket attributes, uploads, and related content. The ticket will still appear in reporting, though some data may be incomplete due to the deletion.
+      #
+      # @param ticket_id [String] The unique identifier for the ticket which is
+      #   given by Intercom. {% admonition type="info" name="Not the Inbox ticket ID"
+      #   %} This is the internal `id` field from the API response, not the
+      #   `ticket_id` displayed in the Intercom Inbox (e.g., #12345). Use the `id`
+      #   value from the ticket object returned by the API. {% /admonition %}
+      def self.delete_ticket(
+        config:,
+        ticket_id:,
+        intercom_version: NOT_GIVEN,
+        request_options: nil
+      )
+        SdkClient.request(
+          'DELETE',
+          [
+            '/tickets/',
+            SdkClient.encode_path_segment(ticket_id)
+          ].join,
+          config: config,
+          return_type: ::OctridevIntercom::TicketDeleted,
+          decoder: :json,
+          operation_id: 'delete_ticket',
+          extra_headers: SdkClient.serialize_headers({
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
+          request_options: request_options,
+          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+        ).data
+      end
     end
   end
 end
 
-require_relative 'tickets_part_2'
+require_relative 'tickets_types'
+require_relative 'tickets_reply'
+require_relative 'tickets_linked_conversations'
+require_relative 'tickets_enqueue'
+require_relative 'tickets_change_type'
+require_relative 'tickets_search'

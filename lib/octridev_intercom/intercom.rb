@@ -5182,7 +5182,7 @@ module OctridevIntercom
       intercom_version: NOT_GIVEN,
       request_options: nil
     )
-      ::OctridevIntercom::Methods::Tickets.unlink_tickets_conversation(
+      ::OctridevIntercom::Methods::Tickets.unlink_ticket_conversation(
         config: @config,
         ticket_id: ticket_id,
         id: id,
