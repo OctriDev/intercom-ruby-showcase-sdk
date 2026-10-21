@@ -131,7 +131,7 @@ module OctridevIntercom
       module ListContactMergeHistoryParameter
         ASC = 'asc'
         DESC = 'desc'
-        VALUES = ['asc', 'desc'].freeze
+        VALUES = %w[asc desc].freeze
         def self.from_value(value)
           value
         end

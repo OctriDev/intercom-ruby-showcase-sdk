@@ -29,24 +29,23 @@ module OctridevIntercom
         remark: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/fin/csat",
+          '/fin/csat',
           config: config,
           body: {
             'conversation_id' => conversation_id,
             'rating' => rating,
-            'remark' => remark,
+            'remark' => remark
           },
           return_type: ::OctridevIntercom::Methods::FinAgent::SubmitFinCsatResponse,
           decoder: :json,
           operation_id: 'submit_fin_csat',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2 }
         ).data
       end
     end

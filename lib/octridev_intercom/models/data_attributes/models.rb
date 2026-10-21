@@ -5,128 +5,127 @@
 
 # tagged_models_data_attributes domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalDataAttributeMetadata
-  FIELDS = {
-    type: "type",
-    id: "id",
-    model: "model",
-    name: "name",
-    full_name: "full_name",
-    label: "label",
-    description: "description",
-    data_type: "data_type",
-    options: "options",
-    api_writable: "api_writable",
-    messenger_writable: "messenger_writable",
-    ui_writable: "ui_writable",
-    custom: "custom",
-    archived: "archived",
-    created_at: "created_at",
-    updated_at: "updated_at",
-    admin_id: "admin_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::DataAttributeType.from_value(value)
-    end,
-    model: lambda do |value|
-      ::OctridevIntercom::DataAttributeModel.from_value(value)
-    end,
-    data_type: lambda do |value|
-      ::OctridevIntercom::DataAttributeDataType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for DataAttribute.
-# Data Attributes are metadata used to describe your contact and company models. These include standard and custom attributes. By using the data attributes endpoint, you can get the global list of attributes for your workspace, as well as create and archive custom attributes.
-class DataAttribute
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDataAttributeMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDataAttributeMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDataAttributeMetadata::DECODERS
-
-  # @return [DataAttributeType] Value is `data_attribute`.
-  attr_reader :type
-  # @return [Integer] The unique identifier for the data attribute which is given by Intercom. Only available for custom attributes.
-  attr_reader :id
-  # @return [DataAttributeModel] Value is `contact` for user/lead attributes and `company` for company attributes.
-  attr_reader :model
-  # @return [String] Name of the attribute.
-  attr_reader :name
-  # @return [String] Full name of the attribute. Should match the name unless it's a nested attribute. We can split full_name on `.` to access nested user object values.
-  attr_reader :full_name
-  # @return [String] Readable name of the attribute (i.e. name you see in the UI)
-  attr_reader :label
-  # @return [String] Readable description of the attribute.
-  attr_reader :description
-  # @return [DataAttributeDataType] The data type of the attribute.
-  attr_reader :data_type
-  # @return [Array_of_String] List of predefined options for attribute value.
-  attr_reader :options
-  # @return [Boolean] Can this attribute be updated through API
-  attr_reader :api_writable
-  # @return [Boolean] Can this attribute be updated by the Messenger
-  attr_reader :messenger_writable
-  # @return [Boolean] Can this attribute be updated in the UI
-  attr_reader :ui_writable
-  # @return [Boolean] Set to true if this is a CDA
-  attr_reader :custom
-  # @return [Boolean] Is this attribute archived. (Only applicable to CDAs)
-  attr_reader :archived
-  # @return [Integer] The time the attribute was created as a UTC Unix timestamp
-  attr_reader :created_at
-  # @return [Integer] The time the attribute was last updated as a UTC Unix timestamp
-  attr_reader :updated_at
-  # @return [String] Teammate who created the attribute. Only applicable to CDAs
-  attr_reader :admin_id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalDataAttributeMetadata
+    FIELDS = {
+      type: 'type',
+      id: 'id',
+      model: 'model',
+      name: 'name',
+      full_name: 'full_name',
+      label: 'label',
+      description: 'description',
+      data_type: 'data_type',
+      options: 'options',
+      api_writable: 'api_writable',
+      messenger_writable: 'messenger_writable',
+      ui_writable: 'ui_writable',
+      custom: 'custom',
+      archived: 'archived',
+      created_at: 'created_at',
+      updated_at: 'updated_at',
+      admin_id: 'admin_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::DataAttributeType.from_value(value)
+      end,
+      model: lambda do |value|
+        ::OctridevIntercom::DataAttributeModel.from_value(value)
+      end,
+      data_type: lambda do |value|
+        ::OctridevIntercom::DataAttributeDataType.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for DataAttribute.
+  # Data Attributes are metadata used to describe your contact and company models. These include standard and custom attributes. By using the data attributes endpoint, you can get the global list of attributes for your workspace, as well as create and archive custom attributes.
+  class DataAttribute
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDataAttributeMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDataAttributeMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDataAttributeMetadata::DECODERS
+
+    # @return [DataAttributeType] Value is `data_attribute`.
+    attr_reader :type
+    # @return [Integer] The unique identifier for the data attribute which is given by Intercom. Only available for custom attributes.
+    attr_reader :id
+    # @return [DataAttributeModel] Value is `contact` for user/lead attributes and `company` for company attributes.
+    attr_reader :model
+    # @return [String] Name of the attribute.
+    attr_reader :name
+    # @return [String] Full name of the attribute. Should match the name unless it's a nested attribute. We can split full_name on `.` to access nested user object values.
+    attr_reader :full_name
+    # @return [String] Readable name of the attribute (i.e. name you see in the UI)
+    attr_reader :label
+    # @return [String] Readable description of the attribute.
+    attr_reader :description
+    # @return [DataAttributeDataType] The data type of the attribute.
+    attr_reader :data_type
+    # @return [Array_of_String] List of predefined options for attribute value.
+    attr_reader :options
+    # @return [Boolean] Can this attribute be updated through API
+    attr_reader :api_writable
+    # @return [Boolean] Can this attribute be updated by the Messenger
+    attr_reader :messenger_writable
+    # @return [Boolean] Can this attribute be updated in the UI
+    attr_reader :ui_writable
+    # @return [Boolean] Set to true if this is a CDA
+    attr_reader :custom
+    # @return [Boolean] Is this attribute archived. (Only applicable to CDAs)
+    attr_reader :archived
+    # @return [Integer] The time the attribute was created as a UTC Unix timestamp
+    attr_reader :created_at
+    # @return [Integer] The time the attribute was last updated as a UTC Unix timestamp
+    attr_reader :updated_at
+    # @return [String] Teammate who created the attribute. Only applicable to CDAs
+    attr_reader :admin_id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Defines the DataAttributeDataType SDK namespace.
+  module DataAttributeDataType
+    STRING = 'string'
+    INTEGER = 'integer'
+    FLOAT = 'float'
+    BOOLEAN = 'boolean'
+    DATE = 'date'
+    VALUES = %w[string integer float boolean date].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
 
-# Defines the DataAttributeDataType SDK namespace.
-module DataAttributeDataType
-  STRING = 'string'
-  INTEGER = 'integer'
-  FLOAT = 'float'
-  BOOLEAN = 'boolean'
-  DATE = 'date'
-  VALUES = ['string', 'integer', 'float', 'boolean', 'date'].freeze
-  def self.from_value(value)
-    value
+  # Defines the DataAttributeModel SDK namespace.
+  module DataAttributeModel
+    CONTACT = 'contact'
+    COMPANY = 'company'
+    VALUES = %w[contact company].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
 
-# Defines the DataAttributeModel SDK namespace.
-module DataAttributeModel
-  CONTACT = 'contact'
-  COMPANY = 'company'
-  VALUES = ['contact', 'company'].freeze
-  def self.from_value(value)
-    value
+  # Defines the DataAttributeType SDK namespace.
+  module DataAttributeType
+    DATA_ATTRIBUTE = 'data_attribute'
+    VALUES = ['data_attribute'].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
-
-# Defines the DataAttributeType SDK namespace.
-module DataAttributeType
-  DATA_ATTRIBUTE = 'data_attribute'
-  VALUES = ['data_attribute'].freeze
-  def self.from_value(value)
-    value
-  end
-end
 end

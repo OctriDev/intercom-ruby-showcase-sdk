@@ -48,12 +48,10 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalRunFinProcedureConversationMetadataMetadata
         FIELDS = {
-          attributes: "attributes",
+          attributes: 'attributes'
         }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
+        REQUIRED_FIELDS = %i[].freeze
+        DECODERS = {}.freeze
       end
 
       # API model for RunFinProcedureConversationMetadata.
@@ -84,11 +82,11 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalRunFinProcedureMetadata
         FIELDS = {
-          conversation_id: "conversation_id",
-          user: "user",
-          message: "message",
-          conversation_metadata: "conversation_metadata",
-          environment: "environment",
+          conversation_id: 'conversation_id',
+          user: 'user',
+          message: 'message',
+          conversation_metadata: 'conversation_metadata',
+          environment: 'environment'
         }.freeze
         REQUIRED_FIELDS = %i[
           conversation_id
@@ -103,7 +101,7 @@ module OctridevIntercom
           end,
           conversation_metadata: lambda do |value|
             ::OctridevIntercom::Methods::FinAgent::RunFinProcedureConversationMetadata.from_hash(value)
-          end,
+          end
         }.freeze
       end
 
@@ -142,24 +140,23 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalRunFinProcedureResponseMetadata
         FIELDS = {
-          conversation_id: "conversation_id",
-          intercom_conversation_id: "intercom_conversation_id",
-          user_id: "user_id",
-          procedure_id: "procedure_id",
-          status: "status",
-          created_at_ms: "created_at_ms",
-          errors: "errors",
-          sse_subscription_url: "sse_subscription_url",
+          conversation_id: 'conversation_id',
+          intercom_conversation_id: 'intercom_conversation_id',
+          user_id: 'user_id',
+          procedure_id: 'procedure_id',
+          status: 'status',
+          created_at_ms: 'created_at_ms',
+          errors: 'errors',
+          sse_subscription_url: 'sse_subscription_url'
         }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
+        REQUIRED_FIELDS = %i[].freeze
         DECODERS = {
           status: lambda do |value|
             ::OctridevIntercom::Methods::FinAgent::RunFinProcedureResponseStatus.from_value(value)
           end,
           errors: lambda do |value|
             ::OctridevIntercom::FinAgentAttributeErrors.from_hash(value)
-          end,
+          end
         }.freeze
       end
 
@@ -204,16 +201,15 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalEscalateFinConversationMetadata
         FIELDS = {
-          conversation_id: "conversation_id",
-          user: "user",
-          context: "context",
+          conversation_id: 'conversation_id',
+          user: 'user',
+          context: 'context'
         }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
+        REQUIRED_FIELDS = %i[].freeze
         DECODERS = {
           user: lambda do |value|
             ::OctridevIntercom::FinAgentUser.from_hash(value)
-          end,
+          end
         }.freeze
       end
 
@@ -248,17 +244,16 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalEscalateFinConversationResponseMetadata
         FIELDS = {
-          conversation_id: "conversation_id",
-          intercom_conversation_id: "intercom_conversation_id",
-          sse_subscription_url: "sse_subscription_url",
-          status: "status",
+          conversation_id: 'conversation_id',
+          intercom_conversation_id: 'intercom_conversation_id',
+          sse_subscription_url: 'sse_subscription_url',
+          status: 'status'
         }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
+        REQUIRED_FIELDS = %i[].freeze
         DECODERS = {
           status: lambda do |value|
             ::OctridevIntercom::Methods::FinAgent::EscalateFinConversationResponseStatus.from_value(value)
-          end,
+          end
         }.freeze
       end
 
@@ -300,8 +295,8 @@ module OctridevIntercom
         ESCALATED = 'escalated'
         RESOLVED = 'resolved'
         COMPLETE = 'complete'
-        VALUES = [
-          'thinking', 'replying', 'awaiting_user_reply', 'escalated', 'resolved', 'complete'
+        VALUES = %w[
+          thinking replying awaiting_user_reply escalated resolved complete
         ].freeze
         def self.from_value(value)
           value
@@ -325,8 +320,8 @@ module OctridevIntercom
         ESCALATED = 'escalated'
         RESOLVED = 'resolved'
         COMPLETE = 'complete'
-        VALUES = [
-          'thinking', 'replying', 'awaiting_user_reply', 'escalated', 'resolved', 'complete'
+        VALUES = %w[
+          thinking replying awaiting_user_reply escalated resolved complete
         ].freeze
         def self.from_value(value)
           value
@@ -340,7 +335,7 @@ module OctridevIntercom
         OK = 'ok'
         GOOD = 'good'
         AMAZING = 'amazing'
-        VALUES = ['terrible', 'bad', 'ok', 'good', 'amazing'].freeze
+        VALUES = %w[terrible bad ok good amazing].freeze
         def self.from_value(value)
           value
         end
@@ -353,7 +348,7 @@ module OctridevIntercom
         OK = 'ok'
         GOOD = 'good'
         AMAZING = 'amazing'
-        VALUES = ['terrible', 'bad', 'ok', 'good', 'amazing'].freeze
+        VALUES = %w[terrible bad ok good amazing].freeze
         def self.from_value(value)
           value
         end
@@ -367,8 +362,8 @@ module OctridevIntercom
         ESCALATED = 'escalated'
         RESOLVED = 'resolved'
         COMPLETE = 'complete'
-        VALUES = [
-          'thinking', 'replying', 'awaiting_user_reply', 'escalated', 'resolved', 'complete'
+        VALUES = %w[
+          thinking replying awaiting_user_reply escalated resolved complete
         ].freeze
         def self.from_value(value)
           value
@@ -390,7 +385,7 @@ module OctridevIntercom
         REPLYING = 'replying'
         RESOLVED = 'resolved'
         COMPLETE = 'complete'
-        VALUES = ['thinking', 'replying', 'resolved', 'complete'].freeze
+        VALUES = %w[thinking replying resolved complete].freeze
         def self.from_value(value)
           value
         end

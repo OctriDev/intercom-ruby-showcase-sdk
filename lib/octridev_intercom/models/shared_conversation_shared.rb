@@ -5,660 +5,636 @@
 
 # shared_conversation domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalConversationAttachmentFilesMetadata
-  FIELDS = {
-    content_type: "content_type",
-    data: "data",
-    name: "name",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ConversationAttachmentFiles.
-# Properties of the attachment files in a conversation part
-class ConversationAttachmentFiles
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalConversationAttachmentFilesMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalConversationAttachmentFilesMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalConversationAttachmentFilesMetadata::DECODERS
-
-  # @return [String] The content type of the file
-  attr_reader :content_type
-  # @return [String] The base64 encoded file data.
-  attr_reader :data
-  # @return [String] The name of the file.
-  attr_reader :name
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalConversationAttachmentFilesMetadata
+    FIELDS = {
+      content_type: 'content_type',
+      data: 'data',
+      name: 'name'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ConversationAttachmentFiles.
+  # Properties of the attachment files in a conversation part
+  class ConversationAttachmentFiles
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalConversationAttachmentFilesMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalConversationAttachmentFilesMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalConversationAttachmentFilesMetadata::DECODERS
+
+    # @return [String] The content type of the file
+    attr_reader :content_type
+    # @return [String] The base64 encoded file data.
+    attr_reader :data
+    # @return [String] The name of the file.
+    attr_reader :name
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalConversationAttributeUpdatedByAdminAttributeMetadata
-  FIELDS = {
-    name: "name",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ConversationAttributeUpdatedByAdminAttribute.
-# Optional object value serialized in the `attribute` wire field.
-class ConversationAttributeUpdatedByAdminAttribute
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalConversationAttributeUpdatedByAdminAttributeMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalConversationAttributeUpdatedByAdminAttributeMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalConversationAttributeUpdatedByAdminAttributeMetadata::DECODERS
-
-  # @return [String] Name of the CDA updated
-  attr_reader :name
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalConversationAttributeUpdatedByAdminAttributeMetadata
+    FIELDS = {
+      name: 'name'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ConversationAttributeUpdatedByAdminAttribute.
+  # Optional object value serialized in the `attribute` wire field.
+  class ConversationAttributeUpdatedByAdminAttribute
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalConversationAttributeUpdatedByAdminAttributeMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalConversationAttributeUpdatedByAdminAttributeMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalConversationAttributeUpdatedByAdminAttributeMetadata::DECODERS
+
+    # @return [String] Name of the CDA updated
+    attr_reader :name
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalConversationAttributeUpdatedByAdminValueMetadata
-  FIELDS = {
-    name: "name",
-    previous: "previous",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ConversationAttributeUpdatedByAdminValue.
-# Optional object value serialized in the `value` wire field.
-class ConversationAttributeUpdatedByAdminValue
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalConversationAttributeUpdatedByAdminValueMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalConversationAttributeUpdatedByAdminValueMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalConversationAttributeUpdatedByAdminValueMetadata::DECODERS
-
-  # @return [String] Current value of the CDA updated
-  attr_reader :name
-  # @return [String] Previous value of the CDA
-  attr_reader :previous
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalConversationAttributeUpdatedByAdminValueMetadata
+    FIELDS = {
+      name: 'name',
+      previous: 'previous'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ConversationAttributeUpdatedByAdminValue.
+  # Optional object value serialized in the `value` wire field.
+  class ConversationAttributeUpdatedByAdminValue
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalConversationAttributeUpdatedByAdminValueMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalConversationAttributeUpdatedByAdminValueMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalConversationAttributeUpdatedByAdminValueMetadata::DECODERS
+
+    # @return [String] Current value of the CDA updated
+    attr_reader :name
+    # @return [String] Previous value of the CDA
+    attr_reader :previous
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalConversationAttributeUpdatedByAdminMetadata
-  FIELDS = {
-    attribute: "attribute",
-    value: "value",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    attribute: lambda do |value|
-      ::OctridevIntercom::ConversationAttributeUpdatedByAdminAttribute.from_hash(value)
-    end,
-    value: lambda do |value|
-      ::OctridevIntercom::ConversationAttributeUpdatedByAdminValue.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ConversationAttributeUpdatedByAdmin.
-# Contains details about Custom Data Attributes (CDAs) that were modified by an admin (operator) for conversation part type conversation_attribute_updated_by_admin .
-class ConversationAttributeUpdatedByAdmin
-  include EventDetails
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalConversationAttributeUpdatedByAdminMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalConversationAttributeUpdatedByAdminMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalConversationAttributeUpdatedByAdminMetadata::DECODERS
-
-  # @return [ConversationAttributeUpdatedByAdminAttribute] Optional object value serialized in the `attribute` wire field.
-  attr_reader :attribute
-  # @return [ConversationAttributeUpdatedByAdminValue] Optional object value serialized in the `value` wire field.
-  attr_reader :value
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalConversationAttributeUpdatedByAdminMetadata
+    FIELDS = {
+      attribute: 'attribute',
+      value: 'value'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      attribute: lambda do |value|
+        ::OctridevIntercom::ConversationAttributeUpdatedByAdminAttribute.from_hash(value)
+      end,
+      value: lambda do |value|
+        ::OctridevIntercom::ConversationAttributeUpdatedByAdminValue.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ConversationAttributeUpdatedByAdmin.
+  # Contains details about Custom Data Attributes (CDAs) that were modified by an admin (operator) for conversation part type conversation_attribute_updated_by_admin .
+  class ConversationAttributeUpdatedByAdmin
+    include EventDetails
+
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalConversationAttributeUpdatedByAdminMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalConversationAttributeUpdatedByAdminMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalConversationAttributeUpdatedByAdminMetadata::DECODERS
+
+    # @return [ConversationAttributeUpdatedByAdminAttribute] Optional object value serialized in the `attribute` wire field.
+    attr_reader :attribute
+    # @return [ConversationAttributeUpdatedByAdminValue] Optional object value serialized in the `value` wire field.
+    attr_reader :value
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalConversationAttributeUpdatedByUserAttributeMetadata
-  FIELDS = {
-    name: "name",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ConversationAttributeUpdatedByUserAttribute.
-# Optional object value serialized in the `attribute` wire field.
-class ConversationAttributeUpdatedByUserAttribute
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalConversationAttributeUpdatedByUserAttributeMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalConversationAttributeUpdatedByUserAttributeMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalConversationAttributeUpdatedByUserAttributeMetadata::DECODERS
-
-  # @return [String] Name of the CDA updated
-  attr_reader :name
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalConversationAttributeUpdatedByUserAttributeMetadata
+    FIELDS = {
+      name: 'name'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ConversationAttributeUpdatedByUserAttribute.
+  # Optional object value serialized in the `attribute` wire field.
+  class ConversationAttributeUpdatedByUserAttribute
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalConversationAttributeUpdatedByUserAttributeMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalConversationAttributeUpdatedByUserAttributeMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalConversationAttributeUpdatedByUserAttributeMetadata::DECODERS
+
+    # @return [String] Name of the CDA updated
+    attr_reader :name
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalConversationAttributeUpdatedByUserValueMetadata
-  FIELDS = {
-    name: "name",
-    previous: "previous",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ConversationAttributeUpdatedByUserValue.
-# Optional object value serialized in the `value` wire field.
-class ConversationAttributeUpdatedByUserValue
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalConversationAttributeUpdatedByUserValueMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalConversationAttributeUpdatedByUserValueMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalConversationAttributeUpdatedByUserValueMetadata::DECODERS
-
-  # @return [String] Current value of the CDA updated
-  attr_reader :name
-  # @return [String] Previous value of the CDA (null for older events)
-  attr_reader :previous
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalConversationAttributeUpdatedByUserValueMetadata
+    FIELDS = {
+      name: 'name',
+      previous: 'previous'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ConversationAttributeUpdatedByUserValue.
+  # Optional object value serialized in the `value` wire field.
+  class ConversationAttributeUpdatedByUserValue
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalConversationAttributeUpdatedByUserValueMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalConversationAttributeUpdatedByUserValueMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalConversationAttributeUpdatedByUserValueMetadata::DECODERS
+
+    # @return [String] Current value of the CDA updated
+    attr_reader :name
+    # @return [String] Previous value of the CDA (null for older events)
+    attr_reader :previous
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalConversationAttributeUpdatedByUserMetadata
-  FIELDS = {
-    attribute: "attribute",
-    value: "value",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    attribute: lambda do |value|
-      ::OctridevIntercom::ConversationAttributeUpdatedByUserAttribute.from_hash(value)
-    end,
-    value: lambda do |value|
-      ::OctridevIntercom::ConversationAttributeUpdatedByUserValue.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ConversationAttributeUpdatedByUser.
-# Contains details about Custom Data Attributes (CDAs) that were modified by a user for conversation part type conversation_attribute_updated_by_user .
-class ConversationAttributeUpdatedByUser
-  include EventDetails
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalConversationAttributeUpdatedByUserMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalConversationAttributeUpdatedByUserMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalConversationAttributeUpdatedByUserMetadata::DECODERS
-
-  # @return [ConversationAttributeUpdatedByUserAttribute] Optional object value serialized in the `attribute` wire field.
-  attr_reader :attribute
-  # @return [ConversationAttributeUpdatedByUserValue] Optional object value serialized in the `value` wire field.
-  attr_reader :value
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalConversationAttributeUpdatedByUserMetadata
+    FIELDS = {
+      attribute: 'attribute',
+      value: 'value'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      attribute: lambda do |value|
+        ::OctridevIntercom::ConversationAttributeUpdatedByUserAttribute.from_hash(value)
+      end,
+      value: lambda do |value|
+        ::OctridevIntercom::ConversationAttributeUpdatedByUserValue.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ConversationAttributeUpdatedByUser.
+  # Contains details about Custom Data Attributes (CDAs) that were modified by a user for conversation part type conversation_attribute_updated_by_user .
+  class ConversationAttributeUpdatedByUser
+    include EventDetails
+
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalConversationAttributeUpdatedByUserMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalConversationAttributeUpdatedByUserMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalConversationAttributeUpdatedByUserMetadata::DECODERS
+
+    # @return [ConversationAttributeUpdatedByUserAttribute] Optional object value serialized in the `attribute` wire field.
+    attr_reader :attribute
+    # @return [ConversationAttributeUpdatedByUserValue] Optional object value serialized in the `value` wire field.
+    attr_reader :value
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalConversationAttributeUpdatedByWorkflowWorkflowMetadata
-  FIELDS = {
-    name: "name",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ConversationAttributeUpdatedByWorkflowWorkflow.
-# Optional object value serialized in the `workflow` wire field.
-class ConversationAttributeUpdatedByWorkflowWorkflow
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalConversationAttributeUpdatedByWorkflowWorkflowMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalConversationAttributeUpdatedByWorkflowWorkflowMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalConversationAttributeUpdatedByWorkflowWorkflowMetadata::DECODERS
-
-  # @return [String] Name of the workflow
-  attr_reader :name
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalConversationAttributeUpdatedByWorkflowWorkflowMetadata
+    FIELDS = {
+      name: 'name'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ConversationAttributeUpdatedByWorkflowWorkflow.
+  # Optional object value serialized in the `workflow` wire field.
+  class ConversationAttributeUpdatedByWorkflowWorkflow
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalConversationAttributeUpdatedByWorkflowWorkflowMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalConversationAttributeUpdatedByWorkflowWorkflowMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalConversationAttributeUpdatedByWorkflowWorkflowMetadata::DECODERS
+
+    # @return [String] Name of the workflow
+    attr_reader :name
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalConversationAttributeUpdatedByWorkflowAttributeMetadata
-  FIELDS = {
-    name: "name",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ConversationAttributeUpdatedByWorkflowAttribute.
-# Optional object value serialized in the `attribute` wire field.
-class ConversationAttributeUpdatedByWorkflowAttribute
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalConversationAttributeUpdatedByWorkflowAttributeMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalConversationAttributeUpdatedByWorkflowAttributeMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalConversationAttributeUpdatedByWorkflowAttributeMetadata::DECODERS
-
-  # @return [String] Name of the CDA updated
-  attr_reader :name
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalConversationAttributeUpdatedByWorkflowAttributeMetadata
+    FIELDS = {
+      name: 'name'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ConversationAttributeUpdatedByWorkflowAttribute.
+  # Optional object value serialized in the `attribute` wire field.
+  class ConversationAttributeUpdatedByWorkflowAttribute
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalConversationAttributeUpdatedByWorkflowAttributeMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalConversationAttributeUpdatedByWorkflowAttributeMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalConversationAttributeUpdatedByWorkflowAttributeMetadata::DECODERS
+
+    # @return [String] Name of the CDA updated
+    attr_reader :name
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalConversationAttributeUpdatedByWorkflowValueMetadata
-  FIELDS = {
-    name: "name",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ConversationAttributeUpdatedByWorkflowValue.
-# Optional object value serialized in the `value` wire field.
-class ConversationAttributeUpdatedByWorkflowValue
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalConversationAttributeUpdatedByWorkflowValueMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalConversationAttributeUpdatedByWorkflowValueMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalConversationAttributeUpdatedByWorkflowValueMetadata::DECODERS
-
-  # @return [String] Value of the CDA updated
-  attr_reader :name
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalConversationAttributeUpdatedByWorkflowValueMetadata
+    FIELDS = {
+      name: 'name'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ConversationAttributeUpdatedByWorkflowValue.
+  # Optional object value serialized in the `value` wire field.
+  class ConversationAttributeUpdatedByWorkflowValue
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalConversationAttributeUpdatedByWorkflowValueMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalConversationAttributeUpdatedByWorkflowValueMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalConversationAttributeUpdatedByWorkflowValueMetadata::DECODERS
+
+    # @return [String] Value of the CDA updated
+    attr_reader :name
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalConversationAttributeUpdatedByWorkflowMetadata
-  FIELDS = {
-    workflow: "workflow",
-    attribute: "attribute",
-    value: "value",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    workflow: lambda do |value|
-      ::OctridevIntercom::ConversationAttributeUpdatedByWorkflowWorkflow.from_hash(value)
-    end,
-    attribute: lambda do |value|
-      ::OctridevIntercom::ConversationAttributeUpdatedByWorkflowAttribute.from_hash(value)
-    end,
-    value: lambda do |value|
-      ::OctridevIntercom::ConversationAttributeUpdatedByWorkflowValue.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ConversationAttributeUpdatedByWorkflow.
-# Contains details about the workflow that was triggered and any Custom Data Attributes (CDAs) that were modified during the workflow execution for conversation part type conversation_attribute_updated_by_workflow .
-class ConversationAttributeUpdatedByWorkflow
-  include EventDetails
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalConversationAttributeUpdatedByWorkflowMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalConversationAttributeUpdatedByWorkflowMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalConversationAttributeUpdatedByWorkflowMetadata::DECODERS
-
-  # @return [ConversationAttributeUpdatedByWorkflowWorkflow] Optional object value serialized in the `workflow` wire field.
-  attr_reader :workflow
-  # @return [ConversationAttributeUpdatedByWorkflowAttribute] Optional object value serialized in the `attribute` wire field.
-  attr_reader :attribute
-  # @return [ConversationAttributeUpdatedByWorkflowValue] Optional object value serialized in the `value` wire field.
-  attr_reader :value
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalConversationAttributeUpdatedByWorkflowMetadata
+    FIELDS = {
+      workflow: 'workflow',
+      attribute: 'attribute',
+      value: 'value'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      workflow: lambda do |value|
+        ::OctridevIntercom::ConversationAttributeUpdatedByWorkflowWorkflow.from_hash(value)
+      end,
+      attribute: lambda do |value|
+        ::OctridevIntercom::ConversationAttributeUpdatedByWorkflowAttribute.from_hash(value)
+      end,
+      value: lambda do |value|
+        ::OctridevIntercom::ConversationAttributeUpdatedByWorkflowValue.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ConversationAttributeUpdatedByWorkflow.
+  # Contains details about the workflow that was triggered and any Custom Data Attributes (CDAs) that were modified during the workflow execution for conversation part type conversation_attribute_updated_by_workflow .
+  class ConversationAttributeUpdatedByWorkflow
+    include EventDetails
+
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalConversationAttributeUpdatedByWorkflowMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalConversationAttributeUpdatedByWorkflowMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalConversationAttributeUpdatedByWorkflowMetadata::DECODERS
+
+    # @return [ConversationAttributeUpdatedByWorkflowWorkflow] Optional object value serialized in the `workflow` wire field.
+    attr_reader :workflow
+    # @return [ConversationAttributeUpdatedByWorkflowAttribute] Optional object value serialized in the `attribute` wire field.
+    attr_reader :attribute
+    # @return [ConversationAttributeUpdatedByWorkflowValue] Optional object value serialized in the `value` wire field.
+    attr_reader :value
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalConversationChannelMetadata
-  FIELDS = {
-    initial: "initial",
-    current: "current",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ConversationChannel.
-# The channel through which a conversation was originally initiated and its current channel.
-class ConversationChannel
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalConversationChannelMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalConversationChannelMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalConversationChannelMetadata::DECODERS
-
-  # @return [String] The channel through which the conversation was originally initiated. Possible values include `messenger`, `zendesk_sunshine`, `zendesk_ticket`, `twitter`, `email`. Returns `null` if channel data is unavailable.
-  attr_reader :initial
-  # @return [String] The current channel of the conversation. May differ from `initial` if the conversation was migrated between channels. Returns `null` if channel data is unavailable.
-  attr_reader :current
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalConversationChannelMetadata
+    FIELDS = {
+      initial: 'initial',
+      current: 'current'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ConversationChannel.
+  # The channel through which a conversation was originally initiated and its current channel.
+  class ConversationChannel
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalConversationChannelMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalConversationChannelMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalConversationChannelMetadata::DECODERS
+
+    # @return [String] The channel through which the conversation was originally initiated. Possible values include `messenger`, `zendesk_sunshine`, `zendesk_ticket`, `twitter`, `email`. Returns `null` if channel data is unavailable.
+    attr_reader :initial
+    # @return [String] The current channel of the conversation. May differ from `initial` if the conversation was migrated between channels. Returns `null` if channel data is unavailable.
+    attr_reader :current
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalConversationContactsMetadata
-  FIELDS = {
-    type: "type",
-    contacts: "contacts",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::ConversationContactsType.from_value(value)
-    end,
-    contacts: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::ContactReference.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for ConversationContacts.
-# The list of contacts (users or leads) involved in this conversation. This will only contain one customer unless more were added via the group conversation feature.
-class ConversationContacts
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalConversationContactsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalConversationContactsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalConversationContactsMetadata::DECODERS
-
-  # @return [ConversationContactsType] Optional enumerated value serialized in the `type` wire field.
-  attr_reader :type
-  # @return [Array_of_ContactReference] The list of contacts (users or leads) involved in this conversation. This will only contain one customer unless more were added via the group conversation feature.
-  attr_reader :contacts
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalConversationContactsMetadata
+    FIELDS = {
+      type: 'type',
+      contacts: 'contacts'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::ConversationContactsType.from_value(value)
+      end,
+      contacts: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::ContactReference.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ConversationContacts.
+  # The list of contacts (users or leads) involved in this conversation. This will only contain one customer unless more were added via the group conversation feature.
+  class ConversationContacts
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalConversationContactsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalConversationContactsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalConversationContactsMetadata::DECODERS
+
+    # @return [ConversationContactsType] Optional enumerated value serialized in the `type` wire field.
+    attr_reader :type
+    # @return [Array_of_ContactReference] The list of contacts (users or leads) involved in this conversation. This will only contain one customer unless more were added via the group conversation feature.
+    attr_reader :contacts
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the ConversationContactsType SDK namespace.
-module ConversationContactsType
-  CONTACT_LIST = 'contact.list'
-  VALUES = ['contact.list'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalConversationExternalReferenceMetadata
-  FIELDS = {
-    type: "type",
-    id: "id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ConversationExternalReference.
-# A reference linking a conversation to a record in an external helpdesk or CRM system, surfaced for Fin Standalone workspaces.
-class ConversationExternalReference
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalConversationExternalReferenceMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalConversationExternalReferenceMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalConversationExternalReferenceMetadata::DECODERS
-
-  # @return [String] The type of external system the reference points to. Possible values include `zendesk_ticket`, `zendesk_sunshine_conversation`, `salesforce_case`, `salesforce_in_app_message_conversation`, `freshdesk_ticket`, `freshchat_conversation`, `hubspot_conversation`, `custom_helpdesk_conversation`, `api_conversation`.
-  attr_reader :type
-  # @return [String] The identifier of the record in the external system. Always serialized as a string, since some external IDs exceed 32-bit integer range.
-  attr_reader :id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ConversationContactsType SDK namespace.
+  module ConversationContactsType
+    CONTACT_LIST = 'contact.list'
+    VALUES = ['contact.list'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalConversationExternalReferenceMetadata
+    FIELDS = {
+      type: 'type',
+      id: 'id'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ConversationExternalReference.
+  # A reference linking a conversation to a record in an external helpdesk or CRM system, surfaced for Fin Standalone workspaces.
+  class ConversationExternalReference
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalConversationExternalReferenceMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalConversationExternalReferenceMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalConversationExternalReferenceMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalConversationFirstContactReplyMetadata
-  FIELDS = {
-    created_at: "created_at",
-    type: "type",
-    url: "url",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [String] The type of external system the reference points to. Possible values include `zendesk_ticket`, `zendesk_sunshine_conversation`, `salesforce_case`, `salesforce_in_app_message_conversation`, `freshdesk_ticket`, `freshchat_conversation`, `hubspot_conversation`, `custom_helpdesk_conversation`, `api_conversation`.
+    attr_reader :type
+    # @return [String] The identifier of the record in the external system. Always serialized as a string, since some external IDs exceed 32-bit integer range.
+    attr_reader :id
 
-# API model for ConversationFirstContactReply.
-# An object containing information on the first users message. For a contact initiated message this will represent the users original message.
-class ConversationFirstContactReply
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalConversationFirstContactReplyMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalConversationFirstContactReplyMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalConversationFirstContactReplyMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Integer] Optional `date-time`-formatted value serialized in the `created_at` wire field.
-  attr_reader :created_at
-  # @return [String] Optional `string` value serialized in the `type` wire field.
-  attr_reader :type
-  # @return [String] Optional `string` value serialized in the `url` wire field.
-  attr_reader :url
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalConversationFirstContactReplyMetadata
+    FIELDS = {
+      created_at: 'created_at',
+      type: 'type',
+      url: 'url'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ConversationFirstContactReply.
+  # An object containing information on the first users message. For a contact initiated message this will represent the users original message.
+  class ConversationFirstContactReply
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalConversationFirstContactReplyMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalConversationFirstContactReplyMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalConversationFirstContactReplyMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalConversationPartTranslationsMetadata
-  FIELDS = {
-    original: "original",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    original
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [Integer] Optional `date-time`-formatted value serialized in the `created_at` wire field.
+    attr_reader :created_at
+    # @return [String] Optional `string` value serialized in the `type` wire field.
+    attr_reader :type
+    # @return [String] Optional `string` value serialized in the `url` wire field.
+    attr_reader :url
 
-# API model for ConversationPartTranslations.
-# A map of the reply text keyed by locale code. Backs the `conversation.admin.replied.translated` webhook topic. `original` holds the locale code the reply was written in; every other key holds the reply translated into that locale.
-class ConversationPartTranslations
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalConversationPartTranslationsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalConversationPartTranslationsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalConversationPartTranslationsMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] The locale code identifying the language the reply was originally written in.
-  attr_reader :original
-  # @return [Hash{String => Object}] Keys the schema admits beside the declared fields.
-  attr_reader :additional_properties
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS, extras: true)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, extras: true)
+  # Internal model hydration metadata.
+  class SdkInternalConversationPartTranslationsMetadata
+    FIELDS = {
+      original: 'original'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      original
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS, extras: true)
+  # API model for ConversationPartTranslations.
+  # A map of the reply text keyed by locale code. Backs the `conversation.admin.replied.translated` webhook topic. `original` holds the locale code the reply was written in; every other key holds the reply translated into that locale.
+  class ConversationPartTranslations
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalConversationPartTranslationsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalConversationPartTranslationsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalConversationPartTranslationsMetadata::DECODERS
+
+    # @return [String] The locale code identifying the language the reply was originally written in.
+    attr_reader :original
+    # @return [Hash{String => Object}] Keys the schema admits beside the declared fields.
+    attr_reader :additional_properties
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS, extras: true)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, extras: true)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS, extras: true)
+    end
   end
-end
 end

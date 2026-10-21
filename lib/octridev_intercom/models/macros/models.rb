@@ -5,257 +5,252 @@
 
 # tagged_models_macros domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalMacroMetadata
-  FIELDS = {
-    type: "type",
-    id: "id",
-    name: "name",
-    body: "body",
-    body_text: "body_text",
-    created_at: "created_at",
-    updated_at: "updated_at",
-    visible_to: "visible_to",
-    visible_to_team_ids: "visible_to_team_ids",
-    available_on: "available_on",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::MacroType.from_value(value)
-    end,
-    visible_to: lambda do |value|
-      ::OctridevIntercom::MacroVisibleTo.from_value(value)
-    end,
-    available_on: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::MacroAvailableOnItem.from_value(item) }
-    end,
-  }.freeze
-end
-
-# API model for Macro.
-# A macro is a pre-defined response template (saved reply) that can be used to quickly reply to conversations.
-class Macro
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalMacroMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalMacroMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalMacroMetadata::DECODERS
-
-  # @return [MacroType] String representing the object's type. Always has the value `macro`.
-  attr_reader :type
-  # @return [String] The unique identifier for the macro.
-  attr_reader :id
-  # @return [String] The name of the macro.
-  attr_reader :name
-  # @return [String] The body of the macro in HTML format with placeholders transformed to XML-like format.
-  attr_reader :body
-  # @return [String] The plain text version of the macro body with original Intercom placeholder format.
-  attr_reader :body_text
-  # @return [String] The time the macro was created in ISO 8601 format.
-  attr_reader :created_at
-  # @return [String] The time the macro was last updated in ISO 8601 format.
-  attr_reader :updated_at
-  # @return [MacroVisibleTo] Who can view this macro.
-  attr_reader :visible_to
-  # @return [Array_of_String] The team IDs that can view this macro when visible_to is set to specific_teams.
-  attr_reader :visible_to_team_ids
-  # @return [Array_of_MacroAvailableOnItem] Where the macro is available for use.
-  attr_reader :available_on
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalMacroMetadata
+    FIELDS = {
+      type: 'type',
+      id: 'id',
+      name: 'name',
+      body: 'body',
+      body_text: 'body_text',
+      created_at: 'created_at',
+      updated_at: 'updated_at',
+      visible_to: 'visible_to',
+      visible_to_team_ids: 'visible_to_team_ids',
+      available_on: 'available_on'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::MacroType.from_value(value)
+      end,
+      visible_to: lambda do |value|
+        ::OctridevIntercom::MacroVisibleTo.from_value(value)
+      end,
+      available_on: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::MacroAvailableOnItem.from_value(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for Macro.
+  # A macro is a pre-defined response template (saved reply) that can be used to quickly reply to conversations.
+  class Macro
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalMacroMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalMacroMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalMacroMetadata::DECODERS
+
+    # @return [MacroType] String representing the object's type. Always has the value `macro`.
+    attr_reader :type
+    # @return [String] The unique identifier for the macro.
+    attr_reader :id
+    # @return [String] The name of the macro.
+    attr_reader :name
+    # @return [String] The body of the macro in HTML format with placeholders transformed to XML-like format.
+    attr_reader :body
+    # @return [String] The plain text version of the macro body with original Intercom placeholder format.
+    attr_reader :body_text
+    # @return [String] The time the macro was created in ISO 8601 format.
+    attr_reader :created_at
+    # @return [String] The time the macro was last updated in ISO 8601 format.
+    attr_reader :updated_at
+    # @return [MacroVisibleTo] Who can view this macro.
+    attr_reader :visible_to
+    # @return [Array_of_String] The team IDs that can view this macro when visible_to is set to specific_teams.
+    attr_reader :visible_to_team_ids
+    # @return [Array_of_MacroAvailableOnItem] Where the macro is available for use.
+    attr_reader :available_on
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the MacroAvailableOnItem SDK namespace.
-module MacroAvailableOnItem
-  INBOX = 'inbox'
-  MESSENGER = 'messenger'
-  VALUES = ['inbox', 'messenger'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the MacroType SDK namespace.
-module MacroType
-  MACRO = 'macro'
-  VALUES = ['macro'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the MacroVisibleTo SDK namespace.
-module MacroVisibleTo
-  EVERYONE = 'everyone'
-  SPECIFIC_TEAMS = 'specific_teams'
-  VALUES = ['everyone', 'specific_teams'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalMacroListPagesNextMetadata
-  FIELDS = {
-    starting_after: "starting_after",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for MacroListPagesNext.
-# Cursor for the next page
-class MacroListPagesNext
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalMacroListPagesNextMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalMacroListPagesNextMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalMacroListPagesNextMetadata::DECODERS
-
-  # @return [String] Base64-encoded cursor containing [updated_at, id] for pagination
-  attr_reader :starting_after
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the MacroAvailableOnItem SDK namespace.
+  module MacroAvailableOnItem
+    INBOX = 'inbox'
+    MESSENGER = 'messenger'
+    VALUES = %w[inbox messenger].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the MacroType SDK namespace.
+  module MacroType
+    MACRO = 'macro'
+    VALUES = ['macro'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalMacroListPagesMetadata
-  FIELDS = {
-    type: "type",
-    per_page: "per_page",
-    next_: "next",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::MacroListPagesType.from_value(value)
-    end,
-    next_: lambda do |value|
-      ::OctridevIntercom::MacroListPagesNext.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for MacroListPages.
-# Pagination information
-class MacroListPages
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalMacroListPagesMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalMacroListPagesMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalMacroListPagesMetadata::DECODERS
-
-  # @return [MacroListPagesType] The type of pagination
-  attr_reader :type
-  # @return [Integer] Number of results per page
-  attr_reader :per_page
-  # @return [MacroListPagesNext] Cursor for the next page
-  attr_reader :next_
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the MacroVisibleTo SDK namespace.
+  module MacroVisibleTo
+    EVERYONE = 'everyone'
+    SPECIFIC_TEAMS = 'specific_teams'
+    VALUES = %w[everyone specific_teams].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalMacroListPagesNextMetadata
+    FIELDS = {
+      starting_after: 'starting_after'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for MacroListPagesNext.
+  # Cursor for the next page
+  class MacroListPagesNext
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalMacroListPagesNextMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalMacroListPagesNextMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalMacroListPagesNextMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalMacroListMetadata
-  FIELDS = {
-    type: "type",
-    data: "data",
-    pages: "pages",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::MacroListType.from_value(value)
-    end,
-    data: lambda do |value|
-      value&.map { |item| item.nil? ? nil : ::OctridevIntercom::Macro.from_hash(item) }
-    end,
-    pages: lambda do |value|
-      ::OctridevIntercom::MacroListPages.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [String] Base64-encoded cursor containing [updated_at, id] for pagination
+    attr_reader :starting_after
 
-# API model for MacroList.
-# A paginated list of macros (saved replies) in the workspace.
-class MacroList
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalMacroListMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalMacroListMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalMacroListMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [MacroListType] Always list
-  attr_reader :type
-  # @return [Array_of_Macro] The list of macro objects
-  attr_reader :data
-  # @return [MacroListPages] Pagination information
-  attr_reader :pages
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalMacroListPagesMetadata
+    FIELDS = {
+      type: 'type',
+      per_page: 'per_page',
+      next_: 'next'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::MacroListPagesType.from_value(value)
+      end,
+      next_: lambda do |value|
+        ::OctridevIntercom::MacroListPagesNext.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for MacroListPages.
+  # Pagination information
+  class MacroListPages
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalMacroListPagesMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalMacroListPagesMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalMacroListPagesMetadata::DECODERS
 
-# Defines the MacroListPagesType SDK namespace.
-module MacroListPagesType
-  PAGES = 'pages'
-  VALUES = ['pages'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [MacroListPagesType] The type of pagination
+    attr_reader :type
+    # @return [Integer] Number of results per page
+    attr_reader :per_page
+    # @return [MacroListPagesNext] Cursor for the next page
+    attr_reader :next_
 
-# Defines the MacroListType SDK namespace.
-module MacroListType
-  LIST = 'list'
-  VALUES = ['list'].freeze
-  def self.from_value(value)
-    value
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
+
+  # Internal model hydration metadata.
+  class SdkInternalMacroListMetadata
+    FIELDS = {
+      type: 'type',
+      data: 'data',
+      pages: 'pages'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::MacroListType.from_value(value)
+      end,
+      data: lambda do |value|
+        value&.map { |item| item.nil? ? nil : ::OctridevIntercom::Macro.from_hash(item) }
+      end,
+      pages: lambda do |value|
+        ::OctridevIntercom::MacroListPages.from_hash(value)
+      end
+    }.freeze
+  end
+
+  # API model for MacroList.
+  # A paginated list of macros (saved replies) in the workspace.
+  class MacroList
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalMacroListMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalMacroListMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalMacroListMetadata::DECODERS
+
+    # @return [MacroListType] Always list
+    attr_reader :type
+    # @return [Array_of_Macro] The list of macro objects
+    attr_reader :data
+    # @return [MacroListPages] Pagination information
+    attr_reader :pages
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the MacroListPagesType SDK namespace.
+  module MacroListPagesType
+    PAGES = 'pages'
+    VALUES = ['pages'].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Defines the MacroListType SDK namespace.
+  module MacroListType
+    LIST = 'list'
+    VALUES = ['list'].freeze
+    def self.from_value(value)
+      value
+    end
+  end
 end

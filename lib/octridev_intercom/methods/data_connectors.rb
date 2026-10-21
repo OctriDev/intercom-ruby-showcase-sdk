@@ -23,12 +23,12 @@ module OctridevIntercom
           'non_fin_standalone_action_identity_verification_error'
         REQUEST_VALIDATION_ERROR = 'request_validation_error'
         CLIENT_SIDE_ACTION_ERROR = 'client_side_action_error'
-        VALUES = [
-          'request_configuration_error', 'faraday_error', '3rd_party_error',
-          'response_mapping_error', 'token_refresh_error', 'fin_action_response_formatting_error',
-          'fin_action_identity_verification_error', 'email_verification_error',
-          'non_fin_standalone_action_identity_verification_error', 'request_validation_error',
-          'client_side_action_error'
+        VALUES = %w[
+          request_configuration_error faraday_error 3rd_party_error
+          response_mapping_error token_refresh_error fin_action_response_formatting_error
+          fin_action_identity_verification_error email_verification_error
+          non_fin_standalone_action_identity_verification_error request_validation_error
+          client_side_action_error
         ].freeze
         def self.from_value(value)
           value
@@ -39,7 +39,7 @@ module OctridevIntercom
       module ListDataConnectorExecutionResultsParameterCe384deb
         TRUE = 'true'
         FALSE = 'false'
-        VALUES = ['true', 'false'].freeze
+        VALUES = %w[true false].freeze
         def self.from_value(value)
           value
         end
@@ -49,7 +49,7 @@ module OctridevIntercom
       module ListDataConnectorExecutionResultsParameter
         TRUE = 'true'
         FALSE = 'false'
-        VALUES = ['true', 'false'].freeze
+        VALUES = %w[true false].freeze
         def self.from_value(value)
           value
         end
@@ -59,7 +59,7 @@ module OctridevIntercom
       module RetrieveDataConnectorParameter
         DRAFT = 'draft'
         LIVE = 'live'
-        VALUES = ['draft', 'live'].freeze
+        VALUES = %w[draft live].freeze
         def self.from_value(value)
           value
         end
@@ -81,25 +81,24 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 50) }
 
         SdkClient.request(
           'GET',
-          "/data_connectors",
+          '/data_connectors',
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'starting_after' => QueryValue.new(starting_after, style: 'form', explode: true),
+            'starting_after' => QueryValue.new(starting_after, style: 'form', explode: true)
           },
           return_type: ::OctridevIntercom::DataConnectorList,
           decoder: :json,
           operation_id: 'list_data_connectors',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 },
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -151,10 +150,9 @@ module OctridevIntercom
         token_ids: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/data_connectors",
+          '/data_connectors',
           config: config,
           body: {
             'name' => name,
@@ -170,16 +168,16 @@ module OctridevIntercom
             'bypass_authentication' => bypass_authentication,
             'validate_missing_attributes' => validate_missing_attributes,
             'mock_response' => mock_response,
-            'token_ids' => token_ids,
+            'token_ids' => token_ids
           },
           return_type: ::OctridevIntercom::DataConnectorDetail,
           decoder: :json,
           operation_id: 'create_data_connector',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -197,25 +195,24 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/data_connectors/",
+            '/data_connectors/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           query: {
-            'state_version' => QueryValue.new(state_version, style: 'form', explode: true),
+            'state_version' => QueryValue.new(state_version, style: 'form', explode: true)
           },
           return_type: ::OctridevIntercom::DataConnectorDetail,
           decoder: :json,
           operation_id: 'retrieve_data_connector',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -230,11 +227,10 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/data_connectors/",
+            '/data_connectors/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -242,10 +238,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'delete_data_connector',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '409' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '409' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -302,11 +298,10 @@ module OctridevIntercom
         token_ids: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PATCH',
           [
-            "/data_connectors/",
+            '/data_connectors/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -325,16 +320,16 @@ module OctridevIntercom
             'bypass_authentication' => bypass_authentication,
             'validate_missing_attributes' => validate_missing_attributes,
             'mock_response' => mock_response,
-            'token_ids' => token_ids,
+            'token_ids' => token_ids
           },
           return_type: ::OctridevIntercom::DataConnectorDetail,
           decoder: :json,
           operation_id: 'update_data_connector',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '409' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '409' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -369,15 +364,14 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 30) }
 
         SdkClient.request(
           'GET',
           [
-            "/data_connectors/",
+            '/data_connectors/',
             SdkClient.encode_path_segment(data_connector_id),
-            "/execution_results"
+            '/execution_results'
           ].join,
           config: config,
           query: {
@@ -387,16 +381,16 @@ module OctridevIntercom
             'error_type' => QueryValue.new(error_type, style: 'form', explode: true),
             'start_ts' => QueryValue.new(start_ts, style: 'form', explode: true),
             'end_ts' => QueryValue.new(end_ts, style: 'form', explode: true),
-            'include_bodies' => QueryValue.new(include_bodies, style: 'form', explode: true),
+            'include_bodies' => QueryValue.new(include_bodies, style: 'form', explode: true)
           },
           return_type: ::OctridevIntercom::DataConnectorExecutionResultList,
           decoder: :json,
           operation_id: 'list_data_connector_execution_results',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -414,13 +408,12 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/data_connectors/",
+            '/data_connectors/',
             SdkClient.encode_path_segment(data_connector_id),
-            "/execution_results/",
+            '/execution_results/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -428,10 +421,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'show_data_connector_execution_result',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -453,29 +446,28 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 50) }
 
         SdkClient.request(
           'GET',
           [
-            "/data_connectors/",
+            '/data_connectors/',
             SdkClient.encode_path_segment(id),
-            "/versions"
+            '/versions'
           ].join,
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'starting_after' => QueryValue.new(starting_after, style: 'form', explode: true),
+            'starting_after' => QueryValue.new(starting_after, style: 'form', explode: true)
           },
           return_type: ::OctridevIntercom::DataConnectorVersionList,
           decoder: :json,
           operation_id: 'list_data_connector_versions',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -493,13 +485,12 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/data_connectors/",
+            '/data_connectors/',
             SdkClient.encode_path_segment(id),
-            "/versions/",
+            '/versions/',
             SdkClient.encode_path_segment(version_id)
           ].join,
           config: config,
@@ -507,10 +498,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'retrieve_data_connector_version',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -531,27 +522,26 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PATCH',
           [
-            "/data_connectors/",
+            '/data_connectors/',
             SdkClient.encode_path_segment(id),
-            "/versions/",
+            '/versions/',
             SdkClient.encode_path_segment(version_id)
           ].join,
           config: config,
           body: {
-            'note' => note,
+            'note' => note
           },
           return_type: ::OctridevIntercom::DataConnectorVersion,
           decoder: :json,
           operation_id: 'update_data_connector_version',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
     end

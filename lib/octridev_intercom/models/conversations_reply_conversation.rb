@@ -5,659 +5,658 @@
 
 # conversations domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalAdminReplyConversationRequestMetadata
-  FIELDS = {
-    message_type: "message_type",
-    type: "type",
-    body: "body",
-    admin_id: "admin_id",
-    created_at: "created_at",
-    reply_options: "reply_options",
-    attachment_urls: "attachment_urls",
-    attachment_files: "attachment_files",
-    skip_notifications: "skip_notifications",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    message_type
-    type
-    admin_id
-  ].freeze
-  DECODERS = {
-    message_type: lambda do |value|
-      ::OctridevIntercom::AdminReplyConversationRequestMessageType.from_value(value)
-    end,
-    type: lambda do |value|
-      ::OctridevIntercom::AdminReplyConversationRequestType.from_value(value)
-    end,
-    reply_options: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::QuickReplyOption.from_hash(item) }
-    end,
-    attachment_files: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::ConversationAttachmentFiles.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for AdminReplyConversationRequest.
-# Payload of the request to reply on behalf of an admin
-class AdminReplyConversationRequest
-  include ReplyConversationRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAdminReplyConversationRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAdminReplyConversationRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAdminReplyConversationRequestMetadata::DECODERS
-
-  # @return [AdminReplyConversationRequestMessageType] Required enumerated value serialized in the `message_type` wire field.
-  attr_reader :message_type
-  # @return [AdminReplyConversationRequestType] Required enumerated value serialized in the `type` wire field.
-  attr_reader :type
-  # @return [String] The text body of the reply. Notes accept some HTML formatting. Must be present for comment and note message types.
-  attr_reader :body
-  # @return [String] The id of the admin who is authoring the comment.
-  attr_reader :admin_id
-  # @return [Integer] The time the reply was created. If not provided, the current time will be used.
-  attr_reader :created_at
-  # @return [Array_of_QuickReplyOption] The quick reply options to display to the end user. Must be present for quick_reply message types.
-  attr_reader :reply_options
-  # @return [Array_of_String] A list of image URLs that will be added as attachments. You can include up to 10 URLs.
-  attr_reader :attachment_urls
-  # @return [Array_of_ConversationAttachmentFiles] A list of files that will be added as attachments. You can include up to 10 files
-  attr_reader :attachment_files
-  # @return [Boolean] Option to disable notifications when replying to a conversation.
-  attr_reader :skip_notifications
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAdminReplyConversationRequestMetadata
+    FIELDS = {
+      message_type: 'message_type',
+      type: 'type',
+      body: 'body',
+      admin_id: 'admin_id',
+      created_at: 'created_at',
+      reply_options: 'reply_options',
+      attachment_urls: 'attachment_urls',
+      attachment_files: 'attachment_files',
+      skip_notifications: 'skip_notifications'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      message_type
+      type
+      admin_id
+    ].freeze
+    DECODERS = {
+      message_type: lambda do |value|
+        ::OctridevIntercom::AdminReplyConversationRequestMessageType.from_value(value)
+      end,
+      type: lambda do |value|
+        ::OctridevIntercom::AdminReplyConversationRequestType.from_value(value)
+      end,
+      reply_options: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::QuickReplyOption.from_hash(item) }
+      end,
+      attachment_files: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::ConversationAttachmentFiles.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AdminReplyConversationRequest.
+  # Payload of the request to reply on behalf of an admin
+  class AdminReplyConversationRequest
+    include ReplyConversationRequest
+
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAdminReplyConversationRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAdminReplyConversationRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAdminReplyConversationRequestMetadata::DECODERS
+
+    # @return [AdminReplyConversationRequestMessageType] Required enumerated value serialized in the `message_type` wire field.
+    attr_reader :message_type
+    # @return [AdminReplyConversationRequestType] Required enumerated value serialized in the `type` wire field.
+    attr_reader :type
+    # @return [String] The text body of the reply. Notes accept some HTML formatting. Must be present for comment and note message types.
+    attr_reader :body
+    # @return [String] The id of the admin who is authoring the comment.
+    attr_reader :admin_id
+    # @return [Integer] The time the reply was created. If not provided, the current time will be used.
+    attr_reader :created_at
+    # @return [Array_of_QuickReplyOption] The quick reply options to display to the end user. Must be present for quick_reply message types.
+    attr_reader :reply_options
+    # @return [Array_of_String] A list of image URLs that will be added as attachments. You can include up to 10 URLs.
+    attr_reader :attachment_urls
+    # @return [Array_of_ConversationAttachmentFiles] A list of files that will be added as attachments. You can include up to 10 files
+    attr_reader :attachment_files
+    # @return [Boolean] Option to disable notifications when replying to a conversation.
+    attr_reader :skip_notifications
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the AdminReplyConversationRequestMessageType SDK namespace.
-module AdminReplyConversationRequestMessageType
-  COMMENT = 'comment'
-  NOTE = 'note'
-  QUICK_REPLY = 'quick_reply'
-  VALUES = ['comment', 'note', 'quick_reply'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the AdminReplyConversationRequestType SDK namespace.
-module AdminReplyConversationRequestType
-  ADMIN = 'admin'
-  VALUES = ['admin'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAssignConversationRequestMetadata
-  FIELDS = {
-    message_type: "message_type",
-    type: "type",
-    admin_id: "admin_id",
-    assignee_id: "assignee_id",
-    body: "body",
-    skip_reopen: "skip_reopen",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    message_type
-    type
-    admin_id
-    assignee_id
-  ].freeze
-  DECODERS = {
-    message_type: lambda do |value|
-      ::OctridevIntercom::AssignConversationRequestMessageType.from_value(value)
-    end,
-    type: lambda do |value|
-      ::OctridevIntercom::AssignConversationRequestType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for AssignConversationRequest.
-# Payload of the request to assign a conversation
-class AssignConversationRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAssignConversationRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAssignConversationRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAssignConversationRequestMetadata::DECODERS
-
-  # @return [AssignConversationRequestMessageType] Required enumerated value serialized in the `message_type` wire field.
-  attr_reader :message_type
-  # @return [AssignConversationRequestType] Required enumerated value serialized in the `type` wire field.
-  attr_reader :type
-  # @return [String] The id of the admin who is performing the action.
-  attr_reader :admin_id
-  # @return [String] The `id` of the `admin` or `team` which will be assigned the conversation. A conversation can be assigned both an admin and a team.\nSet `0` if you want this assign to no admin or team (ie. Unassigned).
-  attr_reader :assignee_id
-  # @return [String] Optionally you can send a response in the conversation when it is assigned.
-  attr_reader :body
-  # @return [Boolean] When true, assigning a closed conversation leaves it closed instead of reopening it. No reopen event is recorded, so the conversation keeps its original close timestamp and the assignment does not count as a new closure in reporting.
-  attr_reader :skip_reopen
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the AdminReplyConversationRequestMessageType SDK namespace.
+  module AdminReplyConversationRequestMessageType
+    COMMENT = 'comment'
+    NOTE = 'note'
+    QUICK_REPLY = 'quick_reply'
+    VALUES = %w[comment note quick_reply].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the AdminReplyConversationRequestType SDK namespace.
+  module AdminReplyConversationRequestType
+    ADMIN = 'admin'
+    VALUES = ['admin'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the AssignConversationRequestMessageType SDK namespace.
-module AssignConversationRequestMessageType
-  ASSIGNMENT = 'assignment'
-  VALUES = ['assignment'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
-
-    raise SdkValidationError.new('AssignConversationRequestMessageType', 'enum', "Unknown AssignConversationRequestMessageType: #{value}")
-  end
-end
-
-# Defines the AssignConversationRequestType SDK namespace.
-module AssignConversationRequestType
-  ADMIN = 'admin'
-  TEAM = 'team'
-  VALUES = ['admin', 'team'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAttachContactToConversationRequestMetadata
-  FIELDS = {
-    admin_id: "admin_id",
-    customer: "customer",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    customer: lambda do |value|
-      ::OctridevIntercom::AttachContactToConversationRequestCustomer.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for AttachContactToConversationRequest.
-# Payload of the request to assign a conversation
-class AttachContactToConversationRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAttachContactToConversationRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAttachContactToConversationRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAttachContactToConversationRequestMetadata::DECODERS
-
-  # @return [String] The `id` of the admin who is adding the new participant.
-  attr_reader :admin_id
-  # @return [AttachContactToConversationRequestCustomer] Optional object value serialized in the `customer` wire field.
-  attr_reader :customer
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAssignConversationRequestMetadata
+    FIELDS = {
+      message_type: 'message_type',
+      type: 'type',
+      admin_id: 'admin_id',
+      assignee_id: 'assignee_id',
+      body: 'body',
+      skip_reopen: 'skip_reopen'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      message_type
+      type
+      admin_id
+      assignee_id
+    ].freeze
+    DECODERS = {
+      message_type: lambda do |value|
+        ::OctridevIntercom::AssignConversationRequestMessageType.from_value(value)
+      end,
+      type: lambda do |value|
+        ::OctridevIntercom::AssignConversationRequestType.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AssignConversationRequest.
+  # Payload of the request to assign a conversation
+  class AssignConversationRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAssignConversationRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAssignConversationRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAssignConversationRequestMetadata::DECODERS
+
+    # @return [AssignConversationRequestMessageType] Required enumerated value serialized in the `message_type` wire field.
+    attr_reader :message_type
+    # @return [AssignConversationRequestType] Required enumerated value serialized in the `type` wire field.
+    attr_reader :type
+    # @return [String] The id of the admin who is performing the action.
+    attr_reader :admin_id
+    # @return [String] The `id` of the `admin` or `team` which will be assigned the conversation. A conversation can be assigned both an admin and a team.\nSet `0` if you want this assign to no admin or team (ie. Unassigned).
+    attr_reader :assignee_id
+    # @return [String] Optionally you can send a response in the conversation when it is assigned.
+    attr_reader :body
+    # @return [Boolean] When true, assigning a closed conversation leaves it closed instead of reopening it. No reopen event is recorded, so the conversation keeps its original close timestamp and the assignment does not count as a new closure in reporting.
+    attr_reader :skip_reopen
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # Defines the AssignConversationRequestMessageType SDK namespace.
+  module AssignConversationRequestMessageType
+    ASSIGNMENT = 'assignment'
+    VALUES = ['assignment'].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
 
-# Internal model hydration metadata.
-class SdkInternalAttachContactToConversationRequestCustomerVariant0Metadata
-  FIELDS = {
-    intercom_user_id: "intercom_user_id",
-    customer: "customer",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    intercom_user_id
-  ].freeze
-  DECODERS = {
-    customer: lambda do |value|
-      ::OctridevIntercom::CustomerRequest.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for AttachContactToConversationRequestCustomerVariant0.
-class AttachContactToConversationRequestCustomerVariant0
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAttachContactToConversationRequestCustomerVariant0Metadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAttachContactToConversationRequestCustomerVariant0Metadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAttachContactToConversationRequestCustomerVariant0Metadata::DECODERS
-
-  # @return [String] The identifier for the contact as given by Intercom.
-  attr_reader :intercom_user_id
-  # @return [CustomerRequest] Optional object value serialized in the `customer` wire field.
-  attr_reader :customer
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+      raise SdkValidationError.new('AssignConversationRequestMessageType', 'enum', "Unknown AssignConversationRequestMessageType: #{value}")
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the AssignConversationRequestType SDK namespace.
+  module AssignConversationRequestType
+    ADMIN = 'admin'
+    TEAM = 'team'
+    VALUES = %w[admin team].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAttachContactToConversationRequestCustomerVariant1Metadata
-  FIELDS = {
-    user_id: "user_id",
-    customer: "customer",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    user_id
-  ].freeze
-  DECODERS = {
-    customer: lambda do |value|
-      ::OctridevIntercom::CustomerRequest.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for AttachContactToConversationRequestCustomerVariant1.
-class AttachContactToConversationRequestCustomerVariant1
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAttachContactToConversationRequestCustomerVariant1Metadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAttachContactToConversationRequestCustomerVariant1Metadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAttachContactToConversationRequestCustomerVariant1Metadata::DECODERS
-
-  # @return [String] The external_id you have defined for the contact who is being added as a participant.
-  attr_reader :user_id
-  # @return [CustomerRequest] Optional object value serialized in the `customer` wire field.
-  attr_reader :customer
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAttachContactToConversationRequestMetadata
+    FIELDS = {
+      admin_id: 'admin_id',
+      customer: 'customer'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      customer: lambda do |value|
+        ::OctridevIntercom::AttachContactToConversationRequestCustomer.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AttachContactToConversationRequest.
+  # Payload of the request to assign a conversation
+  class AttachContactToConversationRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAttachContactToConversationRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAttachContactToConversationRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAttachContactToConversationRequestMetadata::DECODERS
+
+    # @return [String] The `id` of the admin who is adding the new participant.
+    attr_reader :admin_id
+    # @return [AttachContactToConversationRequestCustomer] Optional object value serialized in the `customer` wire field.
+    attr_reader :customer
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAttachContactToConversationRequestCustomerVariant2Metadata
-  FIELDS = {
-    email: "email",
-    customer: "customer",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    email
-  ].freeze
-  DECODERS = {
-    customer: lambda do |value|
-      ::OctridevIntercom::CustomerRequest.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for AttachContactToConversationRequestCustomerVariant2.
-class AttachContactToConversationRequestCustomerVariant2
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAttachContactToConversationRequestCustomerVariant2Metadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAttachContactToConversationRequestCustomerVariant2Metadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAttachContactToConversationRequestCustomerVariant2Metadata::DECODERS
-
-  # @return [String] The email you have defined for the contact who is being added as a participant.
-  attr_reader :email
-  # @return [CustomerRequest] Optional object value serialized in the `customer` wire field.
-  attr_reader :customer
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAttachContactToConversationRequestCustomerVariant0Metadata
+    FIELDS = {
+      intercom_user_id: 'intercom_user_id',
+      customer: 'customer'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      intercom_user_id
+    ].freeze
+    DECODERS = {
+      customer: lambda do |value|
+        ::OctridevIntercom::CustomerRequest.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AttachContactToConversationRequestCustomerVariant0.
+  class AttachContactToConversationRequestCustomerVariant0
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAttachContactToConversationRequestCustomerVariant0Metadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAttachContactToConversationRequestCustomerVariant0Metadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAttachContactToConversationRequestCustomerVariant0Metadata::DECODERS
+
+    # @return [String] The identifier for the contact as given by Intercom.
+    attr_reader :intercom_user_id
+    # @return [CustomerRequest] Optional object value serialized in the `customer` wire field.
+    attr_reader :customer
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the AttachContactToConversationRequestCustomer SDK namespace.
-module AttachContactToConversationRequestCustomer
-  def self.from_hash(hash)
-    shape_mapping = {
-      "intercom_user_id" => AttachContactToConversationRequestCustomerVariant0,
-      "user_id" => AttachContactToConversationRequestCustomerVariant1,
-      "email" => AttachContactToConversationRequestCustomerVariant2,
-    }
-    type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
-    decoded = type&.from_hash(hash)
-    return decoded unless type.nil?
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalCloseConversationRequestMetadata
-  FIELDS = {
-    message_type: "message_type",
-    type: "type",
-    admin_id: "admin_id",
-    body: "body",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    message_type
-    type
-    admin_id
-  ].freeze
-  DECODERS = {
-    message_type: lambda do |value|
-      ::OctridevIntercom::CloseConversationRequestMessageType.from_value(value)
-    end,
-    type: lambda do |value|
-      ::OctridevIntercom::CloseConversationRequestType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for CloseConversationRequest.
-# Payload of the request to close a conversation
-class CloseConversationRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCloseConversationRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCloseConversationRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCloseConversationRequestMetadata::DECODERS
-
-  # @return [CloseConversationRequestMessageType] Required enumerated value serialized in the `message_type` wire field.
-  attr_reader :message_type
-  # @return [CloseConversationRequestType] Required enumerated value serialized in the `type` wire field.
-  attr_reader :type
-  # @return [String] The id of the admin who is performing the action.
-  attr_reader :admin_id
-  # @return [String] Optionally you can leave a message in the conversation to provide additional context to the user and other teammates.
-  attr_reader :body
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAttachContactToConversationRequestCustomerVariant1Metadata
+    FIELDS = {
+      user_id: 'user_id',
+      customer: 'customer'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      user_id
+    ].freeze
+    DECODERS = {
+      customer: lambda do |value|
+        ::OctridevIntercom::CustomerRequest.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AttachContactToConversationRequestCustomerVariant1.
+  class AttachContactToConversationRequestCustomerVariant1
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAttachContactToConversationRequestCustomerVariant1Metadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAttachContactToConversationRequestCustomerVariant1Metadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAttachContactToConversationRequestCustomerVariant1Metadata::DECODERS
+
+    # @return [String] The external_id you have defined for the contact who is being added as a participant.
+    attr_reader :user_id
+    # @return [CustomerRequest] Optional object value serialized in the `customer` wire field.
+    attr_reader :customer
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the CloseConversationRequestMessageType SDK namespace.
-module CloseConversationRequestMessageType
-  CLOSE = 'close'
-  VALUES = ['close'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
-
-    raise SdkValidationError.new('CloseConversationRequestMessageType', 'enum', "Unknown CloseConversationRequestMessageType: #{value}")
-  end
-end
-
-# Defines the CloseConversationRequestType SDK namespace.
-module CloseConversationRequestType
-  ADMIN = 'admin'
-  VALUES = ['admin'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the ContactReplyConversationRequest SDK namespace.
-module ContactReplyConversationRequest
-  def self.from_hash(hash)
-    shape_mapping = {
-      "intercom_user_id" => ContactReplyIntercomUserIdRequest,
-      "email" => ContactReplyEmailRequest,
-      "user_id" => ContactReplyUserIdRequest,
-    }
-    type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
-    decoded = type&.from_hash(hash)
-    return decoded unless type.nil?
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalContactReplyEmailRequestReplyOptionsItemMetadata
-  FIELDS = {
-    text: "text",
-    uuid: "uuid",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    text
-    uuid
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ContactReplyEmailRequestReplyOptionsItem.
-# Required object value serialized in the `reply_options[]` wire field.
-class ContactReplyEmailRequestReplyOptionsItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalContactReplyEmailRequestReplyOptionsItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalContactReplyEmailRequestReplyOptionsItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalContactReplyEmailRequestReplyOptionsItemMetadata::DECODERS
-
-  # @return [String] The text of the chosen reply option.
-  attr_reader :text
-  # @return [String] The unique identifier for the quick reply option selected.
-  attr_reader :uuid
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAttachContactToConversationRequestCustomerVariant2Metadata
+    FIELDS = {
+      email: 'email',
+      customer: 'customer'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      email
+    ].freeze
+    DECODERS = {
+      customer: lambda do |value|
+        ::OctridevIntercom::CustomerRequest.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AttachContactToConversationRequestCustomerVariant2.
+  class AttachContactToConversationRequestCustomerVariant2
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAttachContactToConversationRequestCustomerVariant2Metadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAttachContactToConversationRequestCustomerVariant2Metadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAttachContactToConversationRequestCustomerVariant2Metadata::DECODERS
+
+    # @return [String] The email you have defined for the contact who is being added as a participant.
+    attr_reader :email
+    # @return [CustomerRequest] Optional object value serialized in the `customer` wire field.
+    attr_reader :customer
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalContactReplyEmailRequestMetadata
-  FIELDS = {
-    message_type: "message_type",
-    type: "type",
-    body: "body",
-    created_at: "created_at",
-    attachment_urls: "attachment_urls",
-    reply_options: "reply_options",
-    email: "email",
-    attachment_files: "attachment_files",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    message_type
-    type
-    body
-    email
-  ].freeze
-  DECODERS = {
-    message_type: lambda do |value|
-      ::OctridevIntercom::ContactReplyEmailRequestMessageType.from_value(value)
-    end,
-    type: lambda do |value|
-      ::OctridevIntercom::ContactReplyEmailRequestType.from_value(value)
-    end,
-    reply_options: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::ContactReplyEmailRequestReplyOptionsItem.from_hash(item) }
-    end,
-    attachment_files: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::ConversationAttachmentFiles.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for ContactReplyEmailRequest.
-# Payload of the request to reply on behalf of a contact using their `email`
-class ContactReplyEmailRequest
-  include ContactReplyConversationRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalContactReplyEmailRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalContactReplyEmailRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalContactReplyEmailRequestMetadata::DECODERS
-
-  # @return [ContactReplyEmailRequestMessageType] Required enumerated value serialized in the `message_type` wire field.
-  attr_reader :message_type
-  # @return [ContactReplyEmailRequestType] Required enumerated value serialized in the `type` wire field.
-  attr_reader :type
-  # @return [String] The text body of the comment.
-  attr_reader :body
-  # @return [Integer] The time the reply was created. If not provided, the current time will be used.
-  attr_reader :created_at
-  # @return [Array_of_String] A list of image URLs that will be added as attachments. You can include up to 10 URLs.
-  attr_reader :attachment_urls
-  # @return [Array_of_ContactReplyEmailRequestReplyOptionsItem] The quick reply selection the contact wishes to respond with. These map to buttons displayed in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API.
-  attr_reader :reply_options
-  # @return [String] The email you have defined for the user.
-  attr_reader :email
-  # @return [Array_of_ConversationAttachmentFiles] A list of files that will be added as attachments.
-  attr_reader :attachment_files
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the AttachContactToConversationRequestCustomer SDK namespace.
+  module AttachContactToConversationRequestCustomer
+    def self.from_hash(hash)
+      shape_mapping = {
+        'intercom_user_id' => AttachContactToConversationRequestCustomerVariant0,
+        'user_id' => AttachContactToConversationRequestCustomerVariant1,
+        'email' => AttachContactToConversationRequestCustomerVariant2
+      }
+      type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
+      decoded = type&.from_hash(hash)
+      decoded unless type.nil?
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalCloseConversationRequestMetadata
+    FIELDS = {
+      message_type: 'message_type',
+      type: 'type',
+      admin_id: 'admin_id',
+      body: 'body'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      message_type
+      type
+      admin_id
+    ].freeze
+    DECODERS = {
+      message_type: lambda do |value|
+        ::OctridevIntercom::CloseConversationRequestMessageType.from_value(value)
+      end,
+      type: lambda do |value|
+        ::OctridevIntercom::CloseConversationRequestType.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for CloseConversationRequest.
+  # Payload of the request to close a conversation
+  class CloseConversationRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCloseConversationRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCloseConversationRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCloseConversationRequestMetadata::DECODERS
 
-# Defines the ContactReplyEmailRequestMessageType SDK namespace.
-module ContactReplyEmailRequestMessageType
-  COMMENT = 'comment'
-  VALUES = ['comment'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [CloseConversationRequestMessageType] Required enumerated value serialized in the `message_type` wire field.
+    attr_reader :message_type
+    # @return [CloseConversationRequestType] Required enumerated value serialized in the `type` wire field.
+    attr_reader :type
+    # @return [String] The id of the admin who is performing the action.
+    attr_reader :admin_id
+    # @return [String] Optionally you can leave a message in the conversation to provide additional context to the user and other teammates.
+    attr_reader :body
 
-# Defines the ContactReplyEmailRequestType SDK namespace.
-module ContactReplyEmailRequestType
-  USER = 'user'
-  VALUES = ['user'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# Internal model hydration metadata.
-class SdkInternalContactReplyIntercomUserIdRequestReplyOptionsItemMetadata
-  FIELDS = {
-    text: "text",
-    uuid: "uuid",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    text
-    uuid
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-# API model for ContactReplyIntercomUserIdRequestReplyOptionsItem.
-# Required object value serialized in the `reply_options[]` wire field.
-class ContactReplyIntercomUserIdRequestReplyOptionsItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalContactReplyIntercomUserIdRequestReplyOptionsItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalContactReplyIntercomUserIdRequestReplyOptionsItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalContactReplyIntercomUserIdRequestReplyOptionsItemMetadata::DECODERS
-
-  # @return [String] The text of the chosen reply option.
-  attr_reader :text
-  # @return [String] The unique identifier for the quick reply option selected.
-  attr_reader :uuid
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the CloseConversationRequestMessageType SDK namespace.
+  module CloseConversationRequestMessageType
+    CLOSE = 'close'
+    VALUES = ['close'].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
+
+      raise SdkValidationError.new('CloseConversationRequestMessageType', 'enum', "Unknown CloseConversationRequestMessageType: #{value}")
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Defines the CloseConversationRequestType SDK namespace.
+  module CloseConversationRequestType
+    ADMIN = 'admin'
+    VALUES = ['admin'].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
 
-# Internal model hydration metadata.
-class SdkInternalContactReplyIntercomUserIdRequestMetadata
-  FIELDS = {
-    message_type: "message_type",
-    type: "type",
-    body: "body",
-    created_at: "created_at",
-    attachment_urls: "attachment_urls",
-    reply_options: "reply_options",
-    intercom_user_id: "intercom_user_id",
-    attachment_files: "attachment_files",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    message_type
-    type
-    body
-    intercom_user_id
-  ].freeze
-  DECODERS = {
-    message_type: lambda do |value|
-      ::OctridevIntercom::ContactReplyIntercomUserIdRequestMessageType.from_value(value)
-    end,
-    type: lambda do |value|
-      ::OctridevIntercom::ContactReplyIntercomUserIdRequestType.from_value(value)
-    end,
-    reply_options: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::ContactReplyIntercomUserIdRequestReplyOptionsItem.from_hash(item) }
-    end,
-    attachment_files: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::ConversationAttachmentFiles.from_hash(item) }
-    end,
-  }.freeze
-end
+  # Defines the ContactReplyConversationRequest SDK namespace.
+  module ContactReplyConversationRequest
+    def self.from_hash(hash)
+      shape_mapping = {
+        'intercom_user_id' => ContactReplyIntercomUserIdRequest,
+        'email' => ContactReplyEmailRequest,
+        'user_id' => ContactReplyUserIdRequest
+      }
+      type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
+      decoded = type&.from_hash(hash)
+      decoded unless type.nil?
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalContactReplyEmailRequestReplyOptionsItemMetadata
+    FIELDS = {
+      text: 'text',
+      uuid: 'uuid'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      text
+      uuid
+    ].freeze
+    DECODERS = {}.freeze
+  end
+
+  # API model for ContactReplyEmailRequestReplyOptionsItem.
+  # Required object value serialized in the `reply_options[]` wire field.
+  class ContactReplyEmailRequestReplyOptionsItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalContactReplyEmailRequestReplyOptionsItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalContactReplyEmailRequestReplyOptionsItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalContactReplyEmailRequestReplyOptionsItemMetadata::DECODERS
+
+    # @return [String] The text of the chosen reply option.
+    attr_reader :text
+    # @return [String] The unique identifier for the quick reply option selected.
+    attr_reader :uuid
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalContactReplyEmailRequestMetadata
+    FIELDS = {
+      message_type: 'message_type',
+      type: 'type',
+      body: 'body',
+      created_at: 'created_at',
+      attachment_urls: 'attachment_urls',
+      reply_options: 'reply_options',
+      email: 'email',
+      attachment_files: 'attachment_files'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      message_type
+      type
+      body
+      email
+    ].freeze
+    DECODERS = {
+      message_type: lambda do |value|
+        ::OctridevIntercom::ContactReplyEmailRequestMessageType.from_value(value)
+      end,
+      type: lambda do |value|
+        ::OctridevIntercom::ContactReplyEmailRequestType.from_value(value)
+      end,
+      reply_options: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::ContactReplyEmailRequestReplyOptionsItem.from_hash(item) }
+      end,
+      attachment_files: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::ConversationAttachmentFiles.from_hash(item) }
+      end
+    }.freeze
+  end
+
+  # API model for ContactReplyEmailRequest.
+  # Payload of the request to reply on behalf of a contact using their `email`
+  class ContactReplyEmailRequest
+    include ContactReplyConversationRequest
+
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalContactReplyEmailRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalContactReplyEmailRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalContactReplyEmailRequestMetadata::DECODERS
+
+    # @return [ContactReplyEmailRequestMessageType] Required enumerated value serialized in the `message_type` wire field.
+    attr_reader :message_type
+    # @return [ContactReplyEmailRequestType] Required enumerated value serialized in the `type` wire field.
+    attr_reader :type
+    # @return [String] The text body of the comment.
+    attr_reader :body
+    # @return [Integer] The time the reply was created. If not provided, the current time will be used.
+    attr_reader :created_at
+    # @return [Array_of_String] A list of image URLs that will be added as attachments. You can include up to 10 URLs.
+    attr_reader :attachment_urls
+    # @return [Array_of_ContactReplyEmailRequestReplyOptionsItem] The quick reply selection the contact wishes to respond with. These map to buttons displayed in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API.
+    attr_reader :reply_options
+    # @return [String] The email you have defined for the user.
+    attr_reader :email
+    # @return [Array_of_ConversationAttachmentFiles] A list of files that will be added as attachments.
+    attr_reader :attachment_files
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the ContactReplyEmailRequestMessageType SDK namespace.
+  module ContactReplyEmailRequestMessageType
+    COMMENT = 'comment'
+    VALUES = ['comment'].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Defines the ContactReplyEmailRequestType SDK namespace.
+  module ContactReplyEmailRequestType
+    USER = 'user'
+    VALUES = ['user'].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalContactReplyIntercomUserIdRequestReplyOptionsItemMetadata
+    FIELDS = {
+      text: 'text',
+      uuid: 'uuid'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      text
+      uuid
+    ].freeze
+    DECODERS = {}.freeze
+  end
+
+  # API model for ContactReplyIntercomUserIdRequestReplyOptionsItem.
+  # Required object value serialized in the `reply_options[]` wire field.
+  class ContactReplyIntercomUserIdRequestReplyOptionsItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalContactReplyIntercomUserIdRequestReplyOptionsItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalContactReplyIntercomUserIdRequestReplyOptionsItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalContactReplyIntercomUserIdRequestReplyOptionsItemMetadata::DECODERS
+
+    # @return [String] The text of the chosen reply option.
+    attr_reader :text
+    # @return [String] The unique identifier for the quick reply option selected.
+    attr_reader :uuid
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalContactReplyIntercomUserIdRequestMetadata
+    FIELDS = {
+      message_type: 'message_type',
+      type: 'type',
+      body: 'body',
+      created_at: 'created_at',
+      attachment_urls: 'attachment_urls',
+      reply_options: 'reply_options',
+      intercom_user_id: 'intercom_user_id',
+      attachment_files: 'attachment_files'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      message_type
+      type
+      body
+      intercom_user_id
+    ].freeze
+    DECODERS = {
+      message_type: lambda do |value|
+        ::OctridevIntercom::ContactReplyIntercomUserIdRequestMessageType.from_value(value)
+      end,
+      type: lambda do |value|
+        ::OctridevIntercom::ContactReplyIntercomUserIdRequestType.from_value(value)
+      end,
+      reply_options: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::ContactReplyIntercomUserIdRequestReplyOptionsItem.from_hash(item) }
+      end,
+      attachment_files: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::ConversationAttachmentFiles.from_hash(item) }
+      end
+    }.freeze
+  end
 end

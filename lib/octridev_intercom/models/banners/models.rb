@@ -5,207 +5,201 @@
 
 # tagged_models_banners domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalBannerActionReactionSetItemMetadata
-  FIELDS = {
-    index: "index",
-    unicode_emoticon: "unicode_emoticon",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for BannerActionReactionSetItem.
-# Required object value serialized in the `reaction_set[]` wire field.
-class BannerActionReactionSetItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalBannerActionReactionSetItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalBannerActionReactionSetItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalBannerActionReactionSetItemMetadata::DECODERS
-
-  # @return [Integer] The reaction's position in the set.
-  attr_reader :index
-  # @return [String] The reaction's unicode emoji.
-  attr_reader :unicode_emoticon
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalBannerActionReactionSetItemMetadata
+    FIELDS = {
+      index: 'index',
+      unicode_emoticon: 'unicode_emoticon'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for BannerActionReactionSetItem.
+  # Required object value serialized in the `reaction_set[]` wire field.
+  class BannerActionReactionSetItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalBannerActionReactionSetItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalBannerActionReactionSetItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalBannerActionReactionSetItemMetadata::DECODERS
+
+    # @return [Integer] The reaction's position in the set.
+    attr_reader :index
+    # @return [String] The reaction's unicode emoji.
+    attr_reader :unicode_emoticon
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalBannerActionMetadata
-  FIELDS = {
-    type: "type",
-    label: "label",
-    target: "target",
-    reaction_set: "reaction_set",
-    tour_id: "tour_id",
-    tour_url: "tour_url",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    reaction_set: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::BannerActionReactionSetItem.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for BannerAction.
-# The action a contact can take on the banner, or `null` when the banner has no action. The fields present depend on `type`: `url` (`label`, `target`), `reaction` (`reaction_set`), `email_collector`, or `product_tour` (`tour_id`, `tour_url`).
-class BannerAction
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalBannerActionMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalBannerActionMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalBannerActionMetadata::DECODERS
-
-  # @return [String] The kind of action. One of `url`, `reaction`, `email_collector`, or `product_tour`.
-  attr_reader :type
-  # @return [String] For `url` actions, the label shown on the action link or button.
-  attr_reader :label
-  # @return [String] For `url` actions, the URL the contact is sent to.
-  attr_reader :target
-  # @return [Array_of_BannerActionReactionSetItem] For `reaction` actions, the reactions a contact can choose from.
-  attr_reader :reaction_set
-  # @return [String] For `product_tour` actions, the id of the product tour to launch.
-  attr_reader :tour_id
-  # @return [String] For `product_tour` actions, the URL that launches the product tour.
-  attr_reader :tour_url
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalBannerActionMetadata
+    FIELDS = {
+      type: 'type',
+      label: 'label',
+      target: 'target',
+      reaction_set: 'reaction_set',
+      tour_id: 'tour_id',
+      tour_url: 'tour_url'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      reaction_set: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::BannerActionReactionSetItem.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for BannerAction.
+  # The action a contact can take on the banner, or `null` when the banner has no action. The fields present depend on `type`: `url` (`label`, `target`), `reaction` (`reaction_set`), `email_collector`, or `product_tour` (`tour_id`, `tour_url`).
+  class BannerAction
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalBannerActionMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalBannerActionMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalBannerActionMetadata::DECODERS
+
+    # @return [String] The kind of action. One of `url`, `reaction`, `email_collector`, or `product_tour`.
+    attr_reader :type
+    # @return [String] For `url` actions, the label shown on the action link or button.
+    attr_reader :label
+    # @return [String] For `url` actions, the URL the contact is sent to.
+    attr_reader :target
+    # @return [Array_of_BannerActionReactionSetItem] For `reaction` actions, the reactions a contact can choose from.
+    attr_reader :reaction_set
+    # @return [String] For `product_tour` actions, the id of the product tour to launch.
+    attr_reader :tour_id
+    # @return [String] For `product_tour` actions, the URL that launches the product tour.
+    attr_reader :tour_url
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalBannerMetadata
-  FIELDS = {
-    type: "type",
-    id: "id",
-    view_id: "view_id",
-    title: "title",
-    body: "body",
-    style: "style",
-    position: "position",
-    show_dismiss_button: "show_dismiss_button",
-    action: "action",
-    client_targeting: "client_targeting",
-    created_at: "created_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    action: lambda do |value|
-      ::OctridevIntercom::BannerAction.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for Banner.
-# A banner the contact currently matches, with the content and view identifier needed to display and dismiss it.
-class Banner
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalBannerMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalBannerMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalBannerMetadata::DECODERS
-
-  # @return [String] String representing the object's type. Always has the value `banner`.
-  attr_reader :type
-  # @return [String] The id of the banner.
-  attr_reader :id
-  # @return [String] The id of the contact's view of this banner. Pass this to the dismiss endpoint to record a dismissal.
-  attr_reader :view_id
-  # @return [String] The banner's title. `null` when the banner has no title.
-  attr_reader :title
-  # @return [String] The banner's body content as HTML.
-  attr_reader :body
-  # @return [String] How the banner is displayed.
-  attr_reader :style
-  # @return [String] Where the banner is positioned.
-  attr_reader :position
-  # @return [Boolean] Whether the banner should display a dismiss control.
-  attr_reader :show_dismiss_button
-  # @return [BannerAction] The action a contact can take on the banner, or `null` when the banner has no action. The fields present depend on `type`: `url` (`label`, `target`), `reaction` (`reaction_set`), `email_collector`, or `product_tour` (`tour_id`, `tour_url`).
-  attr_reader :action
-  # @return [Array_of_Hash] Reserved for future use. Always `null` in the current version — banners that depend on client-side targeting rules (such as page URL or time on page) are not returned by this endpoint.
-  attr_reader :client_targeting
-  # @return [Integer] The time the contact's view of this banner was created.
-  attr_reader :created_at
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalBannerMetadata
+    FIELDS = {
+      type: 'type',
+      id: 'id',
+      view_id: 'view_id',
+      title: 'title',
+      body: 'body',
+      style: 'style',
+      position: 'position',
+      show_dismiss_button: 'show_dismiss_button',
+      action: 'action',
+      client_targeting: 'client_targeting',
+      created_at: 'created_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      action: lambda do |value|
+        ::OctridevIntercom::BannerAction.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for Banner.
+  # A banner the contact currently matches, with the content and view identifier needed to display and dismiss it.
+  class Banner
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalBannerMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalBannerMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalBannerMetadata::DECODERS
+
+    # @return [String] String representing the object's type. Always has the value `banner`.
+    attr_reader :type
+    # @return [String] The id of the banner.
+    attr_reader :id
+    # @return [String] The id of the contact's view of this banner. Pass this to the dismiss endpoint to record a dismissal.
+    attr_reader :view_id
+    # @return [String] The banner's title. `null` when the banner has no title.
+    attr_reader :title
+    # @return [String] The banner's body content as HTML.
+    attr_reader :body
+    # @return [String] How the banner is displayed.
+    attr_reader :style
+    # @return [String] Where the banner is positioned.
+    attr_reader :position
+    # @return [Boolean] Whether the banner should display a dismiss control.
+    attr_reader :show_dismiss_button
+    # @return [BannerAction] The action a contact can take on the banner, or `null` when the banner has no action. The fields present depend on `type`: `url` (`label`, `target`), `reaction` (`reaction_set`), `email_collector`, or `product_tour` (`tour_id`, `tour_url`).
+    attr_reader :action
+    # @return [Array_of_Hash] Reserved for future use. Always `null` in the current version — banners that depend on client-side targeting rules (such as page URL or time on page) are not returned by this endpoint.
+    attr_reader :client_targeting
+    # @return [Integer] The time the contact's view of this banner was created.
+    attr_reader :created_at
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalBannerDismissMetadata
-  FIELDS = {
-    type: "type",
-    view_id: "view_id",
-    dismissed: "dismissed",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for BannerDismiss.
-# The result of dismissing a banner for a contact.
-class BannerDismiss
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalBannerDismissMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalBannerDismissMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalBannerDismissMetadata::DECODERS
-
-  # @return [String] String representing the object's type. Always has the value `banner_dismiss`.
-  attr_reader :type
-  # @return [String] The id of the dismissed banner view.
-  attr_reader :view_id
-  # @return [Boolean] Whether the banner view is dismissed.
-  attr_reader :dismissed
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalBannerDismissMetadata
+    FIELDS = {
+      type: 'type',
+      view_id: 'view_id',
+      dismissed: 'dismissed'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for BannerDismiss.
+  # The result of dismissing a banner for a contact.
+  class BannerDismiss
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalBannerDismissMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalBannerDismissMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalBannerDismissMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [String] String representing the object's type. Always has the value `banner_dismiss`.
+    attr_reader :type
+    # @return [String] The id of the dismissed banner view.
+    attr_reader :view_id
+    # @return [Boolean] Whether the banner view is dismissed.
+    attr_reader :dismissed
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

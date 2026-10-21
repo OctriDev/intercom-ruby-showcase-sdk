@@ -12,16 +12,15 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalSetAwayAdminMetadata
         FIELDS = {
-          away_mode_enabled: "away_mode_enabled",
-          away_mode_reassign: "away_mode_reassign",
-          away_status_reason_id: "away_status_reason_id",
+          away_mode_enabled: 'away_mode_enabled',
+          away_mode_reassign: 'away_mode_reassign',
+          away_status_reason_id: 'away_status_reason_id'
         }.freeze
         REQUIRED_FIELDS = %i[
           away_mode_enabled
           away_mode_reassign
         ].freeze
-        DECODERS = {
-        }.freeze
+        DECODERS = {}.freeze
       end
 
       # API model for SetAwayAdmin.
@@ -55,17 +54,16 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalSearchActivityLogsMetadata
         FIELDS = {
-          created_at_after: "created_at_after",
-          created_at_before: "created_at_before",
-          event_types: "event_types",
-          page: "page",
-          per_page: "per_page",
+          created_at_after: 'created_at_after',
+          created_at_before: 'created_at_before',
+          event_types: 'event_types',
+          page: 'page',
+          per_page: 'per_page'
         }.freeze
         REQUIRED_FIELDS = %i[
           created_at_after
         ].freeze
-        DECODERS = {
-        }.freeze
+        DECODERS = {}.freeze
       end
 
       # API model for SearchActivityLogs.
@@ -108,18 +106,17 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/me",
+          '/me',
           config: config,
           return_type: ::OctridevIntercom::AdminWithApp,
           decoder: :json,
           operation_id: 'identify_admin',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
-          request_options: request_options,
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
+          request_options: request_options
         ).data
       end
 
@@ -143,28 +140,27 @@ module OctridevIntercom
         away_status_reason_id: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PUT',
           [
-            "/admins/",
+            '/admins/',
             SdkClient.encode_path_segment(admin_id),
-            "/away"
+            '/away'
           ].join,
           config: config,
           body: {
             'away_mode_enabled' => away_mode_enabled,
             'away_mode_reassign' => away_mode_reassign,
-            'away_status_reason_id' => away_status_reason_id,
+            'away_status_reason_id' => away_status_reason_id
           },
           return_type: ::OctridevIntercom::Admin,
           decoder: :json,
           operation_id: 'set_away_admin',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -183,23 +179,22 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/admins/activity_logs",
+          '/admins/activity_logs',
           config: config,
           query: {
             'created_at_after' => QueryValue.new(created_at_after, style: 'form', explode: true),
-            'created_at_before' => QueryValue.new(created_at_before, style: 'form', explode: true),
+            'created_at_before' => QueryValue.new(created_at_before, style: 'form', explode: true)
           },
           return_type: ::OctridevIntercom::ActivityLogList,
           decoder: :json,
           operation_id: 'list_activity_logs',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -227,28 +222,27 @@ module OctridevIntercom
         per_page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 250) }
 
         SdkClient.request(
           'POST',
-          "/admins/activity_logs/search",
+          '/admins/activity_logs/search',
           config: config,
           body: {
             'created_at_after' => created_at_after,
             'created_at_before' => created_at_before,
             'event_types' => event_types,
             'page' => page,
-            'per_page' => per_page,
+            'per_page' => per_page
           },
           return_type: ::OctridevIntercom::ActivityLogList,
           decoder: :json,
           operation_id: 'search_activity_logs',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -260,19 +254,18 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/admins/activity_log_event_types",
+          '/admins/activity_log_event_types',
           config: config,
           return_type: ::OctridevIntercom::ActivityLogEventTypeList,
           decoder: :json,
           operation_id: 'list_activity_log_event_types',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -288,22 +281,21 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/admins",
+          '/admins',
           config: config,
           query: {
-            'display_avatar' => QueryValue.new(display_avatar, style: 'form', explode: true),
+            'display_avatar' => QueryValue.new(display_avatar, style: 'form', explode: true)
           },
           return_type: ::OctridevIntercom::AdminList,
           decoder: :json,
           operation_id: 'list_admins',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -318,11 +310,10 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/admins/",
+            '/admins/',
             SdkClient.encode_path_segment(admin_id)
           ].join,
           config: config,
@@ -330,10 +321,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'retrieve_admin',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
     end

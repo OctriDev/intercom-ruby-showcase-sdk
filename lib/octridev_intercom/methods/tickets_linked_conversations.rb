@@ -24,26 +24,25 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/tickets/",
+            '/tickets/',
             SdkClient.encode_path_segment(ticket_id),
-            "/linked_conversations"
+            '/linked_conversations'
           ].join,
           config: config,
           body: {
-            'conversation_id' => conversation_id,
+            'conversation_id' => conversation_id
           },
           return_type: ::OctridevIntercom::Conversation,
           decoder: :json,
           operation_id: 'link_tickets_conversation',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -62,13 +61,12 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/tickets/",
+            '/tickets/',
             SdkClient.encode_path_segment(ticket_id),
-            "/linked_conversations/",
+            '/linked_conversations/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -76,10 +74,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'unlink_ticket_conversation',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
     end

@@ -5,671 +5,655 @@
 
 # tagged_models_data_connectors domain models (part 2)
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalDataConnectorExecutionResultMetadata
-  FIELDS = {
-    type: "type",
-    id: "id",
-    data_connector_id: "data_connector_id",
-    success: "success",
-    http_status: "http_status",
-    http_method: "http_method",
-    error_type: "error_type",
-    error_message: "error_message",
-    execution_time_ms: "execution_time_ms",
-    source_type: "source_type",
-    source_id: "source_id",
-    conversation_id: "conversation_id",
-    created_at: "created_at",
-    request_url: "request_url",
-    request_body: "request_body",
-    response_body: "response_body",
-    raw_response_body: "raw_response_body",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::DataConnectorExecutionResultType.from_value(value)
-    end,
-    http_method: lambda do |value|
-      ::OctridevIntercom::DataConnectorExecutionResultHttpMethod.from_value(value)
-    end,
-    error_type: lambda do |value|
-      ::OctridevIntercom::DataConnectorExecutionResultErrorType.from_value(value)
-    end,
-    source_type: lambda do |value|
-      ::OctridevIntercom::DataConnectorExecutionResultSourceType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for DataConnectorExecutionResult.
-# An execution result from a data connector HTTP request.
-class DataConnectorExecutionResult
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDataConnectorExecutionResultMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDataConnectorExecutionResultMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDataConnectorExecutionResultMetadata::DECODERS
-
-  # @return [DataConnectorExecutionResultType] The type of object - `data_connector.execution`.
-  attr_reader :type
-  # @return [String] The unique identifier for the execution result.
-  attr_reader :id
-  # @return [String] The unique identifier of the data connector that produced this result.
-  attr_reader :data_connector_id
-  # @return [Boolean] Whether the execution was successful.
-  attr_reader :success
-  # @return [Integer] The HTTP status code returned by the external API.
-  attr_reader :http_status
-  # @return [DataConnectorExecutionResultHttpMethod] The HTTP method used for the request.
-  attr_reader :http_method
-  # @return [DataConnectorExecutionResultErrorType] The type of error that occurred, if any.
-  attr_reader :error_type
-  # @return [String] A human-readable error message. Query parameters, userinfo, and fragments in URLs are redacted.
-  attr_reader :error_message
-  # @return [Integer] The execution time in milliseconds.
-  attr_reader :execution_time_ms
-  # @return [DataConnectorExecutionResultSourceType] The type of source that triggered this execution.
-  attr_reader :source_type
-  # @return [String] The identifier of the source that triggered this execution.
-  attr_reader :source_id
-  # @return [String] The conversation associated with this execution, if any.
-  attr_reader :conversation_id
-  # @return [String] The time the execution occurred.
-  attr_reader :created_at
-  # @return [String] The request URL. Query parameters, userinfo, and fragments are redacted.
-  attr_reader :request_url
-  # @return [String] The request body sent to the external API.
-  attr_reader :request_body
-  # @return [String] The response body from the external API.
-  attr_reader :response_body
-  # @return [String] The raw (unmapped) response body.
-  attr_reader :raw_response_body
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalDataConnectorExecutionResultMetadata
+    FIELDS = {
+      type: 'type',
+      id: 'id',
+      data_connector_id: 'data_connector_id',
+      success: 'success',
+      http_status: 'http_status',
+      http_method: 'http_method',
+      error_type: 'error_type',
+      error_message: 'error_message',
+      execution_time_ms: 'execution_time_ms',
+      source_type: 'source_type',
+      source_id: 'source_id',
+      conversation_id: 'conversation_id',
+      created_at: 'created_at',
+      request_url: 'request_url',
+      request_body: 'request_body',
+      response_body: 'response_body',
+      raw_response_body: 'raw_response_body'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::DataConnectorExecutionResultType.from_value(value)
+      end,
+      http_method: lambda do |value|
+        ::OctridevIntercom::DataConnectorExecutionResultHttpMethod.from_value(value)
+      end,
+      error_type: lambda do |value|
+        ::OctridevIntercom::DataConnectorExecutionResultErrorType.from_value(value)
+      end,
+      source_type: lambda do |value|
+        ::OctridevIntercom::DataConnectorExecutionResultSourceType.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for DataConnectorExecutionResult.
+  # An execution result from a data connector HTTP request.
+  class DataConnectorExecutionResult
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDataConnectorExecutionResultMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDataConnectorExecutionResultMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDataConnectorExecutionResultMetadata::DECODERS
+
+    # @return [DataConnectorExecutionResultType] The type of object - `data_connector.execution`.
+    attr_reader :type
+    # @return [String] The unique identifier for the execution result.
+    attr_reader :id
+    # @return [String] The unique identifier of the data connector that produced this result.
+    attr_reader :data_connector_id
+    # @return [Boolean] Whether the execution was successful.
+    attr_reader :success
+    # @return [Integer] The HTTP status code returned by the external API.
+    attr_reader :http_status
+    # @return [DataConnectorExecutionResultHttpMethod] The HTTP method used for the request.
+    attr_reader :http_method
+    # @return [DataConnectorExecutionResultErrorType] The type of error that occurred, if any.
+    attr_reader :error_type
+    # @return [String] A human-readable error message. Query parameters, userinfo, and fragments in URLs are redacted.
+    attr_reader :error_message
+    # @return [Integer] The execution time in milliseconds.
+    attr_reader :execution_time_ms
+    # @return [DataConnectorExecutionResultSourceType] The type of source that triggered this execution.
+    attr_reader :source_type
+    # @return [String] The identifier of the source that triggered this execution.
+    attr_reader :source_id
+    # @return [String] The conversation associated with this execution, if any.
+    attr_reader :conversation_id
+    # @return [String] The time the execution occurred.
+    attr_reader :created_at
+    # @return [String] The request URL. Query parameters, userinfo, and fragments are redacted.
+    attr_reader :request_url
+    # @return [String] The request body sent to the external API.
+    attr_reader :request_body
+    # @return [String] The response body from the external API.
+    attr_reader :response_body
+    # @return [String] The raw (unmapped) response body.
+    attr_reader :raw_response_body
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the DataConnectorExecutionResultErrorType SDK namespace.
-module DataConnectorExecutionResultErrorType
-  REQUEST_CONFIGURATION_ERROR = 'request_configuration_error'
-  FARADAY_ERROR = 'faraday_error'
-  V_3_RD_PARTY_ERROR = '3rd_party_error'
-  RESPONSE_MAPPING_ERROR = 'response_mapping_error'
-  TOKEN_REFRESH_ERROR = 'token_refresh_error'
-  FIN_ACTION_RESPONSE_FORMATTING_ERROR = 'fin_action_response_formatting_error'
-  FIN_ACTION_IDENTITY_VERIFICATION_ERROR = 'fin_action_identity_verification_error'
-  EMAIL_VERIFICATION_ERROR = 'email_verification_error'
-  NON_FIN_STANDALONE_ACTION_IDENTITY_VERIFICATION_ERROR =
-    'non_fin_standalone_action_identity_verification_error'
-  REQUEST_VALIDATION_ERROR = 'request_validation_error'
-  CLIENT_SIDE_ACTION_ERROR = 'client_side_action_error'
-  VALUES = [
-    'request_configuration_error', 'faraday_error', '3rd_party_error', 'response_mapping_error',
-    'token_refresh_error', 'fin_action_response_formatting_error',
-    'fin_action_identity_verification_error', 'email_verification_error',
-    'non_fin_standalone_action_identity_verification_error', 'request_validation_error',
-    'client_side_action_error'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the DataConnectorExecutionResultHttpMethod SDK namespace.
-module DataConnectorExecutionResultHttpMethod
-  GET = 'get'
-  POST = 'post'
-  PUT = 'put'
-  DELETE = 'delete'
-  PATCH = 'patch'
-  VALUES = ['get', 'post', 'put', 'delete', 'patch'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the DataConnectorExecutionResultSourceType SDK namespace.
-module DataConnectorExecutionResultSourceType
-  CUSTOM_BOT = 'custom_bot'
-  INBOUND_CUSTOM_BOT = 'inbound_custom_bot'
-  BUTTON_CUSTOM_BOT = 'button_custom_bot'
-  ANSWER = 'answer'
-  WORKFLOW = 'workflow'
-  SAVED_REPLY = 'saved_reply'
-  TRIGGERABLE_CUSTOM_BOT = 'triggerable_custom_bot'
-  INBOX = 'inbox'
-  FIN = 'fin'
-  VALUES = [
-    'custom_bot', 'inbound_custom_bot', 'button_custom_bot', 'answer', 'workflow', 'saved_reply',
-    'triggerable_custom_bot', 'inbox', 'fin'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the DataConnectorExecutionResultType SDK namespace.
-module DataConnectorExecutionResultType
-  DATA_CONNECTOR_EXECUTION = 'data_connector.execution'
-  VALUES = ['data_connector.execution'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDataConnectorVersionAuthorMetadata
-  FIELDS = {
-    id: "id",
-    name: "name",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for DataConnectorVersionAuthor.
-# The teammate who created this version.
-class DataConnectorVersionAuthor
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDataConnectorVersionAuthorMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDataConnectorVersionAuthorMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDataConnectorVersionAuthorMetadata::DECODERS
-
-  # @return [Integer] The unique identifier of the teammate.
-  attr_reader :id
-  # @return [String] The name of the teammate.
-  attr_reader :name
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the DataConnectorExecutionResultErrorType SDK namespace.
+  module DataConnectorExecutionResultErrorType
+    REQUEST_CONFIGURATION_ERROR = 'request_configuration_error'
+    FARADAY_ERROR = 'faraday_error'
+    V_3_RD_PARTY_ERROR = '3rd_party_error'
+    RESPONSE_MAPPING_ERROR = 'response_mapping_error'
+    TOKEN_REFRESH_ERROR = 'token_refresh_error'
+    FIN_ACTION_RESPONSE_FORMATTING_ERROR = 'fin_action_response_formatting_error'
+    FIN_ACTION_IDENTITY_VERIFICATION_ERROR = 'fin_action_identity_verification_error'
+    EMAIL_VERIFICATION_ERROR = 'email_verification_error'
+    NON_FIN_STANDALONE_ACTION_IDENTITY_VERIFICATION_ERROR =
+      'non_fin_standalone_action_identity_verification_error'
+    REQUEST_VALIDATION_ERROR = 'request_validation_error'
+    CLIENT_SIDE_ACTION_ERROR = 'client_side_action_error'
+    VALUES = %w[
+      request_configuration_error faraday_error 3rd_party_error response_mapping_error
+      token_refresh_error fin_action_response_formatting_error
+      fin_action_identity_verification_error email_verification_error
+      non_fin_standalone_action_identity_verification_error request_validation_error
+      client_side_action_error
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the DataConnectorExecutionResultHttpMethod SDK namespace.
+  module DataConnectorExecutionResultHttpMethod
+    GET = 'get'
+    POST = 'post'
+    PUT = 'put'
+    DELETE = 'delete'
+    PATCH = 'patch'
+    VALUES = %w[get post put delete patch].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDataConnectorVersionDefinitionHeadersItemMetadata
-  FIELDS = {
-    name: "name",
-    value: "value",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for DataConnectorVersionDefinitionHeadersItem.
-# Required object value serialized in the `headers[]` wire field.
-class DataConnectorVersionDefinitionHeadersItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDataConnectorVersionDefinitionHeadersItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDataConnectorVersionDefinitionHeadersItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDataConnectorVersionDefinitionHeadersItemMetadata::DECODERS
-
-  # @return [String] Optional `string` value serialized in the `name` wire field.
-  attr_reader :name
-  # @return [String] Always `"****"` in responses.
-  attr_reader :value
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the DataConnectorExecutionResultSourceType SDK namespace.
+  module DataConnectorExecutionResultSourceType
+    CUSTOM_BOT = 'custom_bot'
+    INBOUND_CUSTOM_BOT = 'inbound_custom_bot'
+    BUTTON_CUSTOM_BOT = 'button_custom_bot'
+    ANSWER = 'answer'
+    WORKFLOW = 'workflow'
+    SAVED_REPLY = 'saved_reply'
+    TRIGGERABLE_CUSTOM_BOT = 'triggerable_custom_bot'
+    INBOX = 'inbox'
+    FIN = 'fin'
+    VALUES = %w[
+      custom_bot inbound_custom_bot button_custom_bot answer workflow saved_reply
+      triggerable_custom_bot inbox fin
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the DataConnectorExecutionResultType SDK namespace.
+  module DataConnectorExecutionResultType
+    DATA_CONNECTOR_EXECUTION = 'data_connector.execution'
+    VALUES = ['data_connector.execution'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDataConnectorVersionDefinitionDataInputsItemMetadata
-  FIELDS = {
-    name: "name",
-    type: "type",
-    description: "description",
-    required: "required",
-    default_value: "default_value",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for DataConnectorVersionDefinitionDataInputsItem.
-# Required object value serialized in the `data_inputs[]` wire field.
-class DataConnectorVersionDefinitionDataInputsItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDataConnectorVersionDefinitionDataInputsItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDataConnectorVersionDefinitionDataInputsItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDataConnectorVersionDefinitionDataInputsItemMetadata::DECODERS
-
-  # @return [String] Optional `string` value serialized in the `name` wire field.
-  attr_reader :name
-  # @return [String] Optional `string` value serialized in the `type` wire field.
-  attr_reader :type
-  # @return [String] Optional `string` value serialized in the `description` wire field.
-  attr_reader :description
-  # @return [Boolean] Optional `boolean` value serialized in the `required` wire field.
-  attr_reader :required
-  # @return [Object] Optional API value serialized in the `default_value` wire field.
-  attr_reader :default_value
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalDataConnectorVersionAuthorMetadata
+    FIELDS = {
+      id: 'id',
+      name: 'name'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for DataConnectorVersionAuthor.
+  # The teammate who created this version.
+  class DataConnectorVersionAuthor
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDataConnectorVersionAuthorMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDataConnectorVersionAuthorMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDataConnectorVersionAuthorMetadata::DECODERS
+
+    # @return [Integer] The unique identifier of the teammate.
+    attr_reader :id
+    # @return [String] The name of the teammate.
+    attr_reader :name
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDataConnectorVersionDefinitionResponseFieldsItemMetadata
-  FIELDS = {
-    path: "path",
-    type: "type",
-    example_value: "example_value",
-    redacted: "redacted",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for DataConnectorVersionDefinitionResponseFieldsItem.
-# Required object value serialized in the `response_fields[]` wire field.
-class DataConnectorVersionDefinitionResponseFieldsItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDataConnectorVersionDefinitionResponseFieldsItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDataConnectorVersionDefinitionResponseFieldsItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDataConnectorVersionDefinitionResponseFieldsItemMetadata::DECODERS
-
-  # @return [String] Optional `string` value serialized in the `path` wire field.
-  attr_reader :path
-  # @return [String] Optional `string` value serialized in the `type` wire field.
-  attr_reader :type
-  # @return [Object] Optional API value serialized in the `example_value` wire field.
-  attr_reader :example_value
-  # @return [Boolean] Optional `boolean` value serialized in the `redacted` wire field.
-  attr_reader :redacted
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalDataConnectorVersionDefinitionHeadersItemMetadata
+    FIELDS = {
+      name: 'name',
+      value: 'value'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for DataConnectorVersionDefinitionHeadersItem.
+  # Required object value serialized in the `headers[]` wire field.
+  class DataConnectorVersionDefinitionHeadersItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDataConnectorVersionDefinitionHeadersItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDataConnectorVersionDefinitionHeadersItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDataConnectorVersionDefinitionHeadersItemMetadata::DECODERS
+
+    # @return [String] Optional `string` value serialized in the `name` wire field.
+    attr_reader :name
+    # @return [String] Always `"****"` in responses.
+    attr_reader :value
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDataConnectorVersionDefinitionObjectMappingsItemAttributeMappingsItemMetadata
-  FIELDS = {
-    response_attribute_path: "response_attribute_path",
-    intercom_attribute_identifier: "intercom_attribute_identifier",
-    mapping_type: "mapping_type",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for DataConnectorVersionDefinitionObjectMappingsItemAttributeMappingsItem.
-# Required object value serialized in the `attribute_mappings[]` wire field.
-class DataConnectorVersionDefinitionObjectMappingsItemAttributeMappingsItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDataConnectorVersionDefinitionObjectMappingsItemAttributeMappingsItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDataConnectorVersionDefinitionObjectMappingsItemAttributeMappingsItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDataConnectorVersionDefinitionObjectMappingsItemAttributeMappingsItemMetadata::DECODERS
-
-  # @return [String] Optional `string` value serialized in the `response_attribute_path` wire field.
-  attr_reader :response_attribute_path
-  # @return [String] Optional `string` value serialized in the `intercom_attribute_identifier` wire field.
-  attr_reader :intercom_attribute_identifier
-  # @return [String] Optional `string` value serialized in the `mapping_type` wire field.
-  attr_reader :mapping_type
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalDataConnectorVersionDefinitionDataInputsItemMetadata
+    FIELDS = {
+      name: 'name',
+      type: 'type',
+      description: 'description',
+      required: 'required',
+      default_value: 'default_value'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for DataConnectorVersionDefinitionDataInputsItem.
+  # Required object value serialized in the `data_inputs[]` wire field.
+  class DataConnectorVersionDefinitionDataInputsItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDataConnectorVersionDefinitionDataInputsItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDataConnectorVersionDefinitionDataInputsItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDataConnectorVersionDefinitionDataInputsItemMetadata::DECODERS
+
+    # @return [String] Optional `string` value serialized in the `name` wire field.
+    attr_reader :name
+    # @return [String] Optional `string` value serialized in the `type` wire field.
+    attr_reader :type
+    # @return [String] Optional `string` value serialized in the `description` wire field.
+    attr_reader :description
+    # @return [Boolean] Optional `boolean` value serialized in the `required` wire field.
+    attr_reader :required
+    # @return [Object] Optional API value serialized in the `default_value` wire field.
+    attr_reader :default_value
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDataConnectorVersionDefinitionObjectMappingsItemReferenceMappingsItemMetadata
-  FIELDS = {
-    intercom_object_type: "intercom_object_type",
-    intercom_attribute_identifier: "intercom_attribute_identifier",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for DataConnectorVersionDefinitionObjectMappingsItemReferenceMappingsItem.
-# Required object value serialized in the `reference_mappings[]` wire field.
-class DataConnectorVersionDefinitionObjectMappingsItemReferenceMappingsItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDataConnectorVersionDefinitionObjectMappingsItemReferenceMappingsItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDataConnectorVersionDefinitionObjectMappingsItemReferenceMappingsItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDataConnectorVersionDefinitionObjectMappingsItemReferenceMappingsItemMetadata::DECODERS
-
-  # @return [String] Optional `string` value serialized in the `intercom_object_type` wire field.
-  attr_reader :intercom_object_type
-  # @return [String] Optional `string` value serialized in the `intercom_attribute_identifier` wire field.
-  attr_reader :intercom_attribute_identifier
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalDataConnectorVersionDefinitionResponseFieldsItemMetadata
+    FIELDS = {
+      path: 'path',
+      type: 'type',
+      example_value: 'example_value',
+      redacted: 'redacted'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for DataConnectorVersionDefinitionResponseFieldsItem.
+  # Required object value serialized in the `response_fields[]` wire field.
+  class DataConnectorVersionDefinitionResponseFieldsItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDataConnectorVersionDefinitionResponseFieldsItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDataConnectorVersionDefinitionResponseFieldsItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDataConnectorVersionDefinitionResponseFieldsItemMetadata::DECODERS
+
+    # @return [String] Optional `string` value serialized in the `path` wire field.
+    attr_reader :path
+    # @return [String] Optional `string` value serialized in the `type` wire field.
+    attr_reader :type
+    # @return [Object] Optional API value serialized in the `example_value` wire field.
+    attr_reader :example_value
+    # @return [Boolean] Optional `boolean` value serialized in the `redacted` wire field.
+    attr_reader :redacted
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDataConnectorVersionDefinitionObjectMappingsItemMetadata
-  FIELDS = {
-    response_object_path: "response_object_path",
-    intercom_object_type: "intercom_object_type",
-    attribute_mappings: "attribute_mappings",
-    reference_mappings: "reference_mappings",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    attribute_mappings: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::DataConnectorVersionDefinitionObjectMappingsItemAttributeMappingsItem.from_hash(item) }
-    end,
-    reference_mappings: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::DataConnectorVersionDefinitionObjectMappingsItemReferenceMappingsItem.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for DataConnectorVersionDefinitionObjectMappingsItem.
-# Required object value serialized in the `object_mappings[]` wire field.
-class DataConnectorVersionDefinitionObjectMappingsItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDataConnectorVersionDefinitionObjectMappingsItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDataConnectorVersionDefinitionObjectMappingsItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDataConnectorVersionDefinitionObjectMappingsItemMetadata::DECODERS
-
-  # @return [String] Optional `string` value serialized in the `response_object_path` wire field.
-  attr_reader :response_object_path
-  # @return [String] Optional `string` value serialized in the `intercom_object_type` wire field.
-  attr_reader :intercom_object_type
-  # @return [Array_of_DataConnectorVersionDefinitionObjectMappingsItemAttributeMappingsItem] Optional array value serialized in the `attribute_mappings` wire field.
-  attr_reader :attribute_mappings
-  # @return [Array_of_DataConnectorVersionDefinitionObjectMappingsItemReferenceMappingsItem] Optional array value serialized in the `reference_mappings` wire field.
-  attr_reader :reference_mappings
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalDataConnectorVersionDefinitionObjectMappingsItemAttributeMappingsItemMetadata
+    FIELDS = {
+      response_attribute_path: 'response_attribute_path',
+      intercom_attribute_identifier: 'intercom_attribute_identifier',
+      mapping_type: 'mapping_type'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for DataConnectorVersionDefinitionObjectMappingsItemAttributeMappingsItem.
+  # Required object value serialized in the `attribute_mappings[]` wire field.
+  class DataConnectorVersionDefinitionObjectMappingsItemAttributeMappingsItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDataConnectorVersionDefinitionObjectMappingsItemAttributeMappingsItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDataConnectorVersionDefinitionObjectMappingsItemAttributeMappingsItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDataConnectorVersionDefinitionObjectMappingsItemAttributeMappingsItemMetadata::DECODERS
+
+    # @return [String] Optional `string` value serialized in the `response_attribute_path` wire field.
+    attr_reader :response_attribute_path
+    # @return [String] Optional `string` value serialized in the `intercom_attribute_identifier` wire field.
+    attr_reader :intercom_attribute_identifier
+    # @return [String] Optional `string` value serialized in the `mapping_type` wire field.
+    attr_reader :mapping_type
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDataConnectorVersionDefinitionMetadata
-  FIELDS = {
-    name: "name",
-    description: "description",
-    internal_description: "internal_description",
-    state: "state",
-    url: "url",
-    body: "body",
-    headers: "headers",
-    http_method: "http_method",
-    direct_fin_usage: "direct_fin_usage",
-    audiences: "audiences",
-    execution_type: "execution_type",
-    configuration_response_type: "configuration_response_type",
-    data_transformation_type: "data_transformation_type",
-    client_function_name: "client_function_name",
-    client_function_timeout_ms: "client_function_timeout_ms",
-    data_inputs: "data_inputs",
-    response_fields: "response_fields",
-    object_mappings: "object_mappings",
-    token_ids: "token_ids",
-    customer_authentication: "customer_authentication",
-    bypass_authentication: "bypass_authentication",
-    enforce_auth: "enforce_auth",
-    validate_missing_attributes: "validate_missing_attributes",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    headers: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::DataConnectorVersionDefinitionHeadersItem.from_hash(item) }
-    end,
-    data_inputs: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::DataConnectorVersionDefinitionDataInputsItem.from_hash(item) }
-    end,
-    response_fields: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::DataConnectorVersionDefinitionResponseFieldsItem.from_hash(item) }
-    end,
-    object_mappings: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::DataConnectorVersionDefinitionObjectMappingsItem.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for DataConnectorVersionDefinition.
-# The data connector's configuration at this version. `null` if the snapshot is no longer available. Mirrors the response of Retrieve a data connector, without `id`, `type`, `created_by_admin_id`, `updated_by_admin_id`, `created_at`, `updated_at`, `execution_results_url` and `transform_code_block`.
-class DataConnectorVersionDefinition
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDataConnectorVersionDefinitionMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDataConnectorVersionDefinitionMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDataConnectorVersionDefinitionMetadata::DECODERS
-
-  # @return [String] The name of the data connector.
-  attr_reader :name
-  # @return [String] A description of what this data connector does.
-  attr_reader :description
-  # @return [String] The internal description of the data connector.
-  attr_reader :internal_description
-  # @return [String] The state of the data connector at this version.
-  attr_reader :state
-  # @return [String] The URL of the external API endpoint. Supports template variables like `{{order_id}}`.
-  attr_reader :url
-  # @return [String] The request body template. Supports template variables.
-  attr_reader :body
-  # @return [Array_of_DataConnectorVersionDefinitionHeadersItem] HTTP headers for the request. Header values are always redacted as `"****"`.
-  attr_reader :headers
-  # @return [String] The HTTP method used by the data connector.
-  attr_reader :http_method
-  # @return [Boolean] Whether this connector is used directly by Fin.
-  attr_reader :direct_fin_usage
-  # @return [Array_of_String] The audience types this connector targets.
-  attr_reader :audiences
-  # @return [String] How the connector executes, for example `server_side` or `client_side`.
-  attr_reader :execution_type
-  # @return [String] The expected response format from the connector.
-  attr_reader :configuration_response_type
-  # @return [String] The type of data transformation applied to the response.
-  attr_reader :data_transformation_type
-  # @return [String] The name of the client-side function, if applicable.
-  attr_reader :client_function_name
-  # @return [Integer] Timeout in milliseconds for the client function, if applicable.
-  attr_reader :client_function_timeout_ms
-  # @return [Array_of_DataConnectorVersionDefinitionDataInputsItem] The input parameters accepted by this data connector.
-  attr_reader :data_inputs
-  # @return [Array_of_DataConnectorVersionDefinitionResponseFieldsItem] The fields returned in the connector response.
-  attr_reader :response_fields
-  # @return [Array_of_DataConnectorVersionDefinitionObjectMappingsItem] Mappings from connector response objects to Intercom objects.
-  attr_reader :object_mappings
-  # @return [Array_of_String] IDs of authentication tokens associated with this connector.
-  attr_reader :token_ids
-  # @return [Boolean] Whether OTP authentication is enabled for this connector.
-  attr_reader :customer_authentication
-  # @return [Boolean] Whether authentication is bypassed for this connector.
-  attr_reader :bypass_authentication
-  # @return [Boolean] Whether authentication is enforced for this connector.
-  attr_reader :enforce_auth
-  # @return [Boolean] Whether to validate missing attributes before execution.
-  attr_reader :validate_missing_attributes
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalDataConnectorVersionDefinitionObjectMappingsItemReferenceMappingsItemMetadata
+    FIELDS = {
+      intercom_object_type: 'intercom_object_type',
+      intercom_attribute_identifier: 'intercom_attribute_identifier'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for DataConnectorVersionDefinitionObjectMappingsItemReferenceMappingsItem.
+  # Required object value serialized in the `reference_mappings[]` wire field.
+  class DataConnectorVersionDefinitionObjectMappingsItemReferenceMappingsItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDataConnectorVersionDefinitionObjectMappingsItemReferenceMappingsItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDataConnectorVersionDefinitionObjectMappingsItemReferenceMappingsItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDataConnectorVersionDefinitionObjectMappingsItemReferenceMappingsItemMetadata::DECODERS
+
+    # @return [String] Optional `string` value serialized in the `intercom_object_type` wire field.
+    attr_reader :intercom_object_type
+    # @return [String] Optional `string` value serialized in the `intercom_attribute_identifier` wire field.
+    attr_reader :intercom_attribute_identifier
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDataConnectorVersionMetadata
-  FIELDS = {
-    type: "type",
-    status: "status",
-    note: "note",
-    author: "author",
-    created_at: "created_at",
-    entity_version_id: "entity_version_id",
-    definition: "definition",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::DataConnectorVersionType.from_value(value)
-    end,
-    status: lambda do |value|
-      ::OctridevIntercom::DataConnectorVersionStatus.from_value(value)
-    end,
-    author: lambda do |value|
-      ::OctridevIntercom::DataConnectorVersionAuthor.from_hash(value)
-    end,
-    definition: lambda do |value|
-      ::OctridevIntercom::DataConnectorVersionDefinition.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for DataConnectorVersion.
-# A point-in-time snapshot of a data connector's configuration, with the version's status and an optional note.
-class DataConnectorVersion
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDataConnectorVersionMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDataConnectorVersionMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDataConnectorVersionMetadata::DECODERS
-
-  # @return [DataConnectorVersionType] The type of object - `data_connector_version`.
-  attr_reader :type
-  # @return [DataConnectorVersionStatus] The status of this version today.
-  attr_reader :status
-  # @return [String] A note describing this version, if one has been set.
-  attr_reader :note
-  # @return [DataConnectorVersionAuthor] The teammate who created this version.
-  attr_reader :author
-  # @return [String] The time this version was created.
-  attr_reader :created_at
-  # @return [Integer] The identifier of this version. Use it as `version_id` when retrieving or updating a version.
-  attr_reader :entity_version_id
-  # @return [DataConnectorVersionDefinition] The data connector's configuration at this version. `null` if the snapshot is no longer available. Mirrors the response of Retrieve a data connector, without `id`, `type`, `created_by_admin_id`, `updated_by_admin_id`, `created_at`, `updated_at`, `execution_results_url` and `transform_code_block`.
-  attr_reader :definition
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalDataConnectorVersionDefinitionObjectMappingsItemMetadata
+    FIELDS = {
+      response_object_path: 'response_object_path',
+      intercom_object_type: 'intercom_object_type',
+      attribute_mappings: 'attribute_mappings',
+      reference_mappings: 'reference_mappings'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      attribute_mappings: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::DataConnectorVersionDefinitionObjectMappingsItemAttributeMappingsItem.from_hash(item) }
+      end,
+      reference_mappings: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::DataConnectorVersionDefinitionObjectMappingsItemReferenceMappingsItem.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for DataConnectorVersionDefinitionObjectMappingsItem.
+  # Required object value serialized in the `object_mappings[]` wire field.
+  class DataConnectorVersionDefinitionObjectMappingsItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDataConnectorVersionDefinitionObjectMappingsItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDataConnectorVersionDefinitionObjectMappingsItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDataConnectorVersionDefinitionObjectMappingsItemMetadata::DECODERS
+
+    # @return [String] Optional `string` value serialized in the `response_object_path` wire field.
+    attr_reader :response_object_path
+    # @return [String] Optional `string` value serialized in the `intercom_object_type` wire field.
+    attr_reader :intercom_object_type
+    # @return [Array_of_DataConnectorVersionDefinitionObjectMappingsItemAttributeMappingsItem] Optional array value serialized in the `attribute_mappings` wire field.
+    attr_reader :attribute_mappings
+    # @return [Array_of_DataConnectorVersionDefinitionObjectMappingsItemReferenceMappingsItem] Optional array value serialized in the `reference_mappings` wire field.
+    attr_reader :reference_mappings
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalDataConnectorVersionDefinitionMetadata
+    FIELDS = {
+      name: 'name',
+      description: 'description',
+      internal_description: 'internal_description',
+      state: 'state',
+      url: 'url',
+      body: 'body',
+      headers: 'headers',
+      http_method: 'http_method',
+      direct_fin_usage: 'direct_fin_usage',
+      audiences: 'audiences',
+      execution_type: 'execution_type',
+      configuration_response_type: 'configuration_response_type',
+      data_transformation_type: 'data_transformation_type',
+      client_function_name: 'client_function_name',
+      client_function_timeout_ms: 'client_function_timeout_ms',
+      data_inputs: 'data_inputs',
+      response_fields: 'response_fields',
+      object_mappings: 'object_mappings',
+      token_ids: 'token_ids',
+      customer_authentication: 'customer_authentication',
+      bypass_authentication: 'bypass_authentication',
+      enforce_auth: 'enforce_auth',
+      validate_missing_attributes: 'validate_missing_attributes'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      headers: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::DataConnectorVersionDefinitionHeadersItem.from_hash(item) }
+      end,
+      data_inputs: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::DataConnectorVersionDefinitionDataInputsItem.from_hash(item) }
+      end,
+      response_fields: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::DataConnectorVersionDefinitionResponseFieldsItem.from_hash(item) }
+      end,
+      object_mappings: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::DataConnectorVersionDefinitionObjectMappingsItem.from_hash(item) }
+      end
+    }.freeze
   end
-end
 
-# Defines the DataConnectorVersionStatus SDK namespace.
-module DataConnectorVersionStatus
-  LIVE = 'live'
-  PAUSED = 'paused'
-  DRAFT = 'draft'
-  PREVIOUSLY_LIVE = 'previously_live'
-  VALUES = ['live', 'paused', 'draft', 'previously_live'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+  # API model for DataConnectorVersionDefinition.
+  # The data connector's configuration at this version. `null` if the snapshot is no longer available. Mirrors the response of Retrieve a data connector, without `id`, `type`, `created_by_admin_id`, `updated_by_admin_id`, `created_at`, `updated_at`, `execution_results_url` and `transform_code_block`.
+  class DataConnectorVersionDefinition
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDataConnectorVersionDefinitionMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDataConnectorVersionDefinitionMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDataConnectorVersionDefinitionMetadata::DECODERS
 
-# Defines the DataConnectorVersionType SDK namespace.
-module DataConnectorVersionType
-  DATA_CONNECTOR_VERSION = 'data_connector_version'
-  VALUES = ['data_connector_version'].freeze
-  def self.from_value(value)
-    value
+    # @return [String] The name of the data connector.
+    attr_reader :name
+    # @return [String] A description of what this data connector does.
+    attr_reader :description
+    # @return [String] The internal description of the data connector.
+    attr_reader :internal_description
+    # @return [String] The state of the data connector at this version.
+    attr_reader :state
+    # @return [String] The URL of the external API endpoint. Supports template variables like `{{order_id}}`.
+    attr_reader :url
+    # @return [String] The request body template. Supports template variables.
+    attr_reader :body
+    # @return [Array_of_DataConnectorVersionDefinitionHeadersItem] HTTP headers for the request. Header values are always redacted as `"****"`.
+    attr_reader :headers
+    # @return [String] The HTTP method used by the data connector.
+    attr_reader :http_method
+    # @return [Boolean] Whether this connector is used directly by Fin.
+    attr_reader :direct_fin_usage
+    # @return [Array_of_String] The audience types this connector targets.
+    attr_reader :audiences
+    # @return [String] How the connector executes, for example `server_side` or `client_side`.
+    attr_reader :execution_type
+    # @return [String] The expected response format from the connector.
+    attr_reader :configuration_response_type
+    # @return [String] The type of data transformation applied to the response.
+    attr_reader :data_transformation_type
+    # @return [String] The name of the client-side function, if applicable.
+    attr_reader :client_function_name
+    # @return [Integer] Timeout in milliseconds for the client function, if applicable.
+    attr_reader :client_function_timeout_ms
+    # @return [Array_of_DataConnectorVersionDefinitionDataInputsItem] The input parameters accepted by this data connector.
+    attr_reader :data_inputs
+    # @return [Array_of_DataConnectorVersionDefinitionResponseFieldsItem] The fields returned in the connector response.
+    attr_reader :response_fields
+    # @return [Array_of_DataConnectorVersionDefinitionObjectMappingsItem] Mappings from connector response objects to Intercom objects.
+    attr_reader :object_mappings
+    # @return [Array_of_String] IDs of authentication tokens associated with this connector.
+    attr_reader :token_ids
+    # @return [Boolean] Whether OTP authentication is enabled for this connector.
+    attr_reader :customer_authentication
+    # @return [Boolean] Whether authentication is bypassed for this connector.
+    attr_reader :bypass_authentication
+    # @return [Boolean] Whether authentication is enforced for this connector.
+    attr_reader :enforce_auth
+    # @return [Boolean] Whether to validate missing attributes before execution.
+    attr_reader :validate_missing_attributes
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
+
+  # Internal model hydration metadata.
+  class SdkInternalDataConnectorVersionMetadata
+    FIELDS = {
+      type: 'type',
+      status: 'status',
+      note: 'note',
+      author: 'author',
+      created_at: 'created_at',
+      entity_version_id: 'entity_version_id',
+      definition: 'definition'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::DataConnectorVersionType.from_value(value)
+      end,
+      status: lambda do |value|
+        ::OctridevIntercom::DataConnectorVersionStatus.from_value(value)
+      end,
+      author: lambda do |value|
+        ::OctridevIntercom::DataConnectorVersionAuthor.from_hash(value)
+      end,
+      definition: lambda do |value|
+        ::OctridevIntercom::DataConnectorVersionDefinition.from_hash(value)
+      end
+    }.freeze
+  end
+
+  # API model for DataConnectorVersion.
+  # A point-in-time snapshot of a data connector's configuration, with the version's status and an optional note.
+  class DataConnectorVersion
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDataConnectorVersionMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDataConnectorVersionMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDataConnectorVersionMetadata::DECODERS
+
+    # @return [DataConnectorVersionType] The type of object - `data_connector_version`.
+    attr_reader :type
+    # @return [DataConnectorVersionStatus] The status of this version today.
+    attr_reader :status
+    # @return [String] A note describing this version, if one has been set.
+    attr_reader :note
+    # @return [DataConnectorVersionAuthor] The teammate who created this version.
+    attr_reader :author
+    # @return [String] The time this version was created.
+    attr_reader :created_at
+    # @return [Integer] The identifier of this version. Use it as `version_id` when retrieving or updating a version.
+    attr_reader :entity_version_id
+    # @return [DataConnectorVersionDefinition] The data connector's configuration at this version. `null` if the snapshot is no longer available. Mirrors the response of Retrieve a data connector, without `id`, `type`, `created_by_admin_id`, `updated_by_admin_id`, `created_at`, `updated_at`, `execution_results_url` and `transform_code_block`.
+    attr_reader :definition
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the DataConnectorVersionStatus SDK namespace.
+  module DataConnectorVersionStatus
+    LIVE = 'live'
+    PAUSED = 'paused'
+    DRAFT = 'draft'
+    PREVIOUSLY_LIVE = 'previously_live'
+    VALUES = %w[live paused draft previously_live].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Defines the DataConnectorVersionType SDK namespace.
+  module DataConnectorVersionType
+    DATA_CONNECTOR_VERSION = 'data_connector_version'
+    VALUES = ['data_connector_version'].freeze
+    def self.from_value(value)
+      value
+    end
+  end
 end

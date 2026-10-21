@@ -5,68 +5,67 @@
 
 # tagged_models_ai_content_source domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalContentSourceMetadata
-  FIELDS = {
-    content_type: "content_type",
-    url: "url",
-    title: "title",
-    locale: "locale",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    content_type: lambda do |value|
-      ::OctridevIntercom::ContentSourceContentType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for ContentSource.
-# The content source used by AI Agent in the conversation.
-class ContentSource
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalContentSourceMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalContentSourceMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalContentSourceMetadata::DECODERS
-
-  # @return [ContentSourceContentType] The type of the content source.
-  attr_reader :content_type
-  # @return [String] The internal URL linking to the content source for teammates.
-  attr_reader :url
-  # @return [String] The title of the content source.
-  attr_reader :title
-  # @return [String] The ISO 639 language code of the content source.
-  attr_reader :locale
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalContentSourceMetadata
+    FIELDS = {
+      content_type: 'content_type',
+      url: 'url',
+      title: 'title',
+      locale: 'locale'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      content_type: lambda do |value|
+        ::OctridevIntercom::ContentSourceContentType.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ContentSource.
+  # The content source used by AI Agent in the conversation.
+  class ContentSource
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalContentSourceMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalContentSourceMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalContentSourceMetadata::DECODERS
+
+    # @return [ContentSourceContentType] The type of the content source.
+    attr_reader :content_type
+    # @return [String] The internal URL linking to the content source for teammates.
+    attr_reader :url
+    # @return [String] The title of the content source.
+    attr_reader :title
+    # @return [String] The ISO 639 language code of the content source.
+    attr_reader :locale
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Defines the ContentSourceContentType SDK namespace.
+  module ContentSourceContentType
+    FILE = 'file'
+    ARTICLE = 'article'
+    EXTERNAL_CONTENT = 'external_content'
+    CONTENT_SNIPPET = 'content_snippet'
+    WORKFLOW_CONNECTOR_ACTION = 'workflow_connector_action'
+    INTERNAL_ARTICLE = 'internal_article'
+    VALUES = %w[
+      file article external_content content_snippet workflow_connector_action
+      internal_article
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
-
-# Defines the ContentSourceContentType SDK namespace.
-module ContentSourceContentType
-  FILE = 'file'
-  ARTICLE = 'article'
-  EXTERNAL_CONTENT = 'external_content'
-  CONTENT_SNIPPET = 'content_snippet'
-  WORKFLOW_CONNECTOR_ACTION = 'workflow_connector_action'
-  INTERNAL_ARTICLE = 'internal_article'
-  VALUES = [
-    'file', 'article', 'external_content', 'content_snippet', 'workflow_connector_action',
-    'internal_article'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
 end

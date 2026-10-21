@@ -5,675 +5,659 @@
 
 # visitors domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalConvertVisitorRequestUserMetadata
-  FIELDS = {
-    id: "id",
-    user_id: "user_id",
-    email: "email",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ConvertVisitorRequestUser.
-# The unique identifiers retained after converting or merging.
-class ConvertVisitorRequestUser
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalConvertVisitorRequestUserMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalConvertVisitorRequestUserMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalConvertVisitorRequestUserMetadata::DECODERS
-
-  # @return [String] The unique identifier for the contact which is given by Intercom.
-  attr_reader :id
-  # @return [String] A unique identifier for the contact which is given to Intercom, which will be represented as external_id.
-  attr_reader :user_id
-  # @return [String] The contact's email, retained by default if one is present.
-  attr_reader :email
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalConvertVisitorRequestUserMetadata
+    FIELDS = {
+      id: 'id',
+      user_id: 'user_id',
+      email: 'email'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ConvertVisitorRequestUser.
+  # The unique identifiers retained after converting or merging.
+  class ConvertVisitorRequestUser
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalConvertVisitorRequestUserMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalConvertVisitorRequestUserMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalConvertVisitorRequestUserMetadata::DECODERS
+
+    # @return [String] The unique identifier for the contact which is given by Intercom.
+    attr_reader :id
+    # @return [String] A unique identifier for the contact which is given to Intercom, which will be represented as external_id.
+    attr_reader :user_id
+    # @return [String] The contact's email, retained by default if one is present.
+    attr_reader :email
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalConvertVisitorRequestVisitorMetadata
-  FIELDS = {
-    id: "id",
-    user_id: "user_id",
-    email: "email",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ConvertVisitorRequestVisitor.
-# The unique identifiers to convert a single Visitor.
-class ConvertVisitorRequestVisitor
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalConvertVisitorRequestVisitorMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalConvertVisitorRequestVisitorMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalConvertVisitorRequestVisitorMetadata::DECODERS
-
-  # @return [String] The unique identifier for the contact which is given by Intercom.
-  attr_reader :id
-  # @return [String] A unique identifier for the contact which is given to Intercom.
-  attr_reader :user_id
-  # @return [String] The visitor's email.
-  attr_reader :email
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalConvertVisitorRequestVisitorMetadata
+    FIELDS = {
+      id: 'id',
+      user_id: 'user_id',
+      email: 'email'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ConvertVisitorRequestVisitor.
+  # The unique identifiers to convert a single Visitor.
+  class ConvertVisitorRequestVisitor
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalConvertVisitorRequestVisitorMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalConvertVisitorRequestVisitorMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalConvertVisitorRequestVisitorMetadata::DECODERS
+
+    # @return [String] The unique identifier for the contact which is given by Intercom.
+    attr_reader :id
+    # @return [String] A unique identifier for the contact which is given to Intercom.
+    attr_reader :user_id
+    # @return [String] The visitor's email.
+    attr_reader :email
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalConvertVisitorRequestMetadata
-  FIELDS = {
-    type: "type",
-    user: "user",
-    visitor: "visitor",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    user
-    visitor
-  ].freeze
-  DECODERS = {
-    user: lambda do |value|
-      ::OctridevIntercom::ConvertVisitorRequestUser.from_hash(value)
-    end,
-    visitor: lambda do |value|
-      ::OctridevIntercom::ConvertVisitorRequestVisitor.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ConvertVisitorRequest.
-# You can merge a Visitor to a Contact of role type lead or user.
-class ConvertVisitorRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalConvertVisitorRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalConvertVisitorRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalConvertVisitorRequestMetadata::DECODERS
-
-  # @return [String] Represents the role of the Contact model. Accepts `lead` or `user`.
-  attr_reader :type
-  # @return [ConvertVisitorRequestUser] The unique identifiers retained after converting or merging.
-  attr_reader :user
-  # @return [ConvertVisitorRequestVisitor] The unique identifiers to convert a single Visitor.
-  attr_reader :visitor
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalConvertVisitorRequestMetadata
+    FIELDS = {
+      type: 'type',
+      user: 'user',
+      visitor: 'visitor'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      user
+      visitor
+    ].freeze
+    DECODERS = {
+      user: lambda do |value|
+        ::OctridevIntercom::ConvertVisitorRequestUser.from_hash(value)
+      end,
+      visitor: lambda do |value|
+        ::OctridevIntercom::ConvertVisitorRequestVisitor.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ConvertVisitorRequest.
+  # You can merge a Visitor to a Contact of role type lead or user.
+  class ConvertVisitorRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalConvertVisitorRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalConvertVisitorRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalConvertVisitorRequestMetadata::DECODERS
+
+    # @return [String] Represents the role of the Contact model. Accepts `lead` or `user`.
+    attr_reader :type
+    # @return [ConvertVisitorRequestUser] The unique identifiers retained after converting or merging.
+    attr_reader :user
+    # @return [ConvertVisitorRequestVisitor] The unique identifiers to convert a single Visitor.
+    attr_reader :visitor
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalUpdateVisitorRequestMetadata
-  FIELDS = {
-    id: "id",
-    user_id: "user_id",
-    name: "name",
-    custom_attributes: "custom_attributes",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for UpdateVisitorRequest.
-# Update an existing visitor.
-class UpdateVisitorRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalUpdateVisitorRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalUpdateVisitorRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalUpdateVisitorRequestMetadata::DECODERS
-
-  # @return [String] A unique identified for the visitor which is given by Intercom.
-  attr_reader :id
-  # @return [String] A unique identified for the visitor which is given by you.
-  attr_reader :user_id
-  # @return [String] The visitor's name.
-  attr_reader :name
-  # @return [Hash] The custom attributes which are set for the visitor.
-  attr_reader :custom_attributes
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalUpdateVisitorRequestMetadata
+    FIELDS = {
+      id: 'id',
+      user_id: 'user_id',
+      name: 'name',
+      custom_attributes: 'custom_attributes'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for UpdateVisitorRequest.
+  # Update an existing visitor.
+  class UpdateVisitorRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalUpdateVisitorRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalUpdateVisitorRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalUpdateVisitorRequestMetadata::DECODERS
+
+    # @return [String] A unique identified for the visitor which is given by Intercom.
+    attr_reader :id
+    # @return [String] A unique identified for the visitor which is given by you.
+    attr_reader :user_id
+    # @return [String] The visitor's name.
+    attr_reader :name
+    # @return [Hash] The custom attributes which are set for the visitor.
+    attr_reader :custom_attributes
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalVisitorAvatarMetadata
-  FIELDS = {
-    type: "type",
-    image_url: "image_url",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for VisitorAvatar.
-# Optional object value serialized in the `avatar` wire field.
-class VisitorAvatar
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalVisitorAvatarMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalVisitorAvatarMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalVisitorAvatarMetadata::DECODERS
-
-  # @return [String] Optional `string` value serialized in the `type` wire field.
-  attr_reader :type
-  # @return [String] This object represents the avatar associated with the visitor.
-  attr_reader :image_url
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalVisitorAvatarMetadata
+    FIELDS = {
+      type: 'type',
+      image_url: 'image_url'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for VisitorAvatar.
+  # Optional object value serialized in the `avatar` wire field.
+  class VisitorAvatar
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalVisitorAvatarMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalVisitorAvatarMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalVisitorAvatarMetadata::DECODERS
+
+    # @return [String] Optional `string` value serialized in the `type` wire field.
+    attr_reader :type
+    # @return [String] This object represents the avatar associated with the visitor.
+    attr_reader :image_url
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalVisitorCompaniesMetadata
-  FIELDS = {
-    type: "type",
-    companies: "companies",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::VisitorCompaniesType.from_value(value)
-    end,
-    companies: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::Company.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for VisitorCompanies.
-# Optional object value serialized in the `companies` wire field.
-class VisitorCompanies
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalVisitorCompaniesMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalVisitorCompaniesMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalVisitorCompaniesMetadata::DECODERS
-
-  # @return [VisitorCompaniesType] The type of the object
-  attr_reader :type
-  # @return [Array_of_Company] Optional array value serialized in the `companies` wire field.
-  attr_reader :companies
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalVisitorCompaniesMetadata
+    FIELDS = {
+      type: 'type',
+      companies: 'companies'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::VisitorCompaniesType.from_value(value)
+      end,
+      companies: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::Company.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for VisitorCompanies.
+  # Optional object value serialized in the `companies` wire field.
+  class VisitorCompanies
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalVisitorCompaniesMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalVisitorCompaniesMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalVisitorCompaniesMetadata::DECODERS
+
+    # @return [VisitorCompaniesType] The type of the object
+    attr_reader :type
+    # @return [Array_of_Company] Optional array value serialized in the `companies` wire field.
+    attr_reader :companies
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalVisitorLocationDataMetadata
-  FIELDS = {
-    type: "type",
-    city_name: "city_name",
-    continent_code: "continent_code",
-    country_code: "country_code",
-    country_name: "country_name",
-    postal_code: "postal_code",
-    region_name: "region_name",
-    timezone: "timezone",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for VisitorLocationData.
-# Optional object value serialized in the `location_data` wire field.
-class VisitorLocationData
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalVisitorLocationDataMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalVisitorLocationDataMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalVisitorLocationDataMetadata::DECODERS
-
-  # @return [String] Optional `string` value serialized in the `type` wire field.
-  attr_reader :type
-  # @return [String] The city name of the visitor.
-  attr_reader :city_name
-  # @return [String] The continent code of the visitor.
-  attr_reader :continent_code
-  # @return [String] The country code of the visitor.
-  attr_reader :country_code
-  # @return [String] The country name of the visitor.
-  attr_reader :country_name
-  # @return [String] The postal code of the visitor.
-  attr_reader :postal_code
-  # @return [String] The region name of the visitor.
-  attr_reader :region_name
-  # @return [String] The timezone of the visitor.
-  attr_reader :timezone
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalVisitorLocationDataMetadata
+    FIELDS = {
+      type: 'type',
+      city_name: 'city_name',
+      continent_code: 'continent_code',
+      country_code: 'country_code',
+      country_name: 'country_name',
+      postal_code: 'postal_code',
+      region_name: 'region_name',
+      timezone: 'timezone'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for VisitorLocationData.
+  # Optional object value serialized in the `location_data` wire field.
+  class VisitorLocationData
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalVisitorLocationDataMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalVisitorLocationDataMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalVisitorLocationDataMetadata::DECODERS
+
+    # @return [String] Optional `string` value serialized in the `type` wire field.
+    attr_reader :type
+    # @return [String] The city name of the visitor.
+    attr_reader :city_name
+    # @return [String] The continent code of the visitor.
+    attr_reader :continent_code
+    # @return [String] The country code of the visitor.
+    attr_reader :country_code
+    # @return [String] The country name of the visitor.
+    attr_reader :country_name
+    # @return [String] The postal code of the visitor.
+    attr_reader :postal_code
+    # @return [String] The region name of the visitor.
+    attr_reader :region_name
+    # @return [String] The timezone of the visitor.
+    attr_reader :timezone
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalVisitorSocialProfilesMetadata
-  FIELDS = {
-    type: "type",
-    social_profiles: "social_profiles",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::VisitorSocialProfilesType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for VisitorSocialProfiles.
-# Optional object value serialized in the `social_profiles` wire field.
-class VisitorSocialProfiles
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalVisitorSocialProfilesMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalVisitorSocialProfilesMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalVisitorSocialProfilesMetadata::DECODERS
-
-  # @return [VisitorSocialProfilesType] The type of the object
-  attr_reader :type
-  # @return [Array_of_String] Optional array value serialized in the `social_profiles` wire field.
-  attr_reader :social_profiles
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalVisitorSocialProfilesMetadata
+    FIELDS = {
+      type: 'type',
+      social_profiles: 'social_profiles'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::VisitorSocialProfilesType.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for VisitorSocialProfiles.
+  # Optional object value serialized in the `social_profiles` wire field.
+  class VisitorSocialProfiles
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalVisitorSocialProfilesMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalVisitorSocialProfilesMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalVisitorSocialProfilesMetadata::DECODERS
+
+    # @return [VisitorSocialProfilesType] The type of the object
+    attr_reader :type
+    # @return [Array_of_String] Optional array value serialized in the `social_profiles` wire field.
+    attr_reader :social_profiles
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalVisitorTagsTagsItemMetadata
-  FIELDS = {
-    type: "type",
-    id: "id",
-    name: "name",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::VisitorTagsTagsItemType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for VisitorTagsTagsItem.
-# Required object value serialized in the `tags[]` wire field.
-class VisitorTagsTagsItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalVisitorTagsTagsItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalVisitorTagsTagsItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalVisitorTagsTagsItemMetadata::DECODERS
-
-  # @return [VisitorTagsTagsItemType] The type of the object
-  attr_reader :type
-  # @return [String] The id of the tag.
-  attr_reader :id
-  # @return [String] The name of the tag.
-  attr_reader :name
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalVisitorTagsTagsItemMetadata
+    FIELDS = {
+      type: 'type',
+      id: 'id',
+      name: 'name'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::VisitorTagsTagsItemType.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for VisitorTagsTagsItem.
+  # Required object value serialized in the `tags[]` wire field.
+  class VisitorTagsTagsItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalVisitorTagsTagsItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalVisitorTagsTagsItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalVisitorTagsTagsItemMetadata::DECODERS
+
+    # @return [VisitorTagsTagsItemType] The type of the object
+    attr_reader :type
+    # @return [String] The id of the tag.
+    attr_reader :id
+    # @return [String] The name of the tag.
+    attr_reader :name
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalVisitorTagsMetadata
-  FIELDS = {
-    type: "type",
-    tags: "tags",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::VisitorTagsType.from_value(value)
-    end,
-    tags: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::VisitorTagsTagsItem.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for VisitorTags.
-# Optional object value serialized in the `tags` wire field.
-class VisitorTags
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalVisitorTagsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalVisitorTagsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalVisitorTagsMetadata::DECODERS
-
-  # @return [VisitorTagsType] The type of the object
-  attr_reader :type
-  # @return [Array_of_VisitorTagsTagsItem] Optional array value serialized in the `tags` wire field.
-  attr_reader :tags
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalVisitorTagsMetadata
+    FIELDS = {
+      type: 'type',
+      tags: 'tags'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::VisitorTagsType.from_value(value)
+      end,
+      tags: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::VisitorTagsTagsItem.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for VisitorTags.
+  # Optional object value serialized in the `tags` wire field.
+  class VisitorTags
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalVisitorTagsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalVisitorTagsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalVisitorTagsMetadata::DECODERS
+
+    # @return [VisitorTagsType] The type of the object
+    attr_reader :type
+    # @return [Array_of_VisitorTagsTagsItem] Optional array value serialized in the `tags` wire field.
+    attr_reader :tags
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalVisitorSegmentsMetadata
-  FIELDS = {
-    type: "type",
-    segments: "segments",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::VisitorSegmentsType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for VisitorSegments.
-# Optional object value serialized in the `segments` wire field.
-class VisitorSegments
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalVisitorSegmentsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalVisitorSegmentsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalVisitorSegmentsMetadata::DECODERS
-
-  # @return [VisitorSegmentsType] The type of the object
-  attr_reader :type
-  # @return [Array_of_String] Optional array value serialized in the `segments` wire field.
-  attr_reader :segments
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalVisitorSegmentsMetadata
+    FIELDS = {
+      type: 'type',
+      segments: 'segments'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::VisitorSegmentsType.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for VisitorSegments.
+  # Optional object value serialized in the `segments` wire field.
+  class VisitorSegments
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalVisitorSegmentsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalVisitorSegmentsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalVisitorSegmentsMetadata::DECODERS
+
+    # @return [VisitorSegmentsType] The type of the object
+    attr_reader :type
+    # @return [Array_of_String] Optional array value serialized in the `segments` wire field.
+    attr_reader :segments
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalVisitorMetadata
-  FIELDS = {
-    type: "type",
-    id: "id",
-    user_id: "user_id",
-    anonymous: "anonymous",
-    email: "email",
-    phone: "phone",
-    name: "name",
-    pseudonym: "pseudonym",
-    avatar: "avatar",
-    app_id: "app_id",
-    companies: "companies",
-    location_data: "location_data",
-    las_request_at: "las_request_at",
-    created_at: "created_at",
-    remote_created_at: "remote_created_at",
-    signed_up_at: "signed_up_at",
-    updated_at: "updated_at",
-    session_count: "session_count",
-    social_profiles: "social_profiles",
-    owner_id: "owner_id",
-    unsubscribed_from_emails: "unsubscribed_from_emails",
-    marked_email_as_spam: "marked_email_as_spam",
-    has_hard_bounced: "has_hard_bounced",
-    tags: "tags",
-    segments: "segments",
-    custom_attributes: "custom_attributes",
-    referrer: "referrer",
-    utm_campaign: "utm_campaign",
-    utm_content: "utm_content",
-    utm_medium: "utm_medium",
-    utm_source: "utm_source",
-    utm_term: "utm_term",
-    do_not_track: "do_not_track",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    avatar: lambda do |value|
-      ::OctridevIntercom::VisitorAvatar.from_hash(value)
-    end,
-    companies: lambda do |value|
-      ::OctridevIntercom::VisitorCompanies.from_hash(value)
-    end,
-    location_data: lambda do |value|
-      ::OctridevIntercom::VisitorLocationData.from_hash(value)
-    end,
-    social_profiles: lambda do |value|
-      ::OctridevIntercom::VisitorSocialProfiles.from_hash(value)
-    end,
-    tags: lambda do |value|
-      ::OctridevIntercom::VisitorTags.from_hash(value)
-    end,
-    segments: lambda do |value|
-      ::OctridevIntercom::VisitorSegments.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for Visitor.
-# Visitors are useful for representing anonymous people that have not yet been identified. They usually represent website visitors. Visitors are not visible in Intercom platform. The Visitors resource provides methods to fetch, update, convert and delete.
-class Visitor
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalVisitorMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalVisitorMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalVisitorMetadata::DECODERS
-
-  # @return [String] Value is 'visitor'
-  attr_reader :type
-  # @return [String] The Intercom defined id representing the Visitor.
-  attr_reader :id
-  # @return [String] Automatically generated identifier for the Visitor.
-  attr_reader :user_id
-  # @return [Boolean] Identifies if this visitor is anonymous.
-  attr_reader :anonymous
-  # @return [String] The email of the visitor.
-  attr_reader :email
-  # @return [String] The phone number of the visitor.
-  attr_reader :phone
-  # @return [String] The name of the visitor.
-  attr_reader :name
-  # @return [String] The pseudonym of the visitor.
-  attr_reader :pseudonym
-  # @return [VisitorAvatar] Optional object value serialized in the `avatar` wire field.
-  attr_reader :avatar
-  # @return [String] The id of the app the visitor is associated with.
-  attr_reader :app_id
-  # @return [VisitorCompanies] Optional object value serialized in the `companies` wire field.
-  attr_reader :companies
-  # @return [VisitorLocationData] Optional object value serialized in the `location_data` wire field.
-  attr_reader :location_data
-  # @return [Integer] The time the Lead last recorded making a request.
-  attr_reader :las_request_at
-  # @return [Integer] The time the Visitor was added to Intercom.
-  attr_reader :created_at
-  # @return [Integer] The time the Visitor was added to Intercom.
-  attr_reader :remote_created_at
-  # @return [Integer] The time the Visitor signed up for your product.
-  attr_reader :signed_up_at
-  # @return [Integer] The last time the Visitor was updated.
-  attr_reader :updated_at
-  # @return [Integer] The number of sessions the Visitor has had.
-  attr_reader :session_count
-  # @return [VisitorSocialProfiles] Optional object value serialized in the `social_profiles` wire field.
-  attr_reader :social_profiles
-  # @return [String] The id of the admin that owns the Visitor.
-  attr_reader :owner_id
-  # @return [Boolean] Whether the Visitor is unsubscribed from emails.
-  attr_reader :unsubscribed_from_emails
-  # @return [Boolean] Identifies if this visitor has marked an email as spam.
-  attr_reader :marked_email_as_spam
-  # @return [Boolean] Identifies if this visitor has had a hard bounce.
-  attr_reader :has_hard_bounced
-  # @return [VisitorTags] Optional object value serialized in the `tags` wire field.
-  attr_reader :tags
-  # @return [VisitorSegments] Optional object value serialized in the `segments` wire field.
-  attr_reader :segments
-  # @return [Hash] The custom attributes you have set on the Visitor.
-  attr_reader :custom_attributes
-  # @return [String] The referer of the visitor.
-  attr_reader :referrer
-  # @return [String] The utm_campaign of the visitor.
-  attr_reader :utm_campaign
-  # @return [String] The utm_content of the visitor.
-  attr_reader :utm_content
-  # @return [String] The utm_medium of the visitor.
-  attr_reader :utm_medium
-  # @return [String] The utm_source of the visitor.
-  attr_reader :utm_source
-  # @return [String] The utm_term of the visitor.
-  attr_reader :utm_term
-  # @return [Boolean] Identifies if this visitor has do not track enabled.
-  attr_reader :do_not_track
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalVisitorMetadata
+    FIELDS = {
+      type: 'type',
+      id: 'id',
+      user_id: 'user_id',
+      anonymous: 'anonymous',
+      email: 'email',
+      phone: 'phone',
+      name: 'name',
+      pseudonym: 'pseudonym',
+      avatar: 'avatar',
+      app_id: 'app_id',
+      companies: 'companies',
+      location_data: 'location_data',
+      las_request_at: 'las_request_at',
+      created_at: 'created_at',
+      remote_created_at: 'remote_created_at',
+      signed_up_at: 'signed_up_at',
+      updated_at: 'updated_at',
+      session_count: 'session_count',
+      social_profiles: 'social_profiles',
+      owner_id: 'owner_id',
+      unsubscribed_from_emails: 'unsubscribed_from_emails',
+      marked_email_as_spam: 'marked_email_as_spam',
+      has_hard_bounced: 'has_hard_bounced',
+      tags: 'tags',
+      segments: 'segments',
+      custom_attributes: 'custom_attributes',
+      referrer: 'referrer',
+      utm_campaign: 'utm_campaign',
+      utm_content: 'utm_content',
+      utm_medium: 'utm_medium',
+      utm_source: 'utm_source',
+      utm_term: 'utm_term',
+      do_not_track: 'do_not_track'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      avatar: lambda do |value|
+        ::OctridevIntercom::VisitorAvatar.from_hash(value)
+      end,
+      companies: lambda do |value|
+        ::OctridevIntercom::VisitorCompanies.from_hash(value)
+      end,
+      location_data: lambda do |value|
+        ::OctridevIntercom::VisitorLocationData.from_hash(value)
+      end,
+      social_profiles: lambda do |value|
+        ::OctridevIntercom::VisitorSocialProfiles.from_hash(value)
+      end,
+      tags: lambda do |value|
+        ::OctridevIntercom::VisitorTags.from_hash(value)
+      end,
+      segments: lambda do |value|
+        ::OctridevIntercom::VisitorSegments.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for Visitor.
+  # Visitors are useful for representing anonymous people that have not yet been identified. They usually represent website visitors. Visitors are not visible in Intercom platform. The Visitors resource provides methods to fetch, update, convert and delete.
+  class Visitor
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalVisitorMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalVisitorMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalVisitorMetadata::DECODERS
+
+    # @return [String] Value is 'visitor'
+    attr_reader :type
+    # @return [String] The Intercom defined id representing the Visitor.
+    attr_reader :id
+    # @return [String] Automatically generated identifier for the Visitor.
+    attr_reader :user_id
+    # @return [Boolean] Identifies if this visitor is anonymous.
+    attr_reader :anonymous
+    # @return [String] The email of the visitor.
+    attr_reader :email
+    # @return [String] The phone number of the visitor.
+    attr_reader :phone
+    # @return [String] The name of the visitor.
+    attr_reader :name
+    # @return [String] The pseudonym of the visitor.
+    attr_reader :pseudonym
+    # @return [VisitorAvatar] Optional object value serialized in the `avatar` wire field.
+    attr_reader :avatar
+    # @return [String] The id of the app the visitor is associated with.
+    attr_reader :app_id
+    # @return [VisitorCompanies] Optional object value serialized in the `companies` wire field.
+    attr_reader :companies
+    # @return [VisitorLocationData] Optional object value serialized in the `location_data` wire field.
+    attr_reader :location_data
+    # @return [Integer] The time the Lead last recorded making a request.
+    attr_reader :las_request_at
+    # @return [Integer] The time the Visitor was added to Intercom.
+    attr_reader :created_at
+    # @return [Integer] The time the Visitor was added to Intercom.
+    attr_reader :remote_created_at
+    # @return [Integer] The time the Visitor signed up for your product.
+    attr_reader :signed_up_at
+    # @return [Integer] The last time the Visitor was updated.
+    attr_reader :updated_at
+    # @return [Integer] The number of sessions the Visitor has had.
+    attr_reader :session_count
+    # @return [VisitorSocialProfiles] Optional object value serialized in the `social_profiles` wire field.
+    attr_reader :social_profiles
+    # @return [String] The id of the admin that owns the Visitor.
+    attr_reader :owner_id
+    # @return [Boolean] Whether the Visitor is unsubscribed from emails.
+    attr_reader :unsubscribed_from_emails
+    # @return [Boolean] Identifies if this visitor has marked an email as spam.
+    attr_reader :marked_email_as_spam
+    # @return [Boolean] Identifies if this visitor has had a hard bounce.
+    attr_reader :has_hard_bounced
+    # @return [VisitorTags] Optional object value serialized in the `tags` wire field.
+    attr_reader :tags
+    # @return [VisitorSegments] Optional object value serialized in the `segments` wire field.
+    attr_reader :segments
+    # @return [Hash] The custom attributes you have set on the Visitor.
+    attr_reader :custom_attributes
+    # @return [String] The referer of the visitor.
+    attr_reader :referrer
+    # @return [String] The utm_campaign of the visitor.
+    attr_reader :utm_campaign
+    # @return [String] The utm_content of the visitor.
+    attr_reader :utm_content
+    # @return [String] The utm_medium of the visitor.
+    attr_reader :utm_medium
+    # @return [String] The utm_source of the visitor.
+    attr_reader :utm_source
+    # @return [String] The utm_term of the visitor.
+    attr_reader :utm_term
+    # @return [Boolean] Identifies if this visitor has do not track enabled.
+    attr_reader :do_not_track
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Defines the VisitorCompaniesType SDK namespace.
+  module VisitorCompaniesType
+    COMPANY_LIST = 'company.list'
+    VALUES = ['company.list'].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
 
-# Defines the VisitorCompaniesType SDK namespace.
-module VisitorCompaniesType
-  COMPANY_LIST = 'company.list'
-  VALUES = ['company.list'].freeze
-  def self.from_value(value)
-    value
+  # Defines the VisitorSegmentsType SDK namespace.
+  module VisitorSegmentsType
+    SEGMENT_LIST = 'segment.list'
+    VALUES = ['segment.list'].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
 
-# Defines the VisitorSegmentsType SDK namespace.
-module VisitorSegmentsType
-  SEGMENT_LIST = 'segment.list'
-  VALUES = ['segment.list'].freeze
-  def self.from_value(value)
-    value
+  # Defines the VisitorSocialProfilesType SDK namespace.
+  module VisitorSocialProfilesType
+    SOCIAL_PROFILE_LIST = 'social_profile.list'
+    VALUES = ['social_profile.list'].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
-
-# Defines the VisitorSocialProfilesType SDK namespace.
-module VisitorSocialProfilesType
-  SOCIAL_PROFILE_LIST = 'social_profile.list'
-  VALUES = ['social_profile.list'].freeze
-  def self.from_value(value)
-    value
-  end
-end
 end

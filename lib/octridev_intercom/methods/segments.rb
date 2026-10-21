@@ -21,22 +21,21 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/segments",
+          '/segments',
           config: config,
           query: {
-            'include_count' => QueryValue.new(include_count, style: 'form', explode: true),
+            'include_count' => QueryValue.new(include_count, style: 'form', explode: true)
           },
           return_type: ::OctridevIntercom::SegmentList,
           decoder: :json,
           operation_id: 'list_segments',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -51,11 +50,10 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/segments/",
+            '/segments/',
             SdkClient.encode_path_segment(segment_id)
           ].join,
           config: config,
@@ -63,10 +61,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'retrieve_segment',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
     end
