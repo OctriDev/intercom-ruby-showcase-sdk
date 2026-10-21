@@ -28,24 +28,25 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/articles/search',
+          "/articles/search",
           config: config,
           query: {
             'phrase' => QueryValue.new(phrase, style: 'form', explode: true),
             'state' => QueryValue.new(state, style: 'form', explode: true),
             'help_center_id' => QueryValue.new(help_center_id, style: 'form', explode: true),
-            'highlight' => QueryValue.new(highlight, style: 'form', explode: true)
+            'highlight' => QueryValue.new(highlight, style: 'form', explode: true),
           },
           return_type: ::OctridevIntercom::ArticleSearchResponse,
           decoder: :json,
           operation_id: 'search_articles',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

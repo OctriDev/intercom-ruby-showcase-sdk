@@ -39,12 +39,13 @@ module OctridevIntercom
         environment: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/fin/procedures/',
+            "/fin/procedures/",
             SdkClient.encode_path_segment(procedure_id),
-            '/run'
+            "/run"
           ].join,
           config: config,
           body: {
@@ -52,16 +53,16 @@ module OctridevIntercom
             'user' => user,
             'message' => message,
             'conversation_metadata' => conversation_metadata,
-            'environment' => environment
+            'environment' => environment,
           },
           return_type: ::OctridevIntercom::Methods::FinAgent::RunFinProcedureResponse,
           decoder: :json,
           operation_id: 'run_fin_procedure',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

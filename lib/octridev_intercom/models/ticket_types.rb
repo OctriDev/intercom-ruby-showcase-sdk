@@ -5,171 +5,173 @@
 
 # ticket_types domain models
 module OctridevIntercom
-  # Internal model hydration metadata.
-  class SdkInternalCreateTicketTypeRequestMetadata
-    FIELDS = {
-      name: 'name',
-      description: 'description',
-      category: 'category',
-      icon: 'icon',
-      is_internal: 'is_internal'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      name
-    ].freeze
-    DECODERS = {
-      category: lambda do |value|
-        ::OctridevIntercom::CreateTicketTypeRequestCategory.from_value(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalCreateTicketTypeRequestMetadata
+  FIELDS = {
+    name: "name",
+    description: "description",
+    category: "category",
+    icon: "icon",
+    is_internal: "is_internal",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    name
+  ].freeze
+  DECODERS = {
+    category: lambda do |value|
+      ::OctridevIntercom::CreateTicketTypeRequestCategory.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for CreateTicketTypeRequest.
+# The request payload for creating a ticket type. You can copy the `icon` property for your ticket type from Twemoji Cheatsheet
+class CreateTicketTypeRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCreateTicketTypeRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCreateTicketTypeRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCreateTicketTypeRequestMetadata::DECODERS
+
+  # @return [String] The name of the ticket type.
+  attr_reader :name
+  # @return [String] The description of the ticket type.
+  attr_reader :description
+  # @return [CreateTicketTypeRequestCategory] Category of the Ticket Type.
+  attr_reader :category
+  # @return [String] The icon of the ticket type.
+  attr_reader :icon
+  # @return [Boolean] Whether the tickets associated with this ticket type are intended for internal use only or will be shared with customers. This is currently a limited attribute.
+  attr_reader :is_internal
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CreateTicketTypeRequest.
-  # The request payload for creating a ticket type. You can copy the `icon` property for your ticket type from Twemoji Cheatsheet
-  class CreateTicketTypeRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCreateTicketTypeRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCreateTicketTypeRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCreateTicketTypeRequestMetadata::DECODERS
-
-    # @return [String] The name of the ticket type.
-    attr_reader :name
-    # @return [String] The description of the ticket type.
-    attr_reader :description
-    # @return [CreateTicketTypeRequestCategory] Category of the Ticket Type.
-    attr_reader :category
-    # @return [String] The icon of the ticket type.
-    attr_reader :icon
-    # @return [Boolean] Whether the tickets associated with this ticket type are intended for internal use only or will be shared with customers. This is currently a limited attribute.
-    attr_reader :is_internal
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the CreateTicketTypeRequestCategory SDK namespace.
-  module CreateTicketTypeRequestCategory
-    CUSTOMER = 'Customer'
-    BACK_OFFICE = 'Back-office'
-    TRACKER = 'Tracker'
-    VALUES = %w[Customer Back-office Tracker].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the CreateTicketTypeRequestCategory SDK namespace.
+module CreateTicketTypeRequestCategory
+  CUSTOMER = 'Customer'
+  BACK_OFFICE = 'Back-office'
+  TRACKER = 'Tracker'
+  VALUES = ['Customer', 'Back-office', 'Tracker'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalTicketTypeListMetadata
+  FIELDS = {
+    type: "type",
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    data: lambda do |value|
+      value&.map { |item| item.nil? ? nil : ::OctridevIntercom::TicketType.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for TicketTypeList.
+# A list of ticket types associated with a given workspace.
+class TicketTypeList
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTicketTypeListMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTicketTypeListMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTicketTypeListMetadata::DECODERS
+
+  # @return [String] String representing the object's type. Always has the value `list`.
+  attr_reader :type
+  # @return [Array_of_TicketType] A list of ticket_types associated with a given workspace.
+  attr_reader :data
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalTicketTypeListMetadata
-    FIELDS = {
-      type: 'type',
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      data: lambda do |value|
-        value&.map { |item| item.nil? ? nil : ::OctridevIntercom::TicketType.from_hash(item) }
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for TicketTypeList.
-  # A list of ticket types associated with a given workspace.
-  class TicketTypeList
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTicketTypeListMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTicketTypeListMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTicketTypeListMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] String representing the object's type. Always has the value `list`.
-    attr_reader :type
-    # @return [Array_of_TicketType] A list of ticket_types associated with a given workspace.
-    attr_reader :data
+# Internal model hydration metadata.
+class SdkInternalUpdateTicketTypeRequestMetadata
+  FIELDS = {
+    name: "name",
+    description: "description",
+    category: "category",
+    icon: "icon",
+    archived: "archived",
+    is_internal: "is_internal",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    category: lambda do |value|
+      ::OctridevIntercom::UpdateTicketTypeRequestCategory.from_value(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for UpdateTicketTypeRequest.
+# The request payload for updating a ticket type. You can copy the `icon` property for your ticket type from Twemoji Cheatsheet
+class UpdateTicketTypeRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalUpdateTicketTypeRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalUpdateTicketTypeRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalUpdateTicketTypeRequestMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] The name of the ticket type.
+  attr_reader :name
+  # @return [String] The description of the ticket type.
+  attr_reader :description
+  # @return [UpdateTicketTypeRequestCategory] Category of the Ticket Type.
+  attr_reader :category
+  # @return [String] The icon of the ticket type.
+  attr_reader :icon
+  # @return [Boolean] The archived status of the ticket type.
+  attr_reader :archived
+  # @return [Boolean] Whether the tickets associated with this ticket type are intended for internal use only or will be shared with customers. This is currently a limited attribute.
+  attr_reader :is_internal
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalUpdateTicketTypeRequestMetadata
-    FIELDS = {
-      name: 'name',
-      description: 'description',
-      category: 'category',
-      icon: 'icon',
-      archived: 'archived',
-      is_internal: 'is_internal'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      category: lambda do |value|
-        ::OctridevIntercom::UpdateTicketTypeRequestCategory.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for UpdateTicketTypeRequest.
-  # The request payload for updating a ticket type. You can copy the `icon` property for your ticket type from Twemoji Cheatsheet
-  class UpdateTicketTypeRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalUpdateTicketTypeRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalUpdateTicketTypeRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalUpdateTicketTypeRequestMetadata::DECODERS
-
-    # @return [String] The name of the ticket type.
-    attr_reader :name
-    # @return [String] The description of the ticket type.
-    attr_reader :description
-    # @return [UpdateTicketTypeRequestCategory] Category of the Ticket Type.
-    attr_reader :category
-    # @return [String] The icon of the ticket type.
-    attr_reader :icon
-    # @return [Boolean] The archived status of the ticket type.
-    attr_reader :archived
-    # @return [Boolean] Whether the tickets associated with this ticket type are intended for internal use only or will be shared with customers. This is currently a limited attribute.
-    attr_reader :is_internal
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 
-  # Defines the UpdateTicketTypeRequestCategory SDK namespace.
-  module UpdateTicketTypeRequestCategory
-    CUSTOMER = 'Customer'
-    BACK_OFFICE = 'Back-office'
-    TRACKER = 'Tracker'
-    VALUES = %w[Customer Back-office Tracker].freeze
-    def self.from_value(value)
-      value
-    end
+# Defines the UpdateTicketTypeRequestCategory SDK namespace.
+module UpdateTicketTypeRequestCategory
+  CUSTOMER = 'Customer'
+  BACK_OFFICE = 'Back-office'
+  TRACKER = 'Tracker'
+  VALUES = ['Customer', 'Back-office', 'Tracker'].freeze
+  def self.from_value(value)
+    value
   end
+end
 end

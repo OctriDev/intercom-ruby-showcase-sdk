@@ -5,227 +5,229 @@
 
 # shared_custom domain models
 module OctridevIntercom
-  # Internal model hydration metadata.
-  class SdkInternalCustomActionFinishedActionMetadata
-    FIELDS = {
-      name: 'name',
-      result: 'result'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      result: lambda do |value|
-        ::OctridevIntercom::CustomActionFinishedActionResult.from_value(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalCustomActionFinishedActionMetadata
+  FIELDS = {
+    name: "name",
+    result: "result",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    result: lambda do |value|
+      ::OctridevIntercom::CustomActionFinishedActionResult.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for CustomActionFinishedAction.
+# Optional object value serialized in the `action` wire field.
+class CustomActionFinishedAction
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCustomActionFinishedActionMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCustomActionFinishedActionMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCustomActionFinishedActionMetadata::DECODERS
+
+  # @return [String] Name of the action
+  attr_reader :name
+  # @return [CustomActionFinishedActionResult] Status of the action
+  attr_reader :result
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CustomActionFinishedAction.
-  # Optional object value serialized in the `action` wire field.
-  class CustomActionFinishedAction
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCustomActionFinishedActionMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCustomActionFinishedActionMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCustomActionFinishedActionMetadata::DECODERS
-
-    # @return [String] Name of the action
-    attr_reader :name
-    # @return [CustomActionFinishedActionResult] Status of the action
-    attr_reader :result
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalCustomActionFinishedMetadata
-    FIELDS = {
-      action: 'action'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      action: lambda do |value|
-        ::OctridevIntercom::CustomActionFinishedAction.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalCustomActionFinishedMetadata
+  FIELDS = {
+    action: "action",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    action: lambda do |value|
+      ::OctridevIntercom::CustomActionFinishedAction.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for CustomActionFinished.
+# Contains details about final status of the completed action for conversation part type custom_action_finished .
+class CustomActionFinished
+  include EventDetails
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCustomActionFinishedMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCustomActionFinishedMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCustomActionFinishedMetadata::DECODERS
+
+  # @return [CustomActionFinishedAction] Optional object value serialized in the `action` wire field.
+  attr_reader :action
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CustomActionFinished.
-  # Contains details about final status of the completed action for conversation part type custom_action_finished .
-  class CustomActionFinished
-    include EventDetails
-
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCustomActionFinishedMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCustomActionFinishedMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCustomActionFinishedMetadata::DECODERS
-
-    # @return [CustomActionFinishedAction] Optional object value serialized in the `action` wire field.
-    attr_reader :action
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the CustomActionFinishedActionResult SDK namespace.
-  module CustomActionFinishedActionResult
-    SUCCESS = 'success'
-    FAILED = 'failed'
-    VALUES = %w[success failed].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the CustomActionFinishedActionResult SDK namespace.
+module CustomActionFinishedActionResult
+  SUCCESS = 'success'
+  FAILED = 'failed'
+  VALUES = ['success', 'failed'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalCustomActionStartedActionMetadata
+  FIELDS = {
+    name: "name",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for CustomActionStartedAction.
+# Optional object value serialized in the `action` wire field.
+class CustomActionStartedAction
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCustomActionStartedActionMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCustomActionStartedActionMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCustomActionStartedActionMetadata::DECODERS
+
+  # @return [String] Name of the action
+  attr_reader :name
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalCustomActionStartedActionMetadata
-    FIELDS = {
-      name: 'name'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for CustomActionStartedAction.
-  # Optional object value serialized in the `action` wire field.
-  class CustomActionStartedAction
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCustomActionStartedActionMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCustomActionStartedActionMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCustomActionStartedActionMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] Name of the action
-    attr_reader :name
+# Internal model hydration metadata.
+class SdkInternalCustomActionStartedMetadata
+  FIELDS = {
+    action: "action",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    action: lambda do |value|
+      ::OctridevIntercom::CustomActionStartedAction.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for CustomActionStarted.
+# Contains details about name of the action that was initiated for conversation part type custom_action_started .
+class CustomActionStarted
+  include EventDetails
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCustomActionStartedMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCustomActionStartedMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCustomActionStartedMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [CustomActionStartedAction] Optional object value serialized in the `action` wire field.
+  attr_reader :action
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalCustomActionStartedMetadata
-    FIELDS = {
-      action: 'action'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      action: lambda do |value|
-        ::OctridevIntercom::CustomActionStartedAction.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for CustomActionStarted.
-  # Contains details about name of the action that was initiated for conversation part type custom_action_started .
-  class CustomActionStarted
-    include EventDetails
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCustomActionStartedMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCustomActionStartedMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCustomActionStartedMetadata::DECODERS
+# Defines the CustomAttributes SDK value decoder.
+module CustomAttributes
+  def self.from_hash(value)
+    return nil if value.nil?
+    value&.transform_values { |item| item }
+  end
+end
 
-    # @return [CustomActionStartedAction] Optional object value serialized in the `action` wire field.
-    attr_reader :action
+# Defines the CustomAttributesRequest SDK value decoder.
+module CustomAttributesRequest
+  def self.from_hash(value)
+    return nil if value.nil?
+    value&.transform_values { |item| item }
+  end
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# Internal model hydration metadata.
+class SdkInternalCustomObjectInstanceListMetadata
+  FIELDS = {
+    type: "type",
+    instances: "instances",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    instances: lambda do |value|
+      value&.map { |item| item.nil? ? nil : ::OctridevIntercom::CustomObjectInstance.from_hash(item) }
+    end,
+  }.freeze
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# API model for CustomObjectInstanceList.
+# The list of associated custom object instances for a given reference attribute on the parent object.
+class CustomObjectInstanceList
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCustomObjectInstanceListMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCustomObjectInstanceListMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCustomObjectInstanceListMetadata::DECODERS
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  # @return [String] Optional `string` value serialized in the `type` wire field.
+  attr_reader :type
+  # @return [Array_of_CustomObjectInstance] The list of associated custom object instances for a given reference attribute on the parent object.
+  attr_reader :instances
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the CustomAttributes SDK value decoder.
-  module CustomAttributes
-    def self.from_hash(value)
-      return nil if value.nil?
-
-      value&.transform_values { |item| item }
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the CustomAttributesRequest SDK value decoder.
-  module CustomAttributesRequest
-    def self.from_hash(value)
-      return nil if value.nil?
-
-      value&.transform_values { |item| item }
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
-
-  # Internal model hydration metadata.
-  class SdkInternalCustomObjectInstanceListMetadata
-    FIELDS = {
-      type: 'type',
-      instances: 'instances'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      instances: lambda do |value|
-        value&.map { |item| item.nil? ? nil : ::OctridevIntercom::CustomObjectInstance.from_hash(item) }
-      end
-    }.freeze
-  end
-
-  # API model for CustomObjectInstanceList.
-  # The list of associated custom object instances for a given reference attribute on the parent object.
-  class CustomObjectInstanceList
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCustomObjectInstanceListMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCustomObjectInstanceListMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCustomObjectInstanceListMetadata::DECODERS
-
-    # @return [String] Optional `string` value serialized in the `type` wire field.
-    attr_reader :type
-    # @return [Array_of_CustomObjectInstance] The list of associated custom object instances for a given reference attribute on the parent object.
-    attr_reader :instances
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
+end
 end

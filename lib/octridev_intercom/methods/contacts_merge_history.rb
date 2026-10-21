@@ -29,33 +29,34 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 150) }
 
         SdkClient.request(
           'GET',
           [
-            '/contacts/',
+            "/contacts/",
             SdkClient.encode_path_segment(id),
-            '/merge_history'
+            "/merge_history"
           ].join,
           config: config,
           query: {
             'cursor' => QueryValue.new(cursor, style: 'form', explode: true),
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'order' => QueryValue.new(order, style: 'form', explode: true)
+            'order' => QueryValue.new(order, style: 'form', explode: true),
           },
           return_type: ::OctridevIntercom::MergeHistoryList,
           decoder: :json,
           operation_id: 'list_contact_merge_history',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
-      ListContactMergeHistoryPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
+    ListContactMergeHistoryPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
 
       # Lists the contacts merged into a given contact, with results returned in pages. Use `cursor` to continue from a previous response and `per_page` and `order` to control the results. Merge history is available only for contacts with the `user` role.
       #
@@ -90,13 +91,10 @@ module OctridevIntercom
             )
             items = page.data || []
             break if items.empty?
-
             items.each { |item| y << item }
             break unless page.has_more
-
             next_cursor = page.next_cursor
             break if next_cursor.nil?
-
             cursor = next_cursor
           end
         end
@@ -124,12 +122,10 @@ module OctridevIntercom
             )
             items = page.data || []
             break if items.empty?
-
             next_cursor = page.next_cursor
             has_more = page.has_more && !next_cursor.nil?
             y << ListContactMergeHistoryPage.new(data: page, items: items, has_more: has_more)
             break unless has_more
-
             cursor = next_cursor
           end
         end

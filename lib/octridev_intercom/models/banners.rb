@@ -5,44 +5,45 @@
 
 # banners domain models
 module OctridevIntercom
-  # Internal model hydration metadata.
-  class SdkInternalBannerListMetadata
-    FIELDS = {
-      type: 'type',
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      data: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::Banner.from_hash(item) }
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalBannerListMetadata
+  FIELDS = {
+    type: "type",
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    data: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::Banner.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for BannerList.
+# A list of banners a contact currently matches.
+class BannerList
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBannerListMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBannerListMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBannerListMetadata::DECODERS
+
+  # @return [String] String representing the object's type. Always has the value `list`.
+  attr_reader :type
+  # @return [Array_of_Banner] An array of banners.
+  attr_reader :data
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for BannerList.
-  # A list of banners a contact currently matches.
-  class BannerList
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBannerListMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBannerListMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBannerListMetadata::DECODERS
-
-    # @return [String] String representing the object's type. Always has the value `list`.
-    attr_reader :type
-    # @return [Array_of_Banner] An array of banners.
-    attr_reader :data
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

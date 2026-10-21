@@ -5,643 +5,660 @@
 
 # shared_conversation domain models
 module OctridevIntercom
-  # Internal model hydration metadata.
-  class SdkInternalConversationPartMetadata
-    FIELDS = {
-      type: 'type',
-      id: 'id',
-      part_type: 'part_type',
-      body: 'body',
-      created_at: 'created_at',
-      updated_at: 'updated_at',
-      notified_at: 'notified_at',
-      assigned_to: 'assigned_to',
-      admin_assignee_id: 'admin_assignee_id',
-      team_assignee_id: 'team_assignee_id',
-      author: 'author',
-      attachments: 'attachments',
-      external_id: 'external_id',
-      redacted: 'redacted',
-      email_message_metadata: 'email_message_metadata',
-      metadata: 'metadata',
-      state: 'state',
-      tags: 'tags',
-      event_details: 'event_details',
-      app_package_code: 'app_package_code',
-      translations: 'translations'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      assigned_to: lambda do |value|
-        ::OctridevIntercom::Reference.from_hash(value)
-      end,
-      author: lambda do |value|
-        ::OctridevIntercom::ConversationPartAuthor.from_hash(value)
-      end,
-      attachments: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::PartAttachment.from_hash(item) }
-      end,
-      email_message_metadata: lambda do |value|
-        ::OctridevIntercom::EmailMessageMetadata.from_hash(value)
-      end,
-      metadata: lambda do |value|
-        ::OctridevIntercom::ConversationPartMetadata.from_hash(value)
-      end,
-      state: lambda do |value|
-        ::OctridevIntercom::ConversationPartState.from_value(value)
-      end,
-      tags: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::TagBasic.from_hash(item) }
-      end,
-      event_details: lambda do |value|
-        ::OctridevIntercom::EventDetails.from_hash(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalConversationPartMetadata
+  FIELDS = {
+    type: "type",
+    id: "id",
+    part_type: "part_type",
+    body: "body",
+    created_at: "created_at",
+    updated_at: "updated_at",
+    notified_at: "notified_at",
+    assigned_to: "assigned_to",
+    admin_assignee_id: "admin_assignee_id",
+    team_assignee_id: "team_assignee_id",
+    author: "author",
+    attachments: "attachments",
+    external_id: "external_id",
+    redacted: "redacted",
+    email_message_metadata: "email_message_metadata",
+    metadata: "metadata",
+    state: "state",
+    tags: "tags",
+    event_details: "event_details",
+    app_package_code: "app_package_code",
+    translations: "translations",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    assigned_to: lambda do |value|
+      ::OctridevIntercom::Reference.from_hash(value)
+    end,
+    author: lambda do |value|
+      ::OctridevIntercom::ConversationPartAuthor.from_hash(value)
+    end,
+    attachments: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::PartAttachment.from_hash(item) }
+    end,
+    email_message_metadata: lambda do |value|
+      ::OctridevIntercom::EmailMessageMetadata.from_hash(value)
+    end,
+    metadata: lambda do |value|
+      ::OctridevIntercom::ConversationPartMetadata.from_hash(value)
+    end,
+    state: lambda do |value|
+      ::OctridevIntercom::ConversationPartState.from_value(value)
+    end,
+    tags: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::TagBasic.from_hash(item) }
+    end,
+    event_details: lambda do |value|
+      ::OctridevIntercom::EventDetails.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ConversationPart.
+# A Conversation Part represents a message in the conversation.
+class ConversationPart
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalConversationPartMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalConversationPartMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalConversationPartMetadata::DECODERS
+
+  # @return [String] Always conversation_part
+  attr_reader :type
+  # @return [String] The id representing the conversation part.
+  attr_reader :id
+  # @return [String] The type of conversation part.
+  attr_reader :part_type
+  # @return [String] The message body, which may contain HTML. For Twitter, this will show a generic message regarding why the body is obscured. In webhook payloads for API version 2.15+, this field returns plain text.
+  attr_reader :body
+  # @return [Integer] The time the conversation part was created.
+  attr_reader :created_at
+  # @return [Integer] The last time the conversation part was updated.
+  attr_reader :updated_at
+  # @return [Integer] The time the user was notified with the conversation part.
+  attr_reader :notified_at
+  # @return [Reference] The assignee this conversation_part assigned the conversation to, as a reference whose `type` is `admin`, `team` or `bot`. When the part unassigned the conversation, `type` is `nobody_admin` and `id` is `null`. Null when the part did not change the assignment, or when the assignee has since been deleted.
+  attr_reader :assigned_to
+  # @return [Integer] The id of the teammate that this conversation_part assigned the conversation to, or 0 if the part removed the teammate. Null or absent when the part did not change the teammate, including an unassignment that did not name which assignee it cleared. A bot is reported here, because assignment treats anything that is not a team as a teammate.
+  attr_reader :admin_assignee_id
+  # @return [Integer] The id of the team that this conversation_part assigned the conversation to, or 0 if the part removed the team. Null or absent when the part did not change the team, including an unassignment that did not name which assignee it cleared. A part can assign a team and a teammate at the same time, for example when the team uses Round Robin distribution and the teammate is resolved inline. In that case assigned_to reports only the teammate, and these two fields report each…
+  attr_reader :team_assignee_id
+  # @return [ConversationPartAuthor] The object who initiated the conversation, which can be a Contact, Admin or Team. Bots and campaigns send messages on behalf of Admins or Teams. For Twitter, this will be blank.
+  attr_reader :author
+  # @return [Array_of_PartAttachment] A list of attachments for the part.
+  attr_reader :attachments
+  # @return [String] The external id of the conversation part
+  attr_reader :external_id
+  # @return [Boolean] Whether or not the conversation part has been redacted.
+  attr_reader :redacted
+  # @return [EmailMessageMetadata] Contains metadata if the message was sent as an email
+  attr_reader :email_message_metadata
+  # @return [ConversationPartMetadata] Metadata for a conversation part
+  attr_reader :metadata
+  # @return [ConversationPartState] Indicates the current state of conversation when the conversation part was created.
+  attr_reader :state
+  # @return [Array_of_TagBasic] A list of tags objects associated with the conversation part.
+  attr_reader :tags
+  # @return [EventDetails] Optional object value serialized in the `event_details` wire field.
+  attr_reader :event_details
+  # @return [String] The app package code if this part was created via API. null if the part was not created via API.
+  attr_reader :app_package_code
+  # @return [ConversationPartTranslations] A map of the reply text keyed by locale code. Backs the `conversation.admin.replied.translated` webhook topic. `original` holds the locale code the reply was written in; every other key holds the reply translated into that locale.
+  attr_reader :translations
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ConversationPart.
-  # A Conversation Part represents a message in the conversation.
-  class ConversationPart
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalConversationPartMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalConversationPartMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalConversationPartMetadata::DECODERS
-
-    # @return [String] Always conversation_part
-    attr_reader :type
-    # @return [String] The id representing the conversation part.
-    attr_reader :id
-    # @return [String] The type of conversation part.
-    attr_reader :part_type
-    # @return [String] The message body, which may contain HTML. For Twitter, this will show a generic message regarding why the body is obscured. In webhook payloads for API version 2.15+, this field returns plain text.
-    attr_reader :body
-    # @return [Integer] The time the conversation part was created.
-    attr_reader :created_at
-    # @return [Integer] The last time the conversation part was updated.
-    attr_reader :updated_at
-    # @return [Integer] The time the user was notified with the conversation part.
-    attr_reader :notified_at
-    # @return [Reference] The assignee this conversation_part assigned the conversation to, as a reference whose `type` is `admin`, `team` or `bot`. When the part unassigned the conversation, `type` is `nobody_admin` and `id` is `null`. Null when the part did not change the assignment, or when the assignee has since been deleted.
-    attr_reader :assigned_to
-    # @return [Integer] The id of the teammate that this conversation_part assigned the conversation to, or 0 if the part removed the teammate. Null or absent when the part did not change the teammate, including an unassignment that did not name which assignee it cleared. A bot is reported here, because assignment treats anything that is not a team as a teammate.
-    attr_reader :admin_assignee_id
-    # @return [Integer] The id of the team that this conversation_part assigned the conversation to, or 0 if the part removed the team. Null or absent when the part did not change the team, including an unassignment that did not name which assignee it cleared. A part can assign a team and a teammate at the same time, for example when the team uses Round Robin distribution and the teammate is resolved inline. In that case assigned_to reports only the teammate, and these two fields report each…
-    attr_reader :team_assignee_id
-    # @return [ConversationPartAuthor] The object who initiated the conversation, which can be a Contact, Admin or Team. Bots and campaigns send messages on behalf of Admins or Teams. For Twitter, this will be blank.
-    attr_reader :author
-    # @return [Array_of_PartAttachment] A list of attachments for the part.
-    attr_reader :attachments
-    # @return [String] The external id of the conversation part
-    attr_reader :external_id
-    # @return [Boolean] Whether or not the conversation part has been redacted.
-    attr_reader :redacted
-    # @return [EmailMessageMetadata] Contains metadata if the message was sent as an email
-    attr_reader :email_message_metadata
-    # @return [ConversationPartMetadata] Metadata for a conversation part
-    attr_reader :metadata
-    # @return [ConversationPartState] Indicates the current state of conversation when the conversation part was created.
-    attr_reader :state
-    # @return [Array_of_TagBasic] A list of tags objects associated with the conversation part.
-    attr_reader :tags
-    # @return [EventDetails] Optional object value serialized in the `event_details` wire field.
-    attr_reader :event_details
-    # @return [String] The app package code if this part was created via API. null if the part was not created via API.
-    attr_reader :app_package_code
-    # @return [ConversationPartTranslations] A map of the reply text keyed by locale code. Backs the `conversation.admin.replied.translated` webhook topic. `original` holds the locale code the reply was written in; every other key holds the reply translated into that locale.
-    attr_reader :translations
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the ConversationPartState SDK namespace.
-  module ConversationPartState
-    OPEN = 'open'
-    CLOSED = 'closed'
-    SNOOZED = 'snoozed'
-    VALUES = %w[open closed snoozed].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the ConversationPartState SDK namespace.
+module ConversationPartState
+  OPEN = 'open'
+  CLOSED = 'closed'
+  SNOOZED = 'snoozed'
+  VALUES = ['open', 'closed', 'snoozed'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalConversationPartAuthorMetadata
+  FIELDS = {
+    type: "type",
+    id: "id",
+    name: "name",
+    email: "email",
+    from_ai_agent: "from_ai_agent",
+    is_ai_answer: "is_ai_answer",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ConversationPartAuthor.
+# The object who initiated the conversation, which can be a Contact, Admin or Team. Bots and campaigns send messages on behalf of Admins or Teams. For Twitter, this will be blank.
+class ConversationPartAuthor
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalConversationPartAuthorMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalConversationPartAuthorMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalConversationPartAuthorMetadata::DECODERS
+
+  # @return [String] The type of the author
+  attr_reader :type
+  # @return [String] The id of the author
+  attr_reader :id
+  # @return [String] The name of the author. `null` if the author is a contact that has since been archived or deleted.
+  attr_reader :name
+  # @return [String] The email of the author. `null` if the author is a contact that has since been archived or deleted.
+  attr_reader :email
+  # @return [Boolean] If this conversation part was sent by the AI Agent
+  attr_reader :from_ai_agent
+  # @return [Boolean] If this conversation part body was generated by the AI Agent
+  attr_reader :is_ai_answer
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalConversationPartAuthorMetadata
-    FIELDS = {
-      type: 'type',
-      id: 'id',
-      name: 'name',
-      email: 'email',
-      from_ai_agent: 'from_ai_agent',
-      is_ai_answer: 'is_ai_answer'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ConversationPartAuthor.
-  # The object who initiated the conversation, which can be a Contact, Admin or Team. Bots and campaigns send messages on behalf of Admins or Teams. For Twitter, this will be blank.
-  class ConversationPartAuthor
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalConversationPartAuthorMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalConversationPartAuthorMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalConversationPartAuthorMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] The type of the author
-    attr_reader :type
-    # @return [String] The id of the author
-    attr_reader :id
-    # @return [String] The name of the author. `null` if the author is a contact that has since been archived or deleted.
-    attr_reader :name
-    # @return [String] The email of the author. `null` if the author is a contact that has since been archived or deleted.
-    attr_reader :email
-    # @return [Boolean] If this conversation part was sent by the AI Agent
-    attr_reader :from_ai_agent
-    # @return [Boolean] If this conversation part body was generated by the AI Agent
-    attr_reader :is_ai_answer
+# Internal model hydration metadata.
+class SdkInternalConversationPartMetadataQuickReplyOptionsItemMetadata
+  FIELDS = {
+    text: "text",
+    uuid: "uuid",
+    translations: "translations",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    text
+    uuid
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ConversationPartMetadataQuickReplyOptionsItem.
+# Required object value serialized in the `quick_reply_options[]` wire field.
+class ConversationPartMetadataQuickReplyOptionsItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalConversationPartMetadataQuickReplyOptionsItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalConversationPartMetadataQuickReplyOptionsItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalConversationPartMetadataQuickReplyOptionsItemMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] The text to display in this quick reply option.
+  attr_reader :text
+  # @return [String] A unique identifier for this quick reply option. This value will be available within the metadata of the comment conversation part that is created when a user clicks on this reply option.
+  attr_reader :uuid
+  # @return [Hash] The translations for the quick reply option.
+  attr_reader :translations
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalConversationPartMetadataQuickReplyOptionsItemMetadata
-    FIELDS = {
-      text: 'text',
-      uuid: 'uuid',
-      translations: 'translations'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      text
-      uuid
-    ].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ConversationPartMetadataQuickReplyOptionsItem.
-  # Required object value serialized in the `quick_reply_options[]` wire field.
-  class ConversationPartMetadataQuickReplyOptionsItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalConversationPartMetadataQuickReplyOptionsItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalConversationPartMetadataQuickReplyOptionsItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalConversationPartMetadataQuickReplyOptionsItemMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] The text to display in this quick reply option.
-    attr_reader :text
-    # @return [String] A unique identifier for this quick reply option. This value will be available within the metadata of the comment conversation part that is created when a user clicks on this reply option.
-    attr_reader :uuid
-    # @return [Hash] The translations for the quick reply option.
-    attr_reader :translations
+# Internal model hydration metadata.
+class SdkInternalConversationPartMetadataMetadata
+  FIELDS = {
+    quick_reply_options: "quick_reply_options",
+    quick_reply_uuid: "quick_reply_uuid",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    quick_reply_options: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::ConversationPartMetadataQuickReplyOptionsItem.from_hash(item) }
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ConversationPartMetadata.
+# Metadata for a conversation part
+class ConversationPartMetadata
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalConversationPartMetadataMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalConversationPartMetadataMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalConversationPartMetadataMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [Array_of_ConversationPartMetadataQuickReplyOptionsItem] The quick reply options sent by the Admin or bot, presented in this conversation part.
+  attr_reader :quick_reply_options
+  # @return [String] The unique identifier for the quick reply option that was clicked by the end user.
+  attr_reader :quick_reply_uuid
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalConversationPartMetadataMetadata
-    FIELDS = {
-      quick_reply_options: 'quick_reply_options',
-      quick_reply_uuid: 'quick_reply_uuid'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      quick_reply_options: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::ConversationPartMetadataQuickReplyOptionsItem.from_hash(item) }
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ConversationPartMetadata.
-  # Metadata for a conversation part
-  class ConversationPartMetadata
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalConversationPartMetadataMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalConversationPartMetadataMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalConversationPartMetadataMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Array_of_ConversationPartMetadataQuickReplyOptionsItem] The quick reply options sent by the Admin or bot, presented in this conversation part.
-    attr_reader :quick_reply_options
-    # @return [String] The unique identifier for the quick reply option that was clicked by the end user.
-    attr_reader :quick_reply_uuid
+# Internal model hydration metadata.
+class SdkInternalConversationPartsMetadata
+  FIELDS = {
+    type: "type",
+    conversation_parts: "conversation_parts",
+    total_count: "total_count",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevIntercom::ConversationPartsType.from_value(value)
+    end,
+    conversation_parts: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::ConversationPart.from_hash(item) }
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ConversationParts.
+# A list of Conversation Part objects for each part message in the conversation. This is only returned when Retrieving a Conversation, and ignored when Listing all Conversations. There is a limit of 500 parts.
+class ConversationParts
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalConversationPartsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalConversationPartsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalConversationPartsMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [ConversationPartsType] Optional enumerated value serialized in the `type` wire field.
+  attr_reader :type
+  # @return [Array_of_ConversationPart] A list of Conversation Part objects for each part message in the conversation. This is only returned when Retrieving a Conversation, and ignored when Listing all Conversations. There is a limit of 500 parts.
+  attr_reader :conversation_parts
+  # @return [Integer] Optional `integer` value serialized in the `total_count` wire field.
+  attr_reader :total_count
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalConversationPartsMetadata
-    FIELDS = {
-      type: 'type',
-      conversation_parts: 'conversation_parts',
-      total_count: 'total_count'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevIntercom::ConversationPartsType.from_value(value)
-      end,
-      conversation_parts: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::ConversationPart.from_hash(item) }
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ConversationParts.
-  # A list of Conversation Part objects for each part message in the conversation. This is only returned when Retrieving a Conversation, and ignored when Listing all Conversations. There is a limit of 500 parts.
-  class ConversationParts
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalConversationPartsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalConversationPartsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalConversationPartsMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [ConversationPartsType] Optional enumerated value serialized in the `type` wire field.
-    attr_reader :type
-    # @return [Array_of_ConversationPart] A list of Conversation Part objects for each part message in the conversation. This is only returned when Retrieving a Conversation, and ignored when Listing all Conversations. There is a limit of 500 parts.
-    attr_reader :conversation_parts
-    # @return [Integer] Optional `integer` value serialized in the `total_count` wire field.
-    attr_reader :total_count
+# Defines the ConversationPartsType SDK namespace.
+module ConversationPartsType
+  CONVERSATION_PART_LIST = 'conversation_part.list'
+  VALUES = ['conversation_part.list'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# Internal model hydration metadata.
+class SdkInternalConversationRatingTeammateMetadata
+  FIELDS = {
+    type: "type",
+    id: "id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevIntercom::ConversationRatingTeammateType.from_value(value)
+    end,
+  }.freeze
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# API model for ConversationRatingTeammate.
+# The teammate, bot or workflow the rating is attributed to.
+class ConversationRatingTeammate
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalConversationRatingTeammateMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalConversationRatingTeammateMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalConversationRatingTeammateMetadata::DECODERS
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  # @return [ConversationRatingTeammateType] The type of the rated actor. `workflow` when a workflow requested the rating and no teammate took part.
+  attr_reader :type
+  # @return [String] The unique identifier for the rated actor.
+  attr_reader :id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the ConversationPartsType SDK namespace.
-  module ConversationPartsType
-    CONVERSATION_PART_LIST = 'conversation_part.list'
-    VALUES = ['conversation_part.list'].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalConversationRatingTeammateMetadata
-    FIELDS = {
-      type: 'type',
-      id: 'id'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevIntercom::ConversationRatingTeammateType.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalConversationRatingMetadata
+  FIELDS = {
+    rating: "rating",
+    remark: "remark",
+    created_at: "created_at",
+    updated_at: "updated_at",
+    contact: "contact",
+    teammate: "teammate",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    contact: lambda do |value|
+      ::OctridevIntercom::ContactReference.from_hash(value)
+    end,
+    teammate: lambda do |value|
+      ::OctridevIntercom::ConversationRatingTeammate.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ConversationRating.
+# The Conversation Rating object which contains information on the rating and/or remark added by a Contact and the Admin assigned to the conversation.
+class ConversationRating
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalConversationRatingMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalConversationRatingMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalConversationRatingMetadata::DECODERS
+
+  # @return [Integer] The rating, between 1 and 5, for the conversation.
+  attr_reader :rating
+  # @return [String] An optional field to add a remark to correspond to the number rating
+  attr_reader :remark
+  # @return [Integer] The time the rating was requested in the conversation being rated.
+  attr_reader :created_at
+  # @return [Integer] The time the rating was last updated.
+  attr_reader :updated_at
+  # @return [ContactReference] reference to contact object
+  attr_reader :contact
+  # @return [ConversationRatingTeammate] The teammate, bot or workflow the rating is attributed to.
+  attr_reader :teammate
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ConversationRatingTeammate.
-  # The teammate, bot or workflow the rating is attributed to.
-  class ConversationRatingTeammate
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalConversationRatingTeammateMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalConversationRatingTeammateMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalConversationRatingTeammateMetadata::DECODERS
-
-    # @return [ConversationRatingTeammateType] The type of the rated actor. `workflow` when a workflow requested the rating and no teammate took part.
-    attr_reader :type
-    # @return [String] The unique identifier for the rated actor.
-    attr_reader :id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalConversationRatingMetadata
-    FIELDS = {
-      rating: 'rating',
-      remark: 'remark',
-      created_at: 'created_at',
-      updated_at: 'updated_at',
-      contact: 'contact',
-      teammate: 'teammate'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      contact: lambda do |value|
-        ::OctridevIntercom::ContactReference.from_hash(value)
-      end,
-      teammate: lambda do |value|
-        ::OctridevIntercom::ConversationRatingTeammate.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the ConversationRatingTeammateType SDK namespace.
+module ConversationRatingTeammateType
+  ADMIN = 'admin'
+  TEAM = 'team'
+  BOT = 'bot'
+  WORKFLOW = 'workflow'
+  VALUES = ['admin', 'team', 'bot', 'workflow'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalConversationResponseTimeMetadata
+  FIELDS = {
+    team_id: "team_id",
+    team_name: "team_name",
+    response_time: "response_time",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ConversationResponseTime.
+# Details of first response time of assigned team in seconds.
+class ConversationResponseTime
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalConversationResponseTimeMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalConversationResponseTimeMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalConversationResponseTimeMetadata::DECODERS
+
+  # @return [Integer] Id of the assigned team.
+  attr_reader :team_id
+  # @return [String] Name of the assigned Team, null if team does not exist, Unassigned if no team is assigned.
+  attr_reader :team_name
+  # @return [Integer] First response time of assigned team in seconds.
+  attr_reader :response_time
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ConversationRating.
-  # The Conversation Rating object which contains information on the rating and/or remark added by a Contact and the Admin assigned to the conversation.
-  class ConversationRating
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalConversationRatingMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalConversationRatingMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalConversationRatingMetadata::DECODERS
-
-    # @return [Integer] The rating, between 1 and 5, for the conversation.
-    attr_reader :rating
-    # @return [String] An optional field to add a remark to correspond to the number rating
-    attr_reader :remark
-    # @return [Integer] The time the rating was requested in the conversation being rated.
-    attr_reader :created_at
-    # @return [Integer] The time the rating was last updated.
-    attr_reader :updated_at
-    # @return [ContactReference] reference to contact object
-    attr_reader :contact
-    # @return [ConversationRatingTeammate] The teammate, bot or workflow the rating is attributed to.
-    attr_reader :teammate
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the ConversationRatingTeammateType SDK namespace.
-  module ConversationRatingTeammateType
-    ADMIN = 'admin'
-    TEAM = 'team'
-    BOT = 'bot'
-    WORKFLOW = 'workflow'
-    VALUES = %w[admin team bot workflow].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalConversationSourceRecipientsItemMetadata
+  FIELDS = {
+    type: "type",
+    email: "email",
+    drop_reason: "drop_reason",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ConversationSourceRecipientsItem.
+# Required object value serialized in the `recipients[]` wire field.
+class ConversationSourceRecipientsItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalConversationSourceRecipientsItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalConversationSourceRecipientsItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalConversationSourceRecipientsItemMetadata::DECODERS
+
+  # @return [String] The recipient type. One of `to`, `cc`, or `bcc`.
+  attr_reader :type
+  # @return [String] The recipient email address.
+  attr_reader :email
+  # @return [String] The reason this recipient was dropped, if applicable.
+  attr_reader :drop_reason
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalConversationResponseTimeMetadata
-    FIELDS = {
-      team_id: 'team_id',
-      team_name: 'team_name',
-      response_time: 'response_time'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ConversationResponseTime.
-  # Details of first response time of assigned team in seconds.
-  class ConversationResponseTime
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalConversationResponseTimeMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalConversationResponseTimeMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalConversationResponseTimeMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Integer] Id of the assigned team.
-    attr_reader :team_id
-    # @return [String] Name of the assigned Team, null if team does not exist, Unassigned if no team is assigned.
-    attr_reader :team_name
-    # @return [Integer] First response time of assigned team in seconds.
-    attr_reader :response_time
+# Internal model hydration metadata.
+class SdkInternalConversationSourceReplyToItemMetadata
+  FIELDS = {
+    email: "email",
+    name: "name",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ConversationSourceReplyToItem.
+# Required object value serialized in the `reply_to[]` wire field.
+class ConversationSourceReplyToItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalConversationSourceReplyToItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalConversationSourceReplyToItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalConversationSourceReplyToItemMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] The Reply-To email address.
+  attr_reader :email
+  # @return [String] The display name associated with the Reply-To address.
+  attr_reader :name
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalConversationSourceRecipientsItemMetadata
-    FIELDS = {
-      type: 'type',
-      email: 'email',
-      drop_reason: 'drop_reason'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ConversationSourceRecipientsItem.
-  # Required object value serialized in the `recipients[]` wire field.
-  class ConversationSourceRecipientsItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalConversationSourceRecipientsItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalConversationSourceRecipientsItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalConversationSourceRecipientsItemMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] The recipient type. One of `to`, `cc`, or `bcc`.
-    attr_reader :type
-    # @return [String] The recipient email address.
-    attr_reader :email
-    # @return [String] The reason this recipient was dropped, if applicable.
-    attr_reader :drop_reason
+# Internal model hydration metadata.
+class SdkInternalConversationSourceMetadata
+  FIELDS = {
+    type: "type",
+    id: "id",
+    delivered_as: "delivered_as",
+    recipients: "recipients",
+    reply_to: "reply_to",
+    subject: "subject",
+    body: "body",
+    author: "author",
+    attachments: "attachments",
+    url: "url",
+    redacted: "redacted",
+    email_message_metadata: "email_message_metadata",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    recipients: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::ConversationSourceRecipientsItem.from_hash(item) }
+    end,
+    reply_to: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::ConversationSourceReplyToItem.from_hash(item) }
+    end,
+    author: lambda do |value|
+      ::OctridevIntercom::ConversationSourceAuthor.from_hash(value)
+    end,
+    attachments: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::PartAttachment.from_hash(item) }
+    end,
+    email_message_metadata: lambda do |value|
+      ::OctridevIntercom::SourceEmailMessageMetadata.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ConversationSource.
+# The type of the conversation part that started this conversation. Can be Contact, Admin, Campaign, Automated or Operator initiated.
+class ConversationSource
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalConversationSourceMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalConversationSourceMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalConversationSourceMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] The origin of this conversation.
+  attr_reader :type
+  # @return [String] The id of the source message.
+  attr_reader :id
+  # @return [String] How the conversation was initiated.
+  attr_reader :delivered_as
+  # @return [Array_of_ConversationSourceRecipientsItem] The recipients of the source message. Only present for email conversations.
+  attr_reader :recipients
+  # @return [Array_of_ConversationSourceReplyToItem] The Reply-To header addresses of the source message, where a reply will be routed. Can differ from the sender's From address. Only present for email conversations.
+  attr_reader :reply_to
+  # @return [String] Optional. The message subject. For Twitter, this will show a generic message regarding why the subject is obscured. In webhook payloads for API version 2.15+, this field returns plain text.
+  attr_reader :subject
+  # @return [String] The message body, which may contain HTML. For Twitter, this will show a generic message regarding why the body is obscured. In webhook payloads for API version 2.15+, this field returns plain text.
+  attr_reader :body
+  # @return [ConversationSourceAuthor] The author who started the conversation. Can be a Contact, Admin, or Bot.
+  attr_reader :author
+  # @return [Array_of_PartAttachment] A list of attachments for the part.
+  attr_reader :attachments
+  # @return [String] The URL where the conversation was started. For Twitter, Email, and Bots, this will be blank.
+  attr_reader :url
+  # @return [Boolean] Whether or not the source message has been redacted. Only applicable for contact initiated messages.
+  attr_reader :redacted
+  # @return [SourceEmailMessageMetadata] Contains metadata if the message was sent as an email
+  attr_reader :email_message_metadata
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalConversationSourceReplyToItemMetadata
-    FIELDS = {
-      email: 'email',
-      name: 'name'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ConversationSourceReplyToItem.
-  # Required object value serialized in the `reply_to[]` wire field.
-  class ConversationSourceReplyToItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalConversationSourceReplyToItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalConversationSourceReplyToItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalConversationSourceReplyToItemMetadata::DECODERS
-
-    # @return [String] The Reply-To email address.
-    attr_reader :email
-    # @return [String] The display name associated with the Reply-To address.
-    attr_reader :name
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 
-  # Internal model hydration metadata.
-  class SdkInternalConversationSourceMetadata
-    FIELDS = {
-      type: 'type',
-      id: 'id',
-      delivered_as: 'delivered_as',
-      recipients: 'recipients',
-      reply_to: 'reply_to',
-      subject: 'subject',
-      body: 'body',
-      author: 'author',
-      attachments: 'attachments',
-      url: 'url',
-      redacted: 'redacted',
-      email_message_metadata: 'email_message_metadata'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      recipients: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::ConversationSourceRecipientsItem.from_hash(item) }
-      end,
-      reply_to: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::ConversationSourceReplyToItem.from_hash(item) }
-      end,
-      author: lambda do |value|
-        ::OctridevIntercom::ConversationSourceAuthor.from_hash(value)
-      end,
-      attachments: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::PartAttachment.from_hash(item) }
-      end,
-      email_message_metadata: lambda do |value|
-        ::OctridevIntercom::SourceEmailMessageMetadata.from_hash(value)
-      end
-    }.freeze
-  end
-
-  # API model for ConversationSource.
-  # The type of the conversation part that started this conversation. Can be Contact, Admin, Campaign, Automated or Operator initiated.
-  class ConversationSource
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalConversationSourceMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalConversationSourceMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalConversationSourceMetadata::DECODERS
-
-    # @return [String] The origin of this conversation.
-    attr_reader :type
-    # @return [String] The id of the source message.
-    attr_reader :id
-    # @return [String] How the conversation was initiated.
-    attr_reader :delivered_as
-    # @return [Array_of_ConversationSourceRecipientsItem] The recipients of the source message. Only present for email conversations.
-    attr_reader :recipients
-    # @return [Array_of_ConversationSourceReplyToItem] The Reply-To header addresses of the source message, where a reply will be routed. Can differ from the sender's From address. Only present for email conversations.
-    attr_reader :reply_to
-    # @return [String] Optional. The message subject. For Twitter, this will show a generic message regarding why the subject is obscured. In webhook payloads for API version 2.15+, this field returns plain text.
-    attr_reader :subject
-    # @return [String] The message body, which may contain HTML. For Twitter, this will show a generic message regarding why the body is obscured. In webhook payloads for API version 2.15+, this field returns plain text.
-    attr_reader :body
-    # @return [ConversationSourceAuthor] The author who started the conversation. Can be a Contact, Admin, or Bot.
-    attr_reader :author
-    # @return [Array_of_PartAttachment] A list of attachments for the part.
-    attr_reader :attachments
-    # @return [String] The URL where the conversation was started. For Twitter, Email, and Bots, this will be blank.
-    attr_reader :url
-    # @return [Boolean] Whether or not the source message has been redacted. Only applicable for contact initiated messages.
-    attr_reader :redacted
-    # @return [SourceEmailMessageMetadata] Contains metadata if the message was sent as an email
-    attr_reader :email_message_metadata
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Internal model hydration metadata.
-  class SdkInternalConversationSourceAuthorMetadata
-    FIELDS = {
-      type: 'type',
-      id: 'id',
-      name: 'name',
-      email: 'email'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
-  end
+# Internal model hydration metadata.
+class SdkInternalConversationSourceAuthorMetadata
+  FIELDS = {
+    type: "type",
+    id: "id",
+    name: "name",
+    email: "email",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 end

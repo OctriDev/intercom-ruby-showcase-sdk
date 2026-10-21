@@ -5,50 +5,51 @@
 
 # help_center domain models
 module OctridevIntercom
-  # Internal model hydration metadata.
-  class SdkInternalUpdateCollectionRequestMetadata
-    FIELDS = {
-      name: 'name',
-      description: 'description',
-      translated_content: 'translated_content',
-      parent_id: 'parent_id'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      translated_content: lambda do |value|
-        ::OctridevIntercom::GroupTranslatedContent.from_hash(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalUpdateCollectionRequestMetadata
+  FIELDS = {
+    name: "name",
+    description: "description",
+    translated_content: "translated_content",
+    parent_id: "parent_id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    translated_content: lambda do |value|
+      ::OctridevIntercom::GroupTranslatedContent.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for UpdateCollectionRequest.
+# You can update a collection
+class UpdateCollectionRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalUpdateCollectionRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalUpdateCollectionRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalUpdateCollectionRequestMetadata::DECODERS
+
+  # @return [String] The name of the collection. For multilingual collections, this will be the name of the default language's content.
+  attr_reader :name
+  # @return [String] The description of the collection. For multilingual collections, this will be the description of the default language's content.
+  attr_reader :description
+  # @return [GroupTranslatedContent] The Translated Content of an Group. The keys are the locale codes and the values are the translated content of the Group.
+  attr_reader :translated_content
+  # @return [String] The id of the parent collection. If `null` then it will be updated as the first level collection.
+  attr_reader :parent_id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for UpdateCollectionRequest.
-  # You can update a collection
-  class UpdateCollectionRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalUpdateCollectionRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalUpdateCollectionRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalUpdateCollectionRequestMetadata::DECODERS
-
-    # @return [String] The name of the collection. For multilingual collections, this will be the name of the default language's content.
-    attr_reader :name
-    # @return [String] The description of the collection. For multilingual collections, this will be the description of the default language's content.
-    attr_reader :description
-    # @return [GroupTranslatedContent] The Translated Content of an Group. The keys are the locale codes and the values are the translated content of the Group.
-    attr_reader :translated_content
-    # @return [String] The id of the parent collection. If `null` then it will be updated as the first level collection.
-    attr_reader :parent_id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

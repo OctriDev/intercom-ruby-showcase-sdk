@@ -32,25 +32,26 @@ module OctridevIntercom
         pagination: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/conversations/search',
+          "/conversations/search",
           config: config,
           query: {
             'include_monitors' => QueryValue.new(include_monitors, style: 'form', explode: true),
-            'include_scorecards' => QueryValue.new(include_scorecards, style: 'form', explode: true)
+            'include_scorecards' => QueryValue.new(include_scorecards, style: 'form', explode: true),
           },
           body: {
             'query' => query,
-            'pagination' => pagination
+            'pagination' => pagination,
           },
           return_type: ::OctridevIntercom::ConversationList,
           decoder: :json,
           operation_id: 'search_conversations',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
-          request_options: request_options
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
+          request_options: request_options,
         ).data
       end
     end

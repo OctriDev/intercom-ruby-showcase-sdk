@@ -12,13 +12,14 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalAttachInternalArticlesTagMetadata
         FIELDS = {
-          id: 'id',
-          admin_id: 'admin_id'
+          id: "id",
+          admin_id: "admin_id",
         }.freeze
         REQUIRED_FIELDS = %i[
           id
         ].freeze
-        DECODERS = {}.freeze
+        DECODERS = {
+        }.freeze
       end
 
       # API model for AttachInternalArticlesTag.
@@ -55,18 +56,19 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/internal_articles',
+          "/internal_articles",
           config: config,
           return_type: ::OctridevIntercom::InternalArticleList,
           decoder: :json,
           operation_id: 'list_internal_articles',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -109,9 +111,10 @@ module OctridevIntercom
         ai_sales_agent_availability: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/internal_articles',
+          "/internal_articles",
           config: config,
           body: {
             'title' => title,
@@ -123,16 +126,16 @@ module OctridevIntercom
             'audience_ids' => audience_ids,
             'ai_chatbot_availability' => ai_chatbot_availability,
             'ai_copilot_availability' => ai_copilot_availability,
-            'ai_sales_agent_availability' => ai_sales_agent_availability
+            'ai_sales_agent_availability' => ai_sales_agent_availability,
           },
           return_type: ::OctridevIntercom::InternalArticle,
           decoder: :json,
           operation_id: 'create_internal_article',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -148,10 +151,11 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/internal_articles/',
+            "/internal_articles/",
             SdkClient.encode_path_segment(internal_article_id)
           ].join,
           config: config,
@@ -159,10 +163,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'retrieve_internal_article',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -209,10 +213,11 @@ module OctridevIntercom
         ai_sales_agent_availability: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PUT',
           [
-            '/internal_articles/',
+            "/internal_articles/",
             SdkClient.encode_path_segment(internal_article_id)
           ].join,
           config: config,
@@ -226,16 +231,16 @@ module OctridevIntercom
             'audience_ids' => audience_ids,
             'ai_chatbot_availability' => ai_chatbot_availability,
             'ai_copilot_availability' => ai_copilot_availability,
-            'ai_sales_agent_availability' => ai_sales_agent_availability
+            'ai_sales_agent_availability' => ai_sales_agent_availability,
           },
           return_type: ::OctridevIntercom::InternalArticle,
           decoder: :json,
           operation_id: 'update_internal_article',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -251,10 +256,11 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/internal_articles/',
+            "/internal_articles/",
             SdkClient.encode_path_segment(internal_article_id)
           ].join,
           config: config,
@@ -262,10 +268,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'delete_internal_article',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -288,26 +294,27 @@ module OctridevIntercom
         admin_id: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/internal_articles/',
+            "/internal_articles/",
             SdkClient.encode_path_segment(internal_article_id),
-            '/tags'
+            "/tags"
           ].join,
           config: config,
           body: {
             'id' => id,
-            'admin_id' => admin_id
+            'admin_id' => admin_id,
           },
           return_type: ::OctridevIntercom::Tag,
           decoder: :json,
           operation_id: 'attach_internal_articles_tag',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -326,12 +333,13 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/internal_articles/',
+            "/internal_articles/",
             SdkClient.encode_path_segment(internal_article_id),
-            '/tags/',
+            "/tags/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -339,10 +347,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'detach_internal_articles_tag',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -358,21 +366,22 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/internal_articles/search',
+          "/internal_articles/search",
           config: config,
           query: {
-            'folder_id' => QueryValue.new(folder_id, style: 'form', explode: true)
+            'folder_id' => QueryValue.new(folder_id, style: 'form', explode: true),
           },
           return_type: ::OctridevIntercom::InternalArticleSearchResponse,
           decoder: :json,
           operation_id: 'search_internal_articles',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

@@ -5,21 +5,21 @@
 
 # visitors domain models
 module OctridevIntercom
-  # Defines the VisitorTagsTagsItemType SDK namespace.
-  module VisitorTagsTagsItemType
-    TAG = 'tag'
-    VALUES = ['tag'].freeze
-    def self.from_value(value)
-      value
-    end
+# Defines the VisitorTagsTagsItemType SDK namespace.
+module VisitorTagsTagsItemType
+  TAG = 'tag'
+  VALUES = ['tag'].freeze
+  def self.from_value(value)
+    value
   end
+end
 
-  # Defines the VisitorTagsType SDK namespace.
-  module VisitorTagsType
-    TAG_LIST = 'tag.list'
-    VALUES = ['tag.list'].freeze
-    def self.from_value(value)
-      value
-    end
+# Defines the VisitorTagsType SDK namespace.
+module VisitorTagsType
+  TAG_LIST = 'tag.list'
+  VALUES = ['tag.list'].freeze
+  def self.from_value(value)
+    value
   end
+end
 end

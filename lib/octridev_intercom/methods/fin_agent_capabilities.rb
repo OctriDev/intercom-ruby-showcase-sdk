@@ -22,21 +22,22 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/fin/capabilities',
+          "/fin/capabilities",
           config: config,
           body: {
-            'user' => user
+            'user' => user,
           },
           return_type: ::OctridevIntercom::Methods::FinAgent::ListFinCapabilitiesResponse,
           decoder: :json,
           operation_id: 'list_fin_capabilities',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

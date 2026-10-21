@@ -5,105 +5,108 @@
 
 # tagged_models_emails domain models
 module OctridevIntercom
-  # Internal model hydration metadata.
-  class SdkInternalEmailListMetadata
-    FIELDS = {
-      type: 'type',
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      data: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::EmailSetting.from_hash(item) }
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalEmailListMetadata
+  FIELDS = {
+    type: "type",
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    data: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::EmailSetting.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for EmailList.
+# A list of email settings
+class EmailList
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalEmailListMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalEmailListMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalEmailListMetadata::DECODERS
+
+  # @return [String] The type of object
+  attr_reader :type
+  # @return [Array_of_EmailSetting] Optional array value serialized in the `data` wire field.
+  attr_reader :data
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for EmailList.
-  # A list of email settings
-  class EmailList
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalEmailListMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalEmailListMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalEmailListMetadata::DECODERS
-
-    # @return [String] The type of object
-    attr_reader :type
-    # @return [Array_of_EmailSetting] Optional array value serialized in the `data` wire field.
-    attr_reader :data
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalEmailSettingMetadata
-    FIELDS = {
-      type: 'type',
-      id: 'id',
-      email: 'email',
-      verified: 'verified',
-      domain: 'domain',
-      brand_id: 'brand_id',
-      forwarding_enabled: 'forwarding_enabled',
-      forwarded_email_last_received_at: 'forwarded_email_last_received_at',
-      created_at: 'created_at',
-      updated_at: 'updated_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalEmailSettingMetadata
+  FIELDS = {
+    type: "type",
+    id: "id",
+    email: "email",
+    verified: "verified",
+    domain: "domain",
+    brand_id: "brand_id",
+    forwarding_enabled: "forwarding_enabled",
+    forwarded_email_last_received_at: "forwarded_email_last_received_at",
+    created_at: "created_at",
+    updated_at: "updated_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for EmailSetting.
+# Represents a sender email address configuration
+class EmailSetting
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalEmailSettingMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalEmailSettingMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalEmailSettingMetadata::DECODERS
+
+  # @return [String] The type of object
+  attr_reader :type
+  # @return [String] Unique email setting identifier
+  attr_reader :id
+  # @return [String] Full sender email address
+  attr_reader :email
+  # @return [Boolean] Whether the email address has been verified
+  attr_reader :verified
+  # @return [String] Domain portion of the email address
+  attr_reader :domain
+  # @return [String] Associated brand identifier
+  attr_reader :brand_id
+  # @return [Boolean] Whether email forwarding is active
+  attr_reader :forwarding_enabled
+  # @return [Integer] Unix timestamp of last forwarded email received (null if never)
+  attr_reader :forwarded_email_last_received_at
+  # @return [Integer] Unix timestamp of creation
+  attr_reader :created_at
+  # @return [Integer] Unix timestamp of last modification
+  attr_reader :updated_at
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for EmailSetting.
-  # Represents a sender email address configuration
-  class EmailSetting
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalEmailSettingMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalEmailSettingMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalEmailSettingMetadata::DECODERS
-
-    # @return [String] The type of object
-    attr_reader :type
-    # @return [String] Unique email setting identifier
-    attr_reader :id
-    # @return [String] Full sender email address
-    attr_reader :email
-    # @return [Boolean] Whether the email address has been verified
-    attr_reader :verified
-    # @return [String] Domain portion of the email address
-    attr_reader :domain
-    # @return [String] Associated brand identifier
-    attr_reader :brand_id
-    # @return [Boolean] Whether email forwarding is active
-    attr_reader :forwarding_enabled
-    # @return [Integer] Unix timestamp of last forwarded email received (null if never)
-    attr_reader :forwarded_email_last_received_at
-    # @return [Integer] Unix timestamp of creation
-    attr_reader :created_at
-    # @return [Integer] Unix timestamp of last modification
-    attr_reader :updated_at
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

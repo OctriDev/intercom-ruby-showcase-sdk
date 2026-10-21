@@ -5,278 +5,285 @@
 
 # shared_contact domain models
 module OctridevIntercom
-  # Internal model hydration metadata.
-  class SdkInternalContactCompaniesMetadata
-    FIELDS = {
-      data: 'data',
-      url: 'url',
-      total_count: 'total_count',
-      has_more: 'has_more'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      data: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::CompanyData.from_hash(item) }
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalContactCompaniesMetadata
+  FIELDS = {
+    data: "data",
+    url: "url",
+    total_count: "total_count",
+    has_more: "has_more",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    data: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::CompanyData.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ContactCompanies.
+# An object with metadata about companies attached to a contact . Up to 10 will be displayed here. Use the url to get more.
+class ContactCompanies
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalContactCompaniesMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalContactCompaniesMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalContactCompaniesMetadata::DECODERS
+
+  # @return [Array_of_CompanyData] An array of company data objects attached to the contact.
+  attr_reader :data
+  # @return [String] Url to get more company resources for this contact
+  attr_reader :url
+  # @return [Integer] Integer representing the total number of companies attached to this contact
+  attr_reader :total_count
+  # @return [Boolean] Whether there's more Addressable Objects to be viewed. If true, use the url to view all
+  attr_reader :has_more
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ContactCompanies.
-  # An object with metadata about companies attached to a contact . Up to 10 will be displayed here. Use the url to get more.
-  class ContactCompanies
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalContactCompaniesMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalContactCompaniesMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalContactCompaniesMetadata::DECODERS
-
-    # @return [Array_of_CompanyData] An array of company data objects attached to the contact.
-    attr_reader :data
-    # @return [String] Url to get more company resources for this contact
-    attr_reader :url
-    # @return [Integer] Integer representing the total number of companies attached to this contact
-    attr_reader :total_count
-    # @return [Boolean] Whether there's more Addressable Objects to be viewed. If true, use the url to view all
-    attr_reader :has_more
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalContactLocationMetadata
-    FIELDS = {
-      type: 'type',
-      country: 'country',
-      region: 'region',
-      city: 'city'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalContactLocationMetadata
+  FIELDS = {
+    type: "type",
+    country: "country",
+    region: "region",
+    city: "city",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ContactLocation.
+# An object containing location meta data about a Intercom contact.
+class ContactLocation
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalContactLocationMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalContactLocationMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalContactLocationMetadata::DECODERS
+
+  # @return [String] Always location
+  attr_reader :type
+  # @return [String] The country that the contact is located in
+  attr_reader :country
+  # @return [String] The overal region that the contact is located in
+  attr_reader :region
+  # @return [String] The city that the contact is located in
+  attr_reader :city
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ContactLocation.
-  # An object containing location meta data about a Intercom contact.
-  class ContactLocation
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalContactLocationMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalContactLocationMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalContactLocationMetadata::DECODERS
-
-    # @return [String] Always location
-    attr_reader :type
-    # @return [String] The country that the contact is located in
-    attr_reader :country
-    # @return [String] The overal region that the contact is located in
-    attr_reader :region
-    # @return [String] The city that the contact is located in
-    attr_reader :city
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalContactNotesMetadata
-    FIELDS = {
-      data: 'data',
-      url: 'url',
-      total_count: 'total_count',
-      has_more: 'has_more'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      data: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::AddressableList.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalContactNotesMetadata
+  FIELDS = {
+    data: "data",
+    url: "url",
+    total_count: "total_count",
+    has_more: "has_more",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    data: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::AddressableList.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ContactNotes.
+# An object containing notes meta data about the notes that a contact has. Up to 10 will be displayed here. Use the url to get more.
+class ContactNotes
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalContactNotesMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalContactNotesMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalContactNotesMetadata::DECODERS
+
+  # @return [Array_of_AddressableList] This object represents the notes attached to a contact.
+  attr_reader :data
+  # @return [String] Url to get more company resources for this contact
+  attr_reader :url
+  # @return [Integer] Int representing the total number of companyies attached to this contact
+  attr_reader :total_count
+  # @return [Boolean] Whether there's more Addressable Objects to be viewed. If true, use the url to view all
+  attr_reader :has_more
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ContactNotes.
-  # An object containing notes meta data about the notes that a contact has. Up to 10 will be displayed here. Use the url to get more.
-  class ContactNotes
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalContactNotesMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalContactNotesMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalContactNotesMetadata::DECODERS
-
-    # @return [Array_of_AddressableList] This object represents the notes attached to a contact.
-    attr_reader :data
-    # @return [String] Url to get more company resources for this contact
-    attr_reader :url
-    # @return [Integer] Int representing the total number of companyies attached to this contact
-    attr_reader :total_count
-    # @return [Boolean] Whether there's more Addressable Objects to be viewed. If true, use the url to view all
-    attr_reader :has_more
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalContactReferenceMetadata
-    FIELDS = {
-      type: 'type',
-      id: 'id',
-      external_id: 'external_id'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevIntercom::ContactReferenceType.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalContactReferenceMetadata
+  FIELDS = {
+    type: "type",
+    id: "id",
+    external_id: "external_id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevIntercom::ContactReferenceType.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for ContactReference.
+# reference to contact object
+class ContactReference
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalContactReferenceMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalContactReferenceMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalContactReferenceMetadata::DECODERS
+
+  # @return [ContactReferenceType] always contact
+  attr_reader :type
+  # @return [String] The unique identifier for the contact which is given by Intercom.
+  attr_reader :id
+  # @return [String] The unique identifier for the contact which is provided by the Client.
+  attr_reader :external_id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ContactReference.
-  # reference to contact object
-  class ContactReference
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalContactReferenceMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalContactReferenceMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalContactReferenceMetadata::DECODERS
-
-    # @return [ContactReferenceType] always contact
-    attr_reader :type
-    # @return [String] The unique identifier for the contact which is given by Intercom.
-    attr_reader :id
-    # @return [String] The unique identifier for the contact which is provided by the Client.
-    attr_reader :external_id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the ContactReferenceType SDK namespace.
-  module ContactReferenceType
-    CONTACT = 'contact'
-    VALUES = ['contact'].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the ContactReferenceType SDK namespace.
+module ContactReferenceType
+  CONTACT = 'contact'
+  VALUES = ['contact'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalContactSocialProfilesMetadata
+  FIELDS = {
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    data: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::SocialProfile.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ContactSocialProfiles.
+# An object containing social profiles that a contact has.
+class ContactSocialProfiles
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalContactSocialProfilesMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalContactSocialProfilesMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalContactSocialProfilesMetadata::DECODERS
+
+  # @return [Array_of_SocialProfile] A list of social profiles objects associated with the contact.
+  attr_reader :data
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalContactSocialProfilesMetadata
-    FIELDS = {
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      data: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::SocialProfile.from_hash(item) }
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ContactSocialProfiles.
-  # An object containing social profiles that a contact has.
-  class ContactSocialProfiles
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalContactSocialProfilesMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalContactSocialProfilesMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalContactSocialProfilesMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Array_of_SocialProfile] A list of social profiles objects associated with the contact.
-    attr_reader :data
+# Internal model hydration metadata.
+class SdkInternalContactTagsMetadata
+  FIELDS = {
+    data: "data",
+    url: "url",
+    total_count: "total_count",
+    has_more: "has_more",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    data: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::AddressableList.from_hash(item) }
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ContactTags.
+# An object containing tags meta data about the tags that a contact has. Up to 10 will be displayed here. Use the url to get more.
+class ContactTags
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalContactTagsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalContactTagsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalContactTagsMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [Array_of_AddressableList] This object represents the tags attached to a contact.
+  attr_reader :data
+  # @return [String] url to get more tag resources for this contact
+  attr_reader :url
+  # @return [Integer] Int representing the total number of tags attached to this contact
+  attr_reader :total_count
+  # @return [Boolean] Whether there's more Addressable Objects to be viewed. If true, use the url to view all
+  attr_reader :has_more
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalContactTagsMetadata
-    FIELDS = {
-      data: 'data',
-      url: 'url',
-      total_count: 'total_count',
-      has_more: 'has_more'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      data: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::AddressableList.from_hash(item) }
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ContactTags.
-  # An object containing tags meta data about the tags that a contact has. Up to 10 will be displayed here. Use the url to get more.
-  class ContactTags
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalContactTagsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalContactTagsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalContactTagsMetadata::DECODERS
-
-    # @return [Array_of_AddressableList] This object represents the tags attached to a contact.
-    attr_reader :data
-    # @return [String] url to get more tag resources for this contact
-    attr_reader :url
-    # @return [Integer] Int representing the total number of tags attached to this contact
-    attr_reader :total_count
-    # @return [Boolean] Whether there's more Addressable Objects to be viewed. If true, use the url to view all
-    attr_reader :has_more
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 end

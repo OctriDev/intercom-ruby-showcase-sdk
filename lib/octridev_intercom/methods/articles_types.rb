@@ -12,13 +12,14 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalAttachArticlesTagMetadata
         FIELDS = {
-          id: 'id',
-          admin_id: 'admin_id'
+          id: "id",
+          admin_id: "admin_id",
         }.freeze
         REQUIRED_FIELDS = %i[
           id
         ].freeze
-        DECODERS = {}.freeze
+        DECODERS = {
+        }.freeze
       end
 
       # API model for AttachArticlesTag.

@@ -20,21 +20,22 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/contacts/',
+            "/contacts/",
             SdkClient.encode_path_segment(contact_id),
-            '/block'
+            "/block"
           ].join,
           config: config,
           return_type: ::OctridevIntercom::ContactBlocked,
           decoder: :json,
           operation_id: 'block_contact',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
-          request_options: request_options
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
+          request_options: request_options,
         ).data
       end
     end

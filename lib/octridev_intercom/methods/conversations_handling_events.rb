@@ -20,22 +20,23 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/conversations/',
+            "/conversations/",
             SdkClient.encode_path_segment(id),
-            '/handling_events'
+            "/handling_events"
           ].join,
           config: config,
           return_type: ::OctridevIntercom::HandlingEventList,
           decoder: :json,
           operation_id: 'list_handling_events',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

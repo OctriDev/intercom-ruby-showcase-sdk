@@ -5,117 +5,117 @@
 
 # create_office_hours domain models
 module OctridevIntercom
-  # Internal model hydration metadata.
-  class SdkInternalCreateOfficeHoursExceptionRequestMetadata
-    FIELDS = {
-      exception_date: 'exception_date',
-      exception_type: 'exception_type',
-      name: 'name',
-      time_intervals: 'time_intervals',
-      recurring_annually: 'recurring_annually'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      exception_date
-      exception_type
-    ].freeze
-    DECODERS = {
-      exception_type: lambda do |value|
-        ::OctridevIntercom::CreateOfficeHoursExceptionRequestExceptionType.from_value(value)
-      end,
-      time_intervals: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::OfficeHoursTimeInterval.from_hash(item) }
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalCreateOfficeHoursExceptionRequestMetadata
+  FIELDS = {
+    exception_date: "exception_date",
+    exception_type: "exception_type",
+    name: "name",
+    time_intervals: "time_intervals",
+    recurring_annually: "recurring_annually",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    exception_date
+    exception_type
+  ].freeze
+  DECODERS = {
+    exception_type: lambda do |value|
+      ::OctridevIntercom::CreateOfficeHoursExceptionRequestExceptionType.from_value(value)
+    end,
+    time_intervals: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::OfficeHoursTimeInterval.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for CreateOfficeHoursExceptionRequest.
+# The request payload for creating an office hours exception. Omit `time_intervals` when `exception_type` is `closed`.
+class CreateOfficeHoursExceptionRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCreateOfficeHoursExceptionRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCreateOfficeHoursExceptionRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCreateOfficeHoursExceptionRequestMetadata::DECODERS
+
+  # @return [String] The date the exception applies to, in `YYYY-MM-DD` format.
+  attr_reader :exception_date
+  # @return [CreateOfficeHoursExceptionRequestExceptionType] The type of exception.
+  attr_reader :exception_type
+  # @return [String] An optional name for the exception.
+  attr_reader :name
+  # @return [Array_of_OfficeHoursTimeInterval] The open intervals for the exception date. Required for `custom_hours`; omit for `closed`.
+  attr_reader :time_intervals
+  # @return [Boolean] Whether the exception repeats every year on the same date.
+  attr_reader :recurring_annually
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CreateOfficeHoursExceptionRequest.
-  # The request payload for creating an office hours exception. Omit `time_intervals` when `exception_type` is `closed`.
-  class CreateOfficeHoursExceptionRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCreateOfficeHoursExceptionRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCreateOfficeHoursExceptionRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCreateOfficeHoursExceptionRequestMetadata::DECODERS
-
-    # @return [String] The date the exception applies to, in `YYYY-MM-DD` format.
-    attr_reader :exception_date
-    # @return [CreateOfficeHoursExceptionRequestExceptionType] The type of exception.
-    attr_reader :exception_type
-    # @return [String] An optional name for the exception.
-    attr_reader :name
-    # @return [Array_of_OfficeHoursTimeInterval] The open intervals for the exception date. Required for `custom_hours`; omit for `closed`.
-    attr_reader :time_intervals
-    # @return [Boolean] Whether the exception repeats every year on the same date.
-    attr_reader :recurring_annually
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the CreateOfficeHoursExceptionRequestExceptionType SDK namespace.
-  module CreateOfficeHoursExceptionRequestExceptionType
-    CLOSED = 'closed'
-    CUSTOM_HOURS = 'custom_hours'
-    VALUES = %w[closed custom_hours].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the CreateOfficeHoursExceptionRequestExceptionType SDK namespace.
+module CreateOfficeHoursExceptionRequestExceptionType
+  CLOSED = 'closed'
+  CUSTOM_HOURS = 'custom_hours'
+  VALUES = ['closed', 'custom_hours'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalCreateOfficeHoursScheduleRequestMetadata
+  FIELDS = {
+    name: "name",
+    time_zone_name: "time_zone_name",
+    time_intervals: "time_intervals",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    name
+    time_zone_name
+    time_intervals
+  ].freeze
+  DECODERS = {
+    time_intervals: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::OfficeHoursTimeInterval.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for CreateOfficeHoursScheduleRequest.
+# The request payload for creating an office hours schedule.
+class CreateOfficeHoursScheduleRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCreateOfficeHoursScheduleRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCreateOfficeHoursScheduleRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCreateOfficeHoursScheduleRequestMetadata::DECODERS
+
+  # @return [String] The name of the office hours schedule.
+  attr_reader :name
+  # @return [String] The IANA time zone the schedule's hours are evaluated in.
+  attr_reader :time_zone_name
+  # @return [Array_of_OfficeHoursTimeInterval] The open intervals for the schedule. `start_minute` and `end_minute` must be on a 15-minute boundary.
+  attr_reader :time_intervals
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalCreateOfficeHoursScheduleRequestMetadata
-    FIELDS = {
-      name: 'name',
-      time_zone_name: 'time_zone_name',
-      time_intervals: 'time_intervals'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      name
-      time_zone_name
-      time_intervals
-    ].freeze
-    DECODERS = {
-      time_intervals: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::OfficeHoursTimeInterval.from_hash(item) }
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for CreateOfficeHoursScheduleRequest.
-  # The request payload for creating an office hours schedule.
-  class CreateOfficeHoursScheduleRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCreateOfficeHoursScheduleRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCreateOfficeHoursScheduleRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCreateOfficeHoursScheduleRequestMetadata::DECODERS
-
-    # @return [String] The name of the office hours schedule.
-    attr_reader :name
-    # @return [String] The IANA time zone the schedule's hours are evaluated in.
-    attr_reader :time_zone_name
-    # @return [Array_of_OfficeHoursTimeInterval] The open intervals for the schedule. `start_minute` and `end_minute` must be on a 15-minute boundary.
-    attr_reader :time_intervals
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 end

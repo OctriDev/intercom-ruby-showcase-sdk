@@ -5,59 +5,60 @@
 
 # tagged_models_teams domain models
 module OctridevIntercom
-  # Internal model hydration metadata.
-  class SdkInternalTeamMetadata
-    FIELDS = {
-      type: 'type',
-      id: 'id',
-      name: 'name',
-      admin_ids: 'admin_ids',
-      admin_priority_level: 'admin_priority_level',
-      assignment_limit: 'assignment_limit',
-      distribution_method: 'distribution_method'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      admin_priority_level: lambda do |value|
-        ::OctridevIntercom::AdminPriorityLevel.from_hash(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalTeamMetadata
+  FIELDS = {
+    type: "type",
+    id: "id",
+    name: "name",
+    admin_ids: "admin_ids",
+    admin_priority_level: "admin_priority_level",
+    assignment_limit: "assignment_limit",
+    distribution_method: "distribution_method",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    admin_priority_level: lambda do |value|
+      ::OctridevIntercom::AdminPriorityLevel.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for Team.
+# Teams are groups of admins in Intercom.
+class Team
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTeamMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTeamMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTeamMetadata::DECODERS
+
+  # @return [String] Value is always "team"
+  attr_reader :type
+  # @return [String] The id of the team
+  attr_reader :id
+  # @return [String] The name of the team
+  attr_reader :name
+  # @return [Array_of_Integer] The list of admin IDs that are a part of the team.
+  attr_reader :admin_ids
+  # @return [AdminPriorityLevel] Admin priority levels for the team
+  attr_reader :admin_priority_level
+  # @return [Integer] The assignment limit for the team. This field is only present when the team's distribution type is load balanced.
+  attr_reader :assignment_limit
+  # @return [String] Describes how assignments are distributed among the team members
+  attr_reader :distribution_method
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for Team.
-  # Teams are groups of admins in Intercom.
-  class Team
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTeamMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTeamMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTeamMetadata::DECODERS
-
-    # @return [String] Value is always "team"
-    attr_reader :type
-    # @return [String] The id of the team
-    attr_reader :id
-    # @return [String] The name of the team
-    attr_reader :name
-    # @return [Array_of_Integer] The list of admin IDs that are a part of the team.
-    attr_reader :admin_ids
-    # @return [AdminPriorityLevel] Admin priority levels for the team
-    attr_reader :admin_priority_level
-    # @return [Integer] The assignment limit for the team. This field is only present when the team's distribution type is load balanced.
-    attr_reader :assignment_limit
-    # @return [String] Describes how assignments are distributed among the team members
-    attr_reader :distribution_method
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

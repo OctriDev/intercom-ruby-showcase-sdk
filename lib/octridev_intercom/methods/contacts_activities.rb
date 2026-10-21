@@ -25,24 +25,25 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 150) }
 
         SdkClient.request(
           'GET',
-          '/contacts/activities',
+          "/contacts/activities",
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'starting_after' => QueryValue.new(starting_after, style: 'form', explode: true)
+            'starting_after' => QueryValue.new(starting_after, style: 'form', explode: true),
           },
           return_type: ::OctridevIntercom::ContactActivityList,
           decoder: :json,
           operation_id: 'list_contact_activities',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

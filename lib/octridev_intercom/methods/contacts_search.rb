@@ -31,26 +31,27 @@ module OctridevIntercom
         sort: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/contacts/search',
+          "/contacts/search",
           config: config,
           query: {
-            'include_merge_history' => QueryValue.new(include_merge_history, style: 'form', explode: true)
+            'include_merge_history' => QueryValue.new(include_merge_history, style: 'form', explode: true),
           },
           body: {
             'query' => query,
             'pagination' => pagination,
-            'sort' => sort
+            'sort' => sort,
           },
           return_type: ::OctridevIntercom::ContactList,
           decoder: :json,
           operation_id: 'search_contacts',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

@@ -21,22 +21,23 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/contacts/',
+            "/contacts/",
             SdkClient.encode_path_segment(contact_id),
-            '/companies'
+            "/companies"
           ].join,
           config: config,
           return_type: ::OctridevIntercom::ContactAttachedCompanies,
           decoder: :json,
           operation_id: 'list_contacts_companies',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

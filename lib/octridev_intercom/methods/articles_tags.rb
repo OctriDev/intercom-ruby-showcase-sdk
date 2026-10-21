@@ -28,26 +28,27 @@ module OctridevIntercom
         admin_id: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/articles/',
+            "/articles/",
             SdkClient.encode_path_segment(article_id),
-            '/tags'
+            "/tags"
           ].join,
           config: config,
           body: {
             'id' => id,
-            'admin_id' => admin_id
+            'admin_id' => admin_id,
           },
           return_type: ::OctridevIntercom::Tag,
           decoder: :json,
           operation_id: 'attach_articles_tag',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -66,12 +67,13 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/articles/',
+            "/articles/",
             SdkClient.encode_path_segment(article_id),
-            '/tags/',
+            "/tags/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -79,10 +81,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'detach_articles_tag',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

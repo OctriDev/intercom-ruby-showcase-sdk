@@ -17,18 +17,19 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/ai/content_import_sources',
+          "/ai/content_import_sources",
           config: config,
           return_type: ::OctridevIntercom::ContentImportSourcesList,
           decoder: :json,
           operation_id: 'list_content_import_sources',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -54,24 +55,25 @@ module OctridevIntercom
         audience_ids: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/ai/content_import_sources',
+          "/ai/content_import_sources",
           config: config,
           body: {
             'sync_behavior' => sync_behavior,
             'url' => url,
             'status' => status,
-            'audience_ids' => audience_ids
+            'audience_ids' => audience_ids,
           },
           return_type: ::OctridevIntercom::ContentImportSource,
           decoder: :json,
           operation_id: 'create_content_import_source',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -87,20 +89,21 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/ai/content_import_sources/',
+            "/ai/content_import_sources/",
             SdkClient.encode_path_segment(source_id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'delete_content_import_source',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -108,11 +111,17 @@ module OctridevIntercom
       #
       # @param source_id [String] The unique identifier for the content import
       #   source which is given by Intercom.
-      singleton_class.define_method(:get_content_import_source) do |config:, source_id:, intercom_version: NOT_GIVEN, request_options: nil|
+      singleton_class.define_method(:get_content_import_source) do |
+        config:,
+        source_id:,
+        intercom_version: NOT_GIVEN,
+        request_options: nil
+      |
+
         SdkClient.request(
           'GET',
           [
-            '/ai/content_import_sources/',
+            "/ai/content_import_sources/",
             SdkClient.encode_path_segment(source_id)
           ].join,
           config: config,
@@ -120,10 +129,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'get_content_import_source',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -158,10 +167,11 @@ module OctridevIntercom
         apply_audience_to_existing_content: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PUT',
           [
-            '/ai/content_import_sources/',
+            "/ai/content_import_sources/",
             SdkClient.encode_path_segment(source_id)
           ].join,
           config: config,
@@ -170,16 +180,16 @@ module OctridevIntercom
             'url' => url,
             'status' => status,
             'audience_ids' => audience_ids,
-            'apply_audience_to_existing_content' => apply_audience_to_existing_content
+            'apply_audience_to_existing_content' => apply_audience_to_existing_content,
           },
           return_type: ::OctridevIntercom::ContentImportSource,
           decoder: :json,
           operation_id: 'update_content_import_source',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -191,18 +201,19 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/ai/external_pages',
+          "/ai/external_pages",
           config: config,
           return_type: ::OctridevIntercom::ExternalPagesList,
           decoder: :json,
           operation_id: 'list_external_pages',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -251,9 +262,10 @@ module OctridevIntercom
         audience_ids: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/ai/external_pages',
+          "/ai/external_pages",
           config: config,
           body: {
             'title' => title,
@@ -264,16 +276,16 @@ module OctridevIntercom
             'url' => url,
             'ai_agent_availability' => ai_agent_availability,
             'ai_copilot_availability' => ai_copilot_availability,
-            'audience_ids' => audience_ids
+            'audience_ids' => audience_ids,
           },
           return_type: ::OctridevIntercom::ExternalPage,
           decoder: :json,
           operation_id: 'create_external_page',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -289,10 +301,11 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/ai/external_pages/',
+            "/ai/external_pages/",
             SdkClient.encode_path_segment(page_id)
           ].join,
           config: config,
@@ -300,10 +313,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'delete_external_page',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -313,11 +326,17 @@ module OctridevIntercom
       #
       # @param page_id [String] The unique identifier for the external page which is
       #   given by Intercom.
-      singleton_class.define_method(:get_external_page) do |config:, page_id:, intercom_version: NOT_GIVEN, request_options: nil|
+      singleton_class.define_method(:get_external_page) do |
+        config:,
+        page_id:,
+        intercom_version: NOT_GIVEN,
+        request_options: nil
+      |
+
         SdkClient.request(
           'GET',
           [
-            '/ai/external_pages/',
+            "/ai/external_pages/",
             SdkClient.encode_path_segment(page_id)
           ].join,
           config: config,
@@ -325,10 +344,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'get_external_page',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -372,10 +391,11 @@ module OctridevIntercom
         audience_ids: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PUT',
           [
-            '/ai/external_pages/',
+            "/ai/external_pages/",
             SdkClient.encode_path_segment(page_id)
           ].join,
           config: config,
@@ -387,16 +407,16 @@ module OctridevIntercom
             'source_id' => source_id,
             'fin_availability' => fin_availability,
             'external_id' => external_id,
-            'audience_ids' => audience_ids
+            'audience_ids' => audience_ids,
           },
           return_type: ::OctridevIntercom::ExternalPage,
           decoder: :json,
           operation_id: 'update_external_page',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

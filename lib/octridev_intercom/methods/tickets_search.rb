@@ -24,21 +24,22 @@ module OctridevIntercom
         pagination: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/tickets/search',
+          "/tickets/search",
           config: config,
           body: {
             'query' => query,
-            'pagination' => pagination
+            'pagination' => pagination,
           },
           return_type: ::OctridevIntercom::TicketList,
           decoder: :json,
           operation_id: 'search_tickets',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
-          request_options: request_options
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
+          request_options: request_options,
         ).data
       end
     end

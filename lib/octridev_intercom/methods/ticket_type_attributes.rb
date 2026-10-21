@@ -50,12 +50,13 @@ module OctridevIntercom
         allow_multiple_values: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/ticket_types/',
+            "/ticket_types/",
             SdkClient.encode_path_segment(ticket_type_id),
-            '/attributes'
+            "/attributes"
           ].join,
           config: config,
           body: {
@@ -68,16 +69,16 @@ module OctridevIntercom
             'visible_to_contacts' => visible_to_contacts,
             'multiline' => multiline,
             'list_items' => list_items,
-            'allow_multiple_values' => allow_multiple_values
+            'allow_multiple_values' => allow_multiple_values,
           },
           return_type: ::OctridevIntercom::TicketTypeAttribute,
           decoder: :json,
           operation_id: 'create_ticket_type_attribute',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -126,12 +127,13 @@ module OctridevIntercom
         archived: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PUT',
           [
-            '/ticket_types/',
+            "/ticket_types/",
             SdkClient.encode_path_segment(ticket_type_id),
-            '/attributes/',
+            "/attributes/",
             SdkClient.encode_path_segment(attribute_id)
           ].join,
           config: config,
@@ -145,16 +147,16 @@ module OctridevIntercom
             'multiline' => multiline,
             'list_items' => list_items,
             'allow_multiple_values' => allow_multiple_values,
-            'archived' => archived
+            'archived' => archived,
           },
           return_type: ::OctridevIntercom::TicketTypeAttribute,
           decoder: :json,
           operation_id: 'update_ticket_type_attribute',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

@@ -5,99 +5,102 @@
 
 # tagged_models_brands domain models
 module OctridevIntercom
-  # Internal model hydration metadata.
-  class SdkInternalBrandMetadata
-    FIELDS = {
-      type: 'type',
-      id: 'id',
-      name: 'name',
-      is_default: 'is_default',
-      created_at: 'created_at',
-      updated_at: 'updated_at',
-      help_center_id: 'help_center_id',
-      default_address_settings_id: 'default_address_settings_id'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalBrandMetadata
+  FIELDS = {
+    type: "type",
+    id: "id",
+    name: "name",
+    is_default: "is_default",
+    created_at: "created_at",
+    updated_at: "updated_at",
+    help_center_id: "help_center_id",
+    default_address_settings_id: "default_address_settings_id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for Brand.
+# Represents a branding configuration for the workspace
+class Brand
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBrandMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBrandMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBrandMetadata::DECODERS
+
+  # @return [String] The type of object
+  attr_reader :type
+  # @return [String] Unique brand identifier. For default brand, matches the workspace ID
+  attr_reader :id
+  # @return [String] Display name of the brand
+  attr_reader :name
+  # @return [Boolean] Whether this is the workspace's default brand
+  attr_reader :is_default
+  # @return [Integer] Unix timestamp of brand creation
+  attr_reader :created_at
+  # @return [Integer] Unix timestamp of last modification
+  attr_reader :updated_at
+  # @return [String] Associated help center identifier
+  attr_reader :help_center_id
+  # @return [String] Default email settings ID for this brand
+  attr_reader :default_address_settings_id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for Brand.
-  # Represents a branding configuration for the workspace
-  class Brand
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBrandMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBrandMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBrandMetadata::DECODERS
-
-    # @return [String] The type of object
-    attr_reader :type
-    # @return [String] Unique brand identifier. For default brand, matches the workspace ID
-    attr_reader :id
-    # @return [String] Display name of the brand
-    attr_reader :name
-    # @return [Boolean] Whether this is the workspace's default brand
-    attr_reader :is_default
-    # @return [Integer] Unix timestamp of brand creation
-    attr_reader :created_at
-    # @return [Integer] Unix timestamp of last modification
-    attr_reader :updated_at
-    # @return [String] Associated help center identifier
-    attr_reader :help_center_id
-    # @return [String] Default email settings ID for this brand
-    attr_reader :default_address_settings_id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBrandListMetadata
-    FIELDS = {
-      type: 'type',
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      data: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::Brand.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBrandListMetadata
+  FIELDS = {
+    type: "type",
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    data: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::Brand.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for BrandList.
+# A list of brands
+class BrandList
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBrandListMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBrandListMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBrandListMetadata::DECODERS
+
+  # @return [String] The type of object
+  attr_reader :type
+  # @return [Array_of_Brand] Optional array value serialized in the `data` wire field.
+  attr_reader :data
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for BrandList.
-  # A list of brands
-  class BrandList
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBrandListMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBrandListMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBrandListMetadata::DECODERS
-
-    # @return [String] The type of object
-    attr_reader :type
-    # @return [Array_of_Brand] Optional array value serialized in the `data` wire field.
-    attr_reader :data
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

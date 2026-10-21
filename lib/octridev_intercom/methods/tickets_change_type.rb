@@ -32,27 +32,28 @@ module OctridevIntercom
         ticket_attributes: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/tickets/',
+            "/tickets/",
             SdkClient.encode_path_segment(ticket_id),
-            '/change_type'
+            "/change_type"
           ].join,
           config: config,
           body: {
             'ticket_type_id' => ticket_type_id,
             'ticket_state_id' => ticket_state_id,
-            'ticket_attributes' => ticket_attributes
+            'ticket_attributes' => ticket_attributes,
           },
           return_type: ::OctridevIntercom::Ticket,
           decoder: :json,
           operation_id: 'change_ticket_type',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

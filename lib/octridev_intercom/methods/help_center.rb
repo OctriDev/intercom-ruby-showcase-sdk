@@ -26,26 +26,27 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/help_center/help_centers/',
+            "/help_center/help_centers/",
             SdkClient.encode_path_segment(help_center_id),
-            '/redirects'
+            "/redirects"
           ].join,
           config: config,
           query: {
             'page' => QueryValue.new(page, style: 'form', explode: true),
-            'per_page' => QueryValue.new(per_page, style: 'form', explode: true)
+            'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
           },
           return_type: ::OctridevIntercom::HelpCenterRedirectList,
           decoder: :json,
           operation_id: 'list_help_center_redirects',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -72,28 +73,29 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/help_center/help_centers/',
+            "/help_center/help_centers/",
             SdkClient.encode_path_segment(help_center_id),
-            '/redirects'
+            "/redirects"
           ].join,
           config: config,
           body: {
             'from_url' => from_url,
             'locale' => locale,
             'target_type' => target_type,
-            'target_id' => target_id
+            'target_id' => target_id,
           },
           return_type: ::OctridevIntercom::HelpCenterRedirect,
           decoder: :json,
           operation_id: 'create_help_center_redirect',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '409' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '409' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -110,12 +112,13 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/help_center/help_centers/',
+            "/help_center/help_centers/",
             SdkClient.encode_path_segment(help_center_id),
-            '/redirects/',
+            "/redirects/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -123,10 +126,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'retrieve_help_center_redirect',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -143,12 +146,13 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/help_center/help_centers/',
+            "/help_center/help_centers/",
             SdkClient.encode_path_segment(help_center_id),
-            '/redirects/',
+            "/redirects/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -156,10 +160,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'delete_help_center_redirect',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -171,18 +175,19 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/help_center/collections',
+          "/help_center/collections",
           config: config,
           return_type: ::OctridevIntercom::CollectionList,
           decoder: :json,
           operation_id: 'list_all_collections',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -213,25 +218,26 @@ module OctridevIntercom
         help_center_id: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/help_center/collections',
+          "/help_center/collections",
           config: config,
           body: {
             'name' => name,
             'description' => description,
             'translated_content' => translated_content,
             'parent_id' => parent_id,
-            'help_center_id' => help_center_id
+            'help_center_id' => help_center_id,
           },
           return_type: ::OctridevIntercom::Collection,
           decoder: :json,
           operation_id: 'create_collection',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -247,10 +253,11 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/help_center/collections/',
+            "/help_center/collections/",
             SdkClient.encode_path_segment(collection_id)
           ].join,
           config: config,
@@ -258,10 +265,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'retrieve_collection',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -291,10 +298,11 @@ module OctridevIntercom
         parent_id: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PUT',
           [
-            '/help_center/collections/',
+            "/help_center/collections/",
             SdkClient.encode_path_segment(collection_id)
           ].join,
           config: config,
@@ -302,16 +310,16 @@ module OctridevIntercom
             'name' => name,
             'description' => description,
             'translated_content' => translated_content,
-            'parent_id' => parent_id
+            'parent_id' => parent_id,
           },
           return_type: ::OctridevIntercom::Collection,
           decoder: :json,
           operation_id: 'update_collection',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -327,10 +335,11 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/help_center/collections/',
+            "/help_center/collections/",
             SdkClient.encode_path_segment(collection_id)
           ].join,
           config: config,
@@ -338,10 +347,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'delete_collection',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -357,10 +366,11 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/help_center/help_centers/',
+            "/help_center/help_centers/",
             SdkClient.encode_path_segment(help_center_id)
           ].join,
           config: config,
@@ -368,10 +378,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'retrieve_help_center',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -383,18 +393,19 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/help_center/help_centers',
+          "/help_center/help_centers",
           config: config,
           return_type: ::OctridevIntercom::HelpCenterList,
           decoder: :json,
           operation_id: 'list_help_centers',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

@@ -23,28 +23,29 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, max: 50) }
 
         SdkClient.request(
           'GET',
-          '/audiences',
+          "/audiences",
           config: config,
           query: {
             'page' => QueryValue.new(page, style: 'form', explode: true),
-            'per_page' => QueryValue.new(per_page, style: 'form', explode: true)
+            'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
           },
           return_type: ::OctridevIntercom::AudienceList,
           decoder: :json,
           operation_id: 'list_audiences',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2 },
         ).data
       end
 
-      ListAudiencesPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
+    ListAudiencesPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
 
       # Lists audiences configured for the workspace, with pagination metadata. Use `page` and `per_page` to paginate the results, and note that `per_page` is capped at 50.
       #
@@ -72,10 +73,8 @@ module OctridevIntercom
             )
             items = page.data || []
             break if items.empty?
-
             items.each { |item| y << item }
             break if page_number >= page.total_pages
-
             page_number += 1
           end
         end
@@ -100,12 +99,10 @@ module OctridevIntercom
             )
             items = page.data || []
             break if items.empty?
-
             next_page_number = page_number + 1
             has_more = !next_page_number.nil? && next_page_number != page_number && next_page_number <= page.total_pages
             y << ListAudiencesPage.new(data: page, items: items, has_more: has_more)
             break unless has_more
-
             page_number = next_page_number
           end
         end
@@ -128,23 +125,24 @@ module OctridevIntercom
         role_predicates: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/audiences',
+          "/audiences",
           config: config,
           body: {
             'name' => name,
             'predicates' => predicates,
-            'role_predicates' => role_predicates
+            'role_predicates' => role_predicates,
           },
           return_type: ::OctridevIntercom::Audience,
           decoder: :json,
           operation_id: 'create_audience',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -159,10 +157,11 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/audiences/',
+            "/audiences/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -170,10 +169,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'retrieve_audience',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -196,26 +195,27 @@ module OctridevIntercom
         role_predicates: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PUT',
           [
-            '/audiences/',
+            "/audiences/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           body: {
             'name' => name,
             'predicates' => predicates,
-            'role_predicates' => role_predicates
+            'role_predicates' => role_predicates,
           },
           return_type: ::OctridevIntercom::Audience,
           decoder: :json,
           operation_id: 'update_audience',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -230,20 +230,21 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/audiences/',
+            "/audiences/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'delete_audience',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

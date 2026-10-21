@@ -25,24 +25,25 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/contacts/find_by_external_id/',
+            "/contacts/find_by_external_id/",
             SdkClient.encode_path_segment(external_id)
           ].join,
           config: config,
           query: {
-            'include_merge_history' => QueryValue.new(include_merge_history, style: 'form', explode: true)
+            'include_merge_history' => QueryValue.new(include_merge_history, style: 'form', explode: true),
           },
           return_type: ::OctridevIntercom::Methods::Contacts::ShowContactByExternalIdResponse,
           decoder: :json,
           operation_id: 'show_contact_by_external_id',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '410' => ::OctridevIntercom::Error2 }
+          errors: { '401' => ::OctridevIntercom::Error2, '410' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

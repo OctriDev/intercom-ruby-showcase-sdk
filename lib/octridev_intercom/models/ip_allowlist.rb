@@ -5,43 +5,45 @@
 
 # ip_allowlist domain models
 module OctridevIntercom
-  # Internal model hydration metadata.
-  class SdkInternalIpAllowlistMetadata
-    FIELDS = {
-      type: 'type',
-      enabled: 'enabled',
-      ip_allowlist: 'ip_allowlist'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalIpAllowlistMetadata
+  FIELDS = {
+    type: "type",
+    enabled: "enabled",
+    ip_allowlist: "ip_allowlist",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for IpAllowlist.
+# IP allowlist settings for the workspace.
+class IpAllowlist
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalIpAllowlistMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalIpAllowlistMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalIpAllowlistMetadata::DECODERS
+
+  # @return [String] String representing the object's type. Always has the value `ip_allowlist`.
+  attr_reader :type
+  # @return [Boolean] Whether the IP allowlist is enabled for the workspace.
+  attr_reader :enabled
+  # @return [Array_of_String] List of allowed IP addresses and/or IP ranges in CIDR notation. Examples: - Single IP: `192.168.0.1` - IP range: `192.168.0.1/24` (allows 192.168.0.0 - 192.168.0.255)
+  attr_reader :ip_allowlist
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for IpAllowlist.
-  # IP allowlist settings for the workspace.
-  class IpAllowlist
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalIpAllowlistMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalIpAllowlistMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalIpAllowlistMetadata::DECODERS
-
-    # @return [String] String representing the object's type. Always has the value `ip_allowlist`.
-    attr_reader :type
-    # @return [Boolean] Whether the IP allowlist is enabled for the workspace.
-    attr_reader :enabled
-    # @return [Array_of_String] List of allowed IP addresses and/or IP ranges in CIDR notation. Examples: - Single IP: `192.168.0.1` - IP range: `192.168.0.1/24` (allows 192.168.0.0 - 192.168.0.255)
-    attr_reader :ip_allowlist
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

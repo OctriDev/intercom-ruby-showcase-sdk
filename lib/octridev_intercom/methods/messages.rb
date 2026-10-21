@@ -48,9 +48,10 @@ module OctridevIntercom
         create_conversation_without_contact_reply: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/messages',
+          "/messages",
           config: config,
           body: {
             'message_type' => message_type,
@@ -62,16 +63,16 @@ module OctridevIntercom
             'cc' => cc,
             'bcc' => bcc,
             'created_at' => created_at,
-            'create_conversation_without_contact_reply' => create_conversation_without_contact_reply
+            'create_conversation_without_contact_reply' => create_conversation_without_contact_reply,
           },
           return_type: ::OctridevIntercom::Message,
           decoder: :json,
           operation_id: 'create_message',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -86,21 +87,22 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/messages/whatsapp/status',
+          "/messages/whatsapp/status",
           config: config,
           query: {
-            'message_id' => QueryValue.new(message_id, style: 'form', explode: true)
+            'message_id' => QueryValue.new(message_id, style: 'form', explode: true),
           },
           return_type: ::OctridevIntercom::WhatsappMessageStatus,
           decoder: :json,
           operation_id: 'retrieve_whats_app_message_status',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
         ).data
       end
 
@@ -113,26 +115,34 @@ module OctridevIntercom
       # @param per_page [Integer] Number of results per page (default 50, max 100)
       # @param starting_after [String] Cursor for pagination, used to fetch the next
       #   page of results
-      singleton_class.define_method(:get_whats_app_message_status) do |config:, ruleset_id:, per_page: NOT_GIVEN, starting_after: NOT_GIVEN, intercom_version: NOT_GIVEN, request_options: nil|
+      singleton_class.define_method(:get_whats_app_message_status) do |
+        config:,
+        ruleset_id:,
+        per_page: NOT_GIVEN,
+        starting_after: NOT_GIVEN,
+        intercom_version: NOT_GIVEN,
+        request_options: nil
+      |
+
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, max: 100) }
 
         SdkClient.request(
           'GET',
-          '/messages/status',
+          "/messages/status",
           config: config,
           query: {
             'ruleset_id' => QueryValue.new(ruleset_id, style: 'form', explode: true),
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'starting_after' => QueryValue.new(starting_after, style: 'form', explode: true)
+            'starting_after' => QueryValue.new(starting_after, style: 'form', explode: true),
           },
           return_type: ::OctridevIntercom::WhatsappMessageStatusList,
           decoder: :json,
           operation_id: 'get_whats_app_message_status',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
-                                                     }),
+            'Intercom-Version' => SdkClient.header_value(intercom_version),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '500' => ::OctridevIntercom::Error2 }
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '500' => ::OctridevIntercom::Error2 },
         ).data
       end
     end

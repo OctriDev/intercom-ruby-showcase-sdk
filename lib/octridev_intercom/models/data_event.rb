@@ -5,99 +5,102 @@
 
 # data_event domain models
 module OctridevIntercom
-  # Internal model hydration metadata.
-  class SdkInternalDataEventListPagesMetadata
-    FIELDS = {
-      next_: 'next',
-      since: 'since'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalDataEventListPagesMetadata
+  FIELDS = {
+    next_: "next",
+    since: "since",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for DataEventListPages.
+# Pagination
+class DataEventListPages
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDataEventListPagesMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDataEventListPagesMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDataEventListPagesMetadata::DECODERS
+
+  # @return [String] Optional `string` value serialized in the `next` wire field.
+  attr_reader :next_
+  # @return [String] Optional `string` value serialized in the `since` wire field.
+  attr_reader :since
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DataEventListPages.
-  # Pagination
-  class DataEventListPages
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDataEventListPagesMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDataEventListPagesMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDataEventListPagesMetadata::DECODERS
-
-    # @return [String] Optional `string` value serialized in the `next` wire field.
-    attr_reader :next_
-    # @return [String] Optional `string` value serialized in the `since` wire field.
-    attr_reader :since
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDataEventListMetadata
-    FIELDS = {
-      type: 'type',
-      events: 'events',
-      pages: 'pages'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevIntercom::DataEventListType.from_value(value)
-      end,
-      events: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::DataEvent.from_hash(item) }
-      end,
-      pages: lambda do |value|
-        ::OctridevIntercom::DataEventListPages.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDataEventListMetadata
+  FIELDS = {
+    type: "type",
+    events: "events",
+    pages: "pages",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevIntercom::DataEventListType.from_value(value)
+    end,
+    events: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::DataEvent.from_hash(item) }
+    end,
+    pages: lambda do |value|
+      ::OctridevIntercom::DataEventListPages.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for DataEventList.
+# This will return a list of data events for the App.
+class DataEventList
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDataEventListMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDataEventListMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDataEventListMetadata::DECODERS
+
+  # @return [DataEventListType] The type of the object
+  attr_reader :type
+  # @return [Array_of_DataEvent] A list of data events
+  attr_reader :events
+  # @return [DataEventListPages] Pagination
+  attr_reader :pages
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DataEventList.
-  # This will return a list of data events for the App.
-  class DataEventList
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDataEventListMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDataEventListMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDataEventListMetadata::DECODERS
-
-    # @return [DataEventListType] The type of the object
-    attr_reader :type
-    # @return [Array_of_DataEvent] A list of data events
-    attr_reader :events
-    # @return [DataEventListPages] Pagination
-    attr_reader :pages
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the DataEventListType SDK namespace.
-  module DataEventListType
-    EVENT_LIST = 'event.list'
-    VALUES = ['event.list'].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
+
+# Defines the DataEventListType SDK namespace.
+module DataEventListType
+  EVENT_LIST = 'event.list'
+  VALUES = ['event.list'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 end

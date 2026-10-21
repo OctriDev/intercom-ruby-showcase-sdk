@@ -5,641 +5,656 @@
 
 # contacts domain models
 module OctridevIntercom
-  # Internal model hydration metadata.
-  class SdkInternalBulkCreateContactsRequestContactsItemCompaniesItemMetadata
-    FIELDS = {
-      company_id: 'company_id',
-      name: 'name'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      company_id
-    ].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalBulkCreateContactsRequestContactsItemCompaniesItemMetadata
+  FIELDS = {
+    company_id: "company_id",
+    name: "name",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    company_id
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for BulkCreateContactsRequestContactsItemCompaniesItem.
+# Required object value serialized in the `companies[]` wire field.
+class BulkCreateContactsRequestContactsItemCompaniesItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBulkCreateContactsRequestContactsItemCompaniesItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBulkCreateContactsRequestContactsItemCompaniesItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBulkCreateContactsRequestContactsItemCompaniesItemMetadata::DECODERS
+
+  # @return [String] The company ID you have defined for the company.
+  attr_reader :company_id
+  # @return [String] The name of the company.
+  attr_reader :name
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for BulkCreateContactsRequestContactsItemCompaniesItem.
-  # Required object value serialized in the `companies[]` wire field.
-  class BulkCreateContactsRequestContactsItemCompaniesItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBulkCreateContactsRequestContactsItemCompaniesItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBulkCreateContactsRequestContactsItemCompaniesItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBulkCreateContactsRequestContactsItemCompaniesItemMetadata::DECODERS
-
-    # @return [String] The company ID you have defined for the company.
-    attr_reader :company_id
-    # @return [String] The name of the company.
-    attr_reader :name
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBulkCreateContactsRequestContactsItemTagsAddItemMetadata
-    FIELDS = {
-      id: 'id'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      id
-    ].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBulkCreateContactsRequestContactsItemTagsAddItemMetadata
+  FIELDS = {
+    id: "id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    id
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for BulkCreateContactsRequestContactsItemTagsAddItem.
+# Required object value serialized in the `add[]` wire field.
+class BulkCreateContactsRequestContactsItemTagsAddItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBulkCreateContactsRequestContactsItemTagsAddItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBulkCreateContactsRequestContactsItemTagsAddItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBulkCreateContactsRequestContactsItemTagsAddItemMetadata::DECODERS
+
+  # @return [String] The ID of an existing tag to add to the contact.
+  attr_reader :id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for BulkCreateContactsRequestContactsItemTagsAddItem.
-  # Required object value serialized in the `add[]` wire field.
-  class BulkCreateContactsRequestContactsItemTagsAddItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBulkCreateContactsRequestContactsItemTagsAddItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBulkCreateContactsRequestContactsItemTagsAddItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBulkCreateContactsRequestContactsItemTagsAddItemMetadata::DECODERS
-
-    # @return [String] The ID of an existing tag to add to the contact.
-    attr_reader :id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBulkCreateContactsRequestContactsItemTagsMetadata
-    FIELDS = {
-      add: 'add'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      add: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::BulkCreateContactsRequestContactsItemTagsAddItem.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBulkCreateContactsRequestContactsItemTagsMetadata
+  FIELDS = {
+    add: "add",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    add: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::BulkCreateContactsRequestContactsItemTagsAddItem.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for BulkCreateContactsRequestContactsItemTags.
+# Tags to add to the contact. Each tag is identified by its `id`, which must be a positive integer for a tag that already exists in your workspace. Tag application is best-effort: unknown tag IDs are skipped while the rest of the contact create still applies. Per-tag results are not yet returned in the job status.
+class BulkCreateContactsRequestContactsItemTags
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBulkCreateContactsRequestContactsItemTagsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBulkCreateContactsRequestContactsItemTagsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBulkCreateContactsRequestContactsItemTagsMetadata::DECODERS
+
+  # @return [Array_of_BulkCreateContactsRequestContactsItemTagsAddItem] Tags to add to the contact.
+  attr_reader :add
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for BulkCreateContactsRequestContactsItemTags.
-  # Tags to add to the contact. Each tag is identified by its `id`, which must be a positive integer for a tag that already exists in your workspace. Tag application is best-effort: unknown tag IDs are skipped while the rest of the contact create still applies. Per-tag results are not yet returned in the job status.
-  class BulkCreateContactsRequestContactsItemTags
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBulkCreateContactsRequestContactsItemTagsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBulkCreateContactsRequestContactsItemTagsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBulkCreateContactsRequestContactsItemTagsMetadata::DECODERS
-
-    # @return [Array_of_BulkCreateContactsRequestContactsItemTagsAddItem] Tags to add to the contact.
-    attr_reader :add
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBulkCreateContactsRequestContactsItemMetadata
-    FIELDS = {
-      external_id: 'external_id',
-      email: 'email',
-      email_verified: 'email_verified',
-      name: 'name',
-      role: 'role',
-      phone: 'phone',
-      avatar: 'avatar',
-      language_override: 'language_override',
-      custom_attributes: 'custom_attributes',
-      signed_up_at: 'signed_up_at',
-      last_seen_at: 'last_seen_at',
-      owner_id: 'owner_id',
-      unsubscribed_from_emails: 'unsubscribed_from_emails',
-      companies: 'companies',
-      tags: 'tags'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      companies: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::BulkCreateContactsRequestContactsItemCompaniesItem.from_hash(item) }
-      end,
-      tags: lambda do |value|
-        ::OctridevIntercom::BulkCreateContactsRequestContactsItemTags.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBulkCreateContactsRequestContactsItemMetadata
+  FIELDS = {
+    external_id: "external_id",
+    email: "email",
+    email_verified: "email_verified",
+    name: "name",
+    role: "role",
+    phone: "phone",
+    avatar: "avatar",
+    language_override: "language_override",
+    custom_attributes: "custom_attributes",
+    signed_up_at: "signed_up_at",
+    last_seen_at: "last_seen_at",
+    owner_id: "owner_id",
+    unsubscribed_from_emails: "unsubscribed_from_emails",
+    companies: "companies",
+    tags: "tags",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    companies: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::BulkCreateContactsRequestContactsItemCompaniesItem.from_hash(item) }
+    end,
+    tags: lambda do |value|
+      ::OctridevIntercom::BulkCreateContactsRequestContactsItemTags.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for BulkCreateContactsRequestContactsItem.
+# Required object value serialized in the `contacts[]` wire field.
+class BulkCreateContactsRequestContactsItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBulkCreateContactsRequestContactsItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBulkCreateContactsRequestContactsItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBulkCreateContactsRequestContactsItemMetadata::DECODERS
+
+  # @return [String] A unique identifier for the contact which you have defined.
+  attr_reader :external_id
+  # @return [String] The contact's email address.
+  attr_reader :email
+  # @return [Boolean] Whether the contact has proved they own this email address, for example through a confirmation link or one-time code you sent. Send it together with `email`. `email_verified` without `email` is rejected. Changing a contact's email resets it to not verified. Intercom reuses leads with a verified email when an inbound email, conversation or ticket matches the address.
+  attr_reader :email_verified
+  # @return [String] The contact's name.
+  attr_reader :name
+  # @return [String] The contact's role. One of `user` or `lead`. Leads are exempt from the uniqueness check described above.
+  attr_reader :role
+  # @return [String] The contact's phone number.
+  attr_reader :phone
+  # @return [String] An image URL containing the avatar of the contact.
+  attr_reader :avatar
+  # @return [String] A preferred language setting for the contact, used by the Intercom Messenger.
+  attr_reader :language_override
+  # @return [Hash] Custom attributes to set on the contact.
+  attr_reader :custom_attributes
+  # @return [Integer] The time the contact signed up, in Unix timestamp format.
+  attr_reader :signed_up_at
+  # @return [Integer] The time the contact was last seen, in Unix timestamp format.
+  attr_reader :last_seen_at
+  # @return [String] The ID of an admin that has been assigned account ownership of the contact.
+  attr_reader :owner_id
+  # @return [Boolean] Whether the contact is unsubscribed from emails.
+  attr_reader :unsubscribed_from_emails
+  # @return [Array_of_BulkCreateContactsRequestContactsItemCompaniesItem] A list of companies to associate with the contact. Each company is identified by the `company_id` you have defined. A company that does not exist is created, and one that already exists has the supplied attributes applied to it.
+  attr_reader :companies
+  # @return [BulkCreateContactsRequestContactsItemTags] Tags to add to the contact. Each tag is identified by its `id`, which must be a positive integer for a tag that already exists in your workspace. Tag application is best-effort: unknown tag IDs are skipped while the rest of the contact create still applies. Per-tag results are not yet returned in the job status.
+  attr_reader :tags
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for BulkCreateContactsRequestContactsItem.
-  # Required object value serialized in the `contacts[]` wire field.
-  class BulkCreateContactsRequestContactsItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBulkCreateContactsRequestContactsItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBulkCreateContactsRequestContactsItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBulkCreateContactsRequestContactsItemMetadata::DECODERS
-
-    # @return [String] A unique identifier for the contact which you have defined.
-    attr_reader :external_id
-    # @return [String] The contact's email address.
-    attr_reader :email
-    # @return [Boolean] Whether the contact has proved they own this email address, for example through a confirmation link or one-time code you sent. Send it together with `email`. `email_verified` without `email` is rejected. Changing a contact's email resets it to not verified. Intercom reuses leads with a verified email when an inbound email, conversation or ticket matches the address.
-    attr_reader :email_verified
-    # @return [String] The contact's name.
-    attr_reader :name
-    # @return [String] The contact's role. One of `user` or `lead`. Leads are exempt from the uniqueness check described above.
-    attr_reader :role
-    # @return [String] The contact's phone number.
-    attr_reader :phone
-    # @return [String] An image URL containing the avatar of the contact.
-    attr_reader :avatar
-    # @return [String] A preferred language setting for the contact, used by the Intercom Messenger.
-    attr_reader :language_override
-    # @return [Hash] Custom attributes to set on the contact.
-    attr_reader :custom_attributes
-    # @return [Integer] The time the contact signed up, in Unix timestamp format.
-    attr_reader :signed_up_at
-    # @return [Integer] The time the contact was last seen, in Unix timestamp format.
-    attr_reader :last_seen_at
-    # @return [String] The ID of an admin that has been assigned account ownership of the contact.
-    attr_reader :owner_id
-    # @return [Boolean] Whether the contact is unsubscribed from emails.
-    attr_reader :unsubscribed_from_emails
-    # @return [Array_of_BulkCreateContactsRequestContactsItemCompaniesItem] A list of companies to associate with the contact. Each company is identified by the `company_id` you have defined. A company that does not exist is created, and one that already exists has the supplied attributes applied to it.
-    attr_reader :companies
-    # @return [BulkCreateContactsRequestContactsItemTags] Tags to add to the contact. Each tag is identified by its `id`, which must be a positive integer for a tag that already exists in your workspace. Tag application is best-effort: unknown tag IDs are skipped while the rest of the contact create still applies. Per-tag results are not yet returned in the job status.
-    attr_reader :tags
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBulkCreateContactsRequestJobMetadata
-    FIELDS = {
-      id: 'id'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBulkCreateContactsRequestJobMetadata
+  FIELDS = {
+    id: "id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for BulkCreateContactsRequestJob.
+# Optional. Include to append tasks to an existing job.
+class BulkCreateContactsRequestJob
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBulkCreateContactsRequestJobMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBulkCreateContactsRequestJobMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBulkCreateContactsRequestJobMetadata::DECODERS
+
+  # @return [String] The ID of an existing bulk job to append to.
+  attr_reader :id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for BulkCreateContactsRequestJob.
-  # Optional. Include to append tasks to an existing job.
-  class BulkCreateContactsRequestJob
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBulkCreateContactsRequestJobMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBulkCreateContactsRequestJobMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBulkCreateContactsRequestJobMetadata::DECODERS
-
-    # @return [String] The ID of an existing bulk job to append to.
-    attr_reader :id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBulkCreateContactsRequestMetadata
-    FIELDS = {
-      contacts: 'contacts',
-      job: 'job'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      contacts
-    ].freeze
-    DECODERS = {
-      contacts: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::BulkCreateContactsRequestContactsItem.from_hash(item) }
-      end,
-      job: lambda do |value|
-        ::OctridevIntercom::BulkCreateContactsRequestJob.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBulkCreateContactsRequestMetadata
+  FIELDS = {
+    contacts: "contacts",
+    job: "job",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    contacts
+  ].freeze
+  DECODERS = {
+    contacts: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::BulkCreateContactsRequestContactsItem.from_hash(item) }
+    end,
+    job: lambda do |value|
+      ::OctridevIntercom::BulkCreateContactsRequestJob.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for BulkCreateContactsRequest.
+# Request body for bulk creating contacts.
+class BulkCreateContactsRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBulkCreateContactsRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBulkCreateContactsRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBulkCreateContactsRequestMetadata::DECODERS
+
+  # @return [Array_of_BulkCreateContactsRequestContactsItem] An array of contact objects to create. Maximum 100 contacts per request.
+  attr_reader :contacts
+  # @return [BulkCreateContactsRequestJob] Optional. Include to append tasks to an existing job.
+  attr_reader :job
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for BulkCreateContactsRequest.
-  # Request body for bulk creating contacts.
-  class BulkCreateContactsRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBulkCreateContactsRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBulkCreateContactsRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBulkCreateContactsRequestMetadata::DECODERS
-
-    # @return [Array_of_BulkCreateContactsRequestContactsItem] An array of contact objects to create. Maximum 100 contacts per request.
-    attr_reader :contacts
-    # @return [BulkCreateContactsRequestJob] Optional. Include to append tasks to an existing job.
-    attr_reader :job
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBulkDeleteContactsRequestContactsItemMetadata
-    FIELDS = {
-      id: 'id'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      id
-    ].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBulkDeleteContactsRequestContactsItemMetadata
+  FIELDS = {
+    id: "id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    id
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for BulkDeleteContactsRequestContactsItem.
+# Required object value serialized in the `contacts[]` wire field.
+class BulkDeleteContactsRequestContactsItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBulkDeleteContactsRequestContactsItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBulkDeleteContactsRequestContactsItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBulkDeleteContactsRequestContactsItemMetadata::DECODERS
+
+  # @return [String] The unique identifier for the contact.
+  attr_reader :id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for BulkDeleteContactsRequestContactsItem.
-  # Required object value serialized in the `contacts[]` wire field.
-  class BulkDeleteContactsRequestContactsItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBulkDeleteContactsRequestContactsItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBulkDeleteContactsRequestContactsItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBulkDeleteContactsRequestContactsItemMetadata::DECODERS
-
-    # @return [String] The unique identifier for the contact.
-    attr_reader :id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBulkDeleteContactsRequestJobMetadata
-    FIELDS = {
-      id: 'id'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBulkDeleteContactsRequestJobMetadata
+  FIELDS = {
+    id: "id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for BulkDeleteContactsRequestJob.
+# Optional. Include to append tasks to an existing job.
+class BulkDeleteContactsRequestJob
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBulkDeleteContactsRequestJobMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBulkDeleteContactsRequestJobMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBulkDeleteContactsRequestJobMetadata::DECODERS
+
+  # @return [String] The ID of an existing bulk job to append to.
+  attr_reader :id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for BulkDeleteContactsRequestJob.
-  # Optional. Include to append tasks to an existing job.
-  class BulkDeleteContactsRequestJob
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBulkDeleteContactsRequestJobMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBulkDeleteContactsRequestJobMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBulkDeleteContactsRequestJobMetadata::DECODERS
-
-    # @return [String] The ID of an existing bulk job to append to.
-    attr_reader :id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBulkDeleteContactsRequestMetadata
-    FIELDS = {
-      contacts: 'contacts',
-      job: 'job'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      contacts
-    ].freeze
-    DECODERS = {
-      contacts: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::BulkDeleteContactsRequestContactsItem.from_hash(item) }
-      end,
-      job: lambda do |value|
-        ::OctridevIntercom::BulkDeleteContactsRequestJob.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBulkDeleteContactsRequestMetadata
+  FIELDS = {
+    contacts: "contacts",
+    job: "job",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    contacts
+  ].freeze
+  DECODERS = {
+    contacts: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::BulkDeleteContactsRequestContactsItem.from_hash(item) }
+    end,
+    job: lambda do |value|
+      ::OctridevIntercom::BulkDeleteContactsRequestJob.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for BulkDeleteContactsRequest.
+# Request body for permanently bulk deleting contacts.
+class BulkDeleteContactsRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBulkDeleteContactsRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBulkDeleteContactsRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBulkDeleteContactsRequestMetadata::DECODERS
+
+  # @return [Array_of_BulkDeleteContactsRequestContactsItem] An array of contacts to delete, each identified by `id`. Maximum 100 contacts per request.
+  attr_reader :contacts
+  # @return [BulkDeleteContactsRequestJob] Optional. Include to append tasks to an existing job.
+  attr_reader :job
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for BulkDeleteContactsRequest.
-  # Request body for permanently bulk deleting contacts.
-  class BulkDeleteContactsRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBulkDeleteContactsRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBulkDeleteContactsRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBulkDeleteContactsRequestMetadata::DECODERS
-
-    # @return [Array_of_BulkDeleteContactsRequestContactsItem] An array of contacts to delete, each identified by `id`. Maximum 100 contacts per request.
-    attr_reader :contacts
-    # @return [BulkDeleteContactsRequestJob] Optional. Include to append tasks to an existing job.
-    attr_reader :job
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBulkUpdateContactsRequestContactsItemCompaniesItemMetadata
-    FIELDS = {
-      company_id: 'company_id',
-      name: 'name',
-      remove: 'remove'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      company_id
-    ].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBulkUpdateContactsRequestContactsItemCompaniesItemMetadata
+  FIELDS = {
+    company_id: "company_id",
+    name: "name",
+    remove: "remove",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    company_id
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for BulkUpdateContactsRequestContactsItemCompaniesItem.
+# Required object value serialized in the `companies[]` wire field.
+class BulkUpdateContactsRequestContactsItemCompaniesItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBulkUpdateContactsRequestContactsItemCompaniesItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBulkUpdateContactsRequestContactsItemCompaniesItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBulkUpdateContactsRequestContactsItemCompaniesItemMetadata::DECODERS
+
+  # @return [String] The company ID you have defined for the company.
+  attr_reader :company_id
+  # @return [String] The name of the company.
+  attr_reader :name
+  # @return [Boolean] Set to true to detach this company from the contact instead of attaching it.
+  attr_reader :remove
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for BulkUpdateContactsRequestContactsItemCompaniesItem.
-  # Required object value serialized in the `companies[]` wire field.
-  class BulkUpdateContactsRequestContactsItemCompaniesItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBulkUpdateContactsRequestContactsItemCompaniesItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBulkUpdateContactsRequestContactsItemCompaniesItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBulkUpdateContactsRequestContactsItemCompaniesItemMetadata::DECODERS
-
-    # @return [String] The company ID you have defined for the company.
-    attr_reader :company_id
-    # @return [String] The name of the company.
-    attr_reader :name
-    # @return [Boolean] Set to true to detach this company from the contact instead of attaching it.
-    attr_reader :remove
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBulkUpdateContactsRequestContactsItemTagsAddItemMetadata
-    FIELDS = {
-      id: 'id'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      id
-    ].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBulkUpdateContactsRequestContactsItemTagsAddItemMetadata
+  FIELDS = {
+    id: "id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    id
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for BulkUpdateContactsRequestContactsItemTagsAddItem.
+# Required object value serialized in the `add[]` wire field.
+class BulkUpdateContactsRequestContactsItemTagsAddItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBulkUpdateContactsRequestContactsItemTagsAddItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBulkUpdateContactsRequestContactsItemTagsAddItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBulkUpdateContactsRequestContactsItemTagsAddItemMetadata::DECODERS
+
+  # @return [String] The ID of an existing tag to add to the contact.
+  attr_reader :id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for BulkUpdateContactsRequestContactsItemTagsAddItem.
-  # Required object value serialized in the `add[]` wire field.
-  class BulkUpdateContactsRequestContactsItemTagsAddItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBulkUpdateContactsRequestContactsItemTagsAddItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBulkUpdateContactsRequestContactsItemTagsAddItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBulkUpdateContactsRequestContactsItemTagsAddItemMetadata::DECODERS
-
-    # @return [String] The ID of an existing tag to add to the contact.
-    attr_reader :id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBulkUpdateContactsRequestContactsItemTagsRemoveItemMetadata
-    FIELDS = {
-      id: 'id'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      id
-    ].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBulkUpdateContactsRequestContactsItemTagsRemoveItemMetadata
+  FIELDS = {
+    id: "id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    id
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for BulkUpdateContactsRequestContactsItemTagsRemoveItem.
+# Required object value serialized in the `remove[]` wire field.
+class BulkUpdateContactsRequestContactsItemTagsRemoveItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBulkUpdateContactsRequestContactsItemTagsRemoveItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBulkUpdateContactsRequestContactsItemTagsRemoveItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBulkUpdateContactsRequestContactsItemTagsRemoveItemMetadata::DECODERS
+
+  # @return [String] The ID of an existing tag to remove from the contact.
+  attr_reader :id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for BulkUpdateContactsRequestContactsItemTagsRemoveItem.
-  # Required object value serialized in the `remove[]` wire field.
-  class BulkUpdateContactsRequestContactsItemTagsRemoveItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBulkUpdateContactsRequestContactsItemTagsRemoveItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBulkUpdateContactsRequestContactsItemTagsRemoveItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBulkUpdateContactsRequestContactsItemTagsRemoveItemMetadata::DECODERS
-
-    # @return [String] The ID of an existing tag to remove from the contact.
-    attr_reader :id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBulkUpdateContactsRequestContactsItemTagsMetadata
-    FIELDS = {
-      add: 'add',
-      remove: 'remove'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      add: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::BulkUpdateContactsRequestContactsItemTagsAddItem.from_hash(item) }
-      end,
-      remove: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::BulkUpdateContactsRequestContactsItemTagsRemoveItem.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBulkUpdateContactsRequestContactsItemTagsMetadata
+  FIELDS = {
+    add: "add",
+    remove: "remove",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    add: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::BulkUpdateContactsRequestContactsItemTagsAddItem.from_hash(item) }
+    end,
+    remove: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::BulkUpdateContactsRequestContactsItemTagsRemoveItem.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for BulkUpdateContactsRequestContactsItemTags.
+# Tags to add to or remove from the contact. Each tag is identified by its `id`, which must be a positive integer for a tag that already exists in your workspace. Tag application is best-effort: unknown tag IDs are skipped while the rest of the contact update still applies. Per-tag results are not yet returned in the job status.
+class BulkUpdateContactsRequestContactsItemTags
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBulkUpdateContactsRequestContactsItemTagsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBulkUpdateContactsRequestContactsItemTagsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBulkUpdateContactsRequestContactsItemTagsMetadata::DECODERS
+
+  # @return [Array_of_BulkUpdateContactsRequestContactsItemTagsAddItem] Tags to add to the contact.
+  attr_reader :add
+  # @return [Array_of_BulkUpdateContactsRequestContactsItemTagsRemoveItem] Tags to remove from the contact.
+  attr_reader :remove
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for BulkUpdateContactsRequestContactsItemTags.
-  # Tags to add to or remove from the contact. Each tag is identified by its `id`, which must be a positive integer for a tag that already exists in your workspace. Tag application is best-effort: unknown tag IDs are skipped while the rest of the contact update still applies. Per-tag results are not yet returned in the job status.
-  class BulkUpdateContactsRequestContactsItemTags
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBulkUpdateContactsRequestContactsItemTagsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBulkUpdateContactsRequestContactsItemTagsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBulkUpdateContactsRequestContactsItemTagsMetadata::DECODERS
-
-    # @return [Array_of_BulkUpdateContactsRequestContactsItemTagsAddItem] Tags to add to the contact.
-    attr_reader :add
-    # @return [Array_of_BulkUpdateContactsRequestContactsItemTagsRemoveItem] Tags to remove from the contact.
-    attr_reader :remove
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBulkUpdateContactsRequestContactsItemMetadata
-    FIELDS = {
-      id: 'id',
-      external_id: 'external_id',
-      email: 'email',
-      email_verified: 'email_verified',
-      name: 'name',
-      phone: 'phone',
-      avatar: 'avatar',
-      owner_id: 'owner_id',
-      unsubscribed_from_emails: 'unsubscribed_from_emails',
-      language_override: 'language_override',
-      custom_attributes: 'custom_attributes',
-      companies: 'companies',
-      tags: 'tags'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      id
-    ].freeze
-    DECODERS = {
-      companies: lambda do |value|
-        value&.map { |item| ::OctridevIntercom::BulkUpdateContactsRequestContactsItemCompaniesItem.from_hash(item) }
-      end,
-      tags: lambda do |value|
-        ::OctridevIntercom::BulkUpdateContactsRequestContactsItemTags.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBulkUpdateContactsRequestContactsItemMetadata
+  FIELDS = {
+    id: "id",
+    external_id: "external_id",
+    email: "email",
+    email_verified: "email_verified",
+    name: "name",
+    phone: "phone",
+    avatar: "avatar",
+    owner_id: "owner_id",
+    unsubscribed_from_emails: "unsubscribed_from_emails",
+    language_override: "language_override",
+    custom_attributes: "custom_attributes",
+    companies: "companies",
+    tags: "tags",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    id
+  ].freeze
+  DECODERS = {
+    companies: lambda do |value|
+      value&.map { |item| ::OctridevIntercom::BulkUpdateContactsRequestContactsItemCompaniesItem.from_hash(item) }
+    end,
+    tags: lambda do |value|
+      ::OctridevIntercom::BulkUpdateContactsRequestContactsItemTags.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for BulkUpdateContactsRequestContactsItem.
+# Required object value serialized in the `contacts[]` wire field.
+class BulkUpdateContactsRequestContactsItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBulkUpdateContactsRequestContactsItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBulkUpdateContactsRequestContactsItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBulkUpdateContactsRequestContactsItemMetadata::DECODERS
+
+  # @return [String] The unique identifier for the contact.
+  attr_reader :id
+  # @return [String] A unique identifier for the contact which you have defined.
+  attr_reader :external_id
+  # @return [String] The contact's email address.
+  attr_reader :email
+  # @return [Boolean] Whether the contact has proved they own this email address, for example through a confirmation link or one-time code you sent. Send it together with `email`. `email_verified` without `email` is rejected. Changing a contact's email resets it to not verified. Intercom reuses leads with a verified email when an inbound email, conversation or ticket matches the address.
+  attr_reader :email_verified
+  # @return [String] The contact's name.
+  attr_reader :name
+  # @return [String] The contact's phone number.
+  attr_reader :phone
+  # @return [String] An image URL containing the avatar of the contact.
+  attr_reader :avatar
+  # @return [String] The ID of an admin that has been assigned account ownership of the contact.
+  attr_reader :owner_id
+  # @return [Boolean] Whether the contact is unsubscribed from emails.
+  attr_reader :unsubscribed_from_emails
+  # @return [String] A preferred language setting for the contact, used by the Intercom Messenger.
+  attr_reader :language_override
+  # @return [Hash] Custom attributes to update on the contact.
+  attr_reader :custom_attributes
+  # @return [Array_of_BulkUpdateContactsRequestContactsItemCompaniesItem] A list of companies to associate with the contact. Each company is identified by the `company_id` you have defined. A company that does not exist is created, and one that already exists has the supplied attributes applied to it.
+  attr_reader :companies
+  # @return [BulkUpdateContactsRequestContactsItemTags] Tags to add to or remove from the contact. Each tag is identified by its `id`, which must be a positive integer for a tag that already exists in your workspace. Tag application is best-effort: unknown tag IDs are skipped while the rest of the contact update still applies. Per-tag results are not yet returned in the job status.
+  attr_reader :tags
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for BulkUpdateContactsRequestContactsItem.
-  # Required object value serialized in the `contacts[]` wire field.
-  class BulkUpdateContactsRequestContactsItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBulkUpdateContactsRequestContactsItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBulkUpdateContactsRequestContactsItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBulkUpdateContactsRequestContactsItemMetadata::DECODERS
-
-    # @return [String] The unique identifier for the contact.
-    attr_reader :id
-    # @return [String] A unique identifier for the contact which you have defined.
-    attr_reader :external_id
-    # @return [String] The contact's email address.
-    attr_reader :email
-    # @return [Boolean] Whether the contact has proved they own this email address, for example through a confirmation link or one-time code you sent. Send it together with `email`. `email_verified` without `email` is rejected. Changing a contact's email resets it to not verified. Intercom reuses leads with a verified email when an inbound email, conversation or ticket matches the address.
-    attr_reader :email_verified
-    # @return [String] The contact's name.
-    attr_reader :name
-    # @return [String] The contact's phone number.
-    attr_reader :phone
-    # @return [String] An image URL containing the avatar of the contact.
-    attr_reader :avatar
-    # @return [String] The ID of an admin that has been assigned account ownership of the contact.
-    attr_reader :owner_id
-    # @return [Boolean] Whether the contact is unsubscribed from emails.
-    attr_reader :unsubscribed_from_emails
-    # @return [String] A preferred language setting for the contact, used by the Intercom Messenger.
-    attr_reader :language_override
-    # @return [Hash] Custom attributes to update on the contact.
-    attr_reader :custom_attributes
-    # @return [Array_of_BulkUpdateContactsRequestContactsItemCompaniesItem] A list of companies to associate with the contact. Each company is identified by the `company_id` you have defined. A company that does not exist is created, and one that already exists has the supplied attributes applied to it.
-    attr_reader :companies
-    # @return [BulkUpdateContactsRequestContactsItemTags] Tags to add to or remove from the contact. Each tag is identified by its `id`, which must be a positive integer for a tag that already exists in your workspace. Tag application is best-effort: unknown tag IDs are skipped while the rest of the contact update still applies. Per-tag results are not yet returned in the job status.
-    attr_reader :tags
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBulkUpdateContactsRequestJobMetadata
-    FIELDS = {
-      id: 'id'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBulkUpdateContactsRequestJobMetadata
+  FIELDS = {
+    id: "id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 end
