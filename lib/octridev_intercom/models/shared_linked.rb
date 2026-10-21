@@ -5,132 +5,130 @@
 
 # shared_linked domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalLinkedObjectMetadata
-  FIELDS = {
-    type: "type",
-    id: "id",
-    category: "category",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::LinkedObjectType.from_value(value)
-    end,
-    category: lambda do |value|
-      ::OctridevIntercom::LinkedObjectCategory.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for LinkedObject.
-# A linked conversation or ticket.
-class LinkedObject
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalLinkedObjectMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalLinkedObjectMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalLinkedObjectMetadata::DECODERS
-
-  # @return [LinkedObjectType] ticket or conversation
-  attr_reader :type
-  # @return [String] The ID of the linked object
-  attr_reader :id
-  # @return [LinkedObjectCategory] Category of the Linked Ticket Object.
-  attr_reader :category
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalLinkedObjectMetadata
+    FIELDS = {
+      type: 'type',
+      id: 'id',
+      category: 'category'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::LinkedObjectType.from_value(value)
+      end,
+      category: lambda do |value|
+        ::OctridevIntercom::LinkedObjectCategory.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for LinkedObject.
+  # A linked conversation or ticket.
+  class LinkedObject
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalLinkedObjectMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalLinkedObjectMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalLinkedObjectMetadata::DECODERS
+
+    # @return [LinkedObjectType] ticket or conversation
+    attr_reader :type
+    # @return [String] The ID of the linked object
+    attr_reader :id
+    # @return [LinkedObjectCategory] Category of the Linked Ticket Object.
+    attr_reader :category
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the LinkedObjectCategory SDK namespace.
-module LinkedObjectCategory
-  CUSTOMER = 'Customer'
-  BACK_OFFICE = 'Back-office'
-  TRACKER = 'Tracker'
-  VALUES = ['Customer', 'Back-office', 'Tracker'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the LinkedObjectType SDK namespace.
-module LinkedObjectType
-  TICKET = 'ticket'
-  CONVERSATION = 'conversation'
-  VALUES = ['ticket', 'conversation'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalLinkedObjectListMetadata
-  FIELDS = {
-    type: "type",
-    total_count: "total_count",
-    has_more: "has_more",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::LinkedObjectListType.from_value(value)
-    end,
-    data: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::LinkedObject.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for LinkedObjectList.
-# An object containing metadata about linked conversations and linked tickets. Up to 1000 can be returned.
-class LinkedObjectList
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalLinkedObjectListMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalLinkedObjectListMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalLinkedObjectListMetadata::DECODERS
-
-  # @return [LinkedObjectListType] Always list.
-  attr_reader :type
-  # @return [Integer] The total number of linked objects.
-  attr_reader :total_count
-  # @return [Boolean] Whether or not there are more linked objects than returned.
-  attr_reader :has_more
-  # @return [Array_of_LinkedObject] An array containing the linked conversations and linked tickets.
-  attr_reader :data
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the LinkedObjectCategory SDK namespace.
+  module LinkedObjectCategory
+    CUSTOMER = 'Customer'
+    BACK_OFFICE = 'Back-office'
+    TRACKER = 'Tracker'
+    VALUES = %w[Customer Back-office Tracker].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the LinkedObjectType SDK namespace.
+  module LinkedObjectType
+    TICKET = 'ticket'
+    CONVERSATION = 'conversation'
+    VALUES = %w[ticket conversation].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalLinkedObjectListMetadata
+    FIELDS = {
+      type: 'type',
+      total_count: 'total_count',
+      has_more: 'has_more',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::LinkedObjectListType.from_value(value)
+      end,
+      data: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::LinkedObject.from_hash(item) }
+      end
+    }.freeze
   end
-end
 
-# Defines the LinkedObjectListType SDK namespace.
-module LinkedObjectListType
-  LIST = 'list'
-  VALUES = ['list'].freeze
-  def self.from_value(value)
-    value
+  # API model for LinkedObjectList.
+  # An object containing metadata about linked conversations and linked tickets. Up to 1000 can be returned.
+  class LinkedObjectList
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalLinkedObjectListMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalLinkedObjectListMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalLinkedObjectListMetadata::DECODERS
+
+    # @return [LinkedObjectListType] Always list.
+    attr_reader :type
+    # @return [Integer] The total number of linked objects.
+    attr_reader :total_count
+    # @return [Boolean] Whether or not there are more linked objects than returned.
+    attr_reader :has_more
+    # @return [Array_of_LinkedObject] An array containing the linked conversations and linked tickets.
+    attr_reader :data
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
+
+  # Defines the LinkedObjectListType SDK namespace.
+  module LinkedObjectListType
+    LIST = 'list'
+    VALUES = ['list'].freeze
+    def self.from_value(value)
+      value
+    end
+  end
 end

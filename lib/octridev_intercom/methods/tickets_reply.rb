@@ -22,26 +22,25 @@ module OctridevIntercom
         skip_notifications: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/tickets/",
+            '/tickets/',
             SdkClient.encode_path_segment(ticket_id),
-            "/reply"
+            '/reply'
           ].join,
           config: config,
           body: {
-            'skip_notifications' => skip_notifications,
+            'skip_notifications' => skip_notifications
           },
           return_type: ::OctridevIntercom::TicketReply,
           decoder: :json,
           operation_id: 'reply_ticket',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
     end

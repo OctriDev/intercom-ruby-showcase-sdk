@@ -5,678 +5,672 @@
 
 # conversations domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalDeletedConversationListMetadata
-  FIELDS = {
-    type: "type",
-    conversations: "conversations",
-    total_count: "total_count",
-    pages: "pages",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    conversations: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::DeletedConversationItem.from_hash(item) }
-    end,
-    pages: lambda do |value|
-      ::OctridevIntercom::PagesLink.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for DeletedConversationList.
-# A paginated list of deleted conversation IDs.
-class DeletedConversationList
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDeletedConversationListMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDeletedConversationListMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDeletedConversationListMetadata::DECODERS
-
-  # @return [String] String representing the object's type. Always has the value `conversations.list`.
-  attr_reader :type
-  # @return [Array_of_DeletedConversationItem] The list of deleted conversation IDs.
-  attr_reader :conversations
-  # @return [Integer] Total number of items available.
-  attr_reader :total_count
-  # @return [PagesLink] The majority of list resources in the API are paginated to allow clients to traverse data over multiple requests. Their responses are likely to contain a pages object that hosts pagination links which a client can use to paginate through the data without having to construct a query. The link relations for the pages field are as follows.
-  attr_reader :pages
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalDeletedConversationListMetadata
+    FIELDS = {
+      type: 'type',
+      conversations: 'conversations',
+      total_count: 'total_count',
+      pages: 'pages'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      conversations: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::DeletedConversationItem.from_hash(item) }
+      end,
+      pages: lambda do |value|
+        ::OctridevIntercom::PagesLink.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for DeletedConversationList.
+  # A paginated list of deleted conversation IDs.
+  class DeletedConversationList
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDeletedConversationListMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDeletedConversationListMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDeletedConversationListMetadata::DECODERS
+
+    # @return [String] String representing the object's type. Always has the value `conversations.list`.
+    attr_reader :type
+    # @return [Array_of_DeletedConversationItem] The list of deleted conversation IDs.
+    attr_reader :conversations
+    # @return [Integer] Total number of items available.
+    attr_reader :total_count
+    # @return [PagesLink] The majority of list resources in the API are paginated to allow clients to traverse data over multiple requests. Their responses are likely to contain a pages object that hosts pagination links which a client can use to paginate through the data without having to construct a query. The link relations for the pages field are as follows.
+    attr_reader :pages
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDetachContactFromConversationRequestMetadata
-  FIELDS = {
-    admin_id: "admin_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    admin_id
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for DetachContactFromConversationRequest.
-# Typed representation of the `DetachContactFromConversationRequest` API schema.
-class DetachContactFromConversationRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDetachContactFromConversationRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDetachContactFromConversationRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDetachContactFromConversationRequestMetadata::DECODERS
-
-  # @return [String] The `id` of the admin who is performing the action.
-  attr_reader :admin_id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalDetachContactFromConversationRequestMetadata
+    FIELDS = {
+      admin_id: 'admin_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      admin_id
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for DetachContactFromConversationRequest.
+  # Typed representation of the `DetachContactFromConversationRequest` API schema.
+  class DetachContactFromConversationRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDetachContactFromConversationRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDetachContactFromConversationRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDetachContactFromConversationRequestMetadata::DECODERS
+
+    # @return [String] The `id` of the admin who is performing the action.
+    attr_reader :admin_id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalHandlingEventMetadata
-  FIELDS = {
-    teammate: "teammate",
-    type: "type",
-    timestamp: "timestamp",
-    reason: "reason",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    teammate
-    type
-    timestamp
-  ].freeze
-  DECODERS = {
-    teammate: lambda do |value|
-      ::OctridevIntercom::TeammateReference.from_hash(value)
-    end,
-    type: lambda do |value|
-      ::OctridevIntercom::HandlingEventType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for HandlingEvent.
-# A pause or resume event for a conversation
-class HandlingEvent
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalHandlingEventMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalHandlingEventMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalHandlingEventMetadata::DECODERS
-
-  # @return [TeammateReference] A reference to a teammate
-  attr_reader :teammate
-  # @return [HandlingEventType] The type of handling event
-  attr_reader :type
-  # @return [String] ISO8601 timestamp when the event occurred
-  attr_reader :timestamp
-  # @return [String] Optional reason for the event (e.g., "Paused", "Away")
-  attr_reader :reason
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalHandlingEventMetadata
+    FIELDS = {
+      teammate: 'teammate',
+      type: 'type',
+      timestamp: 'timestamp',
+      reason: 'reason'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      teammate
+      type
+      timestamp
+    ].freeze
+    DECODERS = {
+      teammate: lambda do |value|
+        ::OctridevIntercom::TeammateReference.from_hash(value)
+      end,
+      type: lambda do |value|
+        ::OctridevIntercom::HandlingEventType.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for HandlingEvent.
+  # A pause or resume event for a conversation
+  class HandlingEvent
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalHandlingEventMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalHandlingEventMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalHandlingEventMetadata::DECODERS
+
+    # @return [TeammateReference] A reference to a teammate
+    attr_reader :teammate
+    # @return [HandlingEventType] The type of handling event
+    attr_reader :type
+    # @return [String] ISO8601 timestamp when the event occurred
+    attr_reader :timestamp
+    # @return [String] Optional reason for the event (e.g., "Paused", "Away")
+    attr_reader :reason
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the HandlingEventType SDK namespace.
-module HandlingEventType
-  PAUSED = 'paused'
-  RESUMED = 'resumed'
-  VALUES = ['paused', 'resumed'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalHandlingEventListMetadata
-  FIELDS = {
-    handling_events: "handling_events",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    handling_events: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::HandlingEvent.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for HandlingEventList.
-# A list of handling events for a conversation
-class HandlingEventList
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalHandlingEventListMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalHandlingEventListMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalHandlingEventListMetadata::DECODERS
-
-  # @return [Array_of_HandlingEvent] Array of handling events
-  attr_reader :handling_events
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the HandlingEventType SDK namespace.
+  module HandlingEventType
+    PAUSED = 'paused'
+    RESUMED = 'resumed'
+    VALUES = %w[paused resumed].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalHandlingEventListMetadata
+    FIELDS = {
+      handling_events: 'handling_events'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      handling_events: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::HandlingEvent.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for HandlingEventList.
+  # A list of handling events for a conversation
+  class HandlingEventList
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalHandlingEventListMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalHandlingEventListMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalHandlingEventListMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalHitlEventDataMetadata
-  FIELDS = {
-    channel: "channel",
-    rule_threshold_percent: "rule_threshold_percent",
-    confidence_percent: "confidence_percent",
-    sharp_ask: "sharp_ask",
-    ask_rationale: "ask_rationale",
-    issue_summary: "issue_summary",
-    customer_question: "customer_question",
-    draft: "draft",
-    round_index: "round_index",
-    teammate_input: "teammate_input",
-    reviewer_admin_id: "reviewer_admin_id",
-    regeneration_outcome: "regeneration_outcome",
-    revised_draft: "revised_draft",
-    outcome: "outcome",
-    approved_draft_type: "approved_draft_type",
-    final_draft: "final_draft",
-    sent_text: "sent_text",
-    duration_seconds: "duration_seconds",
-    rounds_count: "rounds_count",
-    payload_truncated: "payload_truncated",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    channel: lambda do |value|
-      ::OctridevIntercom::HitlEventDataChannel.from_value(value)
-    end,
-    outcome: lambda do |value|
-      ::OctridevIntercom::HitlEventDataOutcome.from_value(value)
-    end,
-    approved_draft_type: lambda do |value|
-      ::OctridevIntercom::HitlEventDataApprovedDraftType.from_value(value)
-    end,
-  }.freeze
-end
+    # @return [Array_of_HandlingEvent] Array of handling events
+    attr_reader :handling_events
 
-# API model for HitlEventData.
-# Fields specific to this event. Which are present depends on `event_type` — see the endpoint description for the full mapping.
-class HitlEventData
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalHitlEventDataMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalHitlEventDataMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalHitlEventDataMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [HitlEventDataChannel] The channel the conversation was on when Fin consulted a teammate.
-  attr_reader :channel
-  # @return [Integer] The confidence threshold the rule required, as a percentage.
-  attr_reader :rule_threshold_percent
-  # @return [Integer] How confident Fin was in its answer, as a percentage. Compare against `rule_threshold_percent`.
-  attr_reader :confidence_percent
-  # @return [String] The question Fin put to the teammate.
-  attr_reader :sharp_ask
-  # @return [String] Why Fin needed to ask.
-  attr_reader :ask_rationale
-  # @return [String] Fin's summary of what the customer needs.
-  attr_reader :issue_summary
-  # @return [String] The customer's message that prompted the consultation.
-  attr_reader :customer_question
-  # @return [String] The reply Fin proposed to the teammate.
-  attr_reader :draft
-  # @return [Integer] Which round of teammate feedback this event belongs to, starting at 1.
-  attr_reader :round_index
-  # @return [String] The feedback the teammate gave Fin.
-  attr_reader :teammate_input
-  # @return [String] The teammate involved in this event — who gave the feedback, or who approved the draft or took over.
-  attr_reader :reviewer_admin_id
-  # @return [String] How Fin responded to the feedback. `answer` means it produced a revised draft, and is the only value accompanied by a `fin_draft_revised` event. `no_answer` means it had nothing to send, `failed` that regeneration failed, `consult_teammate` that it asked the teammate again, and `pending` that the consultation ended before Fin responded.
-  attr_reader :regeneration_outcome
-  # @return [String] The reply Fin produced after the teammate's feedback.
-  attr_reader :revised_draft
-  # @return [HitlEventDataOutcome] How the consultation ended.
-  attr_reader :outcome
-  # @return [HitlEventDataApprovedDraftType] Whether the teammate approved Fin's original draft or the one it revised after their feedback.
-  attr_reader :approved_draft_type
-  # @return [String] The reply as it stood when the consultation ended.
-  attr_reader :final_draft
-  # @return [String] What was sent to the customer. Null when nothing was sent.
-  attr_reader :sent_text
-  # @return [Integer] How long the consultation took, in seconds.
-  attr_reader :duration_seconds
-  # @return [Integer] How many rounds of teammate feedback the consultation had. Only the ten most recent are returned as events, so this can exceed the number of `fin_teammate_input_received` events.
-  attr_reader :rounds_count
-  # @return [Boolean] Whether any text on this consultation was too long to store in full and was cut.
-  attr_reader :payload_truncated
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalHitlEventDataMetadata
+    FIELDS = {
+      channel: 'channel',
+      rule_threshold_percent: 'rule_threshold_percent',
+      confidence_percent: 'confidence_percent',
+      sharp_ask: 'sharp_ask',
+      ask_rationale: 'ask_rationale',
+      issue_summary: 'issue_summary',
+      customer_question: 'customer_question',
+      draft: 'draft',
+      round_index: 'round_index',
+      teammate_input: 'teammate_input',
+      reviewer_admin_id: 'reviewer_admin_id',
+      regeneration_outcome: 'regeneration_outcome',
+      revised_draft: 'revised_draft',
+      outcome: 'outcome',
+      approved_draft_type: 'approved_draft_type',
+      final_draft: 'final_draft',
+      sent_text: 'sent_text',
+      duration_seconds: 'duration_seconds',
+      rounds_count: 'rounds_count',
+      payload_truncated: 'payload_truncated'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      channel: lambda do |value|
+        ::OctridevIntercom::HitlEventDataChannel.from_value(value)
+      end,
+      outcome: lambda do |value|
+        ::OctridevIntercom::HitlEventDataOutcome.from_value(value)
+      end,
+      approved_draft_type: lambda do |value|
+        ::OctridevIntercom::HitlEventDataApprovedDraftType.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for HitlEventData.
+  # Fields specific to this event. Which are present depends on `event_type` — see the endpoint description for the full mapping.
+  class HitlEventData
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalHitlEventDataMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalHitlEventDataMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalHitlEventDataMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalHitlEventMetadata
-  FIELDS = {
-    hitl_cycle_id: "hitl_cycle_id",
-    event_type: "event_type",
-    conversation_part_id: "conversation_part_id",
-    rule_id: "rule_id",
-    rule_name: "rule_name",
-    created_at: "created_at",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    event_type: lambda do |value|
-      ::OctridevIntercom::HitlEventEventType.from_value(value)
-    end,
-    data: lambda do |value|
-      ::OctridevIntercom::HitlEventData.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [HitlEventDataChannel] The channel the conversation was on when Fin consulted a teammate.
+    attr_reader :channel
+    # @return [Integer] The confidence threshold the rule required, as a percentage.
+    attr_reader :rule_threshold_percent
+    # @return [Integer] How confident Fin was in its answer, as a percentage. Compare against `rule_threshold_percent`.
+    attr_reader :confidence_percent
+    # @return [String] The question Fin put to the teammate.
+    attr_reader :sharp_ask
+    # @return [String] Why Fin needed to ask.
+    attr_reader :ask_rationale
+    # @return [String] Fin's summary of what the customer needs.
+    attr_reader :issue_summary
+    # @return [String] The customer's message that prompted the consultation.
+    attr_reader :customer_question
+    # @return [String] The reply Fin proposed to the teammate.
+    attr_reader :draft
+    # @return [Integer] Which round of teammate feedback this event belongs to, starting at 1.
+    attr_reader :round_index
+    # @return [String] The feedback the teammate gave Fin.
+    attr_reader :teammate_input
+    # @return [String] The teammate involved in this event — who gave the feedback, or who approved the draft or took over.
+    attr_reader :reviewer_admin_id
+    # @return [String] How Fin responded to the feedback. `answer` means it produced a revised draft, and is the only value accompanied by a `fin_draft_revised` event. `no_answer` means it had nothing to send, `failed` that regeneration failed, `consult_teammate` that it asked the teammate again, and `pending` that the consultation ended before Fin responded.
+    attr_reader :regeneration_outcome
+    # @return [String] The reply Fin produced after the teammate's feedback.
+    attr_reader :revised_draft
+    # @return [HitlEventDataOutcome] How the consultation ended.
+    attr_reader :outcome
+    # @return [HitlEventDataApprovedDraftType] Whether the teammate approved Fin's original draft or the one it revised after their feedback.
+    attr_reader :approved_draft_type
+    # @return [String] The reply as it stood when the consultation ended.
+    attr_reader :final_draft
+    # @return [String] What was sent to the customer. Null when nothing was sent.
+    attr_reader :sent_text
+    # @return [Integer] How long the consultation took, in seconds.
+    attr_reader :duration_seconds
+    # @return [Integer] How many rounds of teammate feedback the consultation had. Only the ten most recent are returned as events, so this can exceed the number of `fin_teammate_input_received` events.
+    attr_reader :rounds_count
+    # @return [Boolean] Whether any text on this consultation was too long to store in full and was cut.
+    attr_reader :payload_truncated
 
-# API model for HitlEvent.
-# A single event in a Fin human-in-the-loop consultation on a conversation.
-class HitlEvent
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalHitlEventMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalHitlEventMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalHitlEventMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] Identifies the consultation this event belongs to. The same on every event of one consultation, so it is not unique per event.
-  attr_reader :hitl_cycle_id
-  # @return [HitlEventEventType] What happened.
-  attr_reader :event_type
-  # @return [String] The conversation part this event relates to, where one exists.
-  attr_reader :conversation_part_id
-  # @return [String] The escalation rule that triggered the consultation, as recorded when it began. Null if no rule triggered it.
-  attr_reader :rule_id
-  # @return [String] The rule's name as recorded when the consultation began, which may differ from its current name.
-  attr_reader :rule_name
-  # @return [Integer] Unix timestamp for when the event occurred. Approximate on `fin_draft_proposed`.
-  attr_reader :created_at
-  # @return [HitlEventData] Fields specific to this event. Which are present depends on `event_type` — see the endpoint description for the full mapping.
-  attr_reader :data
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the HitlEventDataApprovedDraftType SDK namespace.
-module HitlEventDataApprovedDraftType
-  ORIGINAL = 'original'
-  REVISED = 'revised'
-  VALUES = ['original', 'revised'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the HitlEventDataChannel SDK namespace.
-module HitlEventDataChannel
-  EMAIL = 'email'
-  CHAT = 'chat'
-  VOICE = 'voice'
-  UNKNOWN = 'unknown'
-  VALUES = ['email', 'chat', 'voice', 'unknown'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the HitlEventDataOutcome SDK namespace.
-module HitlEventDataOutcome
-  APPROVED = 'approved'
-  TAKEN_OVER = 'taken_over'
-  TIMED_OUT_SENT = 'timed_out_sent'
-  TIMED_OUT_ESCALATED = 'timed_out_escalated'
-  SUPERSEDED = 'superseded'
-  VALUES = ['approved', 'taken_over', 'timed_out_sent', 'timed_out_escalated', 'superseded'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the HitlEventEventType SDK namespace.
-module HitlEventEventType
-  FIN_CONSULTATION_STARTED = 'fin_consultation_started'
-  FIN_DRAFT_PROPOSED = 'fin_draft_proposed'
-  FIN_TEAMMATE_INPUT_RECEIVED = 'fin_teammate_input_received'
-  FIN_DRAFT_REVISED = 'fin_draft_revised'
-  FIN_CONSULTATION_FINISHED = 'fin_consultation_finished'
-  VALUES = [
-    'fin_consultation_started', 'fin_draft_proposed', 'fin_teammate_input_received',
-    'fin_draft_revised', 'fin_consultation_finished'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalHitlEventListMetadata
-  FIELDS = {
-    type: "type",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::HitlEventListType.from_value(value)
-    end,
-    data: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::HitlEvent.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for HitlEventList.
-# A list of human-in-the-loop events for a conversation, oldest first.
-class HitlEventList
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalHitlEventListMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalHitlEventListMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalHitlEventListMetadata::DECODERS
-
-  # @return [HitlEventListType] The type of the object.
-  attr_reader :type
-  # @return [Array_of_HitlEvent] An array of HITL event objects.
-  attr_reader :data
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalHitlEventMetadata
+    FIELDS = {
+      hitl_cycle_id: 'hitl_cycle_id',
+      event_type: 'event_type',
+      conversation_part_id: 'conversation_part_id',
+      rule_id: 'rule_id',
+      rule_name: 'rule_name',
+      created_at: 'created_at',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      event_type: lambda do |value|
+        ::OctridevIntercom::HitlEventEventType.from_value(value)
+      end,
+      data: lambda do |value|
+        ::OctridevIntercom::HitlEventData.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for HitlEvent.
+  # A single event in a Fin human-in-the-loop consultation on a conversation.
+  class HitlEvent
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalHitlEventMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalHitlEventMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalHitlEventMetadata::DECODERS
 
-# Defines the HitlEventListType SDK namespace.
-module HitlEventListType
-  LIST = 'list'
-  VALUES = ['list'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [String] Identifies the consultation this event belongs to. The same on every event of one consultation, so it is not unique per event.
+    attr_reader :hitl_cycle_id
+    # @return [HitlEventEventType] What happened.
+    attr_reader :event_type
+    # @return [String] The conversation part this event relates to, where one exists.
+    attr_reader :conversation_part_id
+    # @return [String] The escalation rule that triggered the consultation, as recorded when it began. Null if no rule triggered it.
+    attr_reader :rule_id
+    # @return [String] The rule's name as recorded when the consultation began, which may differ from its current name.
+    attr_reader :rule_name
+    # @return [Integer] Unix timestamp for when the event occurred. Approximate on `fin_draft_proposed`.
+    attr_reader :created_at
+    # @return [HitlEventData] Fields specific to this event. Which are present depends on `event_type` — see the endpoint description for the full mapping.
+    attr_reader :data
 
-# Internal model hydration metadata.
-class SdkInternalOpenConversationRequestMetadata
-  FIELDS = {
-    message_type: "message_type",
-    admin_id: "admin_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    message_type
-    admin_id
-  ].freeze
-  DECODERS = {
-    message_type: lambda do |value|
-      ::OctridevIntercom::OpenConversationRequestMessageType.from_value(value)
-    end,
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# API model for OpenConversationRequest.
-# Payload of the request to open a conversation
-class OpenConversationRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalOpenConversationRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalOpenConversationRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalOpenConversationRequestMetadata::DECODERS
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  # @return [OpenConversationRequestMessageType] Required enumerated value serialized in the `message_type` wire field.
-  attr_reader :message_type
-  # @return [String] The id of the admin who is performing the action.
-  attr_reader :admin_id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the HitlEventDataApprovedDraftType SDK namespace.
+  module HitlEventDataApprovedDraftType
+    ORIGINAL = 'original'
+    REVISED = 'revised'
+    VALUES = %w[original revised].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the OpenConversationRequestMessageType SDK namespace.
-module OpenConversationRequestMessageType
-  OPEN = 'open'
-  VALUES = ['open'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
-
-    raise SdkValidationError.new('OpenConversationRequestMessageType', 'enum', "Unknown OpenConversationRequestMessageType: #{value}")
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalQuickReplyOptionMetadata
-  FIELDS = {
-    text: "text",
-    uuid: "uuid",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    text
-    uuid
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for QuickReplyOption.
-# Typed representation of the `QuickReplyOption` API schema.
-class QuickReplyOption
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalQuickReplyOptionMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalQuickReplyOptionMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalQuickReplyOptionMetadata::DECODERS
-
-  # @return [String] The text to display in this quick reply option.
-  attr_reader :text
-  # @return [String] A unique identifier for this quick reply option. This value will be available within the metadata of the comment conversation part that is created when a user clicks on this reply option.
-  attr_reader :uuid
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the HitlEventDataChannel SDK namespace.
+  module HitlEventDataChannel
+    EMAIL = 'email'
+    CHAT = 'chat'
+    VOICE = 'voice'
+    UNKNOWN = 'unknown'
+    VALUES = %w[email chat voice unknown].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the HitlEventDataOutcome SDK namespace.
+  module HitlEventDataOutcome
+    APPROVED = 'approved'
+    TAKEN_OVER = 'taken_over'
+    TIMED_OUT_SENT = 'timed_out_sent'
+    TIMED_OUT_ESCALATED = 'timed_out_escalated'
+    SUPERSEDED = 'superseded'
+    VALUES = %w[approved taken_over timed_out_sent timed_out_escalated superseded].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalRedactConversationRequestVariant0Metadata
-  FIELDS = {
-    type: "type",
-    conversation_id: "conversation_id",
-    conversation_part_id: "conversation_part_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    conversation_id
-    conversation_part_id
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::RedactConversationRequestVariant0Type.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for RedactConversationRequestVariant0.
-class RedactConversationRequestVariant0
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalRedactConversationRequestVariant0Metadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalRedactConversationRequestVariant0Metadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalRedactConversationRequestVariant0Metadata::DECODERS
-
-  # @return [RedactConversationRequestVariant0Type] The type of resource being redacted.
-  attr_reader :type
-  # @return [String] The id of the conversation.
-  attr_reader :conversation_id
-  # @return [String] The id of the conversation_part.
-  attr_reader :conversation_part_id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the HitlEventEventType SDK namespace.
+  module HitlEventEventType
+    FIN_CONSULTATION_STARTED = 'fin_consultation_started'
+    FIN_DRAFT_PROPOSED = 'fin_draft_proposed'
+    FIN_TEAMMATE_INPUT_RECEIVED = 'fin_teammate_input_received'
+    FIN_DRAFT_REVISED = 'fin_draft_revised'
+    FIN_CONSULTATION_FINISHED = 'fin_consultation_finished'
+    VALUES = %w[
+      fin_consultation_started fin_draft_proposed fin_teammate_input_received
+      fin_draft_revised fin_consultation_finished
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalHitlEventListMetadata
+    FIELDS = {
+      type: 'type',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::HitlEventListType.from_value(value)
+      end,
+      data: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::HitlEvent.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for HitlEventList.
+  # A list of human-in-the-loop events for a conversation, oldest first.
+  class HitlEventList
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalHitlEventListMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalHitlEventListMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalHitlEventListMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalRedactConversationRequestVariant1Metadata
-  FIELDS = {
-    type: "type",
-    conversation_id: "conversation_id",
-    source_id: "source_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    conversation_id
-    source_id
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::RedactConversationRequestVariant1Type.from_value(value)
-    end,
-  }.freeze
-end
+    # @return [HitlEventListType] The type of the object.
+    attr_reader :type
+    # @return [Array_of_HitlEvent] An array of HITL event objects.
+    attr_reader :data
 
-# API model for RedactConversationRequestVariant1.
-class RedactConversationRequestVariant1
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalRedactConversationRequestVariant1Metadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalRedactConversationRequestVariant1Metadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalRedactConversationRequestVariant1Metadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [RedactConversationRequestVariant1Type] The type of resource being redacted.
-  attr_reader :type
-  # @return [String] The id of the conversation.
-  attr_reader :conversation_id
-  # @return [String] The id of the source.
-  attr_reader :source_id
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the HitlEventListType SDK namespace.
+  module HitlEventListType
+    LIST = 'list'
+    VALUES = ['list'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalOpenConversationRequestMetadata
+    FIELDS = {
+      message_type: 'message_type',
+      admin_id: 'admin_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      message_type
+      admin_id
+    ].freeze
+    DECODERS = {
+      message_type: lambda do |value|
+        ::OctridevIntercom::OpenConversationRequestMessageType.from_value(value)
+      end
+    }.freeze
   end
-end
 
-# Defines the RedactConversationRequest SDK namespace.
-module RedactConversationRequest
-  DISCRIMINATOR_MAPPING = {
-    "conversation_part" => -> { RedactConversationRequestVariant0 },
-    "source" => -> { RedactConversationRequestVariant1 },
-  }.freeze
+  # API model for OpenConversationRequest.
+  # Payload of the request to open a conversation
+  class OpenConversationRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalOpenConversationRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalOpenConversationRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalOpenConversationRequestMetadata::DECODERS
 
-  def self.from_hash(hash)
-    return hash unless hash.is_a?(::Hash)
-    type = DISCRIMINATOR_MAPPING[hash["type"]]&.call
-    return type.from_hash(hash) if type
+    # @return [OpenConversationRequestMessageType] Required enumerated value serialized in the `message_type` wire field.
+    attr_reader :message_type
+    # @return [String] The id of the admin who is performing the action.
+    attr_reader :admin_id
 
-    raise SdkValidationError.new('RedactConversationRequest', 'variant', "Unknown RedactConversationRequest discriminator: #{hash["type"].inspect}")
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 
-# Defines the RedactConversationRequestVariant0Type SDK namespace.
-module RedactConversationRequestVariant0Type
-  CONVERSATION_PART = 'conversation_part'
-  VALUES = ['conversation_part'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
+  # Defines the OpenConversationRequestMessageType SDK namespace.
+  module OpenConversationRequestMessageType
+    OPEN = 'open'
+    VALUES = ['open'].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
 
-    raise SdkValidationError.new('RedactConversationRequestVariant0Type', 'enum', "Unknown RedactConversationRequestVariant0Type: #{value}")
+      raise SdkValidationError.new('OpenConversationRequestMessageType', 'enum', "Unknown OpenConversationRequestMessageType: #{value}")
+    end
   end
-end
+
+  # Internal model hydration metadata.
+  class SdkInternalQuickReplyOptionMetadata
+    FIELDS = {
+      text: 'text',
+      uuid: 'uuid'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      text
+      uuid
+    ].freeze
+    DECODERS = {}.freeze
+  end
+
+  # API model for QuickReplyOption.
+  # Typed representation of the `QuickReplyOption` API schema.
+  class QuickReplyOption
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalQuickReplyOptionMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalQuickReplyOptionMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalQuickReplyOptionMetadata::DECODERS
+
+    # @return [String] The text to display in this quick reply option.
+    attr_reader :text
+    # @return [String] A unique identifier for this quick reply option. This value will be available within the metadata of the comment conversation part that is created when a user clicks on this reply option.
+    attr_reader :uuid
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalRedactConversationRequestVariant0Metadata
+    FIELDS = {
+      type: 'type',
+      conversation_id: 'conversation_id',
+      conversation_part_id: 'conversation_part_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      conversation_id
+      conversation_part_id
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::RedactConversationRequestVariant0Type.from_value(value)
+      end
+    }.freeze
+  end
+
+  # API model for RedactConversationRequestVariant0.
+  class RedactConversationRequestVariant0
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalRedactConversationRequestVariant0Metadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalRedactConversationRequestVariant0Metadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalRedactConversationRequestVariant0Metadata::DECODERS
+
+    # @return [RedactConversationRequestVariant0Type] The type of resource being redacted.
+    attr_reader :type
+    # @return [String] The id of the conversation.
+    attr_reader :conversation_id
+    # @return [String] The id of the conversation_part.
+    attr_reader :conversation_part_id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalRedactConversationRequestVariant1Metadata
+    FIELDS = {
+      type: 'type',
+      conversation_id: 'conversation_id',
+      source_id: 'source_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      conversation_id
+      source_id
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::RedactConversationRequestVariant1Type.from_value(value)
+      end
+    }.freeze
+  end
+
+  # API model for RedactConversationRequestVariant1.
+  class RedactConversationRequestVariant1
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalRedactConversationRequestVariant1Metadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalRedactConversationRequestVariant1Metadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalRedactConversationRequestVariant1Metadata::DECODERS
+
+    # @return [RedactConversationRequestVariant1Type] The type of resource being redacted.
+    attr_reader :type
+    # @return [String] The id of the conversation.
+    attr_reader :conversation_id
+    # @return [String] The id of the source.
+    attr_reader :source_id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the RedactConversationRequest SDK namespace.
+  module RedactConversationRequest
+    DISCRIMINATOR_MAPPING = {
+      'conversation_part' => -> { RedactConversationRequestVariant0 },
+      'source' => -> { RedactConversationRequestVariant1 }
+    }.freeze
+
+    def self.from_hash(hash)
+      return hash unless hash.is_a?(::Hash)
+
+      type = DISCRIMINATOR_MAPPING[hash['type']]&.call
+      return type.from_hash(hash) if type
+
+      raise SdkValidationError.new('RedactConversationRequest', 'variant', "Unknown RedactConversationRequest discriminator: #{hash['type'].inspect}")
+    end
+  end
+
+  # Defines the RedactConversationRequestVariant0Type SDK namespace.
+  module RedactConversationRequestVariant0Type
+    CONVERSATION_PART = 'conversation_part'
+    VALUES = ['conversation_part'].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
+
+      raise SdkValidationError.new('RedactConversationRequestVariant0Type', 'enum', "Unknown RedactConversationRequestVariant0Type: #{value}")
+    end
+  end
 end

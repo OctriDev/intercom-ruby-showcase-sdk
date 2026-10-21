@@ -33,26 +33,25 @@ module OctridevIntercom
         context: NOT_GIVEN,
         request_options: nil
       )
-
-        Validation.if_given(context) { Validation.validate_length('context', context, max: 10000) }
+        Validation.if_given(context) { Validation.validate_length('context', context, max: 10_000) }
 
         SdkClient.request(
           'POST',
-          "/fin/escalate",
+          '/fin/escalate',
           config: config,
           body: {
             'conversation_id' => conversation_id,
             'user' => user,
-            'context' => context,
+            'context' => context
           },
           return_type: ::OctridevIntercom::Methods::FinAgent::EscalateFinConversationResponse,
           decoder: :json,
           operation_id: 'escalate_fin_conversation',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 },
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 }
         ).data
       end
     end

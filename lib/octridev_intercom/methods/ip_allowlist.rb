@@ -12,24 +12,19 @@ module OctridevIntercom
       # Retrieves the current IP allowlist configuration for the workspace. Use the returned `enabled` value and `ip_allowlist` entries to inspect whether the allowlist is active and which IP addresses or ranges are allowed.
       #
       # Retrieve the current IP allowlist configuration for the workspace.
-      singleton_class.define_method(:get_ip_allowlist) do |
-        config:,
-        intercom_version: NOT_GIVEN,
-        request_options: nil
-      |
-
+      singleton_class.define_method(:get_ip_allowlist) do |config:, intercom_version: NOT_GIVEN, request_options: nil|
         SdkClient.request(
           'GET',
-          "/ip_allowlist",
+          '/ip_allowlist',
           config: config,
           return_type: ::OctridevIntercom::IpAllowlist,
           decoder: :json,
           operation_id: 'get_ip_allowlist',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -52,24 +47,23 @@ module OctridevIntercom
         ip_allowlist: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PUT',
-          "/ip_allowlist",
+          '/ip_allowlist',
           config: config,
           body: {
             'type' => type,
             'enabled' => enabled,
-            'ip_allowlist' => ip_allowlist,
+            'ip_allowlist' => ip_allowlist
           },
           return_type: ::OctridevIntercom::IpAllowlist,
           decoder: :json,
           operation_id: 'update_ip_allowlist',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
         ).data
       end
     end

@@ -12,13 +12,12 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalLinkTicketsConversationMetadata
         FIELDS = {
-          conversation_id: "conversation_id",
+          conversation_id: 'conversation_id'
         }.freeze
         REQUIRED_FIELDS = %i[
           conversation_id
         ].freeze
-        DECODERS = {
-        }.freeze
+        DECODERS = {}.freeze
       end
 
       # API model for LinkTicketsConversation.
@@ -48,13 +47,11 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalCreateTicketAssignmentMetadata
         FIELDS = {
-          admin_assignee_id: "admin_assignee_id",
-          team_assignee_id: "team_assignee_id",
+          admin_assignee_id: 'admin_assignee_id',
+          team_assignee_id: 'team_assignee_id'
         }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
+        REQUIRED_FIELDS = %i[].freeze
+        DECODERS = {}.freeze
       end
 
       # API model for CreateTicketAssignment.
@@ -87,15 +84,15 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalCreateTicketMetadata
         FIELDS = {
-          ticket_type_id: "ticket_type_id",
-          contacts: "contacts",
-          conversation_to_link_id: "conversation_to_link_id",
-          company_id: "company_id",
-          created_at: "created_at",
-          ticket_attributes: "ticket_attributes",
-          assignment: "assignment",
-          channel: "channel",
-          skip_notifications: "skip_notifications",
+          ticket_type_id: 'ticket_type_id',
+          contacts: 'contacts',
+          conversation_to_link_id: 'conversation_to_link_id',
+          company_id: 'company_id',
+          created_at: 'created_at',
+          ticket_attributes: 'ticket_attributes',
+          assignment: 'assignment',
+          channel: 'channel',
+          skip_notifications: 'skip_notifications'
         }.freeze
         REQUIRED_FIELDS = %i[
           ticket_type_id
@@ -113,7 +110,7 @@ module OctridevIntercom
           end,
           channel: lambda do |value|
             ::OctridevIntercom::Methods::Tickets::CreateTicketChannel.from_value(value)
-          end,
+          end
         }.freeze
       end
 
@@ -160,13 +157,11 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalEnqueueCreateTicketAssignmentMetadata
         FIELDS = {
-          admin_assignee_id: "admin_assignee_id",
-          team_assignee_id: "team_assignee_id",
+          admin_assignee_id: 'admin_assignee_id',
+          team_assignee_id: 'team_assignee_id'
         }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
+        REQUIRED_FIELDS = %i[].freeze
+        DECODERS = {}.freeze
       end
 
       # API model for EnqueueCreateTicketAssignment.
@@ -199,15 +194,15 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalEnqueueCreateTicketMetadata
         FIELDS = {
-          ticket_type_id: "ticket_type_id",
-          contacts: "contacts",
-          conversation_to_link_id: "conversation_to_link_id",
-          company_id: "company_id",
-          created_at: "created_at",
-          ticket_attributes: "ticket_attributes",
-          assignment: "assignment",
-          channel: "channel",
-          skip_notifications: "skip_notifications",
+          ticket_type_id: 'ticket_type_id',
+          contacts: 'contacts',
+          conversation_to_link_id: 'conversation_to_link_id',
+          company_id: 'company_id',
+          created_at: 'created_at',
+          ticket_attributes: 'ticket_attributes',
+          assignment: 'assignment',
+          channel: 'channel',
+          skip_notifications: 'skip_notifications'
         }.freeze
         REQUIRED_FIELDS = %i[
           ticket_type_id
@@ -225,7 +220,7 @@ module OctridevIntercom
           end,
           channel: lambda do |value|
             ::OctridevIntercom::Methods::Tickets::EnqueueCreateTicketChannel.from_value(value)
-          end,
+          end
         }.freeze
       end
 
@@ -272,20 +267,18 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalUpdateTicketMetadata
         FIELDS = {
-          ticket_attributes: "ticket_attributes",
-          ticket_state_id: "ticket_state_id",
-          company_id: "company_id",
-          open: "open",
-          is_shared: "is_shared",
-          snoozed_until: "snoozed_until",
-          admin_id: "admin_id",
-          assignee_id: "assignee_id",
-          skip_notifications: "skip_notifications",
+          ticket_attributes: 'ticket_attributes',
+          ticket_state_id: 'ticket_state_id',
+          company_id: 'company_id',
+          open: 'open',
+          is_shared: 'is_shared',
+          snoozed_until: 'snoozed_until',
+          admin_id: 'admin_id',
+          assignee_id: 'assignee_id',
+          skip_notifications: 'skip_notifications'
         }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
+        REQUIRED_FIELDS = %i[].freeze
+        DECODERS = {}.freeze
       end
 
       # API model for UpdateTicket.

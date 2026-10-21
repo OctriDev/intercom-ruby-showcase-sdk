@@ -24,26 +24,25 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/conversations/",
+            '/conversations/',
             SdkClient.encode_path_segment(id),
-            "/merge"
+            '/merge'
           ].join,
           config: config,
           body: {
-            'merge_into_conversation_id' => merge_into_conversation_id,
+            'merge_into_conversation_id' => merge_into_conversation_id
           },
           return_type: ::OctridevIntercom::Conversation,
           decoder: :json,
           operation_id: 'merge_conversation',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
         ).data
       end
     end

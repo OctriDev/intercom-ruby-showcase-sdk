@@ -5,181 +5,178 @@
 
 # calls domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalAiCallResponseMetadata
-  FIELDS = {
-    id: "id",
-    app_id: "app_id",
-    user_phone_number: "user_phone_number",
-    status: "status",
-    intercom_call_id: "intercom_call_id",
-    external_call_id: "external_call_id",
-    intercom_conversation_id: "intercom_conversation_id",
-    call_transcript: "call_transcript",
-    call_summary: "call_summary",
-    intent: "intent",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for AiCallResponse.
-# Response containing information about a Fin Voice call
-class AiCallResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAiCallResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAiCallResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAiCallResponseMetadata::DECODERS
-
-  # @return [Integer] The unique identifier for the external reference
-  attr_reader :id
-  # @return [Integer] The workspace identifier
-  attr_reader :app_id
-  # @return [String] Phone number in E.164 format for the call
-  attr_reader :user_phone_number
-  # @return [String] Status of the call. Can be "registered", "in-progress", or a resolution state
-  attr_reader :status
-  # @return [String] The Intercom call identifier, if the call has been matched
-  attr_reader :intercom_call_id
-  # @return [String] The external call identifier from the call provider
-  attr_reader :external_call_id
-  # @return [String] The Intercom conversation identifier, if a conversation has been created
-  attr_reader :intercom_conversation_id
-  # @return [Array_of_Hash] Array of transcript entries for the call
-  attr_reader :call_transcript
-  # @return [String] Summary of the call conversation, truncated to 256 characters. Empty string if no summary available.
-  attr_reader :call_summary
-  # @return [Array_of_Hash] Array of intent classifications for the call
-  attr_reader :intent
-  # @return [Hash] The metadata object supplied when the call was registered, returned verbatim. Empty object when none was supplied.
-  attr_reader :data
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAiCallResponseMetadata
+    FIELDS = {
+      id: 'id',
+      app_id: 'app_id',
+      user_phone_number: 'user_phone_number',
+      status: 'status',
+      intercom_call_id: 'intercom_call_id',
+      external_call_id: 'external_call_id',
+      intercom_conversation_id: 'intercom_conversation_id',
+      call_transcript: 'call_transcript',
+      call_summary: 'call_summary',
+      intent: 'intent',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AiCallResponse.
+  # Response containing information about a Fin Voice call
+  class AiCallResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAiCallResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAiCallResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAiCallResponseMetadata::DECODERS
+
+    # @return [Integer] The unique identifier for the external reference
+    attr_reader :id
+    # @return [Integer] The workspace identifier
+    attr_reader :app_id
+    # @return [String] Phone number in E.164 format for the call
+    attr_reader :user_phone_number
+    # @return [String] Status of the call. Can be "registered", "in-progress", or a resolution state
+    attr_reader :status
+    # @return [String] The Intercom call identifier, if the call has been matched
+    attr_reader :intercom_call_id
+    # @return [String] The external call identifier from the call provider
+    attr_reader :external_call_id
+    # @return [String] The Intercom conversation identifier, if a conversation has been created
+    attr_reader :intercom_conversation_id
+    # @return [Array_of_Hash] Array of transcript entries for the call
+    attr_reader :call_transcript
+    # @return [String] Summary of the call conversation, truncated to 256 characters. Empty string if no summary available.
+    attr_reader :call_summary
+    # @return [Array_of_Hash] Array of intent classifications for the call
+    attr_reader :intent
+    # @return [Hash] The metadata object supplied when the call was registered, returned verbatim. Empty object when none was supplied.
+    attr_reader :data
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalCallListMetadata
-  FIELDS = {
-    type: "type",
-    data: "data",
-    total_count: "total_count",
-    pages: "pages",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    data: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::Call.from_hash(item) }
-    end,
-    pages: lambda do |value|
-      ::OctridevIntercom::CursorPages.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for CallList.
-# A paginated list of calls.
-class CallList
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCallListMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCallListMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCallListMetadata::DECODERS
-
-  # @return [String] String representing the object's type. Always has the value `list`.
-  attr_reader :type
-  # @return [Array_of_Call] A list of calls.
-  attr_reader :data
-  # @return [Integer] Total number of items available.
-  attr_reader :total_count
-  # @return [CursorPages] Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
-  attr_reader :pages
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCallListMetadata
+    FIELDS = {
+      type: 'type',
+      data: 'data',
+      total_count: 'total_count',
+      pages: 'pages'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      data: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::Call.from_hash(item) }
+      end,
+      pages: lambda do |value|
+        ::OctridevIntercom::CursorPages.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for CallList.
+  # A paginated list of calls.
+  class CallList
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCallListMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCallListMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCallListMetadata::DECODERS
+
+    # @return [String] String representing the object's type. Always has the value `list`.
+    attr_reader :type
+    # @return [Array_of_Call] A list of calls.
+    attr_reader :data
+    # @return [Integer] Total number of items available.
+    attr_reader :total_count
+    # @return [CursorPages] Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
+    attr_reader :pages
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalRegisterFinVoiceCallRequestMetadata
-  FIELDS = {
-    phone_number: "phone_number",
-    call_id: "call_id",
-    source: "source",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    phone_number
-    call_id
-  ].freeze
-  DECODERS = {
-    source: lambda do |value|
-      ::OctridevIntercom::RegisterFinVoiceCallRequestSource.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for RegisterFinVoiceCallRequest.
-# Register a Fin Voice call with Intercom
-class RegisterFinVoiceCallRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalRegisterFinVoiceCallRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalRegisterFinVoiceCallRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalRegisterFinVoiceCallRequestMetadata::DECODERS
-
-  # @return [String] Phone number in E.164 format for the call
-  attr_reader :phone_number
-  # @return [String] External call identifier from the call provider
-  attr_reader :call_id
-  # @return [RegisterFinVoiceCallRequestSource] Source of the call. Can be "five9", "zoom_phone", or defaults to "aws_connect"
-  attr_reader :source
-  # @return [Hash] Additional metadata about the call
-  attr_reader :data
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalRegisterFinVoiceCallRequestMetadata
+    FIELDS = {
+      phone_number: 'phone_number',
+      call_id: 'call_id',
+      source: 'source',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      phone_number
+      call_id
+    ].freeze
+    DECODERS = {
+      source: lambda do |value|
+        ::OctridevIntercom::RegisterFinVoiceCallRequestSource.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for RegisterFinVoiceCallRequest.
+  # Register a Fin Voice call with Intercom
+  class RegisterFinVoiceCallRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalRegisterFinVoiceCallRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalRegisterFinVoiceCallRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalRegisterFinVoiceCallRequestMetadata::DECODERS
+
+    # @return [String] Phone number in E.164 format for the call
+    attr_reader :phone_number
+    # @return [String] External call identifier from the call provider
+    attr_reader :call_id
+    # @return [RegisterFinVoiceCallRequestSource] Source of the call. Can be "five9", "zoom_phone", or defaults to "aws_connect"
+    attr_reader :source
+    # @return [Hash] Additional metadata about the call
+    attr_reader :data
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Defines the RegisterFinVoiceCallRequestSource SDK namespace.
+  module RegisterFinVoiceCallRequestSource
+    FIVE9 = 'five9'
+    ZOOM_PHONE = 'zoom_phone'
+    AWS_CONNECT = 'aws_connect'
+    VALUES = %w[five9 zoom_phone aws_connect].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
-
-# Defines the RegisterFinVoiceCallRequestSource SDK namespace.
-module RegisterFinVoiceCallRequestSource
-  FIVE9 = 'five9'
-  ZOOM_PHONE = 'zoom_phone'
-  AWS_CONNECT = 'aws_connect'
-  VALUES = ['five9', 'zoom_phone', 'aws_connect'].freeze
-  def self.from_value(value)
-    value
-  end
-end
 end

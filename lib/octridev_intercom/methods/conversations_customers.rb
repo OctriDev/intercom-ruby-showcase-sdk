@@ -27,27 +27,26 @@ module OctridevIntercom
         customer: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/conversations/",
+            '/conversations/',
             SdkClient.encode_path_segment(conversation_id),
-            "/customers"
+            '/customers'
           ].join,
           config: config,
           body: {
             'admin_id' => admin_id,
-            'customer' => customer,
+            'customer' => customer
           },
           return_type: ::OctridevIntercom::ConversationParticipantsResponse,
           decoder: :json,
           operation_id: 'attach_conversations_contact',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -68,27 +67,26 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/conversations/",
+            '/conversations/',
             SdkClient.encode_path_segment(conversation_id),
-            "/customers/",
+            '/customers/',
             SdkClient.encode_path_segment(contact_id)
           ].join,
           config: config,
           body: {
-            'admin_id' => admin_id,
+            'admin_id' => admin_id
           },
           return_type: ::OctridevIntercom::ConversationParticipantsResponse,
           decoder: :json,
           operation_id: 'detach_conversations_contact',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '403' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2, '422' => ::OctridevIntercom::Error2 }
         ).data
       end
     end

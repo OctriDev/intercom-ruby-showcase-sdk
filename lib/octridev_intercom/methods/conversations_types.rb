@@ -12,13 +12,13 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalCreateConversationResponseMetadata
         FIELDS = {
-          type: "type",
-          id: "id",
-          created_at: "created_at",
-          subject: "subject",
-          body: "body",
-          message_type: "message_type",
-          conversation_id: "conversation_id",
+          type: 'type',
+          id: 'id',
+          created_at: 'created_at',
+          subject: 'subject',
+          body: 'body',
+          message_type: 'message_type',
+          conversation_id: 'conversation_id'
         }.freeze
         REQUIRED_FIELDS = %i[
           type
@@ -31,7 +31,7 @@ module OctridevIntercom
         DECODERS = {
           message_type: lambda do |value|
             ::OctridevIntercom::Methods::Conversations::CreateConversationResponseMessageType.from_value(value)
-          end,
+          end
         }.freeze
       end
 
@@ -77,7 +77,7 @@ module OctridevIntercom
         INAPP = 'inapp'
         FACEBOOK = 'facebook'
         TWITTER = 'twitter'
-        VALUES = ['email', 'inapp', 'facebook', 'twitter'].freeze
+        VALUES = %w[email inapp facebook twitter].freeze
         def self.from_value(value)
           value
         end

@@ -5,540 +5,530 @@
 
 # companies domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalCompanyAttachedContactsMetadata
-  FIELDS = {
-    type: "type",
-    data: "data",
-    total_count: "total_count",
-    pages: "pages",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::CompanyAttachedContactsType.from_value(value)
-    end,
-    data: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::Contact.from_hash(item) }
-    end,
-    pages: lambda do |value|
-      ::OctridevIntercom::CursorPages.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for CompanyAttachedContacts.
-# A list of Contact Objects
-class CompanyAttachedContacts
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCompanyAttachedContactsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCompanyAttachedContactsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCompanyAttachedContactsMetadata::DECODERS
-
-  # @return [CompanyAttachedContactsType] The type of object - `list`
-  attr_reader :type
-  # @return [Array_of_Contact] An array containing Contact Objects
-  attr_reader :data
-  # @return [Integer] The total number of contacts
-  attr_reader :total_count
-  # @return [CursorPages] Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
-  attr_reader :pages
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCompanyAttachedContactsMetadata
+    FIELDS = {
+      type: 'type',
+      data: 'data',
+      total_count: 'total_count',
+      pages: 'pages'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::CompanyAttachedContactsType.from_value(value)
+      end,
+      data: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::Contact.from_hash(item) }
+      end,
+      pages: lambda do |value|
+        ::OctridevIntercom::CursorPages.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for CompanyAttachedContacts.
+  # A list of Contact Objects
+  class CompanyAttachedContacts
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCompanyAttachedContactsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCompanyAttachedContactsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCompanyAttachedContactsMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+    # @return [CompanyAttachedContactsType] The type of object - `list`
+    attr_reader :type
+    # @return [Array_of_Contact] An array containing Contact Objects
+    attr_reader :data
+    # @return [Integer] The total number of contacts
+    attr_reader :total_count
+    # @return [CursorPages] Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
+    attr_reader :pages
 
-# Defines the CompanyAttachedContactsType SDK namespace.
-module CompanyAttachedContactsType
-  LIST = 'list'
-  VALUES = ['list'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalCompanyAttachedSegmentsMetadata
-  FIELDS = {
-    type: "type",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::CompanyAttachedSegmentsType.from_value(value)
-    end,
-    data: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::Segment.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for CompanyAttachedSegments.
-# A list of Segment Objects
-class CompanyAttachedSegments
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCompanyAttachedSegmentsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCompanyAttachedSegmentsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCompanyAttachedSegmentsMetadata::DECODERS
-
-  # @return [CompanyAttachedSegmentsType] The type of object - `list`
-  attr_reader :type
-  # @return [Array_of_Segment] An array containing Segment Objects
-  attr_reader :data
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the CompanyAttachedSegmentsType SDK namespace.
-module CompanyAttachedSegmentsType
-  LIST = 'list'
-  VALUES = ['list'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalCompanyListMetadata
-  FIELDS = {
-    type: "type",
-    pages: "pages",
-    total_count: "total_count",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::CompanyListType.from_value(value)
-    end,
-    pages: lambda do |value|
-      ::OctridevIntercom::CursorPages.from_hash(value)
-    end,
-    data: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::Company.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for CompanyList.
-# This will return a list of companies for the App.
-class CompanyList
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCompanyListMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCompanyListMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCompanyListMetadata::DECODERS
-
-  # @return [CompanyListType] The type of object - `list`.
-  attr_reader :type
-  # @return [CursorPages] Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
-  attr_reader :pages
-  # @return [Integer] The total number of companies.
-  attr_reader :total_count
-  # @return [Array_of_Company] An array containing Company Objects.
-  attr_reader :data
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the CompanyListType SDK namespace.
-module CompanyListType
-  LIST = 'list'
-  VALUES = ['list'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalCompanyScrollMetadata
-  FIELDS = {
-    type: "type",
-    data: "data",
-    pages: "pages",
-    total_count: "total_count",
-    scroll_param: "scroll_param",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::CompanyScrollType.from_value(value)
-    end,
-    data: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::Company.from_hash(item) }
-    end,
-    pages: lambda do |value|
-      ::OctridevIntercom::CursorPages.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for CompanyScroll.
-# Companies allow you to represent organizations using your product. Each company will have its own description and be associated with contacts. You can fetch, create, update and list companies.
-class CompanyScroll
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCompanyScrollMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCompanyScrollMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCompanyScrollMetadata::DECODERS
-
-  # @return [CompanyScrollType] The type of object - `list`
-  attr_reader :type
-  # @return [Array_of_Company] Optional array value serialized in the `data` wire field.
-  attr_reader :data
-  # @return [CursorPages] Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
-  attr_reader :pages
-  # @return [Integer] The total number of companies
-  attr_reader :total_count
-  # @return [String] The scroll parameter to use in the next request to fetch the next page of results.
-  attr_reader :scroll_param
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the CompanyScrollType SDK namespace.
-module CompanyScrollType
-  LIST = 'list'
-  VALUES = ['list'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalCompanySearchRequestSortMetadata
-  FIELDS = {
-    field: "field",
-    order: "order",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    order: lambda do |value|
-      ::OctridevIntercom::CompanySearchRequestSortOrder.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for CompanySearchRequestSort.
-# An optional object to sort the results by.
-class CompanySearchRequestSort
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCompanySearchRequestSortMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCompanySearchRequestSortMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCompanySearchRequestSortMetadata::DECODERS
-
-  # @return [String] The field to sort the results on.
-  attr_reader :field
-  # @return [CompanySearchRequestSortOrder] The order to sort the results in. Defaults to `descending` when omitted. Values other than `ascending` or `descending` return a `400` error with code `invalid_sort_order`.
-  attr_reader :order
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalCompanySearchRequestMetadata
-  FIELDS = {
-    query: "query",
-    pagination: "pagination",
-    sort: "sort",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    query
-  ].freeze
-  DECODERS = {
-    query: lambda do |value|
-      ::OctridevIntercom::CompanySearchRequestQuery.from_hash(value)
-    end,
-    pagination: lambda do |value|
-      ::OctridevIntercom::StartingAfterPaging.from_hash(value)
-    end,
-    sort: lambda do |value|
-      ::OctridevIntercom::CompanySearchRequestSort.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for CompanySearchRequest.
-# Search for companies using Intercom's Search API.
-class CompanySearchRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCompanySearchRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCompanySearchRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCompanySearchRequestMetadata::DECODERS
-
-  # @return [CompanySearchRequestQuery] Required API value serialized in the `query` wire field.
-  attr_reader :query
-  # @return [StartingAfterPaging] Optional object value serialized in the `pagination` wire field.
-  attr_reader :pagination
-  # @return [CompanySearchRequestSort] An optional object to sort the results by.
-  attr_reader :sort
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the CompanySearchRequestSortOrder SDK namespace.
-module CompanySearchRequestSortOrder
-  ASCENDING = 'ascending'
-  DESCENDING = 'descending'
-  VALUES = ['ascending', 'descending'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the CompanySearchRequestQuery SDK namespace.
-module CompanySearchRequestQuery
-  def self.from_hash(hash)
-    lossy = nil
-    [SingleFilterSearchRequest, MultipleFilterSearchRequest].each do |type|
-      decoded = type.from_hash(hash)
-      return decoded if SdkModel.keeps_every_key?(hash, decoded)
-
-      lossy ||= decoded
-    rescue ::StandardError
-      next
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
     end
-    return lossy unless lossy.nil?
-  end
-end
 
-# Internal model hydration metadata.
-class SdkInternalCreateOrUpdateCompanyRequestMetadata
-  FIELDS = {
-    name: "name",
-    company_id: "company_id",
-    plan: "plan",
-    size: "size",
-    website: "website",
-    industry: "industry",
-    custom_attributes: "custom_attributes",
-    remote_created_at: "remote_created_at",
-    update_last_request_at: "update_last_request_at",
-    monthly_spend: "monthly_spend",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-# API model for CreateOrUpdateCompanyRequest.
-# You can create or update a Company
-class CreateOrUpdateCompanyRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateOrUpdateCompanyRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateOrUpdateCompanyRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateOrUpdateCompanyRequestMetadata::DECODERS
-
-  # @return [String] The name of the Company
-  attr_reader :name
-  # @return [String] The company id you have defined for the company. Can't be updated
-  attr_reader :company_id
-  # @return [String] The name of the plan you have associated with the company.
-  attr_reader :plan
-  # @return [Integer] The number of employees in this company.
-  attr_reader :size
-  # @return [String] The URL for this company's website. Please note that the value specified here is not validated. Accepts any string.
-  attr_reader :website
-  # @return [String] The industry that this company operates in.
-  attr_reader :industry
-  # @return [Hash] A hash of key/value pairs containing any other data about the company you want Intercom to store.
-  attr_reader :custom_attributes
-  # @return [Integer] The time the company was created by you.
-  attr_reader :remote_created_at
-  # @return [Boolean] Set to true to update the company's last seen time to now.
-  attr_reader :update_last_request_at
-  # @return [Integer] How much revenue the company generates for your business. Note that this will truncate floats. i.e. it only allow for whole integers, 155.98 will be truncated to 155. Note that this has an upper limit of 2**31-1 or 2147483647..
-  attr_reader :monthly_spend
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the CompanyAttachedContactsType SDK namespace.
+  module CompanyAttachedContactsType
+    LIST = 'list'
+    VALUES = ['list'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDeletedCompanyObjectMetadata
-  FIELDS = {
-    id: "id",
-    object: "object",
-    deleted: "deleted",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    object: lambda do |value|
-      ::OctridevIntercom::DeletedCompanyObjectObject.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for DeletedCompanyObject.
-# Response returned when an object is deleted
-class DeletedCompanyObject
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDeletedCompanyObjectMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDeletedCompanyObjectMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDeletedCompanyObjectMetadata::DECODERS
-
-  # @return [String] The unique identifier for the company which is given by Intercom.
-  attr_reader :id
-  # @return [DeletedCompanyObjectObject] The type of object which was deleted. - `company`
-  attr_reader :object
-  # @return [Boolean] Whether the company was deleted successfully or not.
-  attr_reader :deleted
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCompanyAttachedSegmentsMetadata
+    FIELDS = {
+      type: 'type',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::CompanyAttachedSegmentsType.from_value(value)
+      end,
+      data: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::Segment.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for CompanyAttachedSegments.
+  # A list of Segment Objects
+  class CompanyAttachedSegments
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCompanyAttachedSegmentsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCompanyAttachedSegmentsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCompanyAttachedSegmentsMetadata::DECODERS
+
+    # @return [CompanyAttachedSegmentsType] The type of object - `list`
+    attr_reader :type
+    # @return [Array_of_Segment] An array containing Segment Objects
+    attr_reader :data
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the DeletedCompanyObjectObject SDK namespace.
-module DeletedCompanyObjectObject
-  COMPANY = 'company'
-  VALUES = ['company'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalUpdateCompanyRequestMetadata
-  FIELDS = {
-    name: "name",
-    plan: "plan",
-    size: "size",
-    website: "website",
-    industry: "industry",
-    custom_attributes: "custom_attributes",
-    monthly_spend: "monthly_spend",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for UpdateCompanyRequest.
-# You can update a Company
-class UpdateCompanyRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalUpdateCompanyRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalUpdateCompanyRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalUpdateCompanyRequestMetadata::DECODERS
-
-  # @return [String] The name of the Company
-  attr_reader :name
-  # @return [String] The name of the plan you have associated with the company.
-  attr_reader :plan
-  # @return [Integer] The number of employees in this company.
-  attr_reader :size
-  # @return [String] The URL for this company's website. Please note that the value specified here is not validated. Accepts any string.
-  attr_reader :website
-  # @return [String] The industry that this company operates in.
-  attr_reader :industry
-  # @return [Hash] A hash of key/value pairs containing any other data about the company you want Intercom to store.
-  attr_reader :custom_attributes
-  # @return [Integer] How much revenue the company generates for your business. Note that this will truncate floats. i.e. it only allow for whole integers, 155.98 will be truncated to 155. Note that this has an upper limit of 2**31-1 or 2147483647..
-  attr_reader :monthly_spend
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the CompanyAttachedSegmentsType SDK namespace.
+  module CompanyAttachedSegmentsType
+    LIST = 'list'
+    VALUES = ['list'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalCompanyListMetadata
+    FIELDS = {
+      type: 'type',
+      pages: 'pages',
+      total_count: 'total_count',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::CompanyListType.from_value(value)
+      end,
+      pages: lambda do |value|
+        ::OctridevIntercom::CursorPages.from_hash(value)
+      end,
+      data: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::Company.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for CompanyList.
+  # This will return a list of companies for the App.
+  class CompanyList
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCompanyListMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCompanyListMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCompanyListMetadata::DECODERS
+
+    # @return [CompanyListType] The type of object - `list`.
+    attr_reader :type
+    # @return [CursorPages] Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
+    attr_reader :pages
+    # @return [Integer] The total number of companies.
+    attr_reader :total_count
+    # @return [Array_of_Company] An array containing Company Objects.
+    attr_reader :data
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
+
+  # Defines the CompanyListType SDK namespace.
+  module CompanyListType
+    LIST = 'list'
+    VALUES = ['list'].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalCompanyScrollMetadata
+    FIELDS = {
+      type: 'type',
+      data: 'data',
+      pages: 'pages',
+      total_count: 'total_count',
+      scroll_param: 'scroll_param'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::CompanyScrollType.from_value(value)
+      end,
+      data: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::Company.from_hash(item) }
+      end,
+      pages: lambda do |value|
+        ::OctridevIntercom::CursorPages.from_hash(value)
+      end
+    }.freeze
+  end
+
+  # API model for CompanyScroll.
+  # Companies allow you to represent organizations using your product. Each company will have its own description and be associated with contacts. You can fetch, create, update and list companies.
+  class CompanyScroll
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCompanyScrollMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCompanyScrollMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCompanyScrollMetadata::DECODERS
+
+    # @return [CompanyScrollType] The type of object - `list`
+    attr_reader :type
+    # @return [Array_of_Company] Optional array value serialized in the `data` wire field.
+    attr_reader :data
+    # @return [CursorPages] Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
+    attr_reader :pages
+    # @return [Integer] The total number of companies
+    attr_reader :total_count
+    # @return [String] The scroll parameter to use in the next request to fetch the next page of results.
+    attr_reader :scroll_param
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the CompanyScrollType SDK namespace.
+  module CompanyScrollType
+    LIST = 'list'
+    VALUES = ['list'].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalCompanySearchRequestSortMetadata
+    FIELDS = {
+      field: 'field',
+      order: 'order'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      order: lambda do |value|
+        ::OctridevIntercom::CompanySearchRequestSortOrder.from_value(value)
+      end
+    }.freeze
+  end
+
+  # API model for CompanySearchRequestSort.
+  # An optional object to sort the results by.
+  class CompanySearchRequestSort
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCompanySearchRequestSortMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCompanySearchRequestSortMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCompanySearchRequestSortMetadata::DECODERS
+
+    # @return [String] The field to sort the results on.
+    attr_reader :field
+    # @return [CompanySearchRequestSortOrder] The order to sort the results in. Defaults to `descending` when omitted. Values other than `ascending` or `descending` return a `400` error with code `invalid_sort_order`.
+    attr_reader :order
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalCompanySearchRequestMetadata
+    FIELDS = {
+      query: 'query',
+      pagination: 'pagination',
+      sort: 'sort'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      query
+    ].freeze
+    DECODERS = {
+      query: lambda do |value|
+        ::OctridevIntercom::CompanySearchRequestQuery.from_hash(value)
+      end,
+      pagination: lambda do |value|
+        ::OctridevIntercom::StartingAfterPaging.from_hash(value)
+      end,
+      sort: lambda do |value|
+        ::OctridevIntercom::CompanySearchRequestSort.from_hash(value)
+      end
+    }.freeze
+  end
+
+  # API model for CompanySearchRequest.
+  # Search for companies using Intercom's Search API.
+  class CompanySearchRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCompanySearchRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCompanySearchRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCompanySearchRequestMetadata::DECODERS
+
+    # @return [CompanySearchRequestQuery] Required API value serialized in the `query` wire field.
+    attr_reader :query
+    # @return [StartingAfterPaging] Optional object value serialized in the `pagination` wire field.
+    attr_reader :pagination
+    # @return [CompanySearchRequestSort] An optional object to sort the results by.
+    attr_reader :sort
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the CompanySearchRequestSortOrder SDK namespace.
+  module CompanySearchRequestSortOrder
+    ASCENDING = 'ascending'
+    DESCENDING = 'descending'
+    VALUES = %w[ascending descending].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Defines the CompanySearchRequestQuery SDK namespace.
+  module CompanySearchRequestQuery
+    def self.from_hash(hash)
+      lossy = nil
+      [SingleFilterSearchRequest, MultipleFilterSearchRequest].each do |type|
+        decoded = type.from_hash(hash)
+        return decoded if SdkModel.keeps_every_key?(hash, decoded)
+
+        lossy ||= decoded
+      rescue ::StandardError
+        next
+      end
+      lossy unless lossy.nil?
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalCreateOrUpdateCompanyRequestMetadata
+    FIELDS = {
+      name: 'name',
+      company_id: 'company_id',
+      plan: 'plan',
+      size: 'size',
+      website: 'website',
+      industry: 'industry',
+      custom_attributes: 'custom_attributes',
+      remote_created_at: 'remote_created_at',
+      update_last_request_at: 'update_last_request_at',
+      monthly_spend: 'monthly_spend'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
+  end
+
+  # API model for CreateOrUpdateCompanyRequest.
+  # You can create or update a Company
+  class CreateOrUpdateCompanyRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateOrUpdateCompanyRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateOrUpdateCompanyRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateOrUpdateCompanyRequestMetadata::DECODERS
+
+    # @return [String] The name of the Company
+    attr_reader :name
+    # @return [String] The company id you have defined for the company. Can't be updated
+    attr_reader :company_id
+    # @return [String] The name of the plan you have associated with the company.
+    attr_reader :plan
+    # @return [Integer] The number of employees in this company.
+    attr_reader :size
+    # @return [String] The URL for this company's website. Please note that the value specified here is not validated. Accepts any string.
+    attr_reader :website
+    # @return [String] The industry that this company operates in.
+    attr_reader :industry
+    # @return [Hash] A hash of key/value pairs containing any other data about the company you want Intercom to store.
+    attr_reader :custom_attributes
+    # @return [Integer] The time the company was created by you.
+    attr_reader :remote_created_at
+    # @return [Boolean] Set to true to update the company's last seen time to now.
+    attr_reader :update_last_request_at
+    # @return [Integer] How much revenue the company generates for your business. Note that this will truncate floats. i.e. it only allow for whole integers, 155.98 will be truncated to 155. Note that this has an upper limit of 2**31-1 or 2147483647..
+    attr_reader :monthly_spend
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalDeletedCompanyObjectMetadata
+    FIELDS = {
+      id: 'id',
+      object: 'object',
+      deleted: 'deleted'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      object: lambda do |value|
+        ::OctridevIntercom::DeletedCompanyObjectObject.from_value(value)
+      end
+    }.freeze
+  end
+
+  # API model for DeletedCompanyObject.
+  # Response returned when an object is deleted
+  class DeletedCompanyObject
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDeletedCompanyObjectMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDeletedCompanyObjectMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDeletedCompanyObjectMetadata::DECODERS
+
+    # @return [String] The unique identifier for the company which is given by Intercom.
+    attr_reader :id
+    # @return [DeletedCompanyObjectObject] The type of object which was deleted. - `company`
+    attr_reader :object
+    # @return [Boolean] Whether the company was deleted successfully or not.
+    attr_reader :deleted
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the DeletedCompanyObjectObject SDK namespace.
+  module DeletedCompanyObjectObject
+    COMPANY = 'company'
+    VALUES = ['company'].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalUpdateCompanyRequestMetadata
+    FIELDS = {
+      name: 'name',
+      plan: 'plan',
+      size: 'size',
+      website: 'website',
+      industry: 'industry',
+      custom_attributes: 'custom_attributes',
+      monthly_spend: 'monthly_spend'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
+  end
+
+  # API model for UpdateCompanyRequest.
+  # You can update a Company
+  class UpdateCompanyRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalUpdateCompanyRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalUpdateCompanyRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalUpdateCompanyRequestMetadata::DECODERS
+
+    # @return [String] The name of the Company
+    attr_reader :name
+    # @return [String] The name of the plan you have associated with the company.
+    attr_reader :plan
+    # @return [Integer] The number of employees in this company.
+    attr_reader :size
+    # @return [String] The URL for this company's website. Please note that the value specified here is not validated. Accepts any string.
+    attr_reader :website
+    # @return [String] The industry that this company operates in.
+    attr_reader :industry
+    # @return [Hash] A hash of key/value pairs containing any other data about the company you want Intercom to store.
+    attr_reader :custom_attributes
+    # @return [Integer] How much revenue the company generates for your business. Note that this will truncate floats. i.e. it only allow for whole integers, 155.98 will be truncated to 155. Note that this has an upper limit of 2**31-1 or 2147483647..
+    attr_reader :monthly_spend
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
 end

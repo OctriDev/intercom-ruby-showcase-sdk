@@ -29,25 +29,24 @@ module OctridevIntercom
         custom_attributes: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PUT',
-          "/visitors",
+          '/visitors',
           config: config,
           body: {
             'id' => id,
             'user_id' => user_id,
             'name' => name,
-            'custom_attributes' => custom_attributes,
+            'custom_attributes' => custom_attributes
           },
           return_type: ::OctridevIntercom::Visitor,
           decoder: :json,
           operation_id: 'update_visitor',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -62,22 +61,21 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/visitors",
+          '/visitors',
           config: config,
           query: {
-            'user_id' => QueryValue.new(user_id, style: 'form', explode: true),
+            'user_id' => QueryValue.new(user_id, style: 'form', explode: true)
           },
           return_type: ::OctridevIntercom::Visitor,
           decoder: :json,
           operation_id: 'retrieve_visitor_with_user_id',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -99,24 +97,23 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/visitors/convert",
+          '/visitors/convert',
           config: config,
           body: {
             'type' => type,
             'user' => user,
-            'visitor' => visitor,
+            'visitor' => visitor
           },
           return_type: ::OctridevIntercom::Contact,
           decoder: :json,
           operation_id: 'convert_visitor',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2 }
         ).data
       end
     end

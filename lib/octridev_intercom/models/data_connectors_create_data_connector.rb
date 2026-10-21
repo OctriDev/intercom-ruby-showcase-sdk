@@ -5,676 +5,661 @@
 
 # data_connectors domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalCreateDataConnectorRequestHeadersItemMetadata
-  FIELDS = {
-    name: "name",
-    value: "value",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for CreateDataConnectorRequestHeadersItem.
-# Required object value serialized in the `headers[]` wire field.
-class CreateDataConnectorRequestHeadersItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateDataConnectorRequestHeadersItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateDataConnectorRequestHeadersItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateDataConnectorRequestHeadersItemMetadata::DECODERS
-
-  # @return [String] The header name.
-  attr_reader :name
-  # @return [String] The header value. Supports template variables.
-  attr_reader :value
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCreateDataConnectorRequestHeadersItemMetadata
+    FIELDS = {
+      name: 'name',
+      value: 'value'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for CreateDataConnectorRequestHeadersItem.
+  # Required object value serialized in the `headers[]` wire field.
+  class CreateDataConnectorRequestHeadersItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateDataConnectorRequestHeadersItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateDataConnectorRequestHeadersItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateDataConnectorRequestHeadersItemMetadata::DECODERS
+
+    # @return [String] The header name.
+    attr_reader :name
+    # @return [String] The header value. Supports template variables.
+    attr_reader :value
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalCreateDataConnectorRequestDataInputsItemMetadata
-  FIELDS = {
-    name: "name",
-    type: "type",
-    description: "description",
-    required: "required",
-    default_value: "default_value",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::CreateDataConnectorRequestDataInputsItemType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for CreateDataConnectorRequestDataInputsItem.
-# Required object value serialized in the `data_inputs[]` wire field.
-class CreateDataConnectorRequestDataInputsItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateDataConnectorRequestDataInputsItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateDataConnectorRequestDataInputsItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateDataConnectorRequestDataInputsItemMetadata::DECODERS
-
-  # @return [String] The parameter name.
-  attr_reader :name
-  # @return [CreateDataConnectorRequestDataInputsItemType] The parameter type.
-  attr_reader :type
-  # @return [String] A description of the parameter.
-  attr_reader :description
-  # @return [Boolean] Whether the parameter is required.
-  attr_reader :required
-  # @return [String] The default value for the parameter. Defaults to an empty string if omitted.
-  attr_reader :default_value
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCreateDataConnectorRequestDataInputsItemMetadata
+    FIELDS = {
+      name: 'name',
+      type: 'type',
+      description: 'description',
+      required: 'required',
+      default_value: 'default_value'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::CreateDataConnectorRequestDataInputsItemType.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for CreateDataConnectorRequestDataInputsItem.
+  # Required object value serialized in the `data_inputs[]` wire field.
+  class CreateDataConnectorRequestDataInputsItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateDataConnectorRequestDataInputsItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateDataConnectorRequestDataInputsItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateDataConnectorRequestDataInputsItemMetadata::DECODERS
+
+    # @return [String] The parameter name.
+    attr_reader :name
+    # @return [CreateDataConnectorRequestDataInputsItemType] The parameter type.
+    attr_reader :type
+    # @return [String] A description of the parameter.
+    attr_reader :description
+    # @return [Boolean] Whether the parameter is required.
+    attr_reader :required
+    # @return [String] The default value for the parameter. Defaults to an empty string if omitted.
+    attr_reader :default_value
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalCreateDataConnectorRequestMetadata
-  FIELDS = {
-    name: "name",
-    description: "description",
-    http_method: "http_method",
-    url: "url",
-    body: "body",
-    direct_fin_usage: "direct_fin_usage",
-    audiences: "audiences",
-    headers: "headers",
-    data_inputs: "data_inputs",
-    customer_authentication: "customer_authentication",
-    bypass_authentication: "bypass_authentication",
-    validate_missing_attributes: "validate_missing_attributes",
-    mock_response: "mock_response",
-    token_ids: "token_ids",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-  ].freeze
-  DECODERS = {
-    http_method: lambda do |value|
-      ::OctridevIntercom::CreateDataConnectorRequestHttpMethod.from_value(value)
-    end,
-    audiences: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::CreateDataConnectorRequestAudiencesItem.from_value(item) }
-    end,
-    headers: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::CreateDataConnectorRequestHeadersItem.from_hash(item) }
-    end,
-    data_inputs: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::CreateDataConnectorRequestDataInputsItem.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for CreateDataConnectorRequest.
-# You can create a data connector by providing the required parameters.
-class CreateDataConnectorRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateDataConnectorRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateDataConnectorRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateDataConnectorRequestMetadata::DECODERS
-
-  # @return [String] The name of the data connector.
-  attr_reader :name
-  # @return [String] A description of what this data connector does.
-  attr_reader :description
-  # @return [CreateDataConnectorRequestHttpMethod] The HTTP method used when calling the external API.
-  attr_reader :http_method
-  # @return [String] The URL of the external API endpoint. Supports template variables like `{{order_id}}`.
-  attr_reader :url
-  # @return [String] The request body template. Supports template variables.
-  attr_reader :body
-  # @return [Boolean] Whether the connector is used directly by Fin (true) or only in workflows (false). Defaults to false.
-  attr_reader :direct_fin_usage
-  # @return [Array_of_CreateDataConnectorRequestAudiencesItem] The user types this connector is available for.
-  attr_reader :audiences
-  # @return [Array_of_CreateDataConnectorRequestHeadersItem] HTTP headers to include in the request.
-  attr_reader :headers
-  # @return [Array_of_CreateDataConnectorRequestDataInputsItem] Input parameters accepted by the connector.
-  attr_reader :data_inputs
-  # @return [Boolean] Whether the connector requires customer authentication before executing. Defaults to false.
-  attr_reader :customer_authentication
-  # @return [Boolean] Whether authentication is bypassed entirely (public endpoint). Defaults to false.
-  attr_reader :bypass_authentication
-  # @return [Boolean] Whether to validate that all required data inputs have values before executing.
-  attr_reader :validate_missing_attributes
-  # @return [Hash] A sample JSON response from the external API. Auto-generates `response_fields` and sets `configuration_response_type` to `mock_response_type`.
-  attr_reader :mock_response
-  # @return [Array_of_String] IDs of authentication tokens to attach to this data connector.
-  attr_reader :token_ids
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCreateDataConnectorRequestMetadata
+    FIELDS = {
+      name: 'name',
+      description: 'description',
+      http_method: 'http_method',
+      url: 'url',
+      body: 'body',
+      direct_fin_usage: 'direct_fin_usage',
+      audiences: 'audiences',
+      headers: 'headers',
+      data_inputs: 'data_inputs',
+      customer_authentication: 'customer_authentication',
+      bypass_authentication: 'bypass_authentication',
+      validate_missing_attributes: 'validate_missing_attributes',
+      mock_response: 'mock_response',
+      token_ids: 'token_ids'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+    ].freeze
+    DECODERS = {
+      http_method: lambda do |value|
+        ::OctridevIntercom::CreateDataConnectorRequestHttpMethod.from_value(value)
+      end,
+      audiences: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::CreateDataConnectorRequestAudiencesItem.from_value(item) }
+      end,
+      headers: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::CreateDataConnectorRequestHeadersItem.from_hash(item) }
+      end,
+      data_inputs: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::CreateDataConnectorRequestDataInputsItem.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for CreateDataConnectorRequest.
+  # You can create a data connector by providing the required parameters.
+  class CreateDataConnectorRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateDataConnectorRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateDataConnectorRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateDataConnectorRequestMetadata::DECODERS
+
+    # @return [String] The name of the data connector.
+    attr_reader :name
+    # @return [String] A description of what this data connector does.
+    attr_reader :description
+    # @return [CreateDataConnectorRequestHttpMethod] The HTTP method used when calling the external API.
+    attr_reader :http_method
+    # @return [String] The URL of the external API endpoint. Supports template variables like `{{order_id}}`.
+    attr_reader :url
+    # @return [String] The request body template. Supports template variables.
+    attr_reader :body
+    # @return [Boolean] Whether the connector is used directly by Fin (true) or only in workflows (false). Defaults to false.
+    attr_reader :direct_fin_usage
+    # @return [Array_of_CreateDataConnectorRequestAudiencesItem] The user types this connector is available for.
+    attr_reader :audiences
+    # @return [Array_of_CreateDataConnectorRequestHeadersItem] HTTP headers to include in the request.
+    attr_reader :headers
+    # @return [Array_of_CreateDataConnectorRequestDataInputsItem] Input parameters accepted by the connector.
+    attr_reader :data_inputs
+    # @return [Boolean] Whether the connector requires customer authentication before executing. Defaults to false.
+    attr_reader :customer_authentication
+    # @return [Boolean] Whether authentication is bypassed entirely (public endpoint). Defaults to false.
+    attr_reader :bypass_authentication
+    # @return [Boolean] Whether to validate that all required data inputs have values before executing.
+    attr_reader :validate_missing_attributes
+    # @return [Hash] A sample JSON response from the external API. Auto-generates `response_fields` and sets `configuration_response_type` to `mock_response_type`.
+    attr_reader :mock_response
+    # @return [Array_of_String] IDs of authentication tokens to attach to this data connector.
+    attr_reader :token_ids
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the CreateDataConnectorRequestAudiencesItem SDK namespace.
-module CreateDataConnectorRequestAudiencesItem
-  LEADS = 'leads'
-  USERS = 'users'
-  VISITORS = 'visitors'
-  VALUES = ['leads', 'users', 'visitors'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the CreateDataConnectorRequestDataInputsItemType SDK namespace.
-module CreateDataConnectorRequestDataInputsItemType
-  STRING = 'string'
-  INTEGER = 'integer'
-  DECIMAL = 'decimal'
-  BOOLEAN = 'boolean'
-  VALUES = ['string', 'integer', 'decimal', 'boolean'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the CreateDataConnectorRequestHttpMethod SDK namespace.
-module CreateDataConnectorRequestHttpMethod
-  GET = 'get'
-  POST = 'post'
-  PUT = 'put'
-  DELETE = 'delete'
-  PATCH = 'patch'
-  VALUES = ['get', 'post', 'put', 'delete', 'patch'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDataConnectorExecutionResultListPagesNextMetadata
-  FIELDS = {
-    starting_after: "starting_after",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for DataConnectorExecutionResultListPagesNext.
-# Cursor for the next page of results.
-class DataConnectorExecutionResultListPagesNext
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDataConnectorExecutionResultListPagesNextMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDataConnectorExecutionResultListPagesNextMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDataConnectorExecutionResultListPagesNextMetadata::DECODERS
-
-  # @return [String] The cursor value to use for the next page.
-  attr_reader :starting_after
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the CreateDataConnectorRequestAudiencesItem SDK namespace.
+  module CreateDataConnectorRequestAudiencesItem
+    LEADS = 'leads'
+    USERS = 'users'
+    VISITORS = 'visitors'
+    VALUES = %w[leads users visitors].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the CreateDataConnectorRequestDataInputsItemType SDK namespace.
+  module CreateDataConnectorRequestDataInputsItemType
+    STRING = 'string'
+    INTEGER = 'integer'
+    DECIMAL = 'decimal'
+    BOOLEAN = 'boolean'
+    VALUES = %w[string integer decimal boolean].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDataConnectorExecutionResultListPagesMetadata
-  FIELDS = {
-    type: "type",
-    per_page: "per_page",
-    next_: "next",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::DataConnectorExecutionResultListPagesType.from_value(value)
-    end,
-    next_: lambda do |value|
-      ::OctridevIntercom::DataConnectorExecutionResultListPagesNext.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for DataConnectorExecutionResultListPages.
-# Pagination information.
-class DataConnectorExecutionResultListPages
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDataConnectorExecutionResultListPagesMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDataConnectorExecutionResultListPagesMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDataConnectorExecutionResultListPagesMetadata::DECODERS
-
-  # @return [DataConnectorExecutionResultListPagesType] Optional enumerated value serialized in the `type` wire field.
-  attr_reader :type
-  # @return [Integer] The number of results per page.
-  attr_reader :per_page
-  # @return [DataConnectorExecutionResultListPagesNext] Cursor for the next page of results.
-  attr_reader :next_
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the CreateDataConnectorRequestHttpMethod SDK namespace.
+  module CreateDataConnectorRequestHttpMethod
+    GET = 'get'
+    POST = 'post'
+    PUT = 'put'
+    DELETE = 'delete'
+    PATCH = 'patch'
+    VALUES = %w[get post put delete patch].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalDataConnectorExecutionResultListPagesNextMetadata
+    FIELDS = {
+      starting_after: 'starting_after'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for DataConnectorExecutionResultListPagesNext.
+  # Cursor for the next page of results.
+  class DataConnectorExecutionResultListPagesNext
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDataConnectorExecutionResultListPagesNextMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDataConnectorExecutionResultListPagesNextMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDataConnectorExecutionResultListPagesNextMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalDataConnectorExecutionResultListMetadata
-  FIELDS = {
-    type: "type",
-    data: "data",
-    pages: "pages",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::DataConnectorExecutionResultListType.from_value(value)
-    end,
-    data: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::DataConnectorExecutionResult.from_hash(item) }
-    end,
-    pages: lambda do |value|
-      ::OctridevIntercom::DataConnectorExecutionResultListPages.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [String] The cursor value to use for the next page.
+    attr_reader :starting_after
 
-# API model for DataConnectorExecutionResultList.
-# A paginated list of data connector execution results.
-class DataConnectorExecutionResultList
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDataConnectorExecutionResultListMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDataConnectorExecutionResultListMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDataConnectorExecutionResultListMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [DataConnectorExecutionResultListType] The type of object - `list`.
-  attr_reader :type
-  # @return [Array_of_DataConnectorExecutionResult] An array of execution result objects.
-  attr_reader :data
-  # @return [DataConnectorExecutionResultListPages] Pagination information.
-  attr_reader :pages
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalDataConnectorExecutionResultListPagesMetadata
+    FIELDS = {
+      type: 'type',
+      per_page: 'per_page',
+      next_: 'next'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::DataConnectorExecutionResultListPagesType.from_value(value)
+      end,
+      next_: lambda do |value|
+        ::OctridevIntercom::DataConnectorExecutionResultListPagesNext.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for DataConnectorExecutionResultListPages.
+  # Pagination information.
+  class DataConnectorExecutionResultListPages
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDataConnectorExecutionResultListPagesMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDataConnectorExecutionResultListPagesMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDataConnectorExecutionResultListPagesMetadata::DECODERS
 
-# Defines the DataConnectorExecutionResultListPagesType SDK namespace.
-module DataConnectorExecutionResultListPagesType
-  PAGES = 'pages'
-  VALUES = ['pages'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [DataConnectorExecutionResultListPagesType] Optional enumerated value serialized in the `type` wire field.
+    attr_reader :type
+    # @return [Integer] The number of results per page.
+    attr_reader :per_page
+    # @return [DataConnectorExecutionResultListPagesNext] Cursor for the next page of results.
+    attr_reader :next_
 
-# Defines the DataConnectorExecutionResultListType SDK namespace.
-module DataConnectorExecutionResultListType
-  LIST = 'list'
-  VALUES = ['list'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# Internal model hydration metadata.
-class SdkInternalDataConnectorListPagesNextMetadata
-  FIELDS = {
-    starting_after: "starting_after",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-# API model for DataConnectorListPagesNext.
-# Cursor for the next page of results.
-class DataConnectorListPagesNext
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDataConnectorListPagesNextMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDataConnectorListPagesNextMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDataConnectorListPagesNextMetadata::DECODERS
-
-  # @return [String] The cursor value to use for the next page.
-  attr_reader :starting_after
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalDataConnectorExecutionResultListMetadata
+    FIELDS = {
+      type: 'type',
+      data: 'data',
+      pages: 'pages'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::DataConnectorExecutionResultListType.from_value(value)
+      end,
+      data: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::DataConnectorExecutionResult.from_hash(item) }
+      end,
+      pages: lambda do |value|
+        ::OctridevIntercom::DataConnectorExecutionResultListPages.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for DataConnectorExecutionResultList.
+  # A paginated list of data connector execution results.
+  class DataConnectorExecutionResultList
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDataConnectorExecutionResultListMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDataConnectorExecutionResultListMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDataConnectorExecutionResultListMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalDataConnectorListPagesMetadata
-  FIELDS = {
-    type: "type",
-    per_page: "per_page",
-    next_: "next",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::DataConnectorListPagesType.from_value(value)
-    end,
-    next_: lambda do |value|
-      ::OctridevIntercom::DataConnectorListPagesNext.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [DataConnectorExecutionResultListType] The type of object - `list`.
+    attr_reader :type
+    # @return [Array_of_DataConnectorExecutionResult] An array of execution result objects.
+    attr_reader :data
+    # @return [DataConnectorExecutionResultListPages] Pagination information.
+    attr_reader :pages
 
-# API model for DataConnectorListPages.
-# Pagination information.
-class DataConnectorListPages
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDataConnectorListPagesMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDataConnectorListPagesMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDataConnectorListPagesMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [DataConnectorListPagesType] Optional enumerated value serialized in the `type` wire field.
-  attr_reader :type
-  # @return [Integer] The number of results per page.
-  attr_reader :per_page
-  # @return [DataConnectorListPagesNext] Cursor for the next page of results.
-  attr_reader :next_
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the DataConnectorExecutionResultListPagesType SDK namespace.
+  module DataConnectorExecutionResultListPagesType
+    PAGES = 'pages'
+    VALUES = ['pages'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDataConnectorListMetadata
-  FIELDS = {
-    type: "type",
-    data: "data",
-    pages: "pages",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::DataConnectorListType.from_value(value)
-    end,
-    data: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::DataConnector.from_hash(item) }
-    end,
-    pages: lambda do |value|
-      ::OctridevIntercom::DataConnectorListPages.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for DataConnectorList.
-# A paginated list of data connectors.
-class DataConnectorList
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDataConnectorListMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDataConnectorListMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDataConnectorListMetadata::DECODERS
-
-  # @return [DataConnectorListType] The type of object - `list`.
-  attr_reader :type
-  # @return [Array_of_DataConnector] An array of data connector objects.
-  attr_reader :data
-  # @return [DataConnectorListPages] Pagination information.
-  attr_reader :pages
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the DataConnectorExecutionResultListType SDK namespace.
+  module DataConnectorExecutionResultListType
+    LIST = 'list'
+    VALUES = ['list'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalDataConnectorListPagesNextMetadata
+    FIELDS = {
+      starting_after: 'starting_after'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for DataConnectorListPagesNext.
+  # Cursor for the next page of results.
+  class DataConnectorListPagesNext
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDataConnectorListPagesNextMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDataConnectorListPagesNextMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDataConnectorListPagesNextMetadata::DECODERS
 
-# Defines the DataConnectorListPagesType SDK namespace.
-module DataConnectorListPagesType
-  PAGES = 'pages'
-  VALUES = ['pages'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [String] The cursor value to use for the next page.
+    attr_reader :starting_after
 
-# Defines the DataConnectorListType SDK namespace.
-module DataConnectorListType
-  LIST = 'list'
-  VALUES = ['list'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# Internal model hydration metadata.
-class SdkInternalDataConnectorVersionListPagesNextMetadata
-  FIELDS = {
-    starting_after: "starting_after",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-# API model for DataConnectorVersionListPagesNext.
-# Cursor for the next page of results.
-class DataConnectorVersionListPagesNext
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDataConnectorVersionListPagesNextMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDataConnectorVersionListPagesNextMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDataConnectorVersionListPagesNextMetadata::DECODERS
-
-  # @return [String] The cursor value to use for the next page.
-  attr_reader :starting_after
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalDataConnectorListPagesMetadata
+    FIELDS = {
+      type: 'type',
+      per_page: 'per_page',
+      next_: 'next'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::DataConnectorListPagesType.from_value(value)
+      end,
+      next_: lambda do |value|
+        ::OctridevIntercom::DataConnectorListPagesNext.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for DataConnectorListPages.
+  # Pagination information.
+  class DataConnectorListPages
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDataConnectorListPagesMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDataConnectorListPagesMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDataConnectorListPagesMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalDataConnectorVersionListPagesMetadata
-  FIELDS = {
-    type: "type",
-    per_page: "per_page",
-    next_: "next",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::DataConnectorVersionListPagesType.from_value(value)
-    end,
-    next_: lambda do |value|
-      ::OctridevIntercom::DataConnectorVersionListPagesNext.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [DataConnectorListPagesType] Optional enumerated value serialized in the `type` wire field.
+    attr_reader :type
+    # @return [Integer] The number of results per page.
+    attr_reader :per_page
+    # @return [DataConnectorListPagesNext] Cursor for the next page of results.
+    attr_reader :next_
 
-# API model for DataConnectorVersionListPages.
-# Pagination information. `next` is omitted on the last page.
-class DataConnectorVersionListPages
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDataConnectorVersionListPagesMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDataConnectorVersionListPagesMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDataConnectorVersionListPagesMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [DataConnectorVersionListPagesType] Optional enumerated value serialized in the `type` wire field.
-  attr_reader :type
-  # @return [Integer] The number of results per page.
-  attr_reader :per_page
-  # @return [DataConnectorVersionListPagesNext] Cursor for the next page of results.
-  attr_reader :next_
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalDataConnectorListMetadata
+    FIELDS = {
+      type: 'type',
+      data: 'data',
+      pages: 'pages'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::DataConnectorListType.from_value(value)
+      end,
+      data: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::DataConnector.from_hash(item) }
+      end,
+      pages: lambda do |value|
+        ::OctridevIntercom::DataConnectorListPages.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for DataConnectorList.
+  # A paginated list of data connectors.
+  class DataConnectorList
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDataConnectorListMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDataConnectorListMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDataConnectorListMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalDataConnectorVersionListMetadata
-  FIELDS = {
-    type: "type",
-    data: "data",
-    pages: "pages",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::DataConnectorVersionListType.from_value(value)
-    end,
-    data: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::DataConnectorVersion.from_hash(item) }
-    end,
-    pages: lambda do |value|
-      ::OctridevIntercom::DataConnectorVersionListPages.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [DataConnectorListType] The type of object - `list`.
+    attr_reader :type
+    # @return [Array_of_DataConnector] An array of data connector objects.
+    attr_reader :data
+    # @return [DataConnectorListPages] Pagination information.
+    attr_reader :pages
 
-# API model for DataConnectorVersionList.
-# A paginated list of data connector versions, newest first.
-class DataConnectorVersionList
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDataConnectorVersionListMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDataConnectorVersionListMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDataConnectorVersionListMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [DataConnectorVersionListType] The type of object - `list`.
-  attr_reader :type
-  # @return [Array_of_DataConnectorVersion] An array of data connector version objects.
-  attr_reader :data
-  # @return [DataConnectorVersionListPages] Pagination information. `next` is omitted on the last page.
-  attr_reader :pages
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the DataConnectorListPagesType SDK namespace.
+  module DataConnectorListPagesType
+    PAGES = 'pages'
+    VALUES = ['pages'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Defines the DataConnectorListType SDK namespace.
+  module DataConnectorListType
+    LIST = 'list'
+    VALUES = ['list'].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
 
-# Defines the DataConnectorVersionListPagesType SDK namespace.
-module DataConnectorVersionListPagesType
-  PAGES = 'pages'
-  VALUES = ['pages'].freeze
-  def self.from_value(value)
-    value
+  # Internal model hydration metadata.
+  class SdkInternalDataConnectorVersionListPagesNextMetadata
+    FIELDS = {
+      starting_after: 'starting_after'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
-end
 
-# Defines the DataConnectorVersionListType SDK namespace.
-module DataConnectorVersionListType
-  LIST = 'list'
-  VALUES = ['list'].freeze
-  def self.from_value(value)
-    value
+  # API model for DataConnectorVersionListPagesNext.
+  # Cursor for the next page of results.
+  class DataConnectorVersionListPagesNext
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDataConnectorVersionListPagesNextMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDataConnectorVersionListPagesNextMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDataConnectorVersionListPagesNextMetadata::DECODERS
+
+    # @return [String] The cursor value to use for the next page.
+    attr_reader :starting_after
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
+
+  # Internal model hydration metadata.
+  class SdkInternalDataConnectorVersionListPagesMetadata
+    FIELDS = {
+      type: 'type',
+      per_page: 'per_page',
+      next_: 'next'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::DataConnectorVersionListPagesType.from_value(value)
+      end,
+      next_: lambda do |value|
+        ::OctridevIntercom::DataConnectorVersionListPagesNext.from_hash(value)
+      end
+    }.freeze
+  end
+
+  # API model for DataConnectorVersionListPages.
+  # Pagination information. `next` is omitted on the last page.
+  class DataConnectorVersionListPages
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDataConnectorVersionListPagesMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDataConnectorVersionListPagesMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDataConnectorVersionListPagesMetadata::DECODERS
+
+    # @return [DataConnectorVersionListPagesType] Optional enumerated value serialized in the `type` wire field.
+    attr_reader :type
+    # @return [Integer] The number of results per page.
+    attr_reader :per_page
+    # @return [DataConnectorVersionListPagesNext] Cursor for the next page of results.
+    attr_reader :next_
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalDataConnectorVersionListMetadata
+    FIELDS = {
+      type: 'type',
+      data: 'data',
+      pages: 'pages'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::DataConnectorVersionListType.from_value(value)
+      end,
+      data: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::DataConnectorVersion.from_hash(item) }
+      end,
+      pages: lambda do |value|
+        ::OctridevIntercom::DataConnectorVersionListPages.from_hash(value)
+      end
+    }.freeze
+  end
+
+  # API model for DataConnectorVersionList.
+  # A paginated list of data connector versions, newest first.
+  class DataConnectorVersionList
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDataConnectorVersionListMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDataConnectorVersionListMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDataConnectorVersionListMetadata::DECODERS
+
+    # @return [DataConnectorVersionListType] The type of object - `list`.
+    attr_reader :type
+    # @return [Array_of_DataConnectorVersion] An array of data connector version objects.
+    attr_reader :data
+    # @return [DataConnectorVersionListPages] Pagination information. `next` is omitted on the last page.
+    attr_reader :pages
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the DataConnectorVersionListPagesType SDK namespace.
+  module DataConnectorVersionListPagesType
+    PAGES = 'pages'
+    VALUES = ['pages'].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Defines the DataConnectorVersionListType SDK namespace.
+  module DataConnectorVersionListType
+    LIST = 'list'
+    VALUES = ['list'].freeze
+    def self.from_value(value)
+      value
+    end
+  end
 end

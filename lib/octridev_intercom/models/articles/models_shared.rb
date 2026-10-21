@@ -5,684 +5,676 @@
 
 # tagged_models_articles domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalArticleMetadata
-  FIELDS = {
-    type: "type",
-    id: "id",
-    workspace_id: "workspace_id",
-    title: "title",
-    description: "description",
-    body: "body",
-    body_markdown: "body_markdown",
-    author_id: "author_id",
-    state: "state",
-    created_at: "created_at",
-    updated_at: "updated_at",
-    has_unpublished_changes: "has_unpublished_changes",
-    draft_updated_at: "draft_updated_at",
-    url: "url",
-    parent_ids: "parent_ids",
-    ai_chatbot_availability: "ai_chatbot_availability",
-    ai_copilot_availability: "ai_copilot_availability",
-    ai_sales_agent_availability: "ai_sales_agent_availability",
-    created_by_id: "created_by_id",
-    updated_by_id: "updated_by_id",
-    exclude_from_article_suggestions: "exclude_from_article_suggestions",
-    help_center_audience: "help_center_audience",
-    scheduled_publish_at: "scheduled_publish_at",
-    scheduled_unpublish_at: "scheduled_unpublish_at",
-    default_locale: "default_locale",
-    translated_content: "translated_content",
-    tags: "tags",
-    folder_id: "folder_id",
-    statistics: "statistics",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::ArticleType.from_value(value)
-    end,
-    state: lambda do |value|
-      ::OctridevIntercom::ArticleState.from_value(value)
-    end,
-    help_center_audience: lambda do |value|
-      ::OctridevIntercom::ArticleHelpCenterAudience.from_value(value)
-    end,
-    translated_content: lambda do |value|
-      ::OctridevIntercom::ArticleTranslatedContent.from_hash(value)
-    end,
-    tags: lambda do |value|
-      ::OctridevIntercom::Tags.from_hash(value)
-    end,
-    statistics: lambda do |value|
-      ::OctridevIntercom::ArticleStatistics.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for Article.
-# The Articles API is a central place to gather all information and take actions on your articles. Articles can live within collections and sections, or alternatively they can stand alone.
-class Article
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalArticleMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalArticleMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalArticleMetadata::DECODERS
-
-  # @return [ArticleType] The type of object - `article`.
-  attr_reader :type
-  # @return [String] The unique identifier for the article which is given by Intercom.
-  attr_reader :id
-  # @return [String] The id of the workspace which the article belongs to.
-  attr_reader :workspace_id
-  # @return [String] The title of the article. For multilingual articles, this will be the title of the default language's content.
-  attr_reader :title
-  # @return [String] The description of the article. For multilingual articles, this will be the description of the default language's content.
-  attr_reader :description
-  # @return [String] The body of the article in HTML. For multilingual articles, this will be the body of the default language's content.
-  attr_reader :body
-  # @return [String] The body of the article in markdown. For multilingual articles, this will be the body of the default language's content.
-  attr_reader :body_markdown
-  # @return [Integer] The id of the author of the article. For multilingual articles, this will be the id of the author of the default language's content. Must be a teammate on the help center's workspace.
-  attr_reader :author_id
-  # @return [ArticleState] Whether the article is `published` or is a `draft`. For multilingual articles, this will be the state of the default language's content.
-  attr_reader :state
-  # @return [Integer] The time when the article was created. For multilingual articles, this will be the timestamp of creation of the default language's content in seconds.
-  attr_reader :created_at
-  # @return [Integer] The time when the article was last updated. For multilingual articles, this will be the timestamp of last update of the default language's content in seconds.
-  attr_reader :updated_at
-  # @return [Boolean] Whether the published article has unpublished changes staged as a draft on top of its live content. For multilingual articles this reflects the default language's content; a pure draft (never published) reports `false`.
-  attr_reader :has_unpublished_changes
-  # @return [Integer] The time, in seconds, when the staged draft was last edited, or `null` when there is no staged draft.
-  attr_reader :draft_updated_at
-  # @return [String] The URL of the article. For multilingual articles, this will be the URL of the default language's content.
-  attr_reader :url
-  # @return [Array_of_Integer] The ids of the article's parent collections or sections. An article without this field stands alone.
-  attr_reader :parent_ids
-  # @return [Boolean] Whether the article is available for AI Chatbot. For multilingual articles, this will be the value of the default language's content.
-  attr_reader :ai_chatbot_availability
-  # @return [Boolean] Whether the article is available for AI Copilot. For multilingual articles, this will be the value of the default language's content.
-  attr_reader :ai_copilot_availability
-  # @return [Boolean] Whether the article is available for AI Sales Agent. For multilingual articles, this will be the value of the default language's content.
-  attr_reader :ai_sales_agent_availability
-  # @return [Integer] The ID of the teammate who created the article. For multilingual articles, this will be the creator of the default language's content.
-  attr_reader :created_by_id
-  # @return [Integer] The ID of the teammate who last updated the article. For multilingual articles, this will be the last editor of the default language's content.
-  attr_reader :updated_by_id
-  # @return [Boolean] Whether the article is excluded from Fin AI Agent article suggestions.
-  attr_reader :exclude_from_article_suggestions
-  # @return [ArticleHelpCenterAudience] The audience that can view this article in the Help Center. `everyone` means all users and visitors can view it; `restricted` indicates a custom audience ruleset. For multilingual articles, this is the article-level audience.
-  attr_reader :help_center_audience
-  # @return [Integer] The Unix timestamp (in seconds) at which the article is scheduled to be published. `null` when no publish is scheduled. Mutually exclusive with `scheduled_unpublish_at` — at most one pending schedule exists per article.
-  attr_reader :scheduled_publish_at
-  # @return [Integer] The Unix timestamp (in seconds) at which the article is scheduled to be unpublished. `null` when no unpublish is scheduled. Mutually exclusive with `scheduled_publish_at` — at most one pending schedule exists per article.
-  attr_reader :scheduled_unpublish_at
-  # @return [String] The default locale of the help center. This field is only returned for multilingual help centers.
-  attr_reader :default_locale
-  # @return [ArticleTranslatedContent] The Translated Content of an Article. The keys are the locale codes and the values are the translated content of the article.
-  attr_reader :translated_content
-  # @return [Tags] A list of tags objects associated with a conversation
-  attr_reader :tags
-  # @return [Integer] The ID of the folder this article belongs to, or null if not in a folder.
-  attr_reader :folder_id
-  # @return [ArticleStatistics] The statistics of an article.
-  attr_reader :statistics
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalArticleMetadata
+    FIELDS = {
+      type: 'type',
+      id: 'id',
+      workspace_id: 'workspace_id',
+      title: 'title',
+      description: 'description',
+      body: 'body',
+      body_markdown: 'body_markdown',
+      author_id: 'author_id',
+      state: 'state',
+      created_at: 'created_at',
+      updated_at: 'updated_at',
+      has_unpublished_changes: 'has_unpublished_changes',
+      draft_updated_at: 'draft_updated_at',
+      url: 'url',
+      parent_ids: 'parent_ids',
+      ai_chatbot_availability: 'ai_chatbot_availability',
+      ai_copilot_availability: 'ai_copilot_availability',
+      ai_sales_agent_availability: 'ai_sales_agent_availability',
+      created_by_id: 'created_by_id',
+      updated_by_id: 'updated_by_id',
+      exclude_from_article_suggestions: 'exclude_from_article_suggestions',
+      help_center_audience: 'help_center_audience',
+      scheduled_publish_at: 'scheduled_publish_at',
+      scheduled_unpublish_at: 'scheduled_unpublish_at',
+      default_locale: 'default_locale',
+      translated_content: 'translated_content',
+      tags: 'tags',
+      folder_id: 'folder_id',
+      statistics: 'statistics'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::ArticleType.from_value(value)
+      end,
+      state: lambda do |value|
+        ::OctridevIntercom::ArticleState.from_value(value)
+      end,
+      help_center_audience: lambda do |value|
+        ::OctridevIntercom::ArticleHelpCenterAudience.from_value(value)
+      end,
+      translated_content: lambda do |value|
+        ::OctridevIntercom::ArticleTranslatedContent.from_hash(value)
+      end,
+      tags: lambda do |value|
+        ::OctridevIntercom::Tags.from_hash(value)
+      end,
+      statistics: lambda do |value|
+        ::OctridevIntercom::ArticleStatistics.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for Article.
+  # The Articles API is a central place to gather all information and take actions on your articles. Articles can live within collections and sections, or alternatively they can stand alone.
+  class Article
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalArticleMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalArticleMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalArticleMetadata::DECODERS
+
+    # @return [ArticleType] The type of object - `article`.
+    attr_reader :type
+    # @return [String] The unique identifier for the article which is given by Intercom.
+    attr_reader :id
+    # @return [String] The id of the workspace which the article belongs to.
+    attr_reader :workspace_id
+    # @return [String] The title of the article. For multilingual articles, this will be the title of the default language's content.
+    attr_reader :title
+    # @return [String] The description of the article. For multilingual articles, this will be the description of the default language's content.
+    attr_reader :description
+    # @return [String] The body of the article in HTML. For multilingual articles, this will be the body of the default language's content.
+    attr_reader :body
+    # @return [String] The body of the article in markdown. For multilingual articles, this will be the body of the default language's content.
+    attr_reader :body_markdown
+    # @return [Integer] The id of the author of the article. For multilingual articles, this will be the id of the author of the default language's content. Must be a teammate on the help center's workspace.
+    attr_reader :author_id
+    # @return [ArticleState] Whether the article is `published` or is a `draft`. For multilingual articles, this will be the state of the default language's content.
+    attr_reader :state
+    # @return [Integer] The time when the article was created. For multilingual articles, this will be the timestamp of creation of the default language's content in seconds.
+    attr_reader :created_at
+    # @return [Integer] The time when the article was last updated. For multilingual articles, this will be the timestamp of last update of the default language's content in seconds.
+    attr_reader :updated_at
+    # @return [Boolean] Whether the published article has unpublished changes staged as a draft on top of its live content. For multilingual articles this reflects the default language's content; a pure draft (never published) reports `false`.
+    attr_reader :has_unpublished_changes
+    # @return [Integer] The time, in seconds, when the staged draft was last edited, or `null` when there is no staged draft.
+    attr_reader :draft_updated_at
+    # @return [String] The URL of the article. For multilingual articles, this will be the URL of the default language's content.
+    attr_reader :url
+    # @return [Array_of_Integer] The ids of the article's parent collections or sections. An article without this field stands alone.
+    attr_reader :parent_ids
+    # @return [Boolean] Whether the article is available for AI Chatbot. For multilingual articles, this will be the value of the default language's content.
+    attr_reader :ai_chatbot_availability
+    # @return [Boolean] Whether the article is available for AI Copilot. For multilingual articles, this will be the value of the default language's content.
+    attr_reader :ai_copilot_availability
+    # @return [Boolean] Whether the article is available for AI Sales Agent. For multilingual articles, this will be the value of the default language's content.
+    attr_reader :ai_sales_agent_availability
+    # @return [Integer] The ID of the teammate who created the article. For multilingual articles, this will be the creator of the default language's content.
+    attr_reader :created_by_id
+    # @return [Integer] The ID of the teammate who last updated the article. For multilingual articles, this will be the last editor of the default language's content.
+    attr_reader :updated_by_id
+    # @return [Boolean] Whether the article is excluded from Fin AI Agent article suggestions.
+    attr_reader :exclude_from_article_suggestions
+    # @return [ArticleHelpCenterAudience] The audience that can view this article in the Help Center. `everyone` means all users and visitors can view it; `restricted` indicates a custom audience ruleset. For multilingual articles, this is the article-level audience.
+    attr_reader :help_center_audience
+    # @return [Integer] The Unix timestamp (in seconds) at which the article is scheduled to be published. `null` when no publish is scheduled. Mutually exclusive with `scheduled_unpublish_at` — at most one pending schedule exists per article.
+    attr_reader :scheduled_publish_at
+    # @return [Integer] The Unix timestamp (in seconds) at which the article is scheduled to be unpublished. `null` when no unpublish is scheduled. Mutually exclusive with `scheduled_publish_at` — at most one pending schedule exists per article.
+    attr_reader :scheduled_unpublish_at
+    # @return [String] The default locale of the help center. This field is only returned for multilingual help centers.
+    attr_reader :default_locale
+    # @return [ArticleTranslatedContent] The Translated Content of an Article. The keys are the locale codes and the values are the translated content of the article.
+    attr_reader :translated_content
+    # @return [Tags] A list of tags objects associated with a conversation
+    attr_reader :tags
+    # @return [Integer] The ID of the folder this article belongs to, or null if not in a folder.
+    attr_reader :folder_id
+    # @return [ArticleStatistics] The statistics of an article.
+    attr_reader :statistics
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the ArticleHelpCenterAudience SDK namespace.
-module ArticleHelpCenterAudience
-  EVERYONE = 'everyone'
-  ALL_USERS = 'all_users'
-  ALL_VISITORS = 'all_visitors'
-  ALL_LEADS = 'all_leads'
-  ALL_VISITORS_AND_LEADS = 'all_visitors_and_leads'
-  RESTRICTED = 'restricted'
-  VALUES = [
-    'everyone', 'all_users', 'all_visitors', 'all_leads', 'all_visitors_and_leads', 'restricted'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the ArticleState SDK namespace.
-module ArticleState
-  PUBLISHED = 'published'
-  DRAFT = 'draft'
-  VALUES = ['published', 'draft'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the ArticleType SDK namespace.
-module ArticleType
-  ARTICLE = 'article'
-  VALUES = ['article'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalArticleListItemMetadata
-  FIELDS = {
-    type: "type",
-    id: "id",
-    workspace_id: "workspace_id",
-    title: "title",
-    description: "description",
-    body: "body",
-    body_markdown: "body_markdown",
-    author_id: "author_id",
-    state: "state",
-    created_at: "created_at",
-    updated_at: "updated_at",
-    has_unpublished_changes: "has_unpublished_changes",
-    draft_updated_at: "draft_updated_at",
-    url: "url",
-    parent_ids: "parent_ids",
-    ai_chatbot_availability: "ai_chatbot_availability",
-    ai_copilot_availability: "ai_copilot_availability",
-    ai_sales_agent_availability: "ai_sales_agent_availability",
-    created_by_id: "created_by_id",
-    updated_by_id: "updated_by_id",
-    exclude_from_article_suggestions: "exclude_from_article_suggestions",
-    help_center_audience: "help_center_audience",
-    scheduled_publish_at: "scheduled_publish_at",
-    scheduled_unpublish_at: "scheduled_unpublish_at",
-    default_locale: "default_locale",
-    translated_content: "translated_content",
-    tags: "tags",
-    folder_id: "folder_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::ArticleListItemType.from_value(value)
-    end,
-    state: lambda do |value|
-      ::OctridevIntercom::ArticleListItemState.from_value(value)
-    end,
-    help_center_audience: lambda do |value|
-      ::OctridevIntercom::ArticleListItemHelpCenterAudience.from_value(value)
-    end,
-    translated_content: lambda do |value|
-      ::OctridevIntercom::ArticleTranslatedContent.from_hash(value)
-    end,
-    tags: lambda do |value|
-      ::OctridevIntercom::Tags.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ArticleListItem.
-# The data returned about your articles when you list them.
-class ArticleListItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalArticleListItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalArticleListItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalArticleListItemMetadata::DECODERS
-
-  # @return [ArticleListItemType] The type of object - `article`.
-  attr_reader :type
-  # @return [String] The unique identifier for the article which is given by Intercom.
-  attr_reader :id
-  # @return [String] The id of the workspace which the article belongs to.
-  attr_reader :workspace_id
-  # @return [String] The title of the article. For multilingual articles, this will be the title of the default language's content.
-  attr_reader :title
-  # @return [String] The description of the article. For multilingual articles, this will be the description of the default language's content.
-  attr_reader :description
-  # @return [String] The body of the article in HTML. For multilingual articles, this will be the body of the default language's content.
-  attr_reader :body
-  # @return [String] The body of the article in markdown. For multilingual articles, this will be the body of the default language's content.
-  attr_reader :body_markdown
-  # @return [Integer] The id of the author of the article. For multilingual articles, this will be the id of the author of the default language's content. Must be a teammate on the help center's workspace.
-  attr_reader :author_id
-  # @return [ArticleListItemState] Whether the article is `published` or is a `draft`. For multilingual articles, this will be the state of the default language's content.
-  attr_reader :state
-  # @return [Integer] The time when the article was created. For multilingual articles, this will be the timestamp of creation of the default language's content in seconds.
-  attr_reader :created_at
-  # @return [Integer] The time when the article was last updated. For multilingual articles, this will be the timestamp of last update of the default language's content in seconds.
-  attr_reader :updated_at
-  # @return [Boolean] Whether the published article has unpublished changes staged as a draft on top of its live content. For multilingual articles this reflects the default language's content; a pure draft (never published) reports `false`.
-  attr_reader :has_unpublished_changes
-  # @return [Integer] The time, in seconds, when the staged draft was last edited, or `null` when there is no staged draft.
-  attr_reader :draft_updated_at
-  # @return [String] The URL of the article. For multilingual articles, this will be the URL of the default language's content.
-  attr_reader :url
-  # @return [Array_of_Integer] The ids of the article's parent collections or sections. An article without this field stands alone.
-  attr_reader :parent_ids
-  # @return [Boolean] Whether the article is available for AI Chatbot. For multilingual articles, this will be the value of the default language's content.
-  attr_reader :ai_chatbot_availability
-  # @return [Boolean] Whether the article is available for AI Copilot. For multilingual articles, this will be the value of the default language's content.
-  attr_reader :ai_copilot_availability
-  # @return [Boolean] Whether the article is available for AI Sales Agent. For multilingual articles, this will be the value of the default language's content.
-  attr_reader :ai_sales_agent_availability
-  # @return [Integer] The ID of the teammate who created the article. For multilingual articles, this will be the creator of the default language's content.
-  attr_reader :created_by_id
-  # @return [Integer] The ID of the teammate who last updated the article. For multilingual articles, this will be the last editor of the default language's content.
-  attr_reader :updated_by_id
-  # @return [Boolean] Whether the article is excluded from Fin AI Agent article suggestions.
-  attr_reader :exclude_from_article_suggestions
-  # @return [ArticleListItemHelpCenterAudience] The audience that can view this article in the Help Center. `everyone` means all users and visitors can view it; `restricted` indicates a custom audience ruleset. For multilingual articles, this is the article-level audience.
-  attr_reader :help_center_audience
-  # @return [Integer] The Unix timestamp (in seconds) at which the article is scheduled to be published. `null` when no publish is scheduled. Mutually exclusive with `scheduled_unpublish_at` — at most one pending schedule exists per article.
-  attr_reader :scheduled_publish_at
-  # @return [Integer] The Unix timestamp (in seconds) at which the article is scheduled to be unpublished. `null` when no unpublish is scheduled. Mutually exclusive with `scheduled_publish_at` — at most one pending schedule exists per article.
-  attr_reader :scheduled_unpublish_at
-  # @return [String] The default locale of the help center. This field is only returned for multilingual help centers.
-  attr_reader :default_locale
-  # @return [ArticleTranslatedContent] The Translated Content of an Article. The keys are the locale codes and the values are the translated content of the article.
-  attr_reader :translated_content
-  # @return [Tags] A list of tags objects associated with a conversation
-  attr_reader :tags
-  # @return [Integer] The ID of the folder this article belongs to, or null if not in a folder.
-  attr_reader :folder_id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ArticleHelpCenterAudience SDK namespace.
+  module ArticleHelpCenterAudience
+    EVERYONE = 'everyone'
+    ALL_USERS = 'all_users'
+    ALL_VISITORS = 'all_visitors'
+    ALL_LEADS = 'all_leads'
+    ALL_VISITORS_AND_LEADS = 'all_visitors_and_leads'
+    RESTRICTED = 'restricted'
+    VALUES = %w[
+      everyone all_users all_visitors all_leads all_visitors_and_leads restricted
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the ArticleState SDK namespace.
+  module ArticleState
+    PUBLISHED = 'published'
+    DRAFT = 'draft'
+    VALUES = %w[published draft].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the ArticleListItemHelpCenterAudience SDK namespace.
-module ArticleListItemHelpCenterAudience
-  EVERYONE = 'everyone'
-  ALL_USERS = 'all_users'
-  ALL_VISITORS = 'all_visitors'
-  ALL_LEADS = 'all_leads'
-  ALL_VISITORS_AND_LEADS = 'all_visitors_and_leads'
-  RESTRICTED = 'restricted'
-  VALUES = [
-    'everyone', 'all_users', 'all_visitors', 'all_leads', 'all_visitors_and_leads', 'restricted'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the ArticleListItemState SDK namespace.
-module ArticleListItemState
-  PUBLISHED = 'published'
-  DRAFT = 'draft'
-  VALUES = ['published', 'draft'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the ArticleListItemType SDK namespace.
-module ArticleListItemType
-  ARTICLE = 'article'
-  VALUES = ['article'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalArticleSearchHighlightsHighlightedTitleItemMetadata
-  FIELDS = {
-    type: "type",
-    text: "text",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::ArticleSearchHighlightsHighlightedTitleItemType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for ArticleSearchHighlightsHighlightedTitleItem.
-# A highlighted article title.
-class ArticleSearchHighlightsHighlightedTitleItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalArticleSearchHighlightsHighlightedTitleItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalArticleSearchHighlightsHighlightedTitleItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalArticleSearchHighlightsHighlightedTitleItemMetadata::DECODERS
-
-  # @return [ArticleSearchHighlightsHighlightedTitleItemType] The type of text - `highlight` or `plain`.
-  attr_reader :type
-  # @return [String] The text of the title.
-  attr_reader :text
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ArticleType SDK namespace.
+  module ArticleType
+    ARTICLE = 'article'
+    VALUES = ['article'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalArticleListItemMetadata
+    FIELDS = {
+      type: 'type',
+      id: 'id',
+      workspace_id: 'workspace_id',
+      title: 'title',
+      description: 'description',
+      body: 'body',
+      body_markdown: 'body_markdown',
+      author_id: 'author_id',
+      state: 'state',
+      created_at: 'created_at',
+      updated_at: 'updated_at',
+      has_unpublished_changes: 'has_unpublished_changes',
+      draft_updated_at: 'draft_updated_at',
+      url: 'url',
+      parent_ids: 'parent_ids',
+      ai_chatbot_availability: 'ai_chatbot_availability',
+      ai_copilot_availability: 'ai_copilot_availability',
+      ai_sales_agent_availability: 'ai_sales_agent_availability',
+      created_by_id: 'created_by_id',
+      updated_by_id: 'updated_by_id',
+      exclude_from_article_suggestions: 'exclude_from_article_suggestions',
+      help_center_audience: 'help_center_audience',
+      scheduled_publish_at: 'scheduled_publish_at',
+      scheduled_unpublish_at: 'scheduled_unpublish_at',
+      default_locale: 'default_locale',
+      translated_content: 'translated_content',
+      tags: 'tags',
+      folder_id: 'folder_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::ArticleListItemType.from_value(value)
+      end,
+      state: lambda do |value|
+        ::OctridevIntercom::ArticleListItemState.from_value(value)
+      end,
+      help_center_audience: lambda do |value|
+        ::OctridevIntercom::ArticleListItemHelpCenterAudience.from_value(value)
+      end,
+      translated_content: lambda do |value|
+        ::OctridevIntercom::ArticleTranslatedContent.from_hash(value)
+      end,
+      tags: lambda do |value|
+        ::OctridevIntercom::Tags.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ArticleListItem.
+  # The data returned about your articles when you list them.
+  class ArticleListItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalArticleListItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalArticleListItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalArticleListItemMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalArticleSearchHighlightsHighlightedSummaryItemItemMetadata
-  FIELDS = {
-    type: "type",
-    text: "text",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::ArticleSearchHighlightsHighlightedSummaryItemItemType.from_value(value)
-    end,
-  }.freeze
-end
+    # @return [ArticleListItemType] The type of object - `article`.
+    attr_reader :type
+    # @return [String] The unique identifier for the article which is given by Intercom.
+    attr_reader :id
+    # @return [String] The id of the workspace which the article belongs to.
+    attr_reader :workspace_id
+    # @return [String] The title of the article. For multilingual articles, this will be the title of the default language's content.
+    attr_reader :title
+    # @return [String] The description of the article. For multilingual articles, this will be the description of the default language's content.
+    attr_reader :description
+    # @return [String] The body of the article in HTML. For multilingual articles, this will be the body of the default language's content.
+    attr_reader :body
+    # @return [String] The body of the article in markdown. For multilingual articles, this will be the body of the default language's content.
+    attr_reader :body_markdown
+    # @return [Integer] The id of the author of the article. For multilingual articles, this will be the id of the author of the default language's content. Must be a teammate on the help center's workspace.
+    attr_reader :author_id
+    # @return [ArticleListItemState] Whether the article is `published` or is a `draft`. For multilingual articles, this will be the state of the default language's content.
+    attr_reader :state
+    # @return [Integer] The time when the article was created. For multilingual articles, this will be the timestamp of creation of the default language's content in seconds.
+    attr_reader :created_at
+    # @return [Integer] The time when the article was last updated. For multilingual articles, this will be the timestamp of last update of the default language's content in seconds.
+    attr_reader :updated_at
+    # @return [Boolean] Whether the published article has unpublished changes staged as a draft on top of its live content. For multilingual articles this reflects the default language's content; a pure draft (never published) reports `false`.
+    attr_reader :has_unpublished_changes
+    # @return [Integer] The time, in seconds, when the staged draft was last edited, or `null` when there is no staged draft.
+    attr_reader :draft_updated_at
+    # @return [String] The URL of the article. For multilingual articles, this will be the URL of the default language's content.
+    attr_reader :url
+    # @return [Array_of_Integer] The ids of the article's parent collections or sections. An article without this field stands alone.
+    attr_reader :parent_ids
+    # @return [Boolean] Whether the article is available for AI Chatbot. For multilingual articles, this will be the value of the default language's content.
+    attr_reader :ai_chatbot_availability
+    # @return [Boolean] Whether the article is available for AI Copilot. For multilingual articles, this will be the value of the default language's content.
+    attr_reader :ai_copilot_availability
+    # @return [Boolean] Whether the article is available for AI Sales Agent. For multilingual articles, this will be the value of the default language's content.
+    attr_reader :ai_sales_agent_availability
+    # @return [Integer] The ID of the teammate who created the article. For multilingual articles, this will be the creator of the default language's content.
+    attr_reader :created_by_id
+    # @return [Integer] The ID of the teammate who last updated the article. For multilingual articles, this will be the last editor of the default language's content.
+    attr_reader :updated_by_id
+    # @return [Boolean] Whether the article is excluded from Fin AI Agent article suggestions.
+    attr_reader :exclude_from_article_suggestions
+    # @return [ArticleListItemHelpCenterAudience] The audience that can view this article in the Help Center. `everyone` means all users and visitors can view it; `restricted` indicates a custom audience ruleset. For multilingual articles, this is the article-level audience.
+    attr_reader :help_center_audience
+    # @return [Integer] The Unix timestamp (in seconds) at which the article is scheduled to be published. `null` when no publish is scheduled. Mutually exclusive with `scheduled_unpublish_at` — at most one pending schedule exists per article.
+    attr_reader :scheduled_publish_at
+    # @return [Integer] The Unix timestamp (in seconds) at which the article is scheduled to be unpublished. `null` when no unpublish is scheduled. Mutually exclusive with `scheduled_publish_at` — at most one pending schedule exists per article.
+    attr_reader :scheduled_unpublish_at
+    # @return [String] The default locale of the help center. This field is only returned for multilingual help centers.
+    attr_reader :default_locale
+    # @return [ArticleTranslatedContent] The Translated Content of an Article. The keys are the locale codes and the values are the translated content of the article.
+    attr_reader :translated_content
+    # @return [Tags] A list of tags objects associated with a conversation
+    attr_reader :tags
+    # @return [Integer] The ID of the folder this article belongs to, or null if not in a folder.
+    attr_reader :folder_id
 
-# API model for ArticleSearchHighlightsHighlightedSummaryItemItem.
-# An instance of highlighted summary text.
-class ArticleSearchHighlightsHighlightedSummaryItemItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalArticleSearchHighlightsHighlightedSummaryItemItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalArticleSearchHighlightsHighlightedSummaryItemItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalArticleSearchHighlightsHighlightedSummaryItemItemMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [ArticleSearchHighlightsHighlightedSummaryItemItemType] The type of text - `highlight` or `plain`.
-  attr_reader :type
-  # @return [String] The text of the title.
-  attr_reader :text
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalArticleSearchHighlightsMetadata
-  FIELDS = {
-    article_id: "article_id",
-    highlighted_title: "highlighted_title",
-    highlighted_summary: "highlighted_summary",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    highlighted_title: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::ArticleSearchHighlightsHighlightedTitleItem.from_hash(item) }
-    end,
-    highlighted_summary: lambda do |value|
-      value&.map { |list| list&.map { |item| ::OctridevIntercom::ArticleSearchHighlightsHighlightedSummaryItemItem.from_hash(item) } }
-    end,
-  }.freeze
-end
-
-# API model for ArticleSearchHighlights.
-# The highlighted results of an Article search. In the examples provided my search query is always "my query".
-class ArticleSearchHighlights
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalArticleSearchHighlightsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalArticleSearchHighlightsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalArticleSearchHighlightsMetadata::DECODERS
-
-  # @return [String] The ID of the corresponding article.
-  attr_reader :article_id
-  # @return [Array_of_ArticleSearchHighlightsHighlightedTitleItem] An Article title highlighted.
-  attr_reader :highlighted_title
-  # @return [Array_of_Array_of_ArticleSearchHighlightsHighlightedSummaryItemItem] An Article description and body text highlighted.
-  attr_reader :highlighted_summary
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the ArticleListItemHelpCenterAudience SDK namespace.
+  module ArticleListItemHelpCenterAudience
+    EVERYONE = 'everyone'
+    ALL_USERS = 'all_users'
+    ALL_VISITORS = 'all_visitors'
+    ALL_LEADS = 'all_leads'
+    ALL_VISITORS_AND_LEADS = 'all_visitors_and_leads'
+    RESTRICTED = 'restricted'
+    VALUES = %w[
+      everyone all_users all_visitors all_leads all_visitors_and_leads restricted
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the ArticleSearchHighlightsHighlightedSummaryItemItemType SDK namespace.
-module ArticleSearchHighlightsHighlightedSummaryItemItemType
-  HIGHLIGHT = 'highlight'
-  PLAIN = 'plain'
-  VALUES = ['highlight', 'plain'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the ArticleSearchHighlightsHighlightedTitleItemType SDK namespace.
-module ArticleSearchHighlightsHighlightedTitleItemType
-  HIGHLIGHT = 'highlight'
-  PLAIN = 'plain'
-  VALUES = ['highlight', 'plain'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalArticleSearchResponseDataMetadata
-  FIELDS = {
-    articles: "articles",
-    highlights: "highlights",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    articles: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::Article.from_hash(item) }
-    end,
-    highlights: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::ArticleSearchHighlights.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for ArticleSearchResponseData.
-# An object containing the results of the search.
-class ArticleSearchResponseData
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalArticleSearchResponseDataMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalArticleSearchResponseDataMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalArticleSearchResponseDataMetadata::DECODERS
-
-  # @return [Array_of_Article] An array of Article objects
-  attr_reader :articles
-  # @return [Array_of_ArticleSearchHighlights] A corresponding array of highlighted Article content
-  attr_reader :highlights
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ArticleListItemState SDK namespace.
+  module ArticleListItemState
+    PUBLISHED = 'published'
+    DRAFT = 'draft'
+    VALUES = %w[published draft].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the ArticleListItemType SDK namespace.
+  module ArticleListItemType
+    ARTICLE = 'article'
+    VALUES = ['article'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalArticleSearchResponseMetadata
-  FIELDS = {
-    type: "type",
-    total_count: "total_count",
-    data: "data",
-    pages: "pages",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::ArticleSearchResponseType.from_value(value)
-    end,
-    data: lambda do |value|
-      ::OctridevIntercom::ArticleSearchResponseData.from_hash(value)
-    end,
-    pages: lambda do |value|
-      ::OctridevIntercom::CursorPages.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ArticleSearchResponse.
-# The results of an Article search
-class ArticleSearchResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalArticleSearchResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalArticleSearchResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalArticleSearchResponseMetadata::DECODERS
-
-  # @return [ArticleSearchResponseType] The type of the object - `list`.
-  attr_reader :type
-  # @return [Integer] The total number of Articles matching the search query
-  attr_reader :total_count
-  # @return [ArticleSearchResponseData] An object containing the results of the search.
-  attr_reader :data
-  # @return [CursorPages] Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
-  attr_reader :pages
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalArticleSearchHighlightsHighlightedTitleItemMetadata
+    FIELDS = {
+      type: 'type',
+      text: 'text'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::ArticleSearchHighlightsHighlightedTitleItemType.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ArticleSearchHighlightsHighlightedTitleItem.
+  # A highlighted article title.
+  class ArticleSearchHighlightsHighlightedTitleItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalArticleSearchHighlightsHighlightedTitleItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalArticleSearchHighlightsHighlightedTitleItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalArticleSearchHighlightsHighlightedTitleItemMetadata::DECODERS
+
+    # @return [ArticleSearchHighlightsHighlightedTitleItemType] The type of text - `highlight` or `plain`.
+    attr_reader :type
+    # @return [String] The text of the title.
+    attr_reader :text
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the ArticleSearchResponseType SDK namespace.
-module ArticleSearchResponseType
-  LIST = 'list'
-  VALUES = ['list'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalArticleVersionMetadata
-  FIELDS = {
-    type: "type",
-    id: "id",
-    article_id: "article_id",
-    title: "title",
-    description: "description",
-    body: "body",
-    body_markdown: "body_markdown",
-    author_id: "author_id",
-    created_by_id: "created_by_id",
-    created_via: "created_via",
-    from_version_id: "from_version_id",
-    state: "state",
-    created_at: "created_at",
-    updated_at: "updated_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::ArticleVersionType.from_value(value)
-    end,
-    state: lambda do |value|
-      ::OctridevIntercom::ArticleVersionState.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for ArticleVersion.
-# A historical version of an article, including its content.
-class ArticleVersion
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalArticleVersionMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalArticleVersionMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalArticleVersionMetadata::DECODERS
-
-  # @return [ArticleVersionType] String representing the object's type. Always has the value `article_version`.
-  attr_reader :type
-  # @return [String] The unique identifier for the version.
-  attr_reader :id
-  # @return [String] The unique identifier of the article this version belongs to.
-  attr_reader :article_id
-  # @return [String] The title of the article at this version.
-  attr_reader :title
-  # @return [String] The description of the article at this version.
-  attr_reader :description
-  # @return [String] The HTML body of the article at this version.
-  attr_reader :body
-  # @return [String] The Markdown body of the article at this version.
-  attr_reader :body_markdown
-  # @return [String] The id of the teammate listed as the article's author at this version.
-  attr_reader :author_id
-  # @return [String] The id of the teammate who created this version.
-  attr_reader :created_by_id
-  # @return [String] How this version was created (for example `web`, `api`).
-  attr_reader :created_via
-  # @return [String] The id of the version this version was created from, or `null` if this is the first version.
-  attr_reader :from_version_id
-  # @return [ArticleVersionState] Whether this version is the currently published version of the article (`published`) or an earlier non-live version (`draft`).
-  attr_reader :state
-  # @return [Integer] The time the version was created, as a UTC Unix timestamp.
-  attr_reader :created_at
-  # @return [Integer] The time the version was last updated, as a UTC Unix timestamp.
-  attr_reader :updated_at
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalArticleSearchHighlightsHighlightedSummaryItemItemMetadata
+    FIELDS = {
+      type: 'type',
+      text: 'text'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::ArticleSearchHighlightsHighlightedSummaryItemItemType.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ArticleSearchHighlightsHighlightedSummaryItemItem.
+  # An instance of highlighted summary text.
+  class ArticleSearchHighlightsHighlightedSummaryItemItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalArticleSearchHighlightsHighlightedSummaryItemItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalArticleSearchHighlightsHighlightedSummaryItemItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalArticleSearchHighlightsHighlightedSummaryItemItemMetadata::DECODERS
+
+    # @return [ArticleSearchHighlightsHighlightedSummaryItemItemType] The type of text - `highlight` or `plain`.
+    attr_reader :type
+    # @return [String] The text of the title.
+    attr_reader :text
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalArticleSearchHighlightsMetadata
+    FIELDS = {
+      article_id: 'article_id',
+      highlighted_title: 'highlighted_title',
+      highlighted_summary: 'highlighted_summary'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      highlighted_title: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::ArticleSearchHighlightsHighlightedTitleItem.from_hash(item) }
+      end,
+      highlighted_summary: lambda do |value|
+        value&.map { |list| list&.map { |item| ::OctridevIntercom::ArticleSearchHighlightsHighlightedSummaryItemItem.from_hash(item) } }
+      end
+    }.freeze
   end
-end
+
+  # API model for ArticleSearchHighlights.
+  # The highlighted results of an Article search. In the examples provided my search query is always "my query".
+  class ArticleSearchHighlights
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalArticleSearchHighlightsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalArticleSearchHighlightsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalArticleSearchHighlightsMetadata::DECODERS
+
+    # @return [String] The ID of the corresponding article.
+    attr_reader :article_id
+    # @return [Array_of_ArticleSearchHighlightsHighlightedTitleItem] An Article title highlighted.
+    attr_reader :highlighted_title
+    # @return [Array_of_Array_of_ArticleSearchHighlightsHighlightedSummaryItemItem] An Article description and body text highlighted.
+    attr_reader :highlighted_summary
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the ArticleSearchHighlightsHighlightedSummaryItemItemType SDK namespace.
+  module ArticleSearchHighlightsHighlightedSummaryItemItemType
+    HIGHLIGHT = 'highlight'
+    PLAIN = 'plain'
+    VALUES = %w[highlight plain].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Defines the ArticleSearchHighlightsHighlightedTitleItemType SDK namespace.
+  module ArticleSearchHighlightsHighlightedTitleItemType
+    HIGHLIGHT = 'highlight'
+    PLAIN = 'plain'
+    VALUES = %w[highlight plain].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalArticleSearchResponseDataMetadata
+    FIELDS = {
+      articles: 'articles',
+      highlights: 'highlights'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      articles: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::Article.from_hash(item) }
+      end,
+      highlights: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::ArticleSearchHighlights.from_hash(item) }
+      end
+    }.freeze
+  end
+
+  # API model for ArticleSearchResponseData.
+  # An object containing the results of the search.
+  class ArticleSearchResponseData
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalArticleSearchResponseDataMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalArticleSearchResponseDataMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalArticleSearchResponseDataMetadata::DECODERS
+
+    # @return [Array_of_Article] An array of Article objects
+    attr_reader :articles
+    # @return [Array_of_ArticleSearchHighlights] A corresponding array of highlighted Article content
+    attr_reader :highlights
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalArticleSearchResponseMetadata
+    FIELDS = {
+      type: 'type',
+      total_count: 'total_count',
+      data: 'data',
+      pages: 'pages'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::ArticleSearchResponseType.from_value(value)
+      end,
+      data: lambda do |value|
+        ::OctridevIntercom::ArticleSearchResponseData.from_hash(value)
+      end,
+      pages: lambda do |value|
+        ::OctridevIntercom::CursorPages.from_hash(value)
+      end
+    }.freeze
+  end
+
+  # API model for ArticleSearchResponse.
+  # The results of an Article search
+  class ArticleSearchResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalArticleSearchResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalArticleSearchResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalArticleSearchResponseMetadata::DECODERS
+
+    # @return [ArticleSearchResponseType] The type of the object - `list`.
+    attr_reader :type
+    # @return [Integer] The total number of Articles matching the search query
+    attr_reader :total_count
+    # @return [ArticleSearchResponseData] An object containing the results of the search.
+    attr_reader :data
+    # @return [CursorPages] Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
+    attr_reader :pages
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the ArticleSearchResponseType SDK namespace.
+  module ArticleSearchResponseType
+    LIST = 'list'
+    VALUES = ['list'].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalArticleVersionMetadata
+    FIELDS = {
+      type: 'type',
+      id: 'id',
+      article_id: 'article_id',
+      title: 'title',
+      description: 'description',
+      body: 'body',
+      body_markdown: 'body_markdown',
+      author_id: 'author_id',
+      created_by_id: 'created_by_id',
+      created_via: 'created_via',
+      from_version_id: 'from_version_id',
+      state: 'state',
+      created_at: 'created_at',
+      updated_at: 'updated_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::ArticleVersionType.from_value(value)
+      end,
+      state: lambda do |value|
+        ::OctridevIntercom::ArticleVersionState.from_value(value)
+      end
+    }.freeze
+  end
+
+  # API model for ArticleVersion.
+  # A historical version of an article, including its content.
+  class ArticleVersion
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalArticleVersionMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalArticleVersionMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalArticleVersionMetadata::DECODERS
+
+    # @return [ArticleVersionType] String representing the object's type. Always has the value `article_version`.
+    attr_reader :type
+    # @return [String] The unique identifier for the version.
+    attr_reader :id
+    # @return [String] The unique identifier of the article this version belongs to.
+    attr_reader :article_id
+    # @return [String] The title of the article at this version.
+    attr_reader :title
+    # @return [String] The description of the article at this version.
+    attr_reader :description
+    # @return [String] The HTML body of the article at this version.
+    attr_reader :body
+    # @return [String] The Markdown body of the article at this version.
+    attr_reader :body_markdown
+    # @return [String] The id of the teammate listed as the article's author at this version.
+    attr_reader :author_id
+    # @return [String] The id of the teammate who created this version.
+    attr_reader :created_by_id
+    # @return [String] How this version was created (for example `web`, `api`).
+    attr_reader :created_via
+    # @return [String] The id of the version this version was created from, or `null` if this is the first version.
+    attr_reader :from_version_id
+    # @return [ArticleVersionState] Whether this version is the currently published version of the article (`published`) or an earlier non-live version (`draft`).
+    attr_reader :state
+    # @return [Integer] The time the version was created, as a UTC Unix timestamp.
+    attr_reader :created_at
+    # @return [Integer] The time the version was last updated, as a UTC Unix timestamp.
+    attr_reader :updated_at
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
 end

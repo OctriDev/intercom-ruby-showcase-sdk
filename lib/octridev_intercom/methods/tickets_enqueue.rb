@@ -56,10 +56,9 @@ module OctridevIntercom
         skip_notifications: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/tickets/enqueue",
+          '/tickets/enqueue',
           config: config,
           body: {
             'ticket_type_id' => ticket_type_id,
@@ -70,16 +69,16 @@ module OctridevIntercom
             'ticket_attributes' => ticket_attributes,
             'assignment' => assignment,
             'channel' => channel,
-            'skip_notifications' => skip_notifications,
+            'skip_notifications' => skip_notifications
           },
           return_type: ::OctridevIntercom::Jobs,
           decoder: :json,
           operation_id: 'enqueue_create_ticket',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 },
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 }
         ).data
       end
     end

@@ -5,211 +5,209 @@
 
 # tagged_models_news domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalNewsfeedMetadata
-  FIELDS = {
-    id: "id",
-    type: "type",
-    name: "name",
-    created_at: "created_at",
-    updated_at: "updated_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::NewsfeedType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for Newsfeed.
-# A newsfeed is a collection of news items, targeted to a specific audience. Newsfeeds currently cannot be edited through the API, please refer to this article to set up your newsfeeds in Intercom.
-class Newsfeed
-  include PaginatedResponseDataItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalNewsfeedMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalNewsfeedMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalNewsfeedMetadata::DECODERS
-
-  # @return [String] The unique identifier for the newsfeed which is given by Intercom.
-  attr_reader :id
-  # @return [NewsfeedType] The type of object.
-  attr_reader :type
-  # @return [String] The name of the newsfeed. This name will never be visible to your users.
-  attr_reader :name
-  # @return [Integer] Timestamp for when the newsfeed was created.
-  attr_reader :created_at
-  # @return [Integer] Timestamp for when the newsfeed was last updated.
-  attr_reader :updated_at
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalNewsfeedMetadata
+    FIELDS = {
+      id: 'id',
+      type: 'type',
+      name: 'name',
+      created_at: 'created_at',
+      updated_at: 'updated_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::NewsfeedType.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for Newsfeed.
+  # A newsfeed is a collection of news items, targeted to a specific audience. Newsfeeds currently cannot be edited through the API, please refer to this article to set up your newsfeeds in Intercom.
+  class Newsfeed
+    include PaginatedResponseDataItem
+
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalNewsfeedMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalNewsfeedMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalNewsfeedMetadata::DECODERS
+
+    # @return [String] The unique identifier for the newsfeed which is given by Intercom.
+    attr_reader :id
+    # @return [NewsfeedType] The type of object.
+    attr_reader :type
+    # @return [String] The name of the newsfeed. This name will never be visible to your users.
+    attr_reader :name
+    # @return [Integer] Timestamp for when the newsfeed was created.
+    attr_reader :created_at
+    # @return [Integer] Timestamp for when the newsfeed was last updated.
+    attr_reader :updated_at
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # Defines the NewsfeedType SDK namespace.
+  module NewsfeedType
+    NEWSFEED = 'newsfeed'
+    VALUES = ['newsfeed'].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
 
-# Defines the NewsfeedType SDK namespace.
-module NewsfeedType
-  NEWSFEED = 'newsfeed'
-  VALUES = ['newsfeed'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
-
-    raise SdkValidationError.new('NewsfeedType', 'enum', "Unknown NewsfeedType: #{value}")
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalNewsfeedAssignmentMetadata
-  FIELDS = {
-    newsfeed_id: "newsfeed_id",
-    published_at: "published_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for NewsfeedAssignment.
-# Assigns a news item to a newsfeed.
-class NewsfeedAssignment
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalNewsfeedAssignmentMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalNewsfeedAssignmentMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalNewsfeedAssignmentMetadata::DECODERS
-
-  # @return [Integer] The unique identifier for the newsfeed which is given by Intercom. Publish dates cannot be in the future, to schedule news items use the dedicated feature in app (see this article).
-  attr_reader :newsfeed_id
-  # @return [Integer] Publish date of the news item on the newsfeed, use this field if you want to set a publish date in the past (e.g. when importing existing news items). On write, this field will be ignored if the news item state is "draft".
-  attr_reader :published_at
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+      raise SdkValidationError.new('NewsfeedType', 'enum', "Unknown NewsfeedType: #{value}")
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalNewsfeedAssignmentMetadata
+    FIELDS = {
+      newsfeed_id: 'newsfeed_id',
+      published_at: 'published_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for NewsfeedAssignment.
+  # Assigns a news item to a newsfeed.
+  class NewsfeedAssignment
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalNewsfeedAssignmentMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalNewsfeedAssignmentMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalNewsfeedAssignmentMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalNewsItemMetadata
-  FIELDS = {
-    type: "type",
-    id: "id",
-    workspace_id: "workspace_id",
-    title: "title",
-    body: "body",
-    sender_id: "sender_id",
-    state: "state",
-    newsfeed_assignments: "newsfeed_assignments",
-    labels: "labels",
-    cover_image_url: "cover_image_url",
-    reactions: "reactions",
-    deliver_silently: "deliver_silently",
-    created_at: "created_at",
-    updated_at: "updated_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::NewsItemType.from_value(value)
-    end,
-    state: lambda do |value|
-      ::OctridevIntercom::NewsItemState.from_value(value)
-    end,
-    newsfeed_assignments: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::NewsfeedAssignment.from_hash(item) }
-    end,
-  }.freeze
-end
+    # @return [Integer] The unique identifier for the newsfeed which is given by Intercom. Publish dates cannot be in the future, to schedule news items use the dedicated feature in app (see this article).
+    attr_reader :newsfeed_id
+    # @return [Integer] Publish date of the news item on the newsfeed, use this field if you want to set a publish date in the past (e.g. when importing existing news items). On write, this field will be ignored if the news item state is "draft".
+    attr_reader :published_at
 
-# API model for NewsItem.
-# A News Item is a content type in Intercom enabling you to announce product updates, company news, promotions, events and more with your customers.
-class NewsItem
-  include PaginatedResponseDataItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalNewsItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalNewsItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalNewsItemMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [NewsItemType] The type of object.
-  attr_reader :type
-  # @return [String] The unique identifier for the news item which is given by Intercom.
-  attr_reader :id
-  # @return [String] The id of the workspace which the news item belongs to.
-  attr_reader :workspace_id
-  # @return [String] The title of the news item.
-  attr_reader :title
-  # @return [String] The news item body, which may contain HTML.
-  attr_reader :body
-  # @return [Integer] The id of the sender of the news item. Must be a teammate on the workspace.
-  attr_reader :sender_id
-  # @return [NewsItemState] News items will not be visible to your users in the assigned newsfeeds until they are set live.
-  attr_reader :state
-  # @return [Array_of_NewsfeedAssignment] A list of newsfeed_assignments to assign to the specified newsfeed.
-  attr_reader :newsfeed_assignments
-  # @return [Array_of_String] Label names displayed to users to categorize the news item.
-  attr_reader :labels
-  # @return [String] URL of the image used as cover. Must have .jpg or .png extension.
-  attr_reader :cover_image_url
-  # @return [Array_of_String] Ordered list of emoji reactions to the news item. When empty, reactions are disabled.
-  attr_reader :reactions
-  # @return [Boolean] When set to true, the news item will appear in the messenger newsfeed without showing a notification badge.
-  attr_reader :deliver_silently
-  # @return [Integer] Timestamp for when the news item was created.
-  attr_reader :created_at
-  # @return [Integer] Timestamp for when the news item was last updated.
-  attr_reader :updated_at
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalNewsItemMetadata
+    FIELDS = {
+      type: 'type',
+      id: 'id',
+      workspace_id: 'workspace_id',
+      title: 'title',
+      body: 'body',
+      sender_id: 'sender_id',
+      state: 'state',
+      newsfeed_assignments: 'newsfeed_assignments',
+      labels: 'labels',
+      cover_image_url: 'cover_image_url',
+      reactions: 'reactions',
+      deliver_silently: 'deliver_silently',
+      created_at: 'created_at',
+      updated_at: 'updated_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::NewsItemType.from_value(value)
+      end,
+      state: lambda do |value|
+        ::OctridevIntercom::NewsItemState.from_value(value)
+      end,
+      newsfeed_assignments: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::NewsfeedAssignment.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for NewsItem.
+  # A News Item is a content type in Intercom enabling you to announce product updates, company news, promotions, events and more with your customers.
+  class NewsItem
+    include PaginatedResponseDataItem
 
-# Defines the NewsItemState SDK namespace.
-module NewsItemState
-  DRAFT = 'draft'
-  LIVE = 'live'
-  VALUES = ['draft', 'live'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalNewsItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalNewsItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalNewsItemMetadata::DECODERS
 
-# Defines the NewsItemType SDK namespace.
-module NewsItemType
-  NEWS_ITEM = 'news-item'
-  VALUES = ['news-item'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
+    # @return [NewsItemType] The type of object.
+    attr_reader :type
+    # @return [String] The unique identifier for the news item which is given by Intercom.
+    attr_reader :id
+    # @return [String] The id of the workspace which the news item belongs to.
+    attr_reader :workspace_id
+    # @return [String] The title of the news item.
+    attr_reader :title
+    # @return [String] The news item body, which may contain HTML.
+    attr_reader :body
+    # @return [Integer] The id of the sender of the news item. Must be a teammate on the workspace.
+    attr_reader :sender_id
+    # @return [NewsItemState] News items will not be visible to your users in the assigned newsfeeds until they are set live.
+    attr_reader :state
+    # @return [Array_of_NewsfeedAssignment] A list of newsfeed_assignments to assign to the specified newsfeed.
+    attr_reader :newsfeed_assignments
+    # @return [Array_of_String] Label names displayed to users to categorize the news item.
+    attr_reader :labels
+    # @return [String] URL of the image used as cover. Must have .jpg or .png extension.
+    attr_reader :cover_image_url
+    # @return [Array_of_String] Ordered list of emoji reactions to the news item. When empty, reactions are disabled.
+    attr_reader :reactions
+    # @return [Boolean] When set to true, the news item will appear in the messenger newsfeed without showing a notification badge.
+    attr_reader :deliver_silently
+    # @return [Integer] Timestamp for when the news item was created.
+    attr_reader :created_at
+    # @return [Integer] Timestamp for when the news item was last updated.
+    attr_reader :updated_at
 
-    raise SdkValidationError.new('NewsItemType', 'enum', "Unknown NewsItemType: #{value}")
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
+
+  # Defines the NewsItemState SDK namespace.
+  module NewsItemState
+    DRAFT = 'draft'
+    LIVE = 'live'
+    VALUES = %w[draft live].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Defines the NewsItemType SDK namespace.
+  module NewsItemType
+    NEWS_ITEM = 'news-item'
+    VALUES = ['news-item'].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
+
+      raise SdkValidationError.new('NewsItemType', 'enum', "Unknown NewsItemType: #{value}")
+    end
+  end
 end

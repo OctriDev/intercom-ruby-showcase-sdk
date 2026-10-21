@@ -40,12 +40,11 @@ module OctridevIntercom
         environment: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(attachments) { Validation.validate_items('attachments', attachments, max: 10) }
 
         SdkClient.request(
           'POST',
-          "/fin/ask",
+          '/fin/ask',
           config: config,
           body: {
             'conversation_id' => conversation_id,
@@ -53,16 +52,16 @@ module OctridevIntercom
             'user' => user,
             'conversation_metadata' => conversation_metadata,
             'attachments' => attachments,
-            'environment' => environment,
+            'environment' => environment
           },
           return_type: ::OctridevIntercom::Methods::FinAgent::AskFinResponse,
           decoder: :json,
           operation_id: 'ask_fin',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 },
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 }
         ).data
       end
     end

@@ -31,27 +31,26 @@ module OctridevIntercom
         skip_duplicate_validation: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/contacts/merge",
+          '/contacts/merge',
           config: config,
           query: {
-            'include_merge_history' => QueryValue.new(include_merge_history, style: 'form', explode: true),
+            'include_merge_history' => QueryValue.new(include_merge_history, style: 'form', explode: true)
           },
           body: {
             'from' => from,
             'into' => into,
-            'skip_duplicate_validation' => skip_duplicate_validation,
+            'skip_duplicate_validation' => skip_duplicate_validation
           },
           return_type: ::OctridevIntercom::Methods::Contacts::MergeContactResponse,
           decoder: :json,
           operation_id: 'merge_contact',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 },
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2 }
         ).data
       end
 
@@ -77,25 +76,24 @@ module OctridevIntercom
         custom_attribute_names: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/contacts/merge/preview",
+          '/contacts/merge/preview',
           config: config,
           body: {
             'from' => from,
             'into' => into,
             'skip_duplicate_validation' => skip_duplicate_validation,
-            'custom_attribute_names' => custom_attribute_names,
+            'custom_attribute_names' => custom_attribute_names
           },
           return_type: ::OctridevIntercom::MergePreviewResponse,
           decoder: :json,
           operation_id: 'preview_merge_contact',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2 }
         ).data
       end
     end

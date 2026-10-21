@@ -5,663 +5,667 @@
 
 # conversations_attributes domain models
 module OctridevIntercom
-# API model for ConversationAttributeOption.
-# A single option on a list-type conversation attribute.
-class ConversationAttributeOption
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalConversationAttributeOptionMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalConversationAttributeOptionMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalConversationAttributeOptionMetadata::DECODERS
+  # API model for ConversationAttributeOption.
+  # A single option on a list-type conversation attribute.
+  class ConversationAttributeOption
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalConversationAttributeOptionMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalConversationAttributeOptionMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalConversationAttributeOptionMetadata::DECODERS
 
-  # @return [String] The unique UUID identifier for this option. Use this value as `option_id` in the options management endpoints.
-  attr_reader :id
-  # @return [String] The display label for the option.
-  attr_reader :label
-  # @return [Boolean] Whether this option is archived (soft-deleted).
-  attr_reader :archived
+    # @return [String] The unique UUID identifier for this option. Use this value as `option_id` in the options management endpoints.
+    attr_reader :id
+    # @return [String] The display label for the option.
+    attr_reader :label
+    # @return [Boolean] Whether this option is archived (soft-deleted).
+    attr_reader :archived
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalConversationAttributeRelationshipTypeVariant1ReferenceMetadata
+    FIELDS = {
+      type: 'type',
+      object_type_id: 'object_type_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::ConversationAttributeRelationshipTypeVariant1ReferenceType.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ConversationAttributeRelationshipTypeVariant1Reference.
+  # Reference configuration for related objects.
+  class ConversationAttributeRelationshipTypeVariant1Reference
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalConversationAttributeRelationshipTypeVariant1ReferenceMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalConversationAttributeRelationshipTypeVariant1ReferenceMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalConversationAttributeRelationshipTypeVariant1ReferenceMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalConversationAttributeRelationshipTypeVariant1ReferenceMetadata
-  FIELDS = {
-    type: "type",
-    object_type_id: "object_type_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::ConversationAttributeRelationshipTypeVariant1ReferenceType.from_value(value)
-    end,
-  }.freeze
-end
+    # @return [ConversationAttributeRelationshipTypeVariant1ReferenceType] The cardinality of the relationship: `one` or `many`.
+    attr_reader :type
+    # @return [String] The ID of the related custom object type.
+    attr_reader :object_type_id
 
-# API model for ConversationAttributeRelationshipTypeVariant1Reference.
-# Reference configuration for related objects.
-class ConversationAttributeRelationshipTypeVariant1Reference
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalConversationAttributeRelationshipTypeVariant1ReferenceMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalConversationAttributeRelationshipTypeVariant1ReferenceMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalConversationAttributeRelationshipTypeVariant1ReferenceMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [ConversationAttributeRelationshipTypeVariant1ReferenceType] The cardinality of the relationship: `one` or `many`.
-  attr_reader :type
-  # @return [String] The ID of the related custom object type.
-  attr_reader :object_type_id
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalConversationAttributeRelationshipTypeMetadata
+    FIELDS = {
+      type: 'type',
+      id: 'id',
+      name: 'name',
+      description: 'description',
+      data_type: 'data_type',
+      required: 'required',
+      visible_to_team_ids: 'visible_to_team_ids',
+      archived: 'archived',
+      created_at: 'created_at',
+      updated_at: 'updated_at',
+      admin_id: 'admin_id',
+      reference: 'reference'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::ConversationAttributeBaseType.from_value(value)
+      end,
+      data_type: lambda do |value|
+        ::OctridevIntercom::ConversationAttributeRelationshipTypeVariant1DataType.from_value(value)
+      end,
+      reference: lambda do |value|
+        ::OctridevIntercom::ConversationAttributeRelationshipTypeVariant1Reference.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ConversationAttributeRelationshipType.
+  # Typed representation of the `ConversationAttributeRelationshipType` API schema.
+  class ConversationAttributeRelationshipType
+    include ConversationAttribute
 
-# Internal model hydration metadata.
-class SdkInternalConversationAttributeRelationshipTypeMetadata
-  FIELDS = {
-    type: "type",
-    id: "id",
-    name: "name",
-    description: "description",
-    data_type: "data_type",
-    required: "required",
-    visible_to_team_ids: "visible_to_team_ids",
-    archived: "archived",
-    created_at: "created_at",
-    updated_at: "updated_at",
-    admin_id: "admin_id",
-    reference: "reference",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::ConversationAttributeBaseType.from_value(value)
-    end,
-    data_type: lambda do |value|
-      ::OctridevIntercom::ConversationAttributeRelationshipTypeVariant1DataType.from_value(value)
-    end,
-    reference: lambda do |value|
-      ::OctridevIntercom::ConversationAttributeRelationshipTypeVariant1Reference.from_hash(value)
-    end,
-  }.freeze
-end
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalConversationAttributeRelationshipTypeMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalConversationAttributeRelationshipTypeMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalConversationAttributeRelationshipTypeMetadata::DECODERS
 
-# API model for ConversationAttributeRelationshipType.
-# Typed representation of the `ConversationAttributeRelationshipType` API schema.
-class ConversationAttributeRelationshipType
-  include ConversationAttribute
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalConversationAttributeRelationshipTypeMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalConversationAttributeRelationshipTypeMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalConversationAttributeRelationshipTypeMetadata::DECODERS
+    # @return [ConversationAttributeBaseType] Value is `conversation_attribute`.
+    attr_reader :type
+    # @return [Integer] The unique identifier for the conversation attribute.
+    attr_reader :id
+    # @return [String] Name of the attribute.
+    attr_reader :name
+    # @return [String] Readable description of the attribute.
+    attr_reader :description
+    # @return [ConversationAttributeRelationshipTypeVariant1DataType] Optional enumerated value serialized in the `data_type` wire field.
+    attr_reader :data_type
+    # @return [Boolean] Whether this attribute is required.
+    attr_reader :required
+    # @return [Array_of_String] Team IDs that can see this attribute. Empty array means all teams.
+    attr_reader :visible_to_team_ids
+    # @return [Boolean] Whether this attribute is archived.
+    attr_reader :archived
+    # @return [Integer] The time the attribute was created as a UTC Unix timestamp.
+    attr_reader :created_at
+    # @return [Integer] The time the attribute was last updated as a UTC Unix timestamp.
+    attr_reader :updated_at
+    # @return [String] ID of the admin who created the attribute.
+    attr_reader :admin_id
+    # @return [ConversationAttributeRelationshipTypeVariant1Reference] Reference configuration for related objects.
+    attr_reader :reference
 
-  # @return [ConversationAttributeBaseType] Value is `conversation_attribute`.
-  attr_reader :type
-  # @return [Integer] The unique identifier for the conversation attribute.
-  attr_reader :id
-  # @return [String] Name of the attribute.
-  attr_reader :name
-  # @return [String] Readable description of the attribute.
-  attr_reader :description
-  # @return [ConversationAttributeRelationshipTypeVariant1DataType] Optional enumerated value serialized in the `data_type` wire field.
-  attr_reader :data_type
-  # @return [Boolean] Whether this attribute is required.
-  attr_reader :required
-  # @return [Array_of_String] Team IDs that can see this attribute. Empty array means all teams.
-  attr_reader :visible_to_team_ids
-  # @return [Boolean] Whether this attribute is archived.
-  attr_reader :archived
-  # @return [Integer] The time the attribute was created as a UTC Unix timestamp.
-  attr_reader :created_at
-  # @return [Integer] The time the attribute was last updated as a UTC Unix timestamp.
-  attr_reader :updated_at
-  # @return [String] ID of the admin who created the attribute.
-  attr_reader :admin_id
-  # @return [ConversationAttributeRelationshipTypeVariant1Reference] Reference configuration for related objects.
-  attr_reader :reference
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the ConversationAttributeRelationshipTypeVariant1DataType SDK namespace.
+  module ConversationAttributeRelationshipTypeVariant1DataType
+    RELATIONSHIP = 'relationship'
+    VALUES = ['relationship'].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
+
+      raise SdkValidationError.new('ConversationAttributeRelationshipTypeVariant1DataType', 'enum', "Unknown ConversationAttributeRelationshipTypeVariant1DataType: #{value}")
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the ConversationAttributeRelationshipTypeVariant1DataType SDK namespace.
-module ConversationAttributeRelationshipTypeVariant1DataType
-  RELATIONSHIP = 'relationship'
-  VALUES = ['relationship'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
-
-    raise SdkValidationError.new('ConversationAttributeRelationshipTypeVariant1DataType', 'enum', "Unknown ConversationAttributeRelationshipTypeVariant1DataType: #{value}")
-  end
-end
-
-# Defines the ConversationAttributeRelationshipTypeVariant1ReferenceType SDK namespace.
-module ConversationAttributeRelationshipTypeVariant1ReferenceType
-  ONE = 'one'
-  MANY = 'many'
-  VALUES = ['one', 'many'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalConversationAttributeStringTypeMetadata
-  FIELDS = {
-    type: "type",
-    id: "id",
-    name: "name",
-    description: "description",
-    data_type: "data_type",
-    required: "required",
-    visible_to_team_ids: "visible_to_team_ids",
-    archived: "archived",
-    created_at: "created_at",
-    updated_at: "updated_at",
-    admin_id: "admin_id",
-    multiline: "multiline",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::ConversationAttributeBaseType.from_value(value)
-    end,
-    data_type: lambda do |value|
-      ::OctridevIntercom::ConversationAttributeStringTypeVariant1DataType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for ConversationAttributeStringType.
-# Typed representation of the `ConversationAttributeStringType` API schema.
-class ConversationAttributeStringType
-  include ConversationAttribute
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalConversationAttributeStringTypeMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalConversationAttributeStringTypeMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalConversationAttributeStringTypeMetadata::DECODERS
-
-  # @return [ConversationAttributeBaseType] Value is `conversation_attribute`.
-  attr_reader :type
-  # @return [Integer] The unique identifier for the conversation attribute.
-  attr_reader :id
-  # @return [String] Name of the attribute.
-  attr_reader :name
-  # @return [String] Readable description of the attribute.
-  attr_reader :description
-  # @return [ConversationAttributeStringTypeVariant1DataType] Optional enumerated value serialized in the `data_type` wire field.
-  attr_reader :data_type
-  # @return [Boolean] Whether this attribute is required.
-  attr_reader :required
-  # @return [Array_of_String] Team IDs that can see this attribute. Empty array means all teams.
-  attr_reader :visible_to_team_ids
-  # @return [Boolean] Whether this attribute is archived.
-  attr_reader :archived
-  # @return [Integer] The time the attribute was created as a UTC Unix timestamp.
-  attr_reader :created_at
-  # @return [Integer] The time the attribute was last updated as a UTC Unix timestamp.
-  attr_reader :updated_at
-  # @return [String] ID of the admin who created the attribute.
-  attr_reader :admin_id
-  # @return [Boolean] Whether this string attribute is multiline.
-  attr_reader :multiline
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ConversationAttributeRelationshipTypeVariant1ReferenceType SDK namespace.
+  module ConversationAttributeRelationshipTypeVariant1ReferenceType
+    ONE = 'one'
+    MANY = 'many'
+    VALUES = %w[one many].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalConversationAttributeStringTypeMetadata
+    FIELDS = {
+      type: 'type',
+      id: 'id',
+      name: 'name',
+      description: 'description',
+      data_type: 'data_type',
+      required: 'required',
+      visible_to_team_ids: 'visible_to_team_ids',
+      archived: 'archived',
+      created_at: 'created_at',
+      updated_at: 'updated_at',
+      admin_id: 'admin_id',
+      multiline: 'multiline'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::ConversationAttributeBaseType.from_value(value)
+      end,
+      data_type: lambda do |value|
+        ::OctridevIntercom::ConversationAttributeStringTypeVariant1DataType.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ConversationAttributeStringType.
+  # Typed representation of the `ConversationAttributeStringType` API schema.
+  class ConversationAttributeStringType
+    include ConversationAttribute
 
-# Defines the ConversationAttributeStringTypeVariant1DataType SDK namespace.
-module ConversationAttributeStringTypeVariant1DataType
-  STRING = 'string'
-  VALUES = ['string'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalConversationAttributeStringTypeMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalConversationAttributeStringTypeMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalConversationAttributeStringTypeMetadata::DECODERS
 
-    raise SdkValidationError.new('ConversationAttributeStringTypeVariant1DataType', 'enum', "Unknown ConversationAttributeStringTypeVariant1DataType: #{value}")
-  end
-end
+    # @return [ConversationAttributeBaseType] Value is `conversation_attribute`.
+    attr_reader :type
+    # @return [Integer] The unique identifier for the conversation attribute.
+    attr_reader :id
+    # @return [String] Name of the attribute.
+    attr_reader :name
+    # @return [String] Readable description of the attribute.
+    attr_reader :description
+    # @return [ConversationAttributeStringTypeVariant1DataType] Optional enumerated value serialized in the `data_type` wire field.
+    attr_reader :data_type
+    # @return [Boolean] Whether this attribute is required.
+    attr_reader :required
+    # @return [Array_of_String] Team IDs that can see this attribute. Empty array means all teams.
+    attr_reader :visible_to_team_ids
+    # @return [Boolean] Whether this attribute is archived.
+    attr_reader :archived
+    # @return [Integer] The time the attribute was created as a UTC Unix timestamp.
+    attr_reader :created_at
+    # @return [Integer] The time the attribute was last updated as a UTC Unix timestamp.
+    attr_reader :updated_at
+    # @return [String] ID of the admin who created the attribute.
+    attr_reader :admin_id
+    # @return [Boolean] Whether this string attribute is multiline.
+    attr_reader :multiline
 
-# Internal model hydration metadata.
-class SdkInternalCreateConversationAttributeBooleanRequestMetadata
-  FIELDS = {
-    name: "name",
-    description: "description",
-    data_type: "data_type",
-    required: "required",
-    visible_to_team_ids: "visible_to_team_ids",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-    data_type
-  ].freeze
-  DECODERS = {
-    data_type: lambda do |value|
-      ::OctridevIntercom::CreateConversationAttributeBooleanRequestVariant1DataType.from_value(value)
-    end,
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# API model for CreateConversationAttributeBooleanRequest.
-# Typed representation of the `CreateConversationAttributeBooleanRequest` API schema.
-class CreateConversationAttributeBooleanRequest
-  include CreateConversationAttributeRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateConversationAttributeBooleanRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateConversationAttributeBooleanRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateConversationAttributeBooleanRequestMetadata::DECODERS
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  attr_reader :data_type
-  # @return [String] Name of the attribute.
-  attr_reader :name
-  # @return [String] Readable description of the attribute.
-  attr_reader :description
-  # @return [Boolean] Whether this attribute is required.
-  attr_reader :required
-  # @return [Array_of_String] Team IDs that can see this attribute. Empty array means all teams.
-  attr_reader :visible_to_team_ids
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the ConversationAttributeStringTypeVariant1DataType SDK namespace.
+  module ConversationAttributeStringTypeVariant1DataType
+    STRING = 'string'
+    VALUES = ['string'].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
+
+      raise SdkValidationError.new('ConversationAttributeStringTypeVariant1DataType', 'enum', "Unknown ConversationAttributeStringTypeVariant1DataType: #{value}")
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the CreateConversationAttributeBooleanRequestVariant1DataType SDK namespace.
-module CreateConversationAttributeBooleanRequestVariant1DataType
-  BOOLEAN = 'boolean'
-  VALUES = ['boolean'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
-
-    raise SdkValidationError.new('CreateConversationAttributeBooleanRequestVariant1DataType', 'enum', "Unknown CreateConversationAttributeBooleanRequestVariant1DataType: #{value}")
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalCreateConversationAttributeDatetimeRequestMetadata
-  FIELDS = {
-    name: "name",
-    description: "description",
-    data_type: "data_type",
-    required: "required",
-    visible_to_team_ids: "visible_to_team_ids",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-    data_type
-  ].freeze
-  DECODERS = {
-    data_type: lambda do |value|
-      ::OctridevIntercom::CreateConversationAttributeDatetimeRequestVariant1DataType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for CreateConversationAttributeDatetimeRequest.
-# Typed representation of the `CreateConversationAttributeDatetimeRequest` API schema.
-class CreateConversationAttributeDatetimeRequest
-  include CreateConversationAttributeRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateConversationAttributeDatetimeRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateConversationAttributeDatetimeRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateConversationAttributeDatetimeRequestMetadata::DECODERS
-
-  attr_reader :data_type
-  # @return [String] Name of the attribute.
-  attr_reader :name
-  # @return [String] Readable description of the attribute.
-  attr_reader :description
-  # @return [Boolean] Whether this attribute is required.
-  attr_reader :required
-  # @return [Array_of_String] Team IDs that can see this attribute. Empty array means all teams.
-  attr_reader :visible_to_team_ids
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCreateConversationAttributeBooleanRequestMetadata
+    FIELDS = {
+      name: 'name',
+      description: 'description',
+      data_type: 'data_type',
+      required: 'required',
+      visible_to_team_ids: 'visible_to_team_ids'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+      data_type
+    ].freeze
+    DECODERS = {
+      data_type: lambda do |value|
+        ::OctridevIntercom::CreateConversationAttributeBooleanRequestVariant1DataType.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for CreateConversationAttributeBooleanRequest.
+  # Typed representation of the `CreateConversationAttributeBooleanRequest` API schema.
+  class CreateConversationAttributeBooleanRequest
+    include CreateConversationAttributeRequest
+
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateConversationAttributeBooleanRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateConversationAttributeBooleanRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateConversationAttributeBooleanRequestMetadata::DECODERS
+
+    attr_reader :data_type
+    # @return [String] Name of the attribute.
+    attr_reader :name
+    # @return [String] Readable description of the attribute.
+    attr_reader :description
+    # @return [Boolean] Whether this attribute is required.
+    attr_reader :required
+    # @return [Array_of_String] Team IDs that can see this attribute. Empty array means all teams.
+    attr_reader :visible_to_team_ids
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # Defines the CreateConversationAttributeBooleanRequestVariant1DataType SDK namespace.
+  module CreateConversationAttributeBooleanRequestVariant1DataType
+    BOOLEAN = 'boolean'
+    VALUES = ['boolean'].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
 
-# Defines the CreateConversationAttributeDatetimeRequestVariant1DataType SDK namespace.
-module CreateConversationAttributeDatetimeRequestVariant1DataType
-  DATETIME = 'datetime'
-  VALUES = ['datetime'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
-
-    raise SdkValidationError.new('CreateConversationAttributeDatetimeRequestVariant1DataType', 'enum', "Unknown CreateConversationAttributeDatetimeRequestVariant1DataType: #{value}")
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalCreateConversationAttributeDecimalRequestMetadata
-  FIELDS = {
-    name: "name",
-    description: "description",
-    data_type: "data_type",
-    required: "required",
-    visible_to_team_ids: "visible_to_team_ids",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-    data_type
-  ].freeze
-  DECODERS = {
-    data_type: lambda do |value|
-      ::OctridevIntercom::CreateConversationAttributeDecimalRequestVariant1DataType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for CreateConversationAttributeDecimalRequest.
-# Typed representation of the `CreateConversationAttributeDecimalRequest` API schema.
-class CreateConversationAttributeDecimalRequest
-  include CreateConversationAttributeRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateConversationAttributeDecimalRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateConversationAttributeDecimalRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateConversationAttributeDecimalRequestMetadata::DECODERS
-
-  attr_reader :data_type
-  # @return [String] Name of the attribute.
-  attr_reader :name
-  # @return [String] Readable description of the attribute.
-  attr_reader :description
-  # @return [Boolean] Whether this attribute is required.
-  attr_reader :required
-  # @return [Array_of_String] Team IDs that can see this attribute. Empty array means all teams.
-  attr_reader :visible_to_team_ids
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+      raise SdkValidationError.new('CreateConversationAttributeBooleanRequestVariant1DataType', 'enum', "Unknown CreateConversationAttributeBooleanRequestVariant1DataType: #{value}")
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalCreateConversationAttributeDatetimeRequestMetadata
+    FIELDS = {
+      name: 'name',
+      description: 'description',
+      data_type: 'data_type',
+      required: 'required',
+      visible_to_team_ids: 'visible_to_team_ids'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+      data_type
+    ].freeze
+    DECODERS = {
+      data_type: lambda do |value|
+        ::OctridevIntercom::CreateConversationAttributeDatetimeRequestVariant1DataType.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for CreateConversationAttributeDatetimeRequest.
+  # Typed representation of the `CreateConversationAttributeDatetimeRequest` API schema.
+  class CreateConversationAttributeDatetimeRequest
+    include CreateConversationAttributeRequest
 
-# Defines the CreateConversationAttributeDecimalRequestVariant1DataType SDK namespace.
-module CreateConversationAttributeDecimalRequestVariant1DataType
-  DECIMAL = 'decimal'
-  VALUES = ['decimal'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateConversationAttributeDatetimeRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateConversationAttributeDatetimeRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateConversationAttributeDatetimeRequestMetadata::DECODERS
 
-    raise SdkValidationError.new('CreateConversationAttributeDecimalRequestVariant1DataType', 'enum', "Unknown CreateConversationAttributeDecimalRequestVariant1DataType: #{value}")
-  end
-end
+    attr_reader :data_type
+    # @return [String] Name of the attribute.
+    attr_reader :name
+    # @return [String] Readable description of the attribute.
+    attr_reader :description
+    # @return [Boolean] Whether this attribute is required.
+    attr_reader :required
+    # @return [Array_of_String] Team IDs that can see this attribute. Empty array means all teams.
+    attr_reader :visible_to_team_ids
 
-# Internal model hydration metadata.
-class SdkInternalCreateConversationAttributeFilesRequestMetadata
-  FIELDS = {
-    name: "name",
-    description: "description",
-    data_type: "data_type",
-    required: "required",
-    visible_to_team_ids: "visible_to_team_ids",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-    data_type
-  ].freeze
-  DECODERS = {
-    data_type: lambda do |value|
-      ::OctridevIntercom::CreateConversationAttributeFilesRequestVariant1DataType.from_value(value)
-    end,
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# API model for CreateConversationAttributeFilesRequest.
-# Typed representation of the `CreateConversationAttributeFilesRequest` API schema.
-class CreateConversationAttributeFilesRequest
-  include CreateConversationAttributeRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateConversationAttributeFilesRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateConversationAttributeFilesRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateConversationAttributeFilesRequestMetadata::DECODERS
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  attr_reader :data_type
-  # @return [String] Name of the attribute.
-  attr_reader :name
-  # @return [String] Readable description of the attribute.
-  attr_reader :description
-  # @return [Boolean] Whether this attribute is required.
-  attr_reader :required
-  # @return [Array_of_String] Team IDs that can see this attribute. Empty array means all teams.
-  attr_reader :visible_to_team_ids
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the CreateConversationAttributeDatetimeRequestVariant1DataType SDK namespace.
+  module CreateConversationAttributeDatetimeRequestVariant1DataType
+    DATETIME = 'datetime'
+    VALUES = ['datetime'].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
+
+      raise SdkValidationError.new('CreateConversationAttributeDatetimeRequestVariant1DataType', 'enum', "Unknown CreateConversationAttributeDatetimeRequestVariant1DataType: #{value}")
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the CreateConversationAttributeFilesRequestVariant1DataType SDK namespace.
-module CreateConversationAttributeFilesRequestVariant1DataType
-  FILES = 'files'
-  VALUES = ['files'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
-
-    raise SdkValidationError.new('CreateConversationAttributeFilesRequestVariant1DataType', 'enum', "Unknown CreateConversationAttributeFilesRequestVariant1DataType: #{value}")
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalCreateConversationAttributeIntegerRequestMetadata
-  FIELDS = {
-    name: "name",
-    description: "description",
-    data_type: "data_type",
-    required: "required",
-    visible_to_team_ids: "visible_to_team_ids",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-    data_type
-  ].freeze
-  DECODERS = {
-    data_type: lambda do |value|
-      ::OctridevIntercom::CreateConversationAttributeIntegerRequestVariant1DataType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for CreateConversationAttributeIntegerRequest.
-# Typed representation of the `CreateConversationAttributeIntegerRequest` API schema.
-class CreateConversationAttributeIntegerRequest
-  include CreateConversationAttributeRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateConversationAttributeIntegerRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateConversationAttributeIntegerRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateConversationAttributeIntegerRequestMetadata::DECODERS
-
-  attr_reader :data_type
-  # @return [String] Name of the attribute.
-  attr_reader :name
-  # @return [String] Readable description of the attribute.
-  attr_reader :description
-  # @return [Boolean] Whether this attribute is required.
-  attr_reader :required
-  # @return [Array_of_String] Team IDs that can see this attribute. Empty array means all teams.
-  attr_reader :visible_to_team_ids
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCreateConversationAttributeDecimalRequestMetadata
+    FIELDS = {
+      name: 'name',
+      description: 'description',
+      data_type: 'data_type',
+      required: 'required',
+      visible_to_team_ids: 'visible_to_team_ids'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+      data_type
+    ].freeze
+    DECODERS = {
+      data_type: lambda do |value|
+        ::OctridevIntercom::CreateConversationAttributeDecimalRequestVariant1DataType.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for CreateConversationAttributeDecimalRequest.
+  # Typed representation of the `CreateConversationAttributeDecimalRequest` API schema.
+  class CreateConversationAttributeDecimalRequest
+    include CreateConversationAttributeRequest
+
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateConversationAttributeDecimalRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateConversationAttributeDecimalRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateConversationAttributeDecimalRequestMetadata::DECODERS
+
+    attr_reader :data_type
+    # @return [String] Name of the attribute.
+    attr_reader :name
+    # @return [String] Readable description of the attribute.
+    attr_reader :description
+    # @return [Boolean] Whether this attribute is required.
+    attr_reader :required
+    # @return [Array_of_String] Team IDs that can see this attribute. Empty array means all teams.
+    attr_reader :visible_to_team_ids
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # Defines the CreateConversationAttributeDecimalRequestVariant1DataType SDK namespace.
+  module CreateConversationAttributeDecimalRequestVariant1DataType
+    DECIMAL = 'decimal'
+    VALUES = ['decimal'].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
 
-# Defines the CreateConversationAttributeIntegerRequestVariant1DataType SDK namespace.
-module CreateConversationAttributeIntegerRequestVariant1DataType
-  INTEGER = 'integer'
-  VALUES = ['integer'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
-
-    raise SdkValidationError.new('CreateConversationAttributeIntegerRequestVariant1DataType', 'enum', "Unknown CreateConversationAttributeIntegerRequestVariant1DataType: #{value}")
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalCreateConversationAttributeListRequestMetadata
-  FIELDS = {
-    name: "name",
-    description: "description",
-    data_type: "data_type",
-    required: "required",
-    visible_to_team_ids: "visible_to_team_ids",
-    options: "options",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-    data_type
-  ].freeze
-  DECODERS = {
-    data_type: lambda do |value|
-      ::OctridevIntercom::CreateConversationAttributeListRequestVariant1DataType.from_value(value)
-    end,
-    options: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::CreateConversationAttributeOptionRequest.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for CreateConversationAttributeListRequest.
-# Typed representation of the `CreateConversationAttributeListRequest` API schema.
-class CreateConversationAttributeListRequest
-  include CreateConversationAttributeRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateConversationAttributeListRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateConversationAttributeListRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateConversationAttributeListRequestMetadata::DECODERS
-
-  attr_reader :data_type
-  # @return [String] Name of the attribute.
-  attr_reader :name
-  # @return [String] Readable description of the attribute.
-  attr_reader :description
-  # @return [Boolean] Whether this attribute is required.
-  attr_reader :required
-  # @return [Array_of_String] Team IDs that can see this attribute. Empty array means all teams.
-  attr_reader :visible_to_team_ids
-  # @return [Array_of_CreateConversationAttributeOptionRequest] Initial options for this list attribute. Each option must have a `label`.
-  attr_reader :options
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+      raise SdkValidationError.new('CreateConversationAttributeDecimalRequestVariant1DataType', 'enum', "Unknown CreateConversationAttributeDecimalRequestVariant1DataType: #{value}")
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalCreateConversationAttributeFilesRequestMetadata
+    FIELDS = {
+      name: 'name',
+      description: 'description',
+      data_type: 'data_type',
+      required: 'required',
+      visible_to_team_ids: 'visible_to_team_ids'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+      data_type
+    ].freeze
+    DECODERS = {
+      data_type: lambda do |value|
+        ::OctridevIntercom::CreateConversationAttributeFilesRequestVariant1DataType.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for CreateConversationAttributeFilesRequest.
+  # Typed representation of the `CreateConversationAttributeFilesRequest` API schema.
+  class CreateConversationAttributeFilesRequest
+    include CreateConversationAttributeRequest
+
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateConversationAttributeFilesRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateConversationAttributeFilesRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateConversationAttributeFilesRequestMetadata::DECODERS
+
+    attr_reader :data_type
+    # @return [String] Name of the attribute.
+    attr_reader :name
+    # @return [String] Readable description of the attribute.
+    attr_reader :description
+    # @return [Boolean] Whether this attribute is required.
+    attr_reader :required
+    # @return [Array_of_String] Team IDs that can see this attribute. Empty array means all teams.
+    attr_reader :visible_to_team_ids
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 
-# Defines the CreateConversationAttributeListRequestVariant1DataType SDK namespace.
-module CreateConversationAttributeListRequestVariant1DataType
-  LIST = 'list'
-  VALUES = ['list'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
+  # Defines the CreateConversationAttributeFilesRequestVariant1DataType SDK namespace.
+  module CreateConversationAttributeFilesRequestVariant1DataType
+    FILES = 'files'
+    VALUES = ['files'].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
 
-    raise SdkValidationError.new('CreateConversationAttributeListRequestVariant1DataType', 'enum', "Unknown CreateConversationAttributeListRequestVariant1DataType: #{value}")
+      raise SdkValidationError.new('CreateConversationAttributeFilesRequestVariant1DataType', 'enum', "Unknown CreateConversationAttributeFilesRequestVariant1DataType: #{value}")
+    end
   end
-end
 
-# Internal model hydration metadata.
-class SdkInternalCreateConversationAttributeOptionRequestMetadata
-  FIELDS = {
-    label: "label",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    label
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+  # Internal model hydration metadata.
+  class SdkInternalCreateConversationAttributeIntegerRequestMetadata
+    FIELDS = {
+      name: 'name',
+      description: 'description',
+      data_type: 'data_type',
+      required: 'required',
+      visible_to_team_ids: 'visible_to_team_ids'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+      data_type
+    ].freeze
+    DECODERS = {
+      data_type: lambda do |value|
+        ::OctridevIntercom::CreateConversationAttributeIntegerRequestVariant1DataType.from_value(value)
+      end
+    }.freeze
+  end
+
+  # API model for CreateConversationAttributeIntegerRequest.
+  # Typed representation of the `CreateConversationAttributeIntegerRequest` API schema.
+  class CreateConversationAttributeIntegerRequest
+    include CreateConversationAttributeRequest
+
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateConversationAttributeIntegerRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateConversationAttributeIntegerRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateConversationAttributeIntegerRequestMetadata::DECODERS
+
+    attr_reader :data_type
+    # @return [String] Name of the attribute.
+    attr_reader :name
+    # @return [String] Readable description of the attribute.
+    attr_reader :description
+    # @return [Boolean] Whether this attribute is required.
+    attr_reader :required
+    # @return [Array_of_String] Team IDs that can see this attribute. Empty array means all teams.
+    attr_reader :visible_to_team_ids
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the CreateConversationAttributeIntegerRequestVariant1DataType SDK namespace.
+  module CreateConversationAttributeIntegerRequestVariant1DataType
+    INTEGER = 'integer'
+    VALUES = ['integer'].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
+
+      raise SdkValidationError.new('CreateConversationAttributeIntegerRequestVariant1DataType', 'enum', "Unknown CreateConversationAttributeIntegerRequestVariant1DataType: #{value}")
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalCreateConversationAttributeListRequestMetadata
+    FIELDS = {
+      name: 'name',
+      description: 'description',
+      data_type: 'data_type',
+      required: 'required',
+      visible_to_team_ids: 'visible_to_team_ids',
+      options: 'options'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+      data_type
+    ].freeze
+    DECODERS = {
+      data_type: lambda do |value|
+        ::OctridevIntercom::CreateConversationAttributeListRequestVariant1DataType.from_value(value)
+      end,
+      options: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::CreateConversationAttributeOptionRequest.from_hash(item) }
+      end
+    }.freeze
+  end
+
+  # API model for CreateConversationAttributeListRequest.
+  # Typed representation of the `CreateConversationAttributeListRequest` API schema.
+  class CreateConversationAttributeListRequest
+    include CreateConversationAttributeRequest
+
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateConversationAttributeListRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateConversationAttributeListRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateConversationAttributeListRequestMetadata::DECODERS
+
+    attr_reader :data_type
+    # @return [String] Name of the attribute.
+    attr_reader :name
+    # @return [String] Readable description of the attribute.
+    attr_reader :description
+    # @return [Boolean] Whether this attribute is required.
+    attr_reader :required
+    # @return [Array_of_String] Team IDs that can see this attribute. Empty array means all teams.
+    attr_reader :visible_to_team_ids
+    # @return [Array_of_CreateConversationAttributeOptionRequest] Initial options for this list attribute. Each option must have a `label`.
+    attr_reader :options
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the CreateConversationAttributeListRequestVariant1DataType SDK namespace.
+  module CreateConversationAttributeListRequestVariant1DataType
+    LIST = 'list'
+    VALUES = ['list'].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
+
+      raise SdkValidationError.new('CreateConversationAttributeListRequestVariant1DataType', 'enum', "Unknown CreateConversationAttributeListRequestVariant1DataType: #{value}")
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalCreateConversationAttributeOptionRequestMetadata
+    FIELDS = {
+      label: 'label'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      label
+    ].freeze
+    DECODERS = {}.freeze
+  end
 end
