@@ -5,52 +5,50 @@
 
 # tagged_models_conversation domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalDeletedConversationItemMetadata
-  FIELDS = {
-    type: "type",
-    id: "id",
-    metrics_retained: "metrics_retained",
-    deleted_at: "deleted_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for DeletedConversationItem.
-# A deleted conversation record containing its ID, metrics retained status and deletion timestamp.
-class DeletedConversationItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDeletedConversationItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDeletedConversationItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDeletedConversationItemMetadata::DECODERS
-
-  # @return [String] String representing the object's type. Always has the value `conversation`.
-  attr_reader :type
-  # @return [String] The ID of the deleted conversation.
-  attr_reader :id
-  # @return [Boolean] Whether reporting metrics are retained for this conversation ID
-  attr_reader :metrics_retained
-  # @return [Integer] The time when the conversation was deleted.
-  attr_reader :deleted_at
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalDeletedConversationItemMetadata
+    FIELDS = {
+      type: 'type',
+      id: 'id',
+      metrics_retained: 'metrics_retained',
+      deleted_at: 'deleted_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for DeletedConversationItem.
+  # A deleted conversation record containing its ID, metrics retained status and deletion timestamp.
+  class DeletedConversationItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDeletedConversationItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDeletedConversationItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDeletedConversationItemMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
+    # @return [String] String representing the object's type. Always has the value `conversation`.
+    attr_reader :type
+    # @return [String] The ID of the deleted conversation.
+    attr_reader :id
+    # @return [Boolean] Whether reporting metrics are retained for this conversation ID
+    attr_reader :metrics_retained
+    # @return [Integer] The time when the conversation was deleted.
+    attr_reader :deleted_at
 
-  def to_json(*args)
-    to_h.to_json(*args)
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
-end
 end

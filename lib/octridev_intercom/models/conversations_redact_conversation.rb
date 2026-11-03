@@ -5,514 +5,512 @@
 
 # conversations domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalRedactConversationRequestVariant0Metadata
-  FIELDS = {
-    type: "type",
-    conversation_id: "conversation_id",
-    conversation_part_id: "conversation_part_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    conversation_id
-    conversation_part_id
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::RedactConversationRequestVariant0Type.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for RedactConversationRequestVariant0.
-class RedactConversationRequestVariant0
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalRedactConversationRequestVariant0Metadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalRedactConversationRequestVariant0Metadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalRedactConversationRequestVariant0Metadata::DECODERS
-
-  # @return [RedactConversationRequestVariant0Type] The type of resource being redacted.
-  attr_reader :type
-  # @return [String] The id of the conversation.
-  attr_reader :conversation_id
-  # @return [String] The id of the conversation_part.
-  attr_reader :conversation_part_id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalRedactConversationRequestVariant0Metadata
+    FIELDS = {
+      type: 'type',
+      conversation_id: 'conversation_id',
+      conversation_part_id: 'conversation_part_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      conversation_id
+      conversation_part_id
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::RedactConversationRequestVariant0Type.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for RedactConversationRequestVariant0.
+  class RedactConversationRequestVariant0
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalRedactConversationRequestVariant0Metadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalRedactConversationRequestVariant0Metadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalRedactConversationRequestVariant0Metadata::DECODERS
+
+    # @return [RedactConversationRequestVariant0Type] The type of resource being redacted.
+    attr_reader :type
+    # @return [String] The id of the conversation.
+    attr_reader :conversation_id
+    # @return [String] The id of the conversation_part.
+    attr_reader :conversation_part_id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalRedactConversationRequestVariant1Metadata
+    FIELDS = {
+      type: 'type',
+      conversation_id: 'conversation_id',
+      source_id: 'source_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      conversation_id
+      source_id
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::RedactConversationRequestVariant1Type.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for RedactConversationRequestVariant1.
+  class RedactConversationRequestVariant1
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalRedactConversationRequestVariant1Metadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalRedactConversationRequestVariant1Metadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalRedactConversationRequestVariant1Metadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalRedactConversationRequestVariant1Metadata
-  FIELDS = {
-    type: "type",
-    conversation_id: "conversation_id",
-    source_id: "source_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    conversation_id
-    source_id
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::RedactConversationRequestVariant1Type.from_value(value)
-    end,
-  }.freeze
-end
+    # @return [RedactConversationRequestVariant1Type] The type of resource being redacted.
+    attr_reader :type
+    # @return [String] The id of the conversation.
+    attr_reader :conversation_id
+    # @return [String] The id of the source.
+    attr_reader :source_id
 
-# API model for RedactConversationRequestVariant1.
-class RedactConversationRequestVariant1
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalRedactConversationRequestVariant1Metadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalRedactConversationRequestVariant1Metadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalRedactConversationRequestVariant1Metadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [RedactConversationRequestVariant1Type] The type of resource being redacted.
-  attr_reader :type
-  # @return [String] The id of the conversation.
-  attr_reader :conversation_id
-  # @return [String] The id of the source.
-  attr_reader :source_id
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the RedactConversationRequest SDK namespace.
+  module RedactConversationRequest
+    DISCRIMINATOR_MAPPING = {
+      'conversation_part' => -> { RedactConversationRequestVariant0 },
+      'source' => -> { RedactConversationRequestVariant1 }
+    }.freeze
+
+    def self.from_hash(hash)
+      return hash unless hash.is_a?(::Hash)
+
+      type = DISCRIMINATOR_MAPPING[hash['type']]&.call
+      return type.from_hash(hash) if type
+
+      raise SdkValidationError.new('RedactConversationRequest', 'variant', "Unknown RedactConversationRequest discriminator: #{hash['type'].inspect}")
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Defines the RedactConversationRequestVariant0Type SDK namespace.
+  module RedactConversationRequestVariant0Type
+    CONVERSATION_PART = 'conversation_part'
+    VALUES = ['conversation_part'].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
+
+      raise SdkValidationError.new('RedactConversationRequestVariant0Type', 'enum', "Unknown RedactConversationRequestVariant0Type: #{value}")
+    end
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # Defines the RedactConversationRequestVariant1Type SDK namespace.
+  module RedactConversationRequestVariant1Type
+    SOURCE = 'source'
+    VALUES = ['source'].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
 
-# Defines the RedactConversationRequest SDK namespace.
-module RedactConversationRequest
-  DISCRIMINATOR_MAPPING = {
-    "conversation_part" => -> { RedactConversationRequestVariant0 },
-    "source" => -> { RedactConversationRequestVariant1 },
-  }.freeze
-
-  def self.from_hash(hash)
-    return hash unless hash.is_a?(::Hash)
-    type = DISCRIMINATOR_MAPPING[hash["type"]]&.call
-    return type.from_hash(hash) if type
-
-    raise SdkValidationError.new('RedactConversationRequest', 'variant', "Unknown RedactConversationRequest discriminator: #{hash["type"].inspect}")
-  end
-end
-
-# Defines the RedactConversationRequestVariant0Type SDK namespace.
-module RedactConversationRequestVariant0Type
-  CONVERSATION_PART = 'conversation_part'
-  VALUES = ['conversation_part'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
-
-    raise SdkValidationError.new('RedactConversationRequestVariant0Type', 'enum', "Unknown RedactConversationRequestVariant0Type: #{value}")
-  end
-end
-
-# Defines the RedactConversationRequestVariant1Type SDK namespace.
-module RedactConversationRequestVariant1Type
-  SOURCE = 'source'
-  VALUES = ['source'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
-
-    raise SdkValidationError.new('RedactConversationRequestVariant1Type', 'enum', "Unknown RedactConversationRequestVariant1Type: #{value}")
-  end
-end
-
-# Defines the ReplyConversationRequest SDK namespace.
-module ReplyConversationRequest
-  def self.from_hash(hash)
-    shape_mapping = {
-      "message_type" => AdminReplyConversationRequest,
-    }
-    type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
-    decoded = type&.from_hash(hash)
-    return decoded unless type.nil?
-    return ContactReplyConversationRequest.from_hash(hash)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalSideConversationListPagesMetadata
-  FIELDS = {
-    type: "type",
-    page: "page",
-    per_page: "per_page",
-    total_pages: "total_pages",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::SideConversationListPagesType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for SideConversationListPages.
-# Pagination metadata.
-class SideConversationListPages
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSideConversationListPagesMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSideConversationListPagesMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSideConversationListPagesMetadata::DECODERS
-
-  # @return [SideConversationListPagesType] Optional enumerated value serialized in the `type` wire field.
-  attr_reader :type
-  # @return [Integer] The current page number.
-  attr_reader :page
-  # @return [Integer] The number of results per page.
-  attr_reader :per_page
-  # @return [Integer] The total number of pages.
-  attr_reader :total_pages
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+      raise SdkValidationError.new('RedactConversationRequestVariant1Type', 'enum', "Unknown RedactConversationRequestVariant1Type: #{value}")
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the ReplyConversationRequest SDK namespace.
+  module ReplyConversationRequest
+    def self.from_hash(hash)
+      shape_mapping = {
+        'message_type' => AdminReplyConversationRequest
+      }
+      type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
+      decoded = type&.from_hash(hash)
+      return decoded unless type.nil?
+
+      ContactReplyConversationRequest.from_hash(hash)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalSideConversationListPagesMetadata
+    FIELDS = {
+      type: 'type',
+      page: 'page',
+      per_page: 'per_page',
+      total_pages: 'total_pages'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::SideConversationListPagesType.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for SideConversationListPages.
+  # Pagination metadata.
+  class SideConversationListPages
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSideConversationListPagesMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSideConversationListPagesMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSideConversationListPagesMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalSideConversationListMetadata
-  FIELDS = {
-    type: "type",
-    side_conversations: "side_conversations",
-    total_count: "total_count",
-    pages: "pages",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::SideConversationListType.from_value(value)
-    end,
-    side_conversations: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::SideConversationSummary.from_hash(item) }
-    end,
-    pages: lambda do |value|
-      ::OctridevIntercom::SideConversationListPages.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [SideConversationListPagesType] Optional enumerated value serialized in the `type` wire field.
+    attr_reader :type
+    # @return [Integer] The current page number.
+    attr_reader :page
+    # @return [Integer] The number of results per page.
+    attr_reader :per_page
+    # @return [Integer] The total number of pages.
+    attr_reader :total_pages
 
-# API model for SideConversationList.
-# A paginated list of side conversations for a conversation.
-class SideConversationList
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSideConversationListMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSideConversationListMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSideConversationListMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [SideConversationListType] The type of the response object.
-  attr_reader :type
-  # @return [Array_of_SideConversationSummary] An array of side conversation objects.
-  attr_reader :side_conversations
-  # @return [Integer] The total number of side conversations.
-  attr_reader :total_count
-  # @return [SideConversationListPages] Pagination metadata.
-  attr_reader :pages
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalSideConversationListMetadata
+    FIELDS = {
+      type: 'type',
+      side_conversations: 'side_conversations',
+      total_count: 'total_count',
+      pages: 'pages'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::SideConversationListType.from_value(value)
+      end,
+      side_conversations: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::SideConversationSummary.from_hash(item) }
+      end,
+      pages: lambda do |value|
+        ::OctridevIntercom::SideConversationListPages.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for SideConversationList.
+  # A paginated list of side conversations for a conversation.
+  class SideConversationList
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSideConversationListMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSideConversationListMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSideConversationListMetadata::DECODERS
+
+    # @return [SideConversationListType] The type of the response object.
+    attr_reader :type
+    # @return [Array_of_SideConversationSummary] An array of side conversation objects.
+    attr_reader :side_conversations
+    # @return [Integer] The total number of side conversations.
+    attr_reader :total_count
+    # @return [SideConversationListPages] Pagination metadata.
+    attr_reader :pages
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Defines the SideConversationListPagesType SDK namespace.
-module SideConversationListPagesType
-  PAGES = 'pages'
-  VALUES = ['pages'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the SideConversationListType SDK namespace.
-module SideConversationListType
-  SIDE_CONVERSATION_LIST = 'side_conversation.list'
-  VALUES = ['side_conversation.list'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalSideConversationSummaryMetadata
-  FIELDS = {
-    side_conversation_id: "side_conversation_id",
-    conversation_parts: "conversation_parts",
-    total_count: "total_count",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    conversation_parts: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::ConversationPart.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for SideConversationSummary.
-# A side conversation with its conversation parts.
-class SideConversationSummary
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSideConversationSummaryMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSideConversationSummaryMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSideConversationSummaryMetadata::DECODERS
-
-  # @return [String] The unique identifier for the side conversation.
-  attr_reader :side_conversation_id
-  # @return [Array_of_ConversationPart] The conversation parts (messages) in this side conversation.
-  attr_reader :conversation_parts
-  # @return [Integer] The total number of conversation parts in this side conversation.
-  attr_reader :total_count
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the SideConversationListPagesType SDK namespace.
+  module SideConversationListPagesType
+    PAGES = 'pages'
+    VALUES = ['pages'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the SideConversationListType SDK namespace.
+  module SideConversationListType
+    SIDE_CONVERSATION_LIST = 'side_conversation.list'
+    VALUES = ['side_conversation.list'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalSideConversationSummaryMetadata
+    FIELDS = {
+      side_conversation_id: 'side_conversation_id',
+      conversation_parts: 'conversation_parts',
+      total_count: 'total_count'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      conversation_parts: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::ConversationPart.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for SideConversationSummary.
+  # A side conversation with its conversation parts.
+  class SideConversationSummary
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSideConversationSummaryMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSideConversationSummaryMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSideConversationSummaryMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalSnoozeConversationRequestMetadata
-  FIELDS = {
-    message_type: "message_type",
-    admin_id: "admin_id",
-    snoozed_until: "snoozed_until",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    message_type
-    admin_id
-    snoozed_until
-  ].freeze
-  DECODERS = {
-    message_type: lambda do |value|
-      ::OctridevIntercom::SnoozeConversationRequestMessageType.from_value(value)
-    end,
-  }.freeze
-end
+    # @return [String] The unique identifier for the side conversation.
+    attr_reader :side_conversation_id
+    # @return [Array_of_ConversationPart] The conversation parts (messages) in this side conversation.
+    attr_reader :conversation_parts
+    # @return [Integer] The total number of conversation parts in this side conversation.
+    attr_reader :total_count
 
-# API model for SnoozeConversationRequest.
-# Payload of the request to snooze a conversation
-class SnoozeConversationRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSnoozeConversationRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSnoozeConversationRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSnoozeConversationRequestMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [SnoozeConversationRequestMessageType] Required enumerated value serialized in the `message_type` wire field.
-  attr_reader :message_type
-  # @return [String] The id of the admin who is performing the action.
-  attr_reader :admin_id
-  # @return [Integer] The time you want the conversation to reopen.
-  attr_reader :snoozed_until
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalSnoozeConversationRequestMetadata
+    FIELDS = {
+      message_type: 'message_type',
+      admin_id: 'admin_id',
+      snoozed_until: 'snoozed_until'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      message_type
+      admin_id
+      snoozed_until
+    ].freeze
+    DECODERS = {
+      message_type: lambda do |value|
+        ::OctridevIntercom::SnoozeConversationRequestMessageType.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for SnoozeConversationRequest.
+  # Payload of the request to snooze a conversation
+  class SnoozeConversationRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSnoozeConversationRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSnoozeConversationRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSnoozeConversationRequestMetadata::DECODERS
+
+    # @return [SnoozeConversationRequestMessageType] Required enumerated value serialized in the `message_type` wire field.
+    attr_reader :message_type
+    # @return [String] The id of the admin who is performing the action.
+    attr_reader :admin_id
+    # @return [Integer] The time you want the conversation to reopen.
+    attr_reader :snoozed_until
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # Defines the SnoozeConversationRequestMessageType SDK namespace.
+  module SnoozeConversationRequestMessageType
+    SNOOZED = 'snoozed'
+    VALUES = ['snoozed'].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
 
-# Defines the SnoozeConversationRequestMessageType SDK namespace.
-module SnoozeConversationRequestMessageType
-  SNOOZED = 'snoozed'
-  VALUES = ['snoozed'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
-
-    raise SdkValidationError.new('SnoozeConversationRequestMessageType', 'enum', "Unknown SnoozeConversationRequestMessageType: #{value}")
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalTeammateReferenceMetadata
-  FIELDS = {
-    type: "type",
-    id: "id",
-    name: "name",
-    email: "email",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    id
-    name
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::TeammateReferenceType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for TeammateReference.
-# A reference to a teammate
-class TeammateReference
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTeammateReferenceMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTeammateReferenceMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTeammateReferenceMetadata::DECODERS
-
-  # @return [TeammateReferenceType] The type of teammate
-  attr_reader :type
-  # @return [Integer] The unique identifier of the teammate
-  attr_reader :id
-  # @return [String] The display name of the teammate
-  attr_reader :name
-  # @return [String] The email address of the teammate (optional for teams/bots)
-  attr_reader :email
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+      raise SdkValidationError.new('SnoozeConversationRequestMessageType', 'enum', "Unknown SnoozeConversationRequestMessageType: #{value}")
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalTeammateReferenceMetadata
+    FIELDS = {
+      type: 'type',
+      id: 'id',
+      name: 'name',
+      email: 'email'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      id
+      name
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::TeammateReferenceType.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for TeammateReference.
+  # A reference to a teammate
+  class TeammateReference
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTeammateReferenceMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTeammateReferenceMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTeammateReferenceMetadata::DECODERS
+
+    # @return [TeammateReferenceType] The type of teammate
+    attr_reader :type
+    # @return [Integer] The unique identifier of the teammate
+    attr_reader :id
+    # @return [String] The display name of the teammate
+    attr_reader :name
+    # @return [String] The email address of the teammate (optional for teams/bots)
+    attr_reader :email
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Defines the TeammateReferenceType SDK namespace.
-module TeammateReferenceType
-  ADMIN = 'admin'
-  TEAM = 'team'
-  BOT = 'bot'
-  VALUES = ['admin', 'team', 'bot'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalUpdateConversationRequestMetadata
-  FIELDS = {
-    read: "read",
-    title: "title",
-    custom_attributes: "custom_attributes",
-    company_id: "company_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    custom_attributes: lambda do |value|
-      ::OctridevIntercom::CustomAttributesRequest.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for UpdateConversationRequest.
-# Payload of the request to update a conversation
-class UpdateConversationRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalUpdateConversationRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalUpdateConversationRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalUpdateConversationRequestMetadata::DECODERS
-
-  # @return [Boolean] Mark a conversation as read within Intercom.
-  attr_reader :read
-  # @return [String] The title given to the conversation
-  attr_reader :title
-  # @return [CustomAttributesRequest] The custom attributes which are set on this object, as key-value pairs. For relationship attributes the value should be a list of custom object instance models. Only attributes a caller may set are accepted here — attributes Intercom generates are returned in responses only.
-  attr_reader :custom_attributes
-  # @return [String] The ID of the company that the conversation is associated with. The unique identifier for the company which is given by Intercom. Set to nil to remove company.
-  attr_reader :company_id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the TeammateReferenceType SDK namespace.
+  module TeammateReferenceType
+    ADMIN = 'admin'
+    TEAM = 'team'
+    BOT = 'bot'
+    VALUES = %w[admin team bot].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalUpdateConversationRequestMetadata
+    FIELDS = {
+      read: 'read',
+      title: 'title',
+      custom_attributes: 'custom_attributes',
+      company_id: 'company_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      custom_attributes: lambda do |value|
+        ::OctridevIntercom::CustomAttributesRequest.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
+  # API model for UpdateConversationRequest.
+  # Payload of the request to update a conversation
+  class UpdateConversationRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalUpdateConversationRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalUpdateConversationRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalUpdateConversationRequestMetadata::DECODERS
 
-  def to_json(*args)
-    to_h.to_json(*args)
+    # @return [Boolean] Mark a conversation as read within Intercom.
+    attr_reader :read
+    # @return [String] The title given to the conversation
+    attr_reader :title
+    # @return [CustomAttributesRequest] The custom attributes which are set on this object, as key-value pairs. For relationship attributes the value should be a list of custom object instance models. Only attributes a caller may set are accepted here — attributes Intercom generates are returned in responses only.
+    attr_reader :custom_attributes
+    # @return [String] The ID of the company that the conversation is associated with. The unique identifier for the company which is given by Intercom. Set to nil to remove company.
+    attr_reader :company_id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
-end
 end

@@ -238,7 +238,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the MacrosNamespace SDK type.
@@ -284,7 +283,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the OfficeHoursNamespace SDK type.
@@ -298,12 +296,7 @@ module OctridevIntercom
     # Retrieves a specific office hours exception from an office hours schedule. Use `office_hours_schedule_id` and `id` to identify the schedule and exception. The response includes the exception date, type, and any replacement time intervals.
     #
     # You can fetch the details of a single office hours exception.
-    define_method(:get_exception) do |
-      office_hours_schedule_id:,
-      id:,
-      intercom_version: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_exception) do |office_hours_schedule_id:, id:, intercom_version: NOT_GIVEN, request_options: nil|
       ::OctridevIntercom::Methods::OfficeHours.get_office_hours_exception(
         config: @config,
         office_hours_schedule_id: office_hours_schedule_id,
@@ -404,11 +397,7 @@ module OctridevIntercom
     # Retrieves a single office hours schedule and its recurring weekly hours. Use this endpoint to inspect the schedule's name, time zone, and open intervals. The response also indicates whether the schedule is open 24/7.
     #
     # You can fetch the details of a single office hours schedule.
-    define_method(:get_schedule) do |
-      id:,
-      intercom_version: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_schedule) do |id:, intercom_version: NOT_GIVEN, request_options: nil|
       ::OctridevIntercom::Methods::OfficeHours.get_office_hours_schedule(
         config: @config,
         id: id,
@@ -488,7 +477,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the AiContentNamespace SDK type.
@@ -552,11 +540,7 @@ module OctridevIntercom
     end
 
     # Retrieves a content import source from your Fin Content Library by its identifier. Use the source ID to inspect its URL, status, sync behavior, and associated audiences.
-    define_method(:get_content_import_source) do |
-      source_id:,
-      intercom_version: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_content_import_source) do |source_id:, intercom_version: NOT_GIVEN, request_options: nil|
       ::OctridevIntercom::Methods::AiContent.get_content_import_source(
         config: @config,
         source_id: source_id,
@@ -656,11 +640,7 @@ module OctridevIntercom
     # Retrieves an external page from your Fin Content Library by its page identifier. Use this operation to inspect the page content, source association, availability settings, and audience targeting.
     #
     # You can retrieve an external page.
-    define_method(:get_external_page) do |
-      page_id:,
-      intercom_version: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_external_page) do |page_id:, intercom_version: NOT_GIVEN, request_options: nil|
       ::OctridevIntercom::Methods::AiContent.get_external_page(
         config: @config,
         page_id: page_id,
@@ -700,7 +680,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the ArticlesNamespace SDK type.
@@ -1034,7 +1013,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the AwayStatusReasonsNamespace SDK type.
@@ -1058,7 +1036,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the AudiencesNamespace SDK type.
@@ -1173,7 +1150,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the ReportingDataExportNamespace SDK type.
@@ -1207,13 +1183,7 @@ module OctridevIntercom
     end
 
     # Retrieves the status and download details for a reporting data export job. Supply `app_id` and `client_id` to identify the workspace context, and `job_identifier` to select the job.
-    define_method(:get_reporting_data) do |
-      job_identifier:,
-      app_id:,
-      client_id:,
-      intercom_version: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_reporting_data) do |job_identifier:, app_id:, client_id:, intercom_version: NOT_GIVEN, request_options: nil|
       ::OctridevIntercom::Methods::ReportingDataExport.get_reporting_data(
         config: @config,
         job_identifier: job_identifier,
@@ -1239,13 +1209,7 @@ module OctridevIntercom
     # Downloads the data file for a completed reporting data export job. Supply `app_id` and `job_identifier`, and send the required `Accept` header with the value `application/octet-stream`. Use the job status endpoint to check that the export is complete before downloading.
     #
     # Download the data from a completed reporting data export job. > Octet header required > > You will have to specify the header Accept: `application/octet-stream` when hitting this endpoint.
-    define_method(:get_reporting_data2) do |
-      job_identifier:,
-      app_id:,
-      accept:,
-      intercom_version: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_reporting_data2) do |job_identifier:, app_id:, accept:, intercom_version: NOT_GIVEN, request_options: nil|
       ::OctridevIntercom::Methods::ReportingDataExport.get_reporting_data2(
         config: @config,
         job_identifier: job_identifier,
@@ -1255,7 +1219,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the FinAgentNamespace SDK type.
@@ -1421,7 +1384,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the HelpCenterNamespace SDK type.
@@ -1635,7 +1597,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the InternalArticlesNamespace SDK type.
@@ -1815,7 +1776,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the FoldersNamespace SDK type.
@@ -1911,7 +1871,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the IpAllowlistNamespace SDK type.
@@ -1955,7 +1914,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the CompaniesNamespace SDK type.
@@ -2211,7 +2169,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the NotesNamespace SDK type.
@@ -2325,7 +2282,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the ContactsNamespace SDK type.
@@ -2760,7 +2716,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the SubscriptionTypesNamespace SDK type.
@@ -2822,7 +2777,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the TagsNamespace SDK type.
@@ -3010,7 +2964,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the BannersNamespace SDK type.
@@ -3054,7 +3007,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the ContentNamespace SDK type.
@@ -3142,7 +3094,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the ContentSnippetsNamespace SDK type.
@@ -3315,7 +3266,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the DynamicContentNamespace SDK type.
@@ -3432,7 +3382,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the ConversationsNamespace SDK type.
@@ -3784,7 +3733,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the ConversationsAttributesNamespace SDK type.
@@ -3942,7 +3890,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the CustomObjectInstancesNamespace SDK type.
@@ -4024,12 +3971,7 @@ module OctridevIntercom
     # Retrieves a custom object instance by ID. Supply the custom object type identifier and an instance identifier to select the record. The instance identifier can be either the Intercom-defined ID or the external ID.
     #
     # Fetch a Custom Object Instance by id.
-    define_method(:get_by_id) do |
-      custom_object_type_identifier:,
-      custom_object_instance_id:,
-      intercom_version: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_by_id) do |custom_object_type_identifier:, custom_object_instance_id:, intercom_version: NOT_GIVEN, request_options: nil|
       ::OctridevIntercom::Methods::CustomObjectInstances.get_custom_object_instances_by_id(
         config: @config,
         custom_object_type_identifier: custom_object_type_identifier,
@@ -4056,7 +3998,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the DataAttributesNamespace SDK type.
@@ -4128,7 +4069,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the DataConnectorsNamespace SDK type.
@@ -4384,7 +4324,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the DataEventsNamespace SDK type.
@@ -4458,7 +4397,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the DataExportNamespace SDK type.
@@ -4534,7 +4472,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the JobsNamespace SDK type.
@@ -4560,7 +4497,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the MessagesNamespace SDK type.
@@ -4624,13 +4560,7 @@ module OctridevIntercom
     # Lists paginated status events for WhatsApp messages sent from the Outbound module. Use `ruleset_id` to select the messages and `starting_after` to continue from a pagination cursor.
     #
     # Retrieves statuses of messages sent from the Outbound module. Currently, this API only supports WhatsApp messages. This endpoint returns paginated status events for WhatsApp messages sent via the Outbound module, providing information about delivery state and related message details.
-    define_method(:get_whats_app_status) do |
-      ruleset_id:,
-      per_page: NOT_GIVEN,
-      starting_after: NOT_GIVEN,
-      intercom_version: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_whats_app_status) do |ruleset_id:, per_page: NOT_GIVEN, starting_after: NOT_GIVEN, intercom_version: NOT_GIVEN, request_options: nil|
       ::OctridevIntercom::Methods::Messages.get_whats_app_message_status(
         config: @config,
         ruleset_id: ruleset_id,
@@ -4640,7 +4570,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the NewsNamespace SDK type.
@@ -4802,7 +4731,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the SegmentsNamespace SDK type.
@@ -4844,7 +4772,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the SwitchNamespace SDK type.
@@ -4872,7 +4799,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the CallsNamespace SDK type.
@@ -5030,7 +4956,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the TeamsNamespace SDK type.
@@ -5074,12 +4999,7 @@ module OctridevIntercom
     # Lists real-time activity metrics for admins in a specified team, including counts of open, idle, and snoozed conversations. Use `idle_threshold` to set how many seconds must pass before an open conversation is considered idle; this feature requires `realtime_monitoring` to be enabled for the workspace.
     #
     # Returns real-time activity metrics for admins in the specified team. For each admin, the response includes counts of open, idle, and snoozed conversations. This endpoint requires the `realtime_monitoring` feature to be enabled for your workspace.
-    define_method(:get_metrics) do |
-      team_id:,
-      idle_threshold: NOT_GIVEN,
-      intercom_version: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_metrics) do |team_id:, idle_threshold: NOT_GIVEN, intercom_version: NOT_GIVEN, request_options: nil|
       ::OctridevIntercom::Methods::Teams.get_team_metrics(
         config: @config,
         team_id: team_id,
@@ -5088,7 +5008,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the TicketStatesNamespace SDK type.
@@ -5112,7 +5031,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the TicketTypeAttributesNamespace SDK type.
@@ -5196,7 +5114,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the TicketTypesNamespace SDK type.
@@ -5288,7 +5205,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the TicketsNamespace SDK type.
@@ -5522,7 +5438,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the VisitorsNamespace SDK type.
@@ -5590,7 +5505,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the BrandsNamespace SDK type.
@@ -5630,7 +5544,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the EmailsNamespace SDK type.
@@ -5670,7 +5583,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the WorkflowsNamespace SDK type.
@@ -5696,7 +5608,6 @@ module OctridevIntercom
         request_options: request_options
       )
     end
-
   end
 
   # Defines the Intercom SDK type.
@@ -5754,7 +5665,7 @@ module OctridevIntercom
       visitors: VisitorsNamespace,
       brands: BrandsNamespace,
       emails: EmailsNamespace,
-      workflows: WorkflowsNamespace,
+      workflows: WorkflowsNamespace
     }.freeze
     private_constant :SUB_NAMESPACES
 
@@ -5783,6 +5694,5 @@ module OctridevIntercom
       end
       logging
     end
-
   end
 end

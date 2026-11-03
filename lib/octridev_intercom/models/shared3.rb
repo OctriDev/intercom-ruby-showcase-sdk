@@ -5,150 +5,145 @@
 
 # shared domain models
 module OctridevIntercom
-# Internal model hydration metadata.
-class SdkInternalTagsMetadata
-  FIELDS = {
-    type: "type",
-    tags: "tags",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevIntercom::TagsType.from_value(value)
-    end,
-    tags: lambda do |value|
-      value&.map { |item| ::OctridevIntercom::Tag.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for Tags.
-# A list of tags objects associated with a conversation
-class Tags
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTagsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTagsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTagsMetadata::DECODERS
-
-  # @return [TagsType] The type of the object
-  attr_reader :type
-  # @return [Array_of_Tag] A list of tags objects associated with the conversation.
-  attr_reader :tags
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalTagsMetadata
+    FIELDS = {
+      type: 'type',
+      tags: 'tags'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevIntercom::TagsType.from_value(value)
+      end,
+      tags: lambda do |value|
+        value&.map { |item| ::OctridevIntercom::Tag.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for Tags.
+  # A list of tags objects associated with a conversation
+  class Tags
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTagsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTagsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTagsMetadata::DECODERS
+
+    # @return [TagsType] The type of the object
+    attr_reader :type
+    # @return [Array_of_Tag] A list of tags objects associated with the conversation.
+    attr_reader :tags
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Defines the TagsType SDK namespace.
+  module TagsType
+    TAG_LIST = 'tag.list'
+    VALUES = ['tag.list'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Defines the TagsType SDK namespace.
-module TagsType
-  TAG_LIST = 'tag.list'
-  VALUES = ['tag.list'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalTeamPriorityLevelMetadata
-  FIELDS = {
-    primary_team_ids: "primary_team_ids",
-    secondary_team_ids: "secondary_team_ids",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for TeamPriorityLevel.
-# Admin priority levels for teams
-class TeamPriorityLevel
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTeamPriorityLevelMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTeamPriorityLevelMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTeamPriorityLevelMetadata::DECODERS
-
-  # @return [Array_of_Integer] The primary team ids for the team
-  attr_reader :primary_team_ids
-  # @return [Array_of_Integer] The secondary team ids for the team
-  attr_reader :secondary_team_ids
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalTeamPriorityLevelMetadata
+    FIELDS = {
+      primary_team_ids: 'primary_team_ids',
+      secondary_team_ids: 'secondary_team_ids'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for TeamPriorityLevel.
+  # Admin priority levels for teams
+  class TeamPriorityLevel
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTeamPriorityLevelMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTeamPriorityLevelMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTeamPriorityLevelMetadata::DECODERS
+
+    # @return [Array_of_Integer] The primary team ids for the team
+    attr_reader :primary_team_ids
+    # @return [Array_of_Integer] The secondary team ids for the team
+    attr_reader :secondary_team_ids
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalTranslationMetadata
+    FIELDS = {
+      name: 'name',
+      description: 'description',
+      locale: 'locale'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
+  # API model for Translation.
+  # A translation object contains the localised details of a subscription type.
+  class Translation
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTranslationMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTranslationMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTranslationMetadata::DECODERS
+
+    # @return [String] The localised name of the subscription type.
+    attr_reader :name
+    # @return [String] The localised description of the subscription type.
+    attr_reader :description
+    # @return [String] The two character identifier for the language of the translation object.
+    attr_reader :locale
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
-end
-
-# Internal model hydration metadata.
-class SdkInternalTranslationMetadata
-  FIELDS = {
-    name: "name",
-    description: "description",
-    locale: "locale",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for Translation.
-# A translation object contains the localised details of a subscription type.
-class Translation
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTranslationMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTranslationMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTranslationMetadata::DECODERS
-
-  # @return [String] The localised name of the subscription type.
-  attr_reader :name
-  # @return [String] The localised description of the subscription type.
-  attr_reader :description
-  # @return [String] The two character identifier for the language of the translation object.
-  attr_reader :locale
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
 end

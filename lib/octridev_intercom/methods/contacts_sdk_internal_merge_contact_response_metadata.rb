@@ -12,57 +12,56 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalMergeContactResponseMetadata
         FIELDS = {
-          type: "type",
-          id: "id",
-          external_id: "external_id",
-          workspace_id: "workspace_id",
-          role: "role",
-          email: "email",
-          email_domain: "email_domain",
-          email_verified: "email_verified",
-          phone: "phone",
-          name: "name",
-          owner_id: "owner_id",
-          has_hard_bounced: "has_hard_bounced",
-          marked_email_as_spam: "marked_email_as_spam",
-          unsubscribed_from_emails: "unsubscribed_from_emails",
-          created_at: "created_at",
-          updated_at: "updated_at",
-          signed_up_at: "signed_up_at",
-          last_seen_at: "last_seen_at",
-          last_replied_at: "last_replied_at",
-          last_contacted_at: "last_contacted_at",
-          last_email_opened_at: "last_email_opened_at",
-          last_email_clicked_at: "last_email_clicked_at",
-          language_override: "language_override",
-          browser: "browser",
-          browser_version: "browser_version",
-          browser_language: "browser_language",
-          os: "os",
-          android_app_name: "android_app_name",
-          android_app_version: "android_app_version",
-          android_device: "android_device",
-          android_os_version: "android_os_version",
-          android_sdk_version: "android_sdk_version",
-          android_last_seen_at: "android_last_seen_at",
-          ios_app_name: "ios_app_name",
-          ios_app_version: "ios_app_version",
-          ios_device: "ios_device",
-          ios_os_version: "ios_os_version",
-          ios_sdk_version: "ios_sdk_version",
-          ios_last_seen_at: "ios_last_seen_at",
-          custom_attributes: "custom_attributes",
-          avatar: "avatar",
-          tags: "tags",
-          notes: "notes",
-          companies: "companies",
-          location: "location",
-          social_profiles: "social_profiles",
-          merge_history: "merge_history",
-          enabled_push_messaging: "enabled_push_messaging",
+          type: 'type',
+          id: 'id',
+          external_id: 'external_id',
+          workspace_id: 'workspace_id',
+          role: 'role',
+          email: 'email',
+          email_domain: 'email_domain',
+          email_verified: 'email_verified',
+          phone: 'phone',
+          name: 'name',
+          owner_id: 'owner_id',
+          has_hard_bounced: 'has_hard_bounced',
+          marked_email_as_spam: 'marked_email_as_spam',
+          unsubscribed_from_emails: 'unsubscribed_from_emails',
+          created_at: 'created_at',
+          updated_at: 'updated_at',
+          signed_up_at: 'signed_up_at',
+          last_seen_at: 'last_seen_at',
+          last_replied_at: 'last_replied_at',
+          last_contacted_at: 'last_contacted_at',
+          last_email_opened_at: 'last_email_opened_at',
+          last_email_clicked_at: 'last_email_clicked_at',
+          language_override: 'language_override',
+          browser: 'browser',
+          browser_version: 'browser_version',
+          browser_language: 'browser_language',
+          os: 'os',
+          android_app_name: 'android_app_name',
+          android_app_version: 'android_app_version',
+          android_device: 'android_device',
+          android_os_version: 'android_os_version',
+          android_sdk_version: 'android_sdk_version',
+          android_last_seen_at: 'android_last_seen_at',
+          ios_app_name: 'ios_app_name',
+          ios_app_version: 'ios_app_version',
+          ios_device: 'ios_device',
+          ios_os_version: 'ios_os_version',
+          ios_sdk_version: 'ios_sdk_version',
+          ios_last_seen_at: 'ios_last_seen_at',
+          custom_attributes: 'custom_attributes',
+          avatar: 'avatar',
+          tags: 'tags',
+          notes: 'notes',
+          companies: 'companies',
+          location: 'location',
+          social_profiles: 'social_profiles',
+          merge_history: 'merge_history',
+          enabled_push_messaging: 'enabled_push_messaging'
         }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
+        REQUIRED_FIELDS = %i[].freeze
         DECODERS = {
           avatar: lambda do |value|
             ::OctridevIntercom::Methods::Contacts::MergeContactResponseAvatar.from_hash(value)
@@ -84,7 +83,7 @@ module OctridevIntercom
           end,
           merge_history: lambda do |value|
             value&.map { |item| ::OctridevIntercom::MergeHistoryItem.from_hash(item) }
-          end,
+          end
         }.freeze
       end
 
@@ -213,13 +212,11 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalCreateContactResponseAvatarMetadata
         FIELDS = {
-          type: "type",
-          image_url: "image_url",
+          type: 'type',
+          image_url: 'image_url'
         }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
+        REQUIRED_FIELDS = %i[].freeze
+        DECODERS = {}.freeze
       end
 
       # API model for CreateContactResponseAvatar.
@@ -256,57 +253,56 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalCreateContactResponseMetadata
         FIELDS = {
-          type: "type",
-          id: "id",
-          external_id: "external_id",
-          workspace_id: "workspace_id",
-          role: "role",
-          email: "email",
-          email_domain: "email_domain",
-          email_verified: "email_verified",
-          phone: "phone",
-          name: "name",
-          owner_id: "owner_id",
-          has_hard_bounced: "has_hard_bounced",
-          marked_email_as_spam: "marked_email_as_spam",
-          unsubscribed_from_emails: "unsubscribed_from_emails",
-          created_at: "created_at",
-          updated_at: "updated_at",
-          signed_up_at: "signed_up_at",
-          last_seen_at: "last_seen_at",
-          last_replied_at: "last_replied_at",
-          last_contacted_at: "last_contacted_at",
-          last_email_opened_at: "last_email_opened_at",
-          last_email_clicked_at: "last_email_clicked_at",
-          language_override: "language_override",
-          browser: "browser",
-          browser_version: "browser_version",
-          browser_language: "browser_language",
-          os: "os",
-          android_app_name: "android_app_name",
-          android_app_version: "android_app_version",
-          android_device: "android_device",
-          android_os_version: "android_os_version",
-          android_sdk_version: "android_sdk_version",
-          android_last_seen_at: "android_last_seen_at",
-          ios_app_name: "ios_app_name",
-          ios_app_version: "ios_app_version",
-          ios_device: "ios_device",
-          ios_os_version: "ios_os_version",
-          ios_sdk_version: "ios_sdk_version",
-          ios_last_seen_at: "ios_last_seen_at",
-          custom_attributes: "custom_attributes",
-          avatar: "avatar",
-          tags: "tags",
-          notes: "notes",
-          companies: "companies",
-          location: "location",
-          social_profiles: "social_profiles",
-          merge_history: "merge_history",
-          enabled_push_messaging: "enabled_push_messaging",
+          type: 'type',
+          id: 'id',
+          external_id: 'external_id',
+          workspace_id: 'workspace_id',
+          role: 'role',
+          email: 'email',
+          email_domain: 'email_domain',
+          email_verified: 'email_verified',
+          phone: 'phone',
+          name: 'name',
+          owner_id: 'owner_id',
+          has_hard_bounced: 'has_hard_bounced',
+          marked_email_as_spam: 'marked_email_as_spam',
+          unsubscribed_from_emails: 'unsubscribed_from_emails',
+          created_at: 'created_at',
+          updated_at: 'updated_at',
+          signed_up_at: 'signed_up_at',
+          last_seen_at: 'last_seen_at',
+          last_replied_at: 'last_replied_at',
+          last_contacted_at: 'last_contacted_at',
+          last_email_opened_at: 'last_email_opened_at',
+          last_email_clicked_at: 'last_email_clicked_at',
+          language_override: 'language_override',
+          browser: 'browser',
+          browser_version: 'browser_version',
+          browser_language: 'browser_language',
+          os: 'os',
+          android_app_name: 'android_app_name',
+          android_app_version: 'android_app_version',
+          android_device: 'android_device',
+          android_os_version: 'android_os_version',
+          android_sdk_version: 'android_sdk_version',
+          android_last_seen_at: 'android_last_seen_at',
+          ios_app_name: 'ios_app_name',
+          ios_app_version: 'ios_app_version',
+          ios_device: 'ios_device',
+          ios_os_version: 'ios_os_version',
+          ios_sdk_version: 'ios_sdk_version',
+          ios_last_seen_at: 'ios_last_seen_at',
+          custom_attributes: 'custom_attributes',
+          avatar: 'avatar',
+          tags: 'tags',
+          notes: 'notes',
+          companies: 'companies',
+          location: 'location',
+          social_profiles: 'social_profiles',
+          merge_history: 'merge_history',
+          enabled_push_messaging: 'enabled_push_messaging'
         }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
+        REQUIRED_FIELDS = %i[].freeze
         DECODERS = {
           avatar: lambda do |value|
             ::OctridevIntercom::Methods::Contacts::CreateContactResponseAvatar.from_hash(value)
@@ -328,7 +324,7 @@ module OctridevIntercom
           end,
           merge_history: lambda do |value|
             value&.map { |item| ::OctridevIntercom::MergeHistoryItem.from_hash(item) }
-          end,
+          end
         }.freeze
       end
 
@@ -457,13 +453,11 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalShowContactByExternalIdResponseAvatarMetadata
         FIELDS = {
-          type: "type",
-          image_url: "image_url",
+          type: 'type',
+          image_url: 'image_url'
         }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
+        REQUIRED_FIELDS = %i[].freeze
+        DECODERS = {}.freeze
       end
 
       # API model for ShowContactByExternalIdResponseAvatar.
@@ -500,57 +494,56 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalShowContactByExternalIdResponseMetadata
         FIELDS = {
-          type: "type",
-          id: "id",
-          external_id: "external_id",
-          workspace_id: "workspace_id",
-          role: "role",
-          email: "email",
-          email_domain: "email_domain",
-          email_verified: "email_verified",
-          phone: "phone",
-          name: "name",
-          owner_id: "owner_id",
-          has_hard_bounced: "has_hard_bounced",
-          marked_email_as_spam: "marked_email_as_spam",
-          unsubscribed_from_emails: "unsubscribed_from_emails",
-          created_at: "created_at",
-          updated_at: "updated_at",
-          signed_up_at: "signed_up_at",
-          last_seen_at: "last_seen_at",
-          last_replied_at: "last_replied_at",
-          last_contacted_at: "last_contacted_at",
-          last_email_opened_at: "last_email_opened_at",
-          last_email_clicked_at: "last_email_clicked_at",
-          language_override: "language_override",
-          browser: "browser",
-          browser_version: "browser_version",
-          browser_language: "browser_language",
-          os: "os",
-          android_app_name: "android_app_name",
-          android_app_version: "android_app_version",
-          android_device: "android_device",
-          android_os_version: "android_os_version",
-          android_sdk_version: "android_sdk_version",
-          android_last_seen_at: "android_last_seen_at",
-          ios_app_name: "ios_app_name",
-          ios_app_version: "ios_app_version",
-          ios_device: "ios_device",
-          ios_os_version: "ios_os_version",
-          ios_sdk_version: "ios_sdk_version",
-          ios_last_seen_at: "ios_last_seen_at",
-          custom_attributes: "custom_attributes",
-          avatar: "avatar",
-          tags: "tags",
-          notes: "notes",
-          companies: "companies",
-          location: "location",
-          social_profiles: "social_profiles",
-          merge_history: "merge_history",
-          enabled_push_messaging: "enabled_push_messaging",
+          type: 'type',
+          id: 'id',
+          external_id: 'external_id',
+          workspace_id: 'workspace_id',
+          role: 'role',
+          email: 'email',
+          email_domain: 'email_domain',
+          email_verified: 'email_verified',
+          phone: 'phone',
+          name: 'name',
+          owner_id: 'owner_id',
+          has_hard_bounced: 'has_hard_bounced',
+          marked_email_as_spam: 'marked_email_as_spam',
+          unsubscribed_from_emails: 'unsubscribed_from_emails',
+          created_at: 'created_at',
+          updated_at: 'updated_at',
+          signed_up_at: 'signed_up_at',
+          last_seen_at: 'last_seen_at',
+          last_replied_at: 'last_replied_at',
+          last_contacted_at: 'last_contacted_at',
+          last_email_opened_at: 'last_email_opened_at',
+          last_email_clicked_at: 'last_email_clicked_at',
+          language_override: 'language_override',
+          browser: 'browser',
+          browser_version: 'browser_version',
+          browser_language: 'browser_language',
+          os: 'os',
+          android_app_name: 'android_app_name',
+          android_app_version: 'android_app_version',
+          android_device: 'android_device',
+          android_os_version: 'android_os_version',
+          android_sdk_version: 'android_sdk_version',
+          android_last_seen_at: 'android_last_seen_at',
+          ios_app_name: 'ios_app_name',
+          ios_app_version: 'ios_app_version',
+          ios_device: 'ios_device',
+          ios_os_version: 'ios_os_version',
+          ios_sdk_version: 'ios_sdk_version',
+          ios_last_seen_at: 'ios_last_seen_at',
+          custom_attributes: 'custom_attributes',
+          avatar: 'avatar',
+          tags: 'tags',
+          notes: 'notes',
+          companies: 'companies',
+          location: 'location',
+          social_profiles: 'social_profiles',
+          merge_history: 'merge_history',
+          enabled_push_messaging: 'enabled_push_messaging'
         }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
+        REQUIRED_FIELDS = %i[].freeze
         DECODERS = {
           avatar: lambda do |value|
             ::OctridevIntercom::Methods::Contacts::ShowContactByExternalIdResponseAvatar.from_hash(value)
@@ -572,7 +565,7 @@ module OctridevIntercom
           end,
           merge_history: lambda do |value|
             value&.map { |item| ::OctridevIntercom::MergeHistoryItem.from_hash(item) }
-          end,
+          end
         }.freeze
       end
     end

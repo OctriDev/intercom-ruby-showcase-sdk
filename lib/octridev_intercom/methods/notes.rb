@@ -12,14 +12,13 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalCreateCompanyNoteMetadata
         FIELDS = {
-          body: "body",
-          admin_id: "admin_id",
+          body: 'body',
+          admin_id: 'admin_id'
         }.freeze
         REQUIRED_FIELDS = %i[
           body
         ].freeze
-        DECODERS = {
-        }.freeze
+        DECODERS = {}.freeze
       end
 
       # API model for CreateCompanyNote.
@@ -55,14 +54,13 @@ module OctridevIntercom
       # Internal model hydration metadata.
       class SdkInternalCreateNoteMetadata
         FIELDS = {
-          body: "body",
-          admin_id: "admin_id",
+          body: 'body',
+          admin_id: 'admin_id'
         }.freeze
         REQUIRED_FIELDS = %i[
           body
         ].freeze
-        DECODERS = {
-        }.freeze
+        DECODERS = {}.freeze
       end
 
       # API model for CreateNote.
@@ -107,23 +105,22 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/companies/",
+            '/companies/',
             SdkClient.encode_path_segment(company_id),
-            "/notes"
+            '/notes'
           ].join,
           config: config,
           return_type: ::OctridevIntercom::NoteList,
           decoder: :json,
           operation_id: 'list_company_notes',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '404' => ::OctridevIntercom::Error2 },
+          errors: { '404' => ::OctridevIntercom::Error2 }
         ).result
       end
 
@@ -145,27 +142,26 @@ module OctridevIntercom
         admin_id: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/companies/",
+            '/companies/',
             SdkClient.encode_path_segment(company_id),
-            "/notes"
+            '/notes'
           ].join,
           config: config,
           body: {
             'body' => body,
-            'admin_id' => admin_id,
+            'admin_id' => admin_id
           },
           return_type: ::OctridevIntercom::Note,
           decoder: :json,
           operation_id: 'create_company_note',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).result
       end
 
@@ -180,23 +176,22 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/contacts/",
+            '/contacts/',
             SdkClient.encode_path_segment(contact_id),
-            "/notes"
+            '/notes'
           ].join,
           config: config,
           return_type: ::OctridevIntercom::NoteList,
           decoder: :json,
           operation_id: 'list_notes',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '404' => ::OctridevIntercom::Error2 },
+          errors: { '404' => ::OctridevIntercom::Error2 }
         ).result
       end
 
@@ -215,27 +210,26 @@ module OctridevIntercom
         admin_id: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/contacts/",
+            '/contacts/',
             SdkClient.encode_path_segment(contact_id),
-            "/notes"
+            '/notes'
           ].join,
           config: config,
           body: {
             'body' => body,
-            'admin_id' => admin_id,
+            'admin_id' => admin_id
           },
           return_type: ::OctridevIntercom::Note,
           decoder: :json,
           operation_id: 'create_note',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '404' => ::OctridevIntercom::Error2 },
+          errors: { '404' => ::OctridevIntercom::Error2 }
         ).result
       end
 
@@ -250,11 +244,10 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/notes/",
+            '/notes/',
             SdkClient.encode_path_segment(note_id)
           ].join,
           config: config,
@@ -262,10 +255,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'retrieve_note',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).result
       end
 
@@ -280,11 +273,10 @@ module OctridevIntercom
         intercom_version: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/notes/",
+            '/notes/',
             SdkClient.encode_path_segment(note_id)
           ].join,
           config: config,
@@ -292,10 +284,10 @@ module OctridevIntercom
           decoder: :json,
           operation_id: 'delete_note',
           extra_headers: SdkClient.serialize_headers({
-            'Intercom-Version' => SdkClient.header_value(intercom_version),
-          }),
+                                                       'Intercom-Version' => SdkClient.header_value(intercom_version)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 },
+          errors: { '400' => ::OctridevIntercom::Error2, '401' => ::OctridevIntercom::Error2, '404' => ::OctridevIntercom::Error2 }
         ).result
       end
     end

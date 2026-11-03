@@ -5,65 +5,65 @@
 
 # tagged_models_data_connectors domain models
 module OctridevIntercom
-# API model for DataConnectorVersion.
-# A point-in-time snapshot of a data connector's configuration, with the version's status and an optional note.
-class DataConnectorVersion
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDataConnectorVersionMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDataConnectorVersionMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDataConnectorVersionMetadata::DECODERS
+  # API model for DataConnectorVersion.
+  # A point-in-time snapshot of a data connector's configuration, with the version's status and an optional note.
+  class DataConnectorVersion
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDataConnectorVersionMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDataConnectorVersionMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDataConnectorVersionMetadata::DECODERS
 
-  # @return [DataConnectorVersionType] The type of object - `data_connector_version`.
-  attr_reader :type
-  # @return [DataConnectorVersionStatus] The status of this version today.
-  attr_reader :status
-  # @return [String] A note describing this version, if one has been set.
-  attr_reader :note
-  # @return [DataConnectorVersionAuthor] The teammate who created this version.
-  attr_reader :author
-  # @return [String] The time this version was created.
-  attr_reader :created_at
-  # @return [Integer] The identifier of this version. Use it as `version_id` when retrieving or updating a version.
-  attr_reader :entity_version_id
-  # @return [DataConnectorVersionDefinition] The data connector's configuration at this version. `null` if the snapshot is no longer available. Mirrors the response of Retrieve a data connector, without `id`, `type`, `created_by_admin_id`, `updated_by_admin_id`, `created_at`, `updated_at`, `execution_results_url` and `transform_code_block`.
-  attr_reader :definition
+    # @return [DataConnectorVersionType] The type of object - `data_connector_version`.
+    attr_reader :type
+    # @return [DataConnectorVersionStatus] The status of this version today.
+    attr_reader :status
+    # @return [String] A note describing this version, if one has been set.
+    attr_reader :note
+    # @return [DataConnectorVersionAuthor] The teammate who created this version.
+    attr_reader :author
+    # @return [String] The time this version was created.
+    attr_reader :created_at
+    # @return [Integer] The identifier of this version. Use it as `version_id` when retrieving or updating a version.
+    attr_reader :entity_version_id
+    # @return [DataConnectorVersionDefinition] The data connector's configuration at this version. `null` if the snapshot is no longer available. Mirrors the response of Retrieve a data connector, without `id`, `type`, `created_by_admin_id`, `updated_by_admin_id`, `created_at`, `updated_at`, `execution_results_url` and `transform_code_block`.
+    attr_reader :definition
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the DataConnectorVersionStatus SDK namespace.
+  module DataConnectorVersionStatus
+    LIVE = 'live'
+    PAUSED = 'paused'
+    DRAFT = 'draft'
+    PREVIOUSLY_LIVE = 'previously_live'
+    VALUES = %w[live paused draft previously_live].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Defines the DataConnectorVersionType SDK namespace.
+  module DataConnectorVersionType
+    DATA_CONNECTOR_VERSION = 'data_connector_version'
+    VALUES = ['data_connector_version'].freeze
+    def self.from_value(value)
+      value
+    end
   end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Defines the DataConnectorVersionStatus SDK namespace.
-module DataConnectorVersionStatus
-  LIVE = 'live'
-  PAUSED = 'paused'
-  DRAFT = 'draft'
-  PREVIOUSLY_LIVE = 'previously_live'
-  VALUES = ['live', 'paused', 'draft', 'previously_live'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the DataConnectorVersionType SDK namespace.
-module DataConnectorVersionType
-  DATA_CONNECTOR_VERSION = 'data_connector_version'
-  VALUES = ['data_connector_version'].freeze
-  def self.from_value(value)
-    value
-  end
-end
 end
